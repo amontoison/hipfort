@@ -28,17 +28,10 @@ module hipfort_check
   implicit none
 contains
   subroutine hipCheck(status)
-#ifdef USE_CUDA_NAMES
-    use hipfort_cuda_errors, only: cudaSuccess
-    implicit none
-    integer(kind(cudaSuccess)) :: status
-    if (status /= cudaSuccess) then
-#else
     use hipfort_enums, only: HIP_SUCCESS
     implicit none
     integer(kind(HIP_SUCCESS)) :: status
     if (status /= HIP_SUCCESS) then
-#endif
       write (*, *) "HIP ERROR: code = ", status
       stop 1
     end if

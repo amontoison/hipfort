@@ -46,21 +46,9 @@ module hipfort_hipblas_enums
 
   ! hipblasOperation_t
   enum, bind(c)
-#ifdef USE_CUDA_NAMES
-    enumerator :: HIPBLAS_OP_N = 0
-#else
     enumerator :: HIPBLAS_OP_N = 111
-#endif
-#ifdef USE_CUDA_NAMES
-    enumerator :: HIPBLAS_OP_T = 1
-#else
     enumerator :: HIPBLAS_OP_T = 112
-#endif
-#ifdef USE_CUDA_NAMES
-    enumerator :: HIPBLAS_OP_C = 2
-#else
     enumerator :: HIPBLAS_OP_C = 113
-#endif
   end enum
 
   ! hipblasComputeType_t
@@ -84,63 +72,27 @@ module hipfort_hipblas_enums
 
   ! hipblasPointerMode_t
   enum, bind(c)
-#ifdef USE_CUDA_NAMES
     enumerator :: HIPBLAS_POINTER_MODE_HOST = 0
-#else
-    enumerator :: HIPBLAS_POINTER_MODE_HOST = 0
-#endif
-#ifdef USE_CUDA_NAMES
     enumerator :: HIPBLAS_POINTER_MODE_DEVICE = 1
-#else
-    enumerator :: HIPBLAS_POINTER_MODE_DEVICE = 1
-#endif
   end enum
 
   ! hipblasFillMode_t
   enum, bind(c)
-#ifdef USE_CUDA_NAMES
-    enumerator :: HIPBLAS_FILL_MODE_UPPER = 1
-#else
     enumerator :: HIPBLAS_FILL_MODE_UPPER = 121
-#endif
-#ifdef USE_CUDA_NAMES
-    enumerator :: HIPBLAS_FILL_MODE_LOWER = 0
-#else
     enumerator :: HIPBLAS_FILL_MODE_LOWER = 122
-#endif
-#ifdef USE_CUDA_NAMES
-    enumerator :: HIPBLAS_FILL_MODE_FULL = 2
-#else
     enumerator :: HIPBLAS_FILL_MODE_FULL = 123
-#endif
   end enum
 
   ! hipblasDiagType_t
   enum, bind(c)
-#ifdef USE_CUDA_NAMES
-    enumerator :: HIPBLAS_DIAG_NON_UNIT = 0
-#else
     enumerator :: HIPBLAS_DIAG_NON_UNIT = 131
-#endif
-#ifdef USE_CUDA_NAMES
-    enumerator :: HIPBLAS_DIAG_UNIT = 1
-#else
     enumerator :: HIPBLAS_DIAG_UNIT = 132
-#endif
   end enum
 
   ! hipblasSideMode_t
   enum, bind(c)
-#ifdef USE_CUDA_NAMES
-    enumerator :: HIPBLAS_SIDE_LEFT = 0
-#else
     enumerator :: HIPBLAS_SIDE_LEFT = 141
-#endif
-#ifdef USE_CUDA_NAMES
-    enumerator :: HIPBLAS_SIDE_RIGHT = 1
-#else
     enumerator :: HIPBLAS_SIDE_RIGHT = 142
-#endif
     enumerator :: HIPBLAS_SIDE_BOTH = 143
   end enum
 
@@ -156,25 +108,13 @@ module hipfort_hipblas_enums
 
   ! hipblasGemmAlgo_t
   enum, bind(c)
-#ifdef USE_CUDA_NAMES
-    enumerator :: HIPBLAS_GEMM_DEFAULT = -1
-#else
     enumerator :: HIPBLAS_GEMM_DEFAULT = 160
-#endif
   end enum
 
   ! hipblasAtomicsMode_t
   enum, bind(c)
-#ifdef USE_CUDA_NAMES
     enumerator :: HIPBLAS_ATOMICS_NOT_ALLOWED = 0
-#else
-    enumerator :: HIPBLAS_ATOMICS_NOT_ALLOWED = 0
-#endif
-#ifdef USE_CUDA_NAMES
     enumerator :: HIPBLAS_ATOMICS_ALLOWED = 1
-#else
-    enumerator :: HIPBLAS_ATOMICS_ALLOWED = 1
-#endif
   end enum
 
   ! hipblasGemmFlags_t

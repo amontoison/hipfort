@@ -58,11 +58,7 @@ module hipfort_hipmemcpy
   !>  hipMemcpyDtoDAsync, hipMemcpyDtoH, hipMemcpyDtoHAsync, hipMemcpyHtoA, hipMemcpyHtoAAsync,
   !>  hipMemcpyHtoDAsync, hipMemFree, hipMemFreeHost, hipMemGetAddressRange, hipMemGetInfo,
   !>  hipMemHostAlloc, hipMemHostGetDevicePointer
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy_(dest, src, sizeBytes, myKind) bind(c, name="cudaMemcpy")
-#else
     function hipMemcpy_(dest, src, sizeBytes, myKind) bind(c, name="hipMemcpy")
-#endif
       use iso_c_binding
       implicit none
       integer(c_int) :: hipMemcpy_
@@ -294,11 +290,7 @@ module hipfort_hipmemcpy
   !>  hipMemcpyFromSymbol, hipMemcpy2DAsync, hipMemcpyToArrayAsync, hipMemcpy2DToArrayAsync,
   !>  hipMemcpyFromArrayAsync, hipMemcpy2DFromArrayAsync, hipMemcpyToSymbolAsync,
   !>  hipMemcpyFromSymbolAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyAsync_(dest, src, sizeBytes, myKind, stream) bind(c, name="cudaMemcpyAsync")
-#else
     function hipMemcpyAsync_(dest, src, sizeBytes, myKind, stream) bind(c, name="hipMemcpyAsync")
-#endif
       use iso_c_binding
       implicit none
       integer(c_int) :: hipMemcpyAsync_
@@ -539,13 +531,8 @@ module hipfort_hipmemcpy
   !>
   !>   @see hipMemcpy, hipMemcpyToArray, hipMemcpy2DToArray, hipMemcpyFromArray, hipMemcpyToSymbol,
   !>  hipMemcpyAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy2D_(dest, dpitch, src, spitch, width, height, myKind) &
-        bind(c, name="cudaMemcpy2D")
-#else
     function hipMemcpy2D_(dest, dpitch, src, spitch, width, height, myKind) &
         bind(c, name="hipMemcpy2D")
-#endif
       use iso_c_binding
       implicit none
       integer(c_int) :: hipMemcpy2D_
@@ -731,13 +718,8 @@ module hipfort_hipmemcpy
   !>
   !>   @see hipMemcpy, hipMemcpyToArray, hipMemcpy2DToArray, hipMemcpyFromArray, hipMemcpyToSymbol,
   !>  hipMemcpyAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy2DAsync_(dest, dpitch, src, spitch, width, height, myKind, stream) &
-        bind(c, name="cudaMemcpy2DAsync")
-#else
     function hipMemcpy2DAsync_(dest, dpitch, src, spitch, width, height, myKind, stream) &
         bind(c, name="hipMemcpy2DAsync")
-#endif
       use iso_c_binding
       implicit none
       integer(c_int) :: hipMemcpy2DAsync_

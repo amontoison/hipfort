@@ -37,11 +37,7 @@ module hipfort_hipsparse
   !>   all subsequent library function calls. The handle should be destroyed at the end
   !>   using hipsparseDestroy().
   interface hipsparseCreate
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreate_(handle) bind(c, name="cusparseCreate")
-#else
     function hipsparseCreate_(handle) bind(c, name="hipsparseCreate")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -57,11 +53,7 @@ module hipfort_hipsparse
   !>   \p hipsparseDestroy destroys the hipSPARSE library context and releases all
   !>   resources used by the hipSPARSE library.
   interface hipsparseDestroy
-#ifdef USE_CUDA_NAMES
-    function hipsparseDestroy_(handle) bind(c, name="cusparseDestroy")
-#else
     function hipsparseDestroy_(handle) bind(c, name="hipsparseDestroy")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -87,11 +79,7 @@ module hipfort_hipsparse
   !>   return
   !>   \p CUSPARSE_STATUS_SUCCESS.
   interface hipsparseGetErrorName
-#ifdef USE_CUDA_NAMES
-    function hipsparseGetErrorName_(status) bind(c, name="cusparseGetErrorName")
-#else
     function hipsparseGetErrorName_(status) bind(c, name="hipsparseGetErrorName")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -110,11 +98,7 @@ module hipfort_hipsparse
   !>   description of this status.
   !>   If the status is not recognized, the function returns "Unrecognized status code".
   interface hipsparseGetErrorString
-#ifdef USE_CUDA_NAMES
-    function hipsparseGetErrorString_(status) bind(c, name="cusparseGetErrorString")
-#else
     function hipsparseGetErrorString_(status) bind(c, name="hipsparseGetErrorString")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -132,11 +116,7 @@ module hipfort_hipsparse
   !>   - minor = version / 100 % 1000
   !>   - major = version / 100000
   interface hipsparseGetVersion
-#ifdef USE_CUDA_NAMES
-    function hipsparseGetVersion_(handle,version) bind(c, name="cusparseGetVersion")
-#else
     function hipsparseGetVersion_(handle,version) bind(c, name="hipsparseGetVersion")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -151,7 +131,6 @@ module hipfort_hipsparse
   !>
   !>   \details
   !>   \p hipsparseGetGitRevision gets the hipSPARSE library git commit revision (SHA-1).
-#ifndef USE_CUDA_NAMES
   interface hipsparseGetGitRevision
     function hipsparseGetGitRevision_(handle,rev) bind(c, name="hipsparseGetGitRevision")
       use iso_c_binding
@@ -162,7 +141,6 @@ module hipfort_hipsparse
       type(c_ptr),value :: rev
     end function
   end interface
-#endif
 
   !>  \ingroup aux_module
   !>   \brief Specify the user-defined HIP stream.
@@ -171,11 +149,7 @@ module hipfort_hipsparse
   !>   \p hipsparseSetStream specifies the stream to be used by the hipSPARSE library
   !>   context and all subsequent function calls.
   interface hipsparseSetStream
-#ifdef USE_CUDA_NAMES
-    function hipsparseSetStream_(handle,streamId) bind(c, name="cusparseSetStream")
-#else
     function hipsparseSetStream_(handle,streamId) bind(c, name="hipsparseSetStream")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -192,11 +166,7 @@ module hipfort_hipsparse
   !>   \p hipsparseGetStream gets the hipSPARSE library context stream which is currently
   !>   used for all subsequent function calls.
   interface hipsparseGetStream
-#ifdef USE_CUDA_NAMES
-    function hipsparseGetStream_(handle,streamId) bind(c, name="cusparseGetStream")
-#else
     function hipsparseGetStream_(handle,streamId) bind(c, name="hipsparseGetStream")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -215,11 +185,7 @@ module hipfort_hipsparse
   !>   by reference on the host. Valid pointer modes are `HIPSPARSE_POINTER_MODE_HOST`
   !>   or `HIPSPARSE_POINTER_MODE_DEVICE`.
   interface hipsparseSetPointerMode
-#ifdef USE_CUDA_NAMES
-    function hipsparseSetPointerMode_(handle,mode) bind(c, name="cusparseSetPointerMode")
-#else
     function hipsparseSetPointerMode_(handle,mode) bind(c, name="hipsparseSetPointerMode")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -236,11 +202,7 @@ module hipfort_hipsparse
   !>   \p hipsparseGetPointerMode gets the hipSPARSE library context pointer mode which
   !>   is currently used for all subsequent function calls.
   interface hipsparseGetPointerMode
-#ifdef USE_CUDA_NAMES
-    function hipsparseGetPointerMode_(handle,mode) bind(c, name="cusparseGetPointerMode")
-#else
     function hipsparseGetPointerMode_(handle,mode) bind(c, name="hipsparseGetPointerMode")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -258,11 +220,7 @@ module hipfort_hipsparse
   !>   `hipsparseIndexBase_t` to `HIPSPARSE_INDEX_BASE_ZERO`. It should be destroyed
   !>   at the end using hipsparseDestroyMatDescr().
   interface hipsparseCreateMatDescr
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateMatDescr_(descrA) bind(c, name="cusparseCreateMatDescr")
-#else
     function hipsparseCreateMatDescr_(descrA) bind(c, name="hipsparseCreateMatDescr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -278,11 +236,7 @@ module hipfort_hipsparse
   !>   \p hipsparseDestroyMatDescr destroys a matrix descriptor and releases all
   !>   resources used by the descriptor.
   interface hipsparseDestroyMatDescr
-#ifdef USE_CUDA_NAMES
-    function hipsparseDestroyMatDescr_(descrA) bind(c, name="cusparseDestroyMatDescr")
-#else
     function hipsparseDestroyMatDescr_(descrA) bind(c, name="hipsparseDestroyMatDescr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -296,7 +250,6 @@ module hipfort_hipsparse
   !>   \details
   !>   \p hipsparseCopyMatDescr copies a matrix descriptor. Both source and destination
   !>   matrix descriptors must be initialized prior to calling \p hipsparseCopyMatDescr.
-#ifndef USE_CUDA_NAMES
   interface hipsparseCopyMatDescr
     function hipsparseCopyMatDescr_(dest,src) bind(c, name="hipsparseCopyMatDescr")
       use iso_c_binding
@@ -307,7 +260,6 @@ module hipfort_hipsparse
       type(c_ptr),value :: src
     end function
   end interface
-#endif
 
   !>  \ingroup aux_module
   !>   \brief Specify the matrix type of a matrix descriptor.
@@ -318,11 +270,7 @@ module hipfort_hipsparse
   !>   `HIPSPARSE_MATRIX_TYPE_SYMMETRIC`, `HIPSPARSE_MATRIX_TYPE_HERMITIAN`, or
   !>   `HIPSPARSE_MATRIX_TYPE_TRIANGULAR`.
   interface hipsparseSetMatType
-#ifdef USE_CUDA_NAMES
-    function hipsparseSetMatType_(descrA,myType) bind(c, name="cusparseSetMatType")
-#else
     function hipsparseSetMatType_(descrA,myType) bind(c, name="hipsparseSetMatType")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -338,11 +286,7 @@ module hipfort_hipsparse
   !>   \details
   !>   \p hipsparseGetMatType returns the matrix type of a matrix descriptor.
   interface hipsparseGetMatType
-#ifdef USE_CUDA_NAMES
-    function hipsparseGetMatType_(descrA) bind(c, name="cusparseGetMatType")
-#else
     function hipsparseGetMatType_(descrA) bind(c, name="hipsparseGetMatType")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -359,11 +303,7 @@ module hipfort_hipsparse
   !>   Valid fill modes are `HIPSPARSE_FILL_MODE_LOWER` or
   !>   `HIPSPARSE_FILL_MODE_UPPER`.
   interface hipsparseSetMatFillMode
-#ifdef USE_CUDA_NAMES
-    function hipsparseSetMatFillMode_(descrA,fillMode) bind(c, name="cusparseSetMatFillMode")
-#else
     function hipsparseSetMatFillMode_(descrA,fillMode) bind(c, name="hipsparseSetMatFillMode")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -379,11 +319,7 @@ module hipfort_hipsparse
   !>   \details
   !>   \p hipsparseGetMatFillMode returns the matrix fill mode of a matrix descriptor.
   interface hipsparseGetMatFillMode
-#ifdef USE_CUDA_NAMES
-    function hipsparseGetMatFillMode_(descrA) bind(c, name="cusparseGetMatFillMode")
-#else
     function hipsparseGetMatFillMode_(descrA) bind(c, name="hipsparseGetMatFillMode")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -400,11 +336,7 @@ module hipfort_hipsparse
   !>   descriptor. Valid diagonal types are `HIPSPARSE_DIAG_TYPE_UNIT` or
   !>   `HIPSPARSE_DIAG_TYPE_NON_UNIT`.
   interface hipsparseSetMatDiagType
-#ifdef USE_CUDA_NAMES
-    function hipsparseSetMatDiagType_(descrA,diagType) bind(c, name="cusparseSetMatDiagType")
-#else
     function hipsparseSetMatDiagType_(descrA,diagType) bind(c, name="hipsparseSetMatDiagType")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -421,11 +353,7 @@ module hipfort_hipsparse
   !>   \p hipsparseGetMatDiagType returns the matrix diagonal type of a matrix
   !>   descriptor.
   interface hipsparseGetMatDiagType
-#ifdef USE_CUDA_NAMES
-    function hipsparseGetMatDiagType_(descrA) bind(c, name="cusparseGetMatDiagType")
-#else
     function hipsparseGetMatDiagType_(descrA) bind(c, name="hipsparseGetMatDiagType")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -441,11 +369,7 @@ module hipfort_hipsparse
   !>   \p hipsparseSetMatIndexBase sets the index base of a matrix descriptor. Valid
   !>   options are `HIPSPARSE_INDEX_BASE_ZERO` or `HIPSPARSE_INDEX_BASE_ONE`.
   interface hipsparseSetMatIndexBase
-#ifdef USE_CUDA_NAMES
-    function hipsparseSetMatIndexBase_(descrA,base) bind(c, name="cusparseSetMatIndexBase")
-#else
     function hipsparseSetMatIndexBase_(descrA,base) bind(c, name="hipsparseSetMatIndexBase")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -461,11 +385,7 @@ module hipfort_hipsparse
   !>   \details
   !>   \p hipsparseGetMatIndexBase returns the index base of a matrix descriptor.
   interface hipsparseGetMatIndexBase
-#ifdef USE_CUDA_NAMES
-    function hipsparseGetMatIndexBase_(descrA) bind(c, name="cusparseGetMatIndexBase")
-#else
     function hipsparseGetMatIndexBase_(descrA) bind(c, name="hipsparseGetMatIndexBase")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -480,7 +400,6 @@ module hipfort_hipsparse
   !>   \details
   !>   \p hipsparseCreateHybMat creates a structure that holds the matrix in \p HYB
   !>   storage format. It should be destroyed at the end using hipsparseDestroyHybMat().
-#ifndef USE_CUDA_NAMES
   interface hipsparseCreateHybMat
     function hipsparseCreateHybMat_(hybA) bind(c, name="hipsparseCreateHybMat")
       use iso_c_binding
@@ -490,14 +409,12 @@ module hipfort_hipsparse
       type(c_ptr) :: hybA
     end function
   end interface
-#endif
 
   !>  \ingroup aux_module
   !>   \brief Destroy a \p HYB matrix structure.
   !>
   !>   \details
   !>   \p hipsparseDestroyHybMat destroys a \p HYB structure.
-#ifndef USE_CUDA_NAMES
   interface hipsparseDestroyHybMat
     function hipsparseDestroyHybMat_(hybA) bind(c, name="hipsparseDestroyHybMat")
       use iso_c_binding
@@ -507,7 +424,6 @@ module hipfort_hipsparse
       type(c_ptr),value :: hybA
     end function
   end interface
-#endif
 
   !>  \ingroup aux_module
   !>   \brief Create a bsrsv2 info structure.
@@ -517,11 +433,7 @@ module hipfort_hipsparse
   !>   that is gathered during the analysis routines. It should be destroyed
   !>   at the end using hipsparseDestroyBsrsv2Info().
   interface hipsparseCreateBsrsv2Info
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateBsrsv2Info_(myInfo) bind(c, name="cusparseCreateBsrsv2Info")
-#else
     function hipsparseCreateBsrsv2Info_(myInfo) bind(c, name="hipsparseCreateBsrsv2Info")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -536,11 +448,7 @@ module hipfort_hipsparse
   !>   \details
   !>   \p hipsparseDestroyBsrsv2Info destroys a bsrsv2 info structure.
   interface hipsparseDestroyBsrsv2Info
-#ifdef USE_CUDA_NAMES
-    function hipsparseDestroyBsrsv2Info_(myInfo) bind(c, name="cusparseDestroyBsrsv2Info")
-#else
     function hipsparseDestroyBsrsv2Info_(myInfo) bind(c, name="hipsparseDestroyBsrsv2Info")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -557,11 +465,7 @@ module hipfort_hipsparse
   !>   that is gathered during the analysis routines. It should be destroyed
   !>   at the end using hipsparseDestroyBsrsm2Info().
   interface hipsparseCreateBsrsm2Info
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateBsrsm2Info_(myInfo) bind(c, name="cusparseCreateBsrsm2Info")
-#else
     function hipsparseCreateBsrsm2Info_(myInfo) bind(c, name="hipsparseCreateBsrsm2Info")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -576,11 +480,7 @@ module hipfort_hipsparse
   !>   \details
   !>   \p hipsparseDestroyBsrsm2Info destroys a bsrsm2 info structure.
   interface hipsparseDestroyBsrsm2Info
-#ifdef USE_CUDA_NAMES
-    function hipsparseDestroyBsrsm2Info_(myInfo) bind(c, name="cusparseDestroyBsrsm2Info")
-#else
     function hipsparseDestroyBsrsm2Info_(myInfo) bind(c, name="hipsparseDestroyBsrsm2Info")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -597,11 +497,7 @@ module hipfort_hipsparse
   !>   that is gathered during the analysis routines. It should be destroyed
   !>   at the end using hipsparseDestroyBsrilu02Info().
   interface hipsparseCreateBsrilu02Info
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateBsrilu02Info_(myInfo) bind(c, name="cusparseCreateBsrilu02Info")
-#else
     function hipsparseCreateBsrilu02Info_(myInfo) bind(c, name="hipsparseCreateBsrilu02Info")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -616,11 +512,7 @@ module hipfort_hipsparse
   !>   \details
   !>   \p hipsparseDestroyBsrilu02Info destroys a bsrilu02 info structure.
   interface hipsparseDestroyBsrilu02Info
-#ifdef USE_CUDA_NAMES
-    function hipsparseDestroyBsrilu02Info_(myInfo) bind(c, name="cusparseDestroyBsrilu02Info")
-#else
     function hipsparseDestroyBsrilu02Info_(myInfo) bind(c, name="hipsparseDestroyBsrilu02Info")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -637,11 +529,7 @@ module hipfort_hipsparse
   !>   that is gathered during the analysis routines. It should be destroyed
   !>   at the end using hipsparseDestroyBsric02Info().
   interface hipsparseCreateBsric02Info
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateBsric02Info_(myInfo) bind(c, name="cusparseCreateBsric02Info")
-#else
     function hipsparseCreateBsric02Info_(myInfo) bind(c, name="hipsparseCreateBsric02Info")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -656,11 +544,7 @@ module hipfort_hipsparse
   !>   \details
   !>   \p hipsparseDestroyBsric02Info destroys a bsric02 info structure.
   interface hipsparseDestroyBsric02Info
-#ifdef USE_CUDA_NAMES
-    function hipsparseDestroyBsric02Info_(myInfo) bind(c, name="cusparseDestroyBsric02Info")
-#else
     function hipsparseDestroyBsric02Info_(myInfo) bind(c, name="hipsparseDestroyBsric02Info")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -676,7 +560,6 @@ module hipfort_hipsparse
   !>   \p hipsparseCreateCsrsv2Info creates a structure that holds the csrsv2 info data
   !>   that is gathered during the analysis routines. It should be destroyed
   !>   at the end using hipsparseDestroyCsrsv2Info().
-#ifndef USE_CUDA_NAMES
   interface hipsparseCreateCsrsv2Info
     function hipsparseCreateCsrsv2Info_(myInfo) bind(c, name="hipsparseCreateCsrsv2Info")
       use iso_c_binding
@@ -686,14 +569,12 @@ module hipfort_hipsparse
       type(c_ptr) :: myInfo
     end function
   end interface
-#endif
 
   !>  \ingroup aux_module
   !>   \brief Destroy a csrsv2 info structure.
   !>
   !>   \details
   !>   \p hipsparseDestroyCsrsv2Info destroys a csrsv2 info structure.
-#ifndef USE_CUDA_NAMES
   interface hipsparseDestroyCsrsv2Info
     function hipsparseDestroyCsrsv2Info_(myInfo) bind(c, name="hipsparseDestroyCsrsv2Info")
       use iso_c_binding
@@ -703,7 +584,6 @@ module hipfort_hipsparse
       type(c_ptr),value :: myInfo
     end function
   end interface
-#endif
 
   !>  \ingroup aux_module
   !>   \brief Create a csrsm2 info structure.
@@ -712,7 +592,6 @@ module hipfort_hipsparse
   !>   \p hipsparseCreateCsrsm2Info creates a structure that holds the csrsm2 info data
   !>   that is gathered during the analysis routines. It should be destroyed
   !>   at the end using hipsparseDestroyCsrsm2Info().
-#ifndef USE_CUDA_NAMES
   interface hipsparseCreateCsrsm2Info
     function hipsparseCreateCsrsm2Info_(myInfo) bind(c, name="hipsparseCreateCsrsm2Info")
       use iso_c_binding
@@ -722,14 +601,12 @@ module hipfort_hipsparse
       type(c_ptr) :: myInfo
     end function
   end interface
-#endif
 
   !>  \ingroup aux_module
   !>   \brief Destroy a csrsm2 info structure.
   !>
   !>   \details
   !>   \p hipsparseDestroyCsrsm2Info destroys a csrsm2 info structure.
-#ifndef USE_CUDA_NAMES
   interface hipsparseDestroyCsrsm2Info
     function hipsparseDestroyCsrsm2Info_(myInfo) bind(c, name="hipsparseDestroyCsrsm2Info")
       use iso_c_binding
@@ -739,7 +616,6 @@ module hipfort_hipsparse
       type(c_ptr),value :: myInfo
     end function
   end interface
-#endif
 
   !>  \ingroup aux_module
   !>   \brief Create a csrilu02 info structure.
@@ -749,11 +625,7 @@ module hipfort_hipsparse
   !>   that is gathered during the analysis routines. It should be destroyed
   !>   at the end using hipsparseDestroyCsrilu02Info().
   interface hipsparseCreateCsrilu02Info
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateCsrilu02Info_(myInfo) bind(c, name="cusparseCreateCsrilu02Info")
-#else
     function hipsparseCreateCsrilu02Info_(myInfo) bind(c, name="hipsparseCreateCsrilu02Info")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -768,11 +640,7 @@ module hipfort_hipsparse
   !>   \details
   !>   \p hipsparseDestroyCsrilu02Info destroys a csrilu02 info structure.
   interface hipsparseDestroyCsrilu02Info
-#ifdef USE_CUDA_NAMES
-    function hipsparseDestroyCsrilu02Info_(myInfo) bind(c, name="cusparseDestroyCsrilu02Info")
-#else
     function hipsparseDestroyCsrilu02Info_(myInfo) bind(c, name="hipsparseDestroyCsrilu02Info")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -789,11 +657,7 @@ module hipfort_hipsparse
   !>   that is gathered during the analysis routines. It should be destroyed
   !>   at the end using hipsparseDestroyCsric02Info().
   interface hipsparseCreateCsric02Info
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateCsric02Info_(myInfo) bind(c, name="cusparseCreateCsric02Info")
-#else
     function hipsparseCreateCsric02Info_(myInfo) bind(c, name="hipsparseCreateCsric02Info")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -808,11 +672,7 @@ module hipfort_hipsparse
   !>   \details
   !>   \p hipsparseDestroyCsric02Info destroys a csric02 info structure.
   interface hipsparseDestroyCsric02Info
-#ifdef USE_CUDA_NAMES
-    function hipsparseDestroyCsric02Info_(myInfo) bind(c, name="cusparseDestroyCsric02Info")
-#else
     function hipsparseDestroyCsric02Info_(myInfo) bind(c, name="hipsparseDestroyCsric02Info")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -829,11 +689,7 @@ module hipfort_hipsparse
   !>   that is gathered during the analysis routines. It should be destroyed
   !>   at the end using hipsparseDestroyCsru2csrInfo().
   interface hipsparseCreateCsru2csrInfo
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateCsru2csrInfo_(myInfo) bind(c, name="cusparseCreateCsru2csrInfo")
-#else
     function hipsparseCreateCsru2csrInfo_(myInfo) bind(c, name="hipsparseCreateCsru2csrInfo")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -848,11 +704,7 @@ module hipfort_hipsparse
   !>   \details
   !>   \p hipsparseDestroyCsru2csrInfo destroys a csru2csr info structure.
   interface hipsparseDestroyCsru2csrInfo
-#ifdef USE_CUDA_NAMES
-    function hipsparseDestroyCsru2csrInfo_(myInfo) bind(c, name="cusparseDestroyCsru2csrInfo")
-#else
     function hipsparseDestroyCsru2csrInfo_(myInfo) bind(c, name="hipsparseDestroyCsru2csrInfo")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -869,11 +721,7 @@ module hipfort_hipsparse
   !>   that is gathered during the analysis routines. It should be destroyed
   !>   at the end using hipsparseDestroyColorInfo().
   interface hipsparseCreateColorInfo
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateColorInfo_(myInfo) bind(c, name="cusparseCreateColorInfo")
-#else
     function hipsparseCreateColorInfo_(myInfo) bind(c, name="hipsparseCreateColorInfo")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -888,11 +736,7 @@ module hipfort_hipsparse
   !>   \details
   !>   \p hipsparseDestroyColorInfo destroys a color info structure.
   interface hipsparseDestroyColorInfo
-#ifdef USE_CUDA_NAMES
-    function hipsparseDestroyColorInfo_(myInfo) bind(c, name="cusparseDestroyColorInfo")
-#else
     function hipsparseDestroyColorInfo_(myInfo) bind(c, name="hipsparseDestroyColorInfo")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -908,7 +752,6 @@ module hipfort_hipsparse
   !>   \p hipsparseCreateCsrgemm2Info creates a structure that holds the csrgemm2 info data
   !>   that is gathered during the analysis routines. It should be destroyed
   !>   at the end using hipsparseDestroyCsrgemm2Info().
-#ifndef USE_CUDA_NAMES
   interface hipsparseCreateCsrgemm2Info
     function hipsparseCreateCsrgemm2Info_(myInfo) bind(c, name="hipsparseCreateCsrgemm2Info")
       use iso_c_binding
@@ -918,14 +761,12 @@ module hipfort_hipsparse
       type(c_ptr) :: myInfo
     end function
   end interface
-#endif
 
   !>  \ingroup aux_module
   !>   \brief Destroy a csrgemm2 info structure.
   !>
   !>   \details
   !>   \p hipsparseDestroyCsrgemm2Info destroys a csrgemm2 info structure.
-#ifndef USE_CUDA_NAMES
   interface hipsparseDestroyCsrgemm2Info
     function hipsparseDestroyCsrgemm2Info_(myInfo) bind(c, name="hipsparseDestroyCsrgemm2Info")
       use iso_c_binding
@@ -935,7 +776,6 @@ module hipfort_hipsparse
       type(c_ptr),value :: myInfo
     end function
   end interface
-#endif
 
   !>  \ingroup aux_module
   !>   \brief Create a prune info structure.
@@ -945,11 +785,7 @@ module hipfort_hipsparse
   !>   that is gathered during the analysis routines. It should be destroyed
   !>   at the end using hipsparseDestroyPruneInfo().
   interface hipsparseCreatePruneInfo
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreatePruneInfo_(myInfo) bind(c, name="cusparseCreatePruneInfo")
-#else
     function hipsparseCreatePruneInfo_(myInfo) bind(c, name="hipsparseCreatePruneInfo")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -964,11 +800,7 @@ module hipfort_hipsparse
   !>   \details
   !>   \p hipsparseDestroyPruneInfo destroys a prune info structure.
   interface hipsparseDestroyPruneInfo
-#ifdef USE_CUDA_NAMES
-    function hipsparseDestroyPruneInfo_(myInfo) bind(c, name="cusparseDestroyPruneInfo")
-#else
     function hipsparseDestroyPruneInfo_(myInfo) bind(c, name="hipsparseDestroyPruneInfo")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -1024,7 +856,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle is nullptr, \p nnz is negative,
   !>           \p alpha, \p xVal, \p xInd, or \p y is nullptr when \p nnz is greater than zero,
   !>           or \p idxBase is neither `HIPSPARSE_INDEX_BASE_ZERO` nor `HIPSPARSE_INDEX_BASE_ONE`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseSaxpyi
     function hipsparseSaxpyi_(handle,nnz,alpha,xVal,xInd,y,idxBase) bind(c, name="hipsparseSaxpyi")
       use iso_c_binding
@@ -1050,9 +881,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDaxpyi
     function hipsparseDaxpyi_(handle,nnz,alpha,xVal,xInd,y,idxBase) bind(c, name="hipsparseDaxpyi")
       use iso_c_binding
@@ -1078,9 +907,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCaxpyi
     function hipsparseCaxpyi_(handle,nnz,alpha,xVal,xInd,y,idxBase) bind(c, name="hipsparseCaxpyi")
       use iso_c_binding
@@ -1106,9 +933,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZaxpyi
     function hipsparseZaxpyi_(handle,nnz,alpha,xVal,xInd,y,idxBase) bind(c, name="hipsparseZaxpyi")
       use iso_c_binding
@@ -1134,7 +959,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level1_module
   !>   \brief Compute the dot product of a complex conjugate sparse vector with a dense
@@ -1185,7 +1009,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_ALLOC_FAILED the buffer for the dot product reduction
   !>           could not be allocated.
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
-#ifndef USE_CUDA_NAMES
   interface hipsparseCdotci
     function hipsparseCdotci_(handle,nnz,xVal,xInd,y,myResult,idxBase) &
         bind(c, name="hipsparseCdotci")
@@ -1212,9 +1035,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZdotci
     function hipsparseZdotci_(handle,nnz,xVal,xInd,y,myResult,idxBase) &
         bind(c, name="hipsparseZdotci")
@@ -1241,7 +1062,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level1_module
   !>   \brief Compute the dot product of a sparse vector with a dense vector.
@@ -1291,7 +1111,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_ALLOC_FAILED the buffer for the dot product reduction
   !>           could not be allocated.
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
-#ifndef USE_CUDA_NAMES
   interface hipsparseSdoti
     function hipsparseSdoti_(handle,nnz,xVal,xInd,y,myResult,idxBase) bind(c, name="hipsparseSdoti")
       use iso_c_binding
@@ -1317,9 +1136,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDdoti
     function hipsparseDdoti_(handle,nnz,xVal,xInd,y,myResult,idxBase) bind(c, name="hipsparseDdoti")
       use iso_c_binding
@@ -1345,9 +1162,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCdoti
     function hipsparseCdoti_(handle,nnz,xVal,xInd,y,myResult,idxBase) bind(c, name="hipsparseCdoti")
       use iso_c_binding
@@ -1373,9 +1188,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZdoti
     function hipsparseZdoti_(handle,nnz,xVal,xInd,y,myResult,idxBase) bind(c, name="hipsparseZdoti")
       use iso_c_binding
@@ -1401,7 +1214,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level1_module
   !>   \brief Gather elements from a dense vector and store them in a sparse vector.
@@ -1443,7 +1255,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle is nullptr, \p nnz is negative,
   !>           \p y, \p xVal, or \p xInd is nullptr when \p nnz is greater than zero, or \p idxBase
   !>           is neither `HIPSPARSE_INDEX_BASE_ZERO` nor `HIPSPARSE_INDEX_BASE_ONE`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseSgthr
     function hipsparseSgthr_(handle,nnz,y,xVal,xInd,idxBase) bind(c, name="hipsparseSgthr")
       use iso_c_binding
@@ -1468,9 +1279,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDgthr
     function hipsparseDgthr_(handle,nnz,y,xVal,xInd,idxBase) bind(c, name="hipsparseDgthr")
       use iso_c_binding
@@ -1495,9 +1304,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCgthr
     function hipsparseCgthr_(handle,nnz,y,xVal,xInd,idxBase) bind(c, name="hipsparseCgthr")
       use iso_c_binding
@@ -1522,9 +1329,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZgthr
     function hipsparseZgthr_(handle,nnz,y,xVal,xInd,idxBase) bind(c, name="hipsparseZgthr")
       use iso_c_binding
@@ -1549,7 +1354,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level1_module
   !>   \brief Gather and zero out elements from a dense vector and store them in a sparse
@@ -1595,7 +1399,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle is nullptr, \p nnz is negative,
   !>           \p y, \p xVal, or \p xInd is nullptr when \p nnz is greater than zero, or \p idxBase
   !>           is neither `HIPSPARSE_INDEX_BASE_ZERO` nor `HIPSPARSE_INDEX_BASE_ONE`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseSgthrz
     function hipsparseSgthrz_(handle,nnz,y,xVal,xInd,idxBase) bind(c, name="hipsparseSgthrz")
       use iso_c_binding
@@ -1620,9 +1423,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDgthrz
     function hipsparseDgthrz_(handle,nnz,y,xVal,xInd,idxBase) bind(c, name="hipsparseDgthrz")
       use iso_c_binding
@@ -1647,9 +1448,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCgthrz
     function hipsparseCgthrz_(handle,nnz,y,xVal,xInd,idxBase) bind(c, name="hipsparseCgthrz")
       use iso_c_binding
@@ -1674,9 +1473,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZgthrz
     function hipsparseZgthrz_(handle,nnz,y,xVal,xInd,idxBase) bind(c, name="hipsparseZgthrz")
       use iso_c_binding
@@ -1701,7 +1498,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level1_module
   !>   \brief Apply the Givens rotation to a dense and a sparse vector.
@@ -1753,7 +1549,6 @@ module hipfort_hipsparse
   !>   negative,
   !>           \p xVal, \p xInd, or \p y is nullptr when \p nnz is greater than zero, or \p idxBase
   !>           is neither `HIPSPARSE_INDEX_BASE_ZERO` nor `HIPSPARSE_INDEX_BASE_ONE`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseSroti
     function hipsparseSroti_(handle,nnz,xVal,xInd,y,c,s,idxBase) bind(c, name="hipsparseSroti")
       use iso_c_binding
@@ -1780,9 +1575,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDroti
     function hipsparseDroti_(handle,nnz,xVal,xInd,y,c,s,idxBase) bind(c, name="hipsparseDroti")
       use iso_c_binding
@@ -1809,7 +1602,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level1_module
   !>   \brief Scatter elements from a dense vector across a sparse vector.
@@ -1853,7 +1645,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle is nullptr, \p nnz is negative,
   !>           \p xVal, \p xInd, or \p y is nullptr when \p nnz is greater than zero, or \p idxBase
   !>           is neither `HIPSPARSE_INDEX_BASE_ZERO` nor `HIPSPARSE_INDEX_BASE_ONE`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseSsctr
     function hipsparseSsctr_(handle,nnz,xVal,xInd,y,idxBase) bind(c, name="hipsparseSsctr")
       use iso_c_binding
@@ -1878,9 +1669,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDsctr
     function hipsparseDsctr_(handle,nnz,xVal,xInd,y,idxBase) bind(c, name="hipsparseDsctr")
       use iso_c_binding
@@ -1905,9 +1694,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCsctr
     function hipsparseCsctr_(handle,nnz,xVal,xInd,y,idxBase) bind(c, name="hipsparseCsctr")
       use iso_c_binding
@@ -1932,9 +1719,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZsctr
     function hipsparseZsctr_(handle,nnz,xVal,xInd,y,idxBase) bind(c, name="hipsparseZsctr")
       use iso_c_binding
@@ -1959,7 +1744,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level2_module
   !>   \brief Sparse matrix vector multiplication using the BSR storage format.
@@ -2021,15 +1805,9 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED \p transA is not `HIPSPARSE_OPERATION_NON_TRANSPOSE`
   !>           or `hipsparseMatrixType_t` is not `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSbsrmv
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsrmv_(handle,dirA,transA,mb,nb,nnzb,alpha,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,x,beta,y) &
-        bind(c, name="cusparseSbsrmv")
-#else
     function hipsparseSbsrmv_(handle,dirA,transA,mb,nb,nnzb,alpha,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,x,beta,y) &
         bind(c, name="hipsparseSbsrmv")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -2063,15 +1841,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsrmv
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsrmv_(handle,dirA,transA,mb,nb,nnzb,alpha,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,x,beta,y) &
-        bind(c, name="cusparseDbsrmv")
-#else
     function hipsparseDbsrmv_(handle,dirA,transA,mb,nb,nnzb,alpha,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,x,beta,y) &
         bind(c, name="hipsparseDbsrmv")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -2105,15 +1877,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsrmv
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsrmv_(handle,dirA,transA,mb,nb,nnzb,alpha,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,x,beta,y) &
-        bind(c, name="cusparseCbsrmv")
-#else
     function hipsparseCbsrmv_(handle,dirA,transA,mb,nb,nnzb,alpha,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,x,beta,y) &
         bind(c, name="hipsparseCbsrmv")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -2147,15 +1913,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsrmv
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsrmv_(handle,dirA,transA,mb,nb,nnzb,alpha,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,x,beta,y) &
-        bind(c, name="cusparseZbsrmv")
-#else
     function hipsparseZbsrmv_(handle,dirA,transA,mb,nb,nnzb,alpha,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,x,beta,y) &
         bind(c, name="hipsparseZbsrmv")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -2216,13 +1976,8 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   !>   \retval HIPSPARSE_STATUS_ZERO_PIVOT zero pivot has been found.
   interface hipsparseXbsrsv2_zeroPivot
-#ifdef USE_CUDA_NAMES
-    function hipsparseXbsrsv2_zeroPivot_(handle,myInfo,position) &
-        bind(c, name="cusparseXbsrsv2_zeroPivot")
-#else
     function hipsparseXbsrsv2_zeroPivot_(handle,myInfo,position) &
         bind(c, name="hipsparseXbsrsv2_zeroPivot")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -2268,15 +2023,9 @@ module hipfort_hipsparse
   !>               \p transA == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE` or
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSbsrsv2_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsrsv2_bufferSize_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseSbsrsv2_bufferSize")
-#else
     function hipsparseSbsrsv2_bufferSize_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseSbsrsv2_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -2307,15 +2056,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsrsv2_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsrsv2_bufferSize_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseDbsrsv2_bufferSize")
-#else
     function hipsparseDbsrsv2_bufferSize_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseDbsrsv2_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -2346,15 +2089,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsrsv2_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsrsv2_bufferSize_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseCbsrsv2_bufferSize")
-#else
     function hipsparseCbsrsv2_bufferSize_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseCbsrsv2_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -2385,15 +2122,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsrsv2_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsrsv2_bufferSize_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseZbsrsv2_bufferSize")
-#else
     function hipsparseZbsrsv2_bufferSize_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseZbsrsv2_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -2457,7 +2188,6 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               \p transA == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE` or
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseSbsrsv2_bufferSizeExt
     function hipsparseSbsrsv2_bufferSizeExt_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
@@ -2490,9 +2220,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDbsrsv2_bufferSizeExt
     function hipsparseDbsrsv2_bufferSizeExt_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
@@ -2525,9 +2253,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCbsrsv2_bufferSizeExt
     function hipsparseCbsrsv2_bufferSizeExt_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
@@ -2560,9 +2286,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZbsrsv2_bufferSizeExt
     function hipsparseZbsrsv2_bufferSizeExt_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
@@ -2595,7 +2319,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level2_module
   !>   \details
@@ -2639,15 +2362,9 @@ module hipfort_hipsparse
   !>               \p transA == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE` or
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSbsrsv2_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsrsv2_analysis_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseSbsrsv2_analysis")
-#else
     function hipsparseSbsrsv2_analysis_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseSbsrsv2_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -2679,15 +2396,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsrsv2_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsrsv2_analysis_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseDbsrsv2_analysis")
-#else
     function hipsparseDbsrsv2_analysis_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseDbsrsv2_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -2719,15 +2430,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsrsv2_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsrsv2_analysis_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseCbsrsv2_analysis")
-#else
     function hipsparseCbsrsv2_analysis_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseCbsrsv2_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -2759,15 +2464,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsrsv2_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsrsv2_analysis_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseZbsrsv2_analysis")
-#else
     function hipsparseZbsrsv2_analysis_(handle,dirA,transA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseZbsrsv2_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -2903,15 +2602,9 @@ module hipfort_hipsparse
   !>               \p transA == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE` or
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSbsrsv2_solve
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsrsv2_solve_(handle,dirA,transA,mb,nnzb,alpha,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,f,x,policy,pBuffer) &
-        bind(c, name="cusparseSbsrsv2_solve")
-#else
     function hipsparseSbsrsv2_solve_(handle,dirA,transA,mb,nnzb,alpha,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,f,x,policy,pBuffer) &
         bind(c, name="hipsparseSbsrsv2_solve")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -2946,15 +2639,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsrsv2_solve
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsrsv2_solve_(handle,dirA,transA,mb,nnzb,alpha,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,f,x,policy,pBuffer) &
-        bind(c, name="cusparseDbsrsv2_solve")
-#else
     function hipsparseDbsrsv2_solve_(handle,dirA,transA,mb,nnzb,alpha,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,f,x,policy,pBuffer) &
         bind(c, name="hipsparseDbsrsv2_solve")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -2989,15 +2676,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsrsv2_solve
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsrsv2_solve_(handle,dirA,transA,mb,nnzb,alpha,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,f,x,policy,pBuffer) &
-        bind(c, name="cusparseCbsrsv2_solve")
-#else
     function hipsparseCbsrsv2_solve_(handle,dirA,transA,mb,nnzb,alpha,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,f,x,policy,pBuffer) &
         bind(c, name="hipsparseCbsrsv2_solve")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -3032,15 +2713,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsrsv2_solve
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsrsv2_solve_(handle,dirA,transA,mb,nnzb,alpha,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,f,x,policy,pBuffer) &
-        bind(c, name="cusparseZbsrsv2_solve")
-#else
     function hipsparseZbsrsv2_solve_(handle,dirA,transA,mb,nnzb,alpha,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,f,x,policy,pBuffer) &
         bind(c, name="hipsparseZbsrsv2_solve")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -3155,15 +2830,9 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED \p trans is not `HIPSPARSE_OPERATION_NON_TRANSPOSE`,
   !>           or `hipsparseMatrixType_t` is not `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSbsrxmv
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsrxmv_(handle,dir,trans,sizeOfMask,mb,nb,nnzb,alpha,descr,bsrVal, &
-        bsrMaskPtr,bsrRowPtr,bsrEndPtr,bsrColInd,blockDim,x,beta,y) &
-        bind(c, name="cusparseSbsrxmv")
-#else
     function hipsparseSbsrxmv_(handle,dir,trans,sizeOfMask,mb,nb,nnzb,alpha,descr,bsrVal, &
         bsrMaskPtr,bsrRowPtr,bsrEndPtr,bsrColInd,blockDim,x,beta,y) &
         bind(c, name="hipsparseSbsrxmv")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -3200,15 +2869,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsrxmv
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsrxmv_(handle,dir,trans,sizeOfMask,mb,nb,nnzb,alpha,descr,bsrVal, &
-        bsrMaskPtr,bsrRowPtr,bsrEndPtr,bsrColInd,blockDim,x,beta,y) &
-        bind(c, name="cusparseDbsrxmv")
-#else
     function hipsparseDbsrxmv_(handle,dir,trans,sizeOfMask,mb,nb,nnzb,alpha,descr,bsrVal, &
         bsrMaskPtr,bsrRowPtr,bsrEndPtr,bsrColInd,blockDim,x,beta,y) &
         bind(c, name="hipsparseDbsrxmv")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -3245,15 +2908,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsrxmv
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsrxmv_(handle,dir,trans,sizeOfMask,mb,nb,nnzb,alpha,descr,bsrVal, &
-        bsrMaskPtr,bsrRowPtr,bsrEndPtr,bsrColInd,blockDim,x,beta,y) &
-        bind(c, name="cusparseCbsrxmv")
-#else
     function hipsparseCbsrxmv_(handle,dir,trans,sizeOfMask,mb,nb,nnzb,alpha,descr,bsrVal, &
         bsrMaskPtr,bsrRowPtr,bsrEndPtr,bsrColInd,blockDim,x,beta,y) &
         bind(c, name="hipsparseCbsrxmv")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -3290,15 +2947,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsrxmv
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsrxmv_(handle,dir,trans,sizeOfMask,mb,nb,nnzb,alpha,descr,bsrVal, &
-        bsrMaskPtr,bsrRowPtr,bsrEndPtr,bsrColInd,blockDim,x,beta,y) &
-        bind(c, name="cusparseZbsrxmv")
-#else
     function hipsparseZbsrxmv_(handle,dir,trans,sizeOfMask,mb,nb,nnzb,alpha,descr,bsrVal, &
         bsrMaskPtr,bsrRowPtr,bsrEndPtr,bsrColInd,blockDim,x,beta,y) &
         bind(c, name="hipsparseZbsrxmv")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -3407,7 +3058,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_ARCH_MISMATCH the device is not supported.
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED `hipsparseMatrixType_t` is not
   !>           `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsrmv
     function hipsparseScsrmv_(handle,transA,m,n,nnz,alpha,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,x,beta,y) &
@@ -3441,9 +3091,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsrmv
     function hipsparseDcsrmv_(handle,transA,m,n,nnz,alpha,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,x,beta,y) &
@@ -3477,9 +3125,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsrmv
     function hipsparseCcsrmv_(handle,transA,m,n,nnz,alpha,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,x,beta,y) &
@@ -3513,9 +3159,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsrmv
     function hipsparseZcsrmv_(handle,transA,m,n,nnz,alpha,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,x,beta,y) &
@@ -3549,7 +3193,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level2_module
   !>   \details
@@ -3579,7 +3222,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle, \p info, or \p position is nullptr.
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   !>   \retval HIPSPARSE_STATUS_ZERO_PIVOT zero pivot has been found.
-#ifndef USE_CUDA_NAMES
   interface hipsparseXcsrsv2_zeroPivot
     function hipsparseXcsrsv2_zeroPivot_(handle,myInfo,position) &
         bind(c, name="hipsparseXcsrsv2_zeroPivot")
@@ -3592,7 +3234,6 @@ module hipfort_hipsparse
       integer(c_int) :: position
     end function
   end interface
-#endif
 
   !>  \ingroup level2_module
   !>   \details
@@ -3626,7 +3267,6 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               \p transA == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE` or
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsrsv2_bufferSize
     function hipsparseScsrsv2_bufferSize_(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes) &
@@ -3657,9 +3297,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsrsv2_bufferSize
     function hipsparseDcsrsv2_bufferSize_(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes) &
@@ -3690,9 +3328,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsrsv2_bufferSize
     function hipsparseCcsrsv2_bufferSize_(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes) &
@@ -3723,9 +3359,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsrsv2_bufferSize
     function hipsparseZcsrsv2_bufferSize_(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes) &
@@ -3756,7 +3390,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level2_module
   !>   \details
@@ -3790,7 +3423,6 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               \p transA == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE` or
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsrsv2_bufferSizeExt
     function hipsparseScsrsv2_bufferSizeExt_(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes) &
@@ -3821,9 +3453,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsrsv2_bufferSizeExt
     function hipsparseDcsrsv2_bufferSizeExt_(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes) &
@@ -3854,9 +3484,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsrsv2_bufferSizeExt
     function hipsparseCcsrsv2_bufferSizeExt_(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes) &
@@ -3887,9 +3515,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsrsv2_bufferSizeExt
     function hipsparseZcsrsv2_bufferSizeExt_(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes) &
@@ -3920,7 +3546,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level2_module
   !>   \details
@@ -3959,7 +3584,6 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               \p transA == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE` or
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsrsv2_analysis
     function hipsparseScsrsv2_analysis_(handle,transA,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
@@ -3991,9 +3615,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsrsv2_analysis
     function hipsparseDcsrsv2_analysis_(handle,transA,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
@@ -4025,9 +3647,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsrsv2_analysis
     function hipsparseCcsrsv2_analysis_(handle,transA,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
@@ -4059,9 +3679,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsrsv2_analysis
     function hipsparseZcsrsv2_analysis_(handle,transA,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
@@ -4093,7 +3711,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level2_module
   !>   \brief Sparse triangular solve using the CSR storage format
@@ -4198,7 +3815,6 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               \p transA == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE` or
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsrsv2_solve
     function hipsparseScsrsv2_solve_(handle,transA,m,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,f,x,policy,pBuffer) &
@@ -4233,9 +3849,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsrsv2_solve
     function hipsparseDcsrsv2_solve_(handle,transA,m,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,f,x,policy,pBuffer) &
@@ -4270,9 +3884,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsrsv2_solve
     function hipsparseCcsrsv2_solve_(handle,transA,m,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,f,x,policy,pBuffer) &
@@ -4307,9 +3919,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsrsv2_solve
     function hipsparseZcsrsv2_solve_(handle,transA,m,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,f,x,policy,pBuffer) &
@@ -4344,7 +3954,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level2_module
   !>   \details
@@ -4366,13 +3975,8 @@ module hipfort_hipsparse
   !>               \p transA != `HIPSPARSE_OPERATION_NON_TRANSPOSE` or
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSgemvi_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgemvi_bufferSize_(handle,transA,m,n,nnz,pBufferSizeInBytes) &
-        bind(c, name="cusparseSgemvi_bufferSize")
-#else
     function hipsparseSgemvi_bufferSize_(handle,transA,m,n,nnz,pBufferSizeInBytes) &
         bind(c, name="hipsparseSgemvi_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -4387,13 +3991,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgemvi_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgemvi_bufferSize_(handle,transA,m,n,nnz,pBufferSizeInBytes) &
-        bind(c, name="cusparseDgemvi_bufferSize")
-#else
     function hipsparseDgemvi_bufferSize_(handle,transA,m,n,nnz,pBufferSizeInBytes) &
         bind(c, name="hipsparseDgemvi_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -4408,13 +4007,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgemvi_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgemvi_bufferSize_(handle,transA,m,n,nnz,pBufferSizeInBytes) &
-        bind(c, name="cusparseCgemvi_bufferSize")
-#else
     function hipsparseCgemvi_bufferSize_(handle,transA,m,n,nnz,pBufferSizeInBytes) &
         bind(c, name="hipsparseCgemvi_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -4429,13 +4023,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgemvi_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgemvi_bufferSize_(handle,transA,m,n,nnz,pBufferSizeInBytes) &
-        bind(c, name="cusparseZgemvi_bufferSize")
-#else
     function hipsparseZgemvi_bufferSize_(handle,transA,m,n,nnz,pBufferSizeInBytes) &
         bind(c, name="hipsparseZgemvi_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -4505,13 +4094,8 @@ module hipfort_hipsparse
   !>               \p transA != `HIPSPARSE_OPERATION_NON_TRANSPOSE` or
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSgemvi
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgemvi_(handle,transA,m,n,alpha,A,lda,nnz,x,xInd,beta,y,idxBase,pBuffer) &
-        bind(c, name="cusparseSgemvi")
-#else
     function hipsparseSgemvi_(handle,transA,m,n,alpha,A,lda,nnz,x,xInd,beta,y,idxBase,pBuffer) &
         bind(c, name="hipsparseSgemvi")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -4545,13 +4129,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgemvi
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgemvi_(handle,transA,m,n,alpha,A,lda,nnz,x,xInd,beta,y,idxBase,pBuffer) &
-        bind(c, name="cusparseDgemvi")
-#else
     function hipsparseDgemvi_(handle,transA,m,n,alpha,A,lda,nnz,x,xInd,beta,y,idxBase,pBuffer) &
         bind(c, name="hipsparseDgemvi")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -4585,13 +4164,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgemvi
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgemvi_(handle,transA,m,n,alpha,A,lda,nnz,x,xInd,beta,y,idxBase,pBuffer) &
-        bind(c, name="cusparseCgemvi")
-#else
     function hipsparseCgemvi_(handle,transA,m,n,alpha,A,lda,nnz,x,xInd,beta,y,idxBase,pBuffer) &
         bind(c, name="hipsparseCgemvi")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -4625,13 +4199,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgemvi
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgemvi_(handle,transA,m,n,alpha,A,lda,nnz,x,xInd,beta,y,idxBase,pBuffer) &
-        bind(c, name="cusparseZgemvi")
-#else
     function hipsparseZgemvi_(handle,transA,m,n,alpha,A,lda,nnz,x,xInd,beta,y,idxBase,pBuffer) &
         bind(c, name="hipsparseZgemvi")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -4717,7 +4286,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED \p transA is not `HIPSPARSE_OPERATION_NON_TRANSPOSE`
   !>           or `hipsparseMatrixType_t` is not `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseShybmv
     function hipsparseShybmv_(handle,transA,alpha,descrA,hybA,x,beta,y) &
         bind(c, name="hipsparseShybmv")
@@ -4745,9 +4313,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDhybmv
     function hipsparseDhybmv_(handle,transA,alpha,descrA,hybA,x,beta,y) &
         bind(c, name="hipsparseDhybmv")
@@ -4775,9 +4341,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseChybmv
     function hipsparseChybmv_(handle,transA,alpha,descrA,hybA,x,beta,y) &
         bind(c, name="hipsparseChybmv")
@@ -4805,9 +4369,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZhybmv
     function hipsparseZhybmv_(handle,transA,alpha,descrA,hybA,x,beta,y) &
         bind(c, name="hipsparseZhybmv")
@@ -4835,7 +4397,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level3_module
   !>   \brief Sparse matrix dense matrix multiplication using the BSR storage format.
@@ -4925,15 +4486,9 @@ module hipfort_hipsparse
   !>           \p transB is `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE`, or
   !>           `hipsparseMatrixType_t` is not `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSbsrmm
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsrmm_(handle,dirA,transA,transB,mb,n,kb,nnzb,alpha,descrA,bsrValA, &
-        bsrRowPtrA,bsrColIndA,blockDim,B,ldb,beta,C,ldc) &
-        bind(c, name="cusparseSbsrmm")
-#else
     function hipsparseSbsrmm_(handle,dirA,transA,transB,mb,n,kb,nnzb,alpha,descrA,bsrValA, &
         bsrRowPtrA,bsrColIndA,blockDim,B,ldb,beta,C,ldc) &
         bind(c, name="hipsparseSbsrmm")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -4972,15 +4527,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsrmm
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsrmm_(handle,dirA,transA,transB,mb,n,kb,nnzb,alpha,descrA,bsrValA, &
-        bsrRowPtrA,bsrColIndA,blockDim,B,ldb,beta,C,ldc) &
-        bind(c, name="cusparseDbsrmm")
-#else
     function hipsparseDbsrmm_(handle,dirA,transA,transB,mb,n,kb,nnzb,alpha,descrA,bsrValA, &
         bsrRowPtrA,bsrColIndA,blockDim,B,ldb,beta,C,ldc) &
         bind(c, name="hipsparseDbsrmm")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -5019,15 +4568,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsrmm
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsrmm_(handle,dirA,transA,transB,mb,n,kb,nnzb,alpha,descrA,bsrValA, &
-        bsrRowPtrA,bsrColIndA,blockDim,B,ldb,beta,C,ldc) &
-        bind(c, name="cusparseCbsrmm")
-#else
     function hipsparseCbsrmm_(handle,dirA,transA,transB,mb,n,kb,nnzb,alpha,descrA,bsrValA, &
         bsrRowPtrA,bsrColIndA,blockDim,B,ldb,beta,C,ldc) &
         bind(c, name="hipsparseCbsrmm")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -5066,15 +4609,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsrmm
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsrmm_(handle,dirA,transA,transB,mb,n,kb,nnzb,alpha,descrA,bsrValA, &
-        bsrRowPtrA,bsrColIndA,blockDim,B,ldb,beta,C,ldc) &
-        bind(c, name="cusparseZbsrmm")
-#else
     function hipsparseZbsrmm_(handle,dirA,transA,transB,mb,n,kb,nnzb,alpha,descrA,bsrValA, &
         bsrRowPtrA,bsrColIndA,blockDim,B,ldb,beta,C,ldc) &
         bind(c, name="hipsparseZbsrmm")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -5142,13 +4679,8 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   !>   \retval HIPSPARSE_STATUS_ZERO_PIVOT zero pivot has been found.
   interface hipsparseXbsrsm2_zeroPivot
-#ifdef USE_CUDA_NAMES
-    function hipsparseXbsrsm2_zeroPivot_(handle,myInfo,position) &
-        bind(c, name="cusparseXbsrsm2_zeroPivot")
-#else
     function hipsparseXbsrsm2_zeroPivot_(handle,myInfo,position) &
         bind(c, name="hipsparseXbsrsm2_zeroPivot")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -5198,15 +4730,9 @@ module hipfort_hipsparse
   !>               \p transX == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE`, or
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSbsrsm2_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsrsm2_bufferSize_(handle,dirA,transA,transX,mb,nrhs,nnzb,descrA, &
-        bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseSbsrsm2_bufferSize")
-#else
     function hipsparseSbsrsm2_bufferSize_(handle,dirA,transA,transX,mb,nrhs,nnzb,descrA, &
         bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseSbsrsm2_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -5239,15 +4765,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsrsm2_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsrsm2_bufferSize_(handle,dirA,transA,transX,mb,nrhs,nnzb,descrA, &
-        bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseDbsrsm2_bufferSize")
-#else
     function hipsparseDbsrsm2_bufferSize_(handle,dirA,transA,transX,mb,nrhs,nnzb,descrA, &
         bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseDbsrsm2_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -5280,15 +4800,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsrsm2_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsrsm2_bufferSize_(handle,dirA,transA,transX,mb,nrhs,nnzb,descrA, &
-        bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseCbsrsm2_bufferSize")
-#else
     function hipsparseCbsrsm2_bufferSize_(handle,dirA,transA,transX,mb,nrhs,nnzb,descrA, &
         bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseCbsrsm2_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -5321,15 +4835,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsrsm2_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsrsm2_bufferSize_(handle,dirA,transA,transX,mb,nrhs,nnzb,descrA, &
-        bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseZbsrsm2_bufferSize")
-#else
     function hipsparseZbsrsm2_bufferSize_(handle,dirA,transA,transX,mb,nrhs,nnzb,descrA, &
         bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseZbsrsm2_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -5407,15 +4915,9 @@ module hipfort_hipsparse
   !>               \p transX == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE`, or
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSbsrsm2_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsrsm2_analysis_(handle,dirA,transA,transX,mb,nrhs,nnzb,descrA, &
-        bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseSbsrsm2_analysis")
-#else
     function hipsparseSbsrsm2_analysis_(handle,dirA,transA,transX,mb,nrhs,nnzb,descrA, &
         bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseSbsrsm2_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -5449,15 +4951,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsrsm2_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsrsm2_analysis_(handle,dirA,transA,transX,mb,nrhs,nnzb,descrA, &
-        bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseDbsrsm2_analysis")
-#else
     function hipsparseDbsrsm2_analysis_(handle,dirA,transA,transX,mb,nrhs,nnzb,descrA, &
         bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseDbsrsm2_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -5491,15 +4987,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsrsm2_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsrsm2_analysis_(handle,dirA,transA,transX,mb,nrhs,nnzb,descrA, &
-        bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseCbsrsm2_analysis")
-#else
     function hipsparseCbsrsm2_analysis_(handle,dirA,transA,transX,mb,nrhs,nnzb,descrA, &
         bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseCbsrsm2_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -5533,15 +5023,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsrsm2_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsrsm2_analysis_(handle,dirA,transA,transX,mb,nrhs,nnzb,descrA, &
-        bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseZbsrsm2_analysis")
-#else
     function hipsparseZbsrsm2_analysis_(handle,dirA,transA,transX,mb,nrhs,nnzb,descrA, &
         bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseZbsrsm2_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -5826,17 +5310,10 @@ module hipfort_hipsparse
   !>               \p transX == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE` or
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSbsrsm2_solve
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsrsm2_solve_(handle,dirA,transA,transX,mb,nrhs,nnzb,alpha,descrA, &
-        bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,B,ldb,X,ldx,policy, &
-        pBuffer) &
-        bind(c, name="cusparseSbsrsm2_solve")
-#else
     function hipsparseSbsrsm2_solve_(handle,dirA,transA,transX,mb,nrhs,nnzb,alpha,descrA, &
         bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,B,ldb,X,ldx,policy, &
         pBuffer) &
         bind(c, name="hipsparseSbsrsm2_solve")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -5876,17 +5353,10 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsrsm2_solve
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsrsm2_solve_(handle,dirA,transA,transX,mb,nrhs,nnzb,alpha,descrA, &
-        bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,B,ldb,X,ldx,policy, &
-        pBuffer) &
-        bind(c, name="cusparseDbsrsm2_solve")
-#else
     function hipsparseDbsrsm2_solve_(handle,dirA,transA,transX,mb,nrhs,nnzb,alpha,descrA, &
         bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,B,ldb,X,ldx,policy, &
         pBuffer) &
         bind(c, name="hipsparseDbsrsm2_solve")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -5926,17 +5396,10 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsrsm2_solve
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsrsm2_solve_(handle,dirA,transA,transX,mb,nrhs,nnzb,alpha,descrA, &
-        bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,B,ldb,X,ldx,policy, &
-        pBuffer) &
-        bind(c, name="cusparseCbsrsm2_solve")
-#else
     function hipsparseCbsrsm2_solve_(handle,dirA,transA,transX,mb,nrhs,nnzb,alpha,descrA, &
         bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,B,ldb,X,ldx,policy, &
         pBuffer) &
         bind(c, name="hipsparseCbsrsm2_solve")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -5976,17 +5439,10 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsrsm2_solve
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsrsm2_solve_(handle,dirA,transA,transX,mb,nrhs,nnzb,alpha,descrA, &
-        bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,B,ldb,X,ldx,policy, &
-        pBuffer) &
-        bind(c, name="cusparseZbsrsm2_solve")
-#else
     function hipsparseZbsrsm2_solve_(handle,dirA,transA,transX,mb,nrhs,nnzb,alpha,descrA, &
         bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,B,ldb,X,ldx,policy, &
         pBuffer) &
         bind(c, name="hipsparseZbsrsm2_solve")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -6106,7 +5562,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_ARCH_MISMATCH the device is not supported.
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED `hipsparseMatrixType_t` is not
   !>           `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsrmm
     function hipsparseScsrmm_(handle,transA,m,n,k,nnz,alpha,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,B,ldb,beta,C,ldc) &
@@ -6144,9 +5599,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsrmm
     function hipsparseDcsrmm_(handle,transA,m,n,k,nnz,alpha,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,B,ldb,beta,C,ldc) &
@@ -6184,9 +5637,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsrmm
     function hipsparseCcsrmm_(handle,transA,m,n,k,nnz,alpha,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,B,ldb,beta,C,ldc) &
@@ -6224,9 +5675,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsrmm
     function hipsparseZcsrmm_(handle,transA,m,n,k,nnz,alpha,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,B,ldb,beta,C,ldc) &
@@ -6264,7 +5713,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level3_module
   !>   \brief Sparse matrix dense matrix multiplication using the CSR storage format.
@@ -6351,7 +5799,6 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_ARCH_MISMATCH the device is not supported.
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsrmm2
     function hipsparseScsrmm2_(handle,transA,transB,m,n,k,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,B,ldb,beta,C,ldc) &
@@ -6390,9 +5837,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsrmm2
     function hipsparseDcsrmm2_(handle,transA,transB,m,n,k,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,B,ldb,beta,C,ldc) &
@@ -6431,9 +5876,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsrmm2
     function hipsparseCcsrmm2_(handle,transA,transB,m,n,k,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,B,ldb,beta,C,ldc) &
@@ -6472,9 +5915,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsrmm2
     function hipsparseZcsrmm2_(handle,transA,transB,m,n,k,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,B,ldb,beta,C,ldc) &
@@ -6513,7 +5954,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level3_module
   !>   \details
@@ -6543,7 +5983,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle, \p info, or \p position is nullptr.
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   !>   \retval HIPSPARSE_STATUS_ZERO_PIVOT zero pivot has been found.
-#ifndef USE_CUDA_NAMES
   interface hipsparseXcsrsm2_zeroPivot
     function hipsparseXcsrsm2_zeroPivot_(handle,myInfo,position) &
         bind(c, name="hipsparseXcsrsm2_zeroPivot")
@@ -6556,7 +5995,6 @@ module hipfort_hipsparse
       integer(c_int) :: position
     end function
   end interface
-#endif
 
   !>  \ingroup level3_module
   !>   \details
@@ -6599,7 +6037,6 @@ module hipfort_hipsparse
   !>               \p transA == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE`,
   !>               \p transB == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE`, or
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsrsm2_bufferSizeExt
     function hipsparseScsrsm2_bufferSizeExt_(handle,algo,transA,transB,m,nrhs,nnz,alpha,descrA, &
         csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBufferSizeInBytes) &
@@ -6638,9 +6075,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsrsm2_bufferSizeExt
     function hipsparseDcsrsm2_bufferSizeExt_(handle,algo,transA,transB,m,nrhs,nnz,alpha,descrA, &
         csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBufferSizeInBytes) &
@@ -6679,9 +6114,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsrsm2_bufferSizeExt
     function hipsparseCcsrsm2_bufferSizeExt_(handle,algo,transA,transB,m,nrhs,nnz,alpha,descrA, &
         csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBufferSizeInBytes) &
@@ -6720,9 +6153,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsrsm2_bufferSizeExt
     function hipsparseZcsrsm2_bufferSizeExt_(handle,algo,transA,transB,m,nrhs,nnz,alpha,descrA, &
         csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBufferSizeInBytes) &
@@ -6761,7 +6192,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level3_module
   !>   \details
@@ -6808,7 +6238,6 @@ module hipfort_hipsparse
   !>               \p transA == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE`,
   !>               \p transB == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE`, or
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsrsm2_analysis
     function hipsparseScsrsm2_analysis_(handle,algo,transA,transB,m,nrhs,nnz,alpha,descrA, &
         csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBuffer) &
@@ -6847,9 +6276,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsrsm2_analysis
     function hipsparseDcsrsm2_analysis_(handle,algo,transA,transB,m,nrhs,nnz,alpha,descrA, &
         csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBuffer) &
@@ -6888,9 +6315,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsrsm2_analysis
     function hipsparseCcsrsm2_analysis_(handle,algo,transA,transB,m,nrhs,nnz,alpha,descrA, &
         csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBuffer) &
@@ -6929,9 +6354,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsrsm2_analysis
     function hipsparseZcsrsm2_analysis_(handle,algo,transA,transB,m,nrhs,nnz,alpha,descrA, &
         csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBuffer) &
@@ -6970,7 +6393,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level3_module
   !>   \brief Sparse triangular system solve using the CSR storage format
@@ -7165,7 +6587,6 @@ module hipfort_hipsparse
   !>               \p transA == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE`,
   !>               \p transB == `HIPSPARSE_OPERATION_CONJUGATE_TRANSPOSE`, or
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsrsm2_solve
     function hipsparseScsrsm2_solve_(handle,algo,transA,transB,m,nrhs,nnz,alpha,descrA, &
         csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBuffer) &
@@ -7204,9 +6625,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsrsm2_solve
     function hipsparseDcsrsm2_solve_(handle,algo,transA,transB,m,nrhs,nnz,alpha,descrA, &
         csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBuffer) &
@@ -7245,9 +6664,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsrsm2_solve
     function hipsparseCcsrsm2_solve_(handle,algo,transA,transB,m,nrhs,nnz,alpha,descrA, &
         csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBuffer) &
@@ -7286,9 +6703,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsrsm2_solve
     function hipsparseZcsrsm2_solve_(handle,algo,transA,transB,m,nrhs,nnz,alpha,descrA, &
         csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBuffer) &
@@ -7327,7 +6742,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup level3_module
   !>   \brief Dense matrix sparse matrix multiplication using the CSC storage format.
@@ -7380,7 +6794,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle, \p alpha or \p beta is nullptr,
   !>           \p m, \p n, \p k, or \p nnz is negative, \p lda or \p ldc is invalid, or
   !>           \p A, \p cscValB, \p cscColPtrB, \p cscRowIndB, or \p C is nullptr.
-#ifndef USE_CUDA_NAMES
   interface hipsparseSgemmi
     function hipsparseSgemmi_(handle,m,n,k,nnz,alpha,A,lda,cscValB,cscColPtrB,cscRowIndB,beta,C, &
         ldc) &
@@ -7416,9 +6829,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDgemmi
     function hipsparseDgemmi_(handle,m,n,k,nnz,alpha,A,lda,cscValB,cscColPtrB,cscRowIndB,beta,C, &
         ldc) &
@@ -7454,9 +6865,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCgemmi
     function hipsparseCgemmi_(handle,m,n,k,nnz,alpha,A,lda,cscValB,cscColPtrB,cscRowIndB,beta,C, &
         ldc) &
@@ -7492,9 +6901,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZgemmi
     function hipsparseZgemmi_(handle,m,n,k,nnz,alpha,A,lda,cscValB,cscColPtrB,cscRowIndB,beta,C, &
         ldc) &
@@ -7530,7 +6937,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup extra_module
   !>   \details
@@ -7594,7 +7000,6 @@ module hipfort_hipsparse
   !>           \p csrColIndB, \p csrRowPtrC, or \p nnzTotalDevHostPtr is nullptr.
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED `hipsparseMatrixType_t` is not
   !>           `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseXcsrgeamNnz
     function hipsparseXcsrgeamNnz_(handle,m,n,descrA,nnzA,csrRowPtrA,csrColIndA,descrB,nnzB, &
         csrRowPtrB,csrColIndB,descrC,csrRowPtrC,nnzTotalDevHostPtr) &
@@ -7629,7 +7034,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup extra_module
   !>   \brief Sparse matrix sparse matrix addition using the CSR storage format.
@@ -7698,7 +7102,6 @@ module hipfort_hipsparse
   !>           \p csrRowPtrC, or \p csrColIndC is invalid.
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED
   !>           `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsrgeam
     function hipsparseScsrgeam_(handle,m,n,alpha,descrA,nnzA,csrValA,csrRowPtrA,csrColIndA,beta, &
         descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,descrC,csrValC,csrRowPtrC,csrColIndC) &
@@ -7738,9 +7141,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsrgeam
     function hipsparseDcsrgeam_(handle,m,n,alpha,descrA,nnzA,csrValA,csrRowPtrA,csrColIndA,beta, &
         descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,descrC,csrValC,csrRowPtrC,csrColIndC) &
@@ -7780,9 +7181,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsrgeam
     function hipsparseCcsrgeam_(handle,m,n,alpha,descrA,nnzA,csrValA,csrRowPtrA,csrColIndA,beta, &
         descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,descrC,csrValC,csrRowPtrC,csrColIndC) &
@@ -7822,9 +7221,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsrgeam
     function hipsparseZcsrgeam_(handle,m,n,alpha,descrA,nnzA,csrValA,csrRowPtrA,csrColIndA,beta, &
         descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,descrC,csrValC,csrRowPtrC,csrColIndC) &
@@ -7864,7 +7261,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup extra_module
   !>   \details
@@ -7918,19 +7314,11 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED
   !>           `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseScsrgeam2_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsrgeam2_bufferSizeExt_(handle,m,n,alpha,descrA,nnzA,csrSortedValA, &
-        csrSortedRowPtrA,csrSortedColIndA,beta,descrB,nnzB,csrSortedValB,csrSortedRowPtrB, &
-        csrSortedColIndB,descrC,csrSortedValC,csrSortedRowPtrC,csrSortedColIndC, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseScsrgeam2_bufferSizeExt")
-#else
     function hipsparseScsrgeam2_bufferSizeExt_(handle,m,n,alpha,descrA,nnzA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,beta,descrB,nnzB,csrSortedValB,csrSortedRowPtrB, &
         csrSortedColIndB,descrC,csrSortedValC,csrSortedRowPtrC,csrSortedColIndC, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseScsrgeam2_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -7969,19 +7357,11 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsrgeam2_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsrgeam2_bufferSizeExt_(handle,m,n,alpha,descrA,nnzA,csrSortedValA, &
-        csrSortedRowPtrA,csrSortedColIndA,beta,descrB,nnzB,csrSortedValB,csrSortedRowPtrB, &
-        csrSortedColIndB,descrC,csrSortedValC,csrSortedRowPtrC,csrSortedColIndC, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseDcsrgeam2_bufferSizeExt")
-#else
     function hipsparseDcsrgeam2_bufferSizeExt_(handle,m,n,alpha,descrA,nnzA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,beta,descrB,nnzB,csrSortedValB,csrSortedRowPtrB, &
         csrSortedColIndB,descrC,csrSortedValC,csrSortedRowPtrC,csrSortedColIndC, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseDcsrgeam2_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -8020,19 +7400,11 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsrgeam2_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsrgeam2_bufferSizeExt_(handle,m,n,alpha,descrA,nnzA,csrSortedValA, &
-        csrSortedRowPtrA,csrSortedColIndA,beta,descrB,nnzB,csrSortedValB,csrSortedRowPtrB, &
-        csrSortedColIndB,descrC,csrSortedValC,csrSortedRowPtrC,csrSortedColIndC, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseCcsrgeam2_bufferSizeExt")
-#else
     function hipsparseCcsrgeam2_bufferSizeExt_(handle,m,n,alpha,descrA,nnzA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,beta,descrB,nnzB,csrSortedValB,csrSortedRowPtrB, &
         csrSortedColIndB,descrC,csrSortedValC,csrSortedRowPtrC,csrSortedColIndC, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseCcsrgeam2_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -8071,19 +7443,11 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsrgeam2_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsrgeam2_bufferSizeExt_(handle,m,n,alpha,descrA,nnzA,csrSortedValA, &
-        csrSortedRowPtrA,csrSortedColIndA,beta,descrB,nnzB,csrSortedValB,csrSortedRowPtrB, &
-        csrSortedColIndB,descrC,csrSortedValC,csrSortedRowPtrC,csrSortedColIndC, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseZcsrgeam2_bufferSizeExt")
-#else
     function hipsparseZcsrgeam2_bufferSizeExt_(handle,m,n,alpha,descrA,nnzA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,beta,descrB,nnzB,csrSortedValB,csrSortedRowPtrB, &
         csrSortedColIndB,descrC,csrSortedValC,csrSortedRowPtrC,csrSortedColIndC, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseZcsrgeam2_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -8177,17 +7541,10 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED
   !>           `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseXcsrgeam2Nnz
-#ifdef USE_CUDA_NAMES
-    function hipsparseXcsrgeam2Nnz_(handle,m,n,descrA,nnzA,csrSortedRowPtrA,csrSortedColIndA, &
-        descrB,nnzB,csrSortedRowPtrB,csrSortedColIndB,descrC,csrSortedRowPtrC,nnzTotalDevHostPtr, &
-        workspace) &
-        bind(c, name="cusparseXcsrgeam2Nnz")
-#else
     function hipsparseXcsrgeam2Nnz_(handle,m,n,descrA,nnzA,csrSortedRowPtrA,csrSortedColIndA, &
         descrB,nnzB,csrSortedRowPtrB,csrSortedColIndB,descrC,csrSortedRowPtrC,nnzTotalDevHostPtr, &
         workspace) &
         bind(c, name="hipsparseXcsrgeam2Nnz")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -8296,17 +7653,10 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED
   !>           `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseScsrgeam2
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsrgeam2_(handle,m,n,alpha,descrA,nnzA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,beta,descrB,nnzB,csrSortedValB,csrSortedRowPtrB,csrSortedColIndB,descrC, &
-        csrSortedValC,csrSortedRowPtrC,csrSortedColIndC,pBuffer) &
-        bind(c, name="cusparseScsrgeam2")
-#else
     function hipsparseScsrgeam2_(handle,m,n,alpha,descrA,nnzA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,beta,descrB,nnzB,csrSortedValB,csrSortedRowPtrB,csrSortedColIndB,descrC, &
         csrSortedValC,csrSortedRowPtrC,csrSortedColIndC,pBuffer) &
         bind(c, name="hipsparseScsrgeam2")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -8345,17 +7695,10 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsrgeam2
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsrgeam2_(handle,m,n,alpha,descrA,nnzA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,beta,descrB,nnzB,csrSortedValB,csrSortedRowPtrB,csrSortedColIndB,descrC, &
-        csrSortedValC,csrSortedRowPtrC,csrSortedColIndC,pBuffer) &
-        bind(c, name="cusparseDcsrgeam2")
-#else
     function hipsparseDcsrgeam2_(handle,m,n,alpha,descrA,nnzA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,beta,descrB,nnzB,csrSortedValB,csrSortedRowPtrB,csrSortedColIndB,descrC, &
         csrSortedValC,csrSortedRowPtrC,csrSortedColIndC,pBuffer) &
         bind(c, name="hipsparseDcsrgeam2")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -8394,17 +7737,10 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsrgeam2
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsrgeam2_(handle,m,n,alpha,descrA,nnzA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,beta,descrB,nnzB,csrSortedValB,csrSortedRowPtrB,csrSortedColIndB,descrC, &
-        csrSortedValC,csrSortedRowPtrC,csrSortedColIndC,pBuffer) &
-        bind(c, name="cusparseCcsrgeam2")
-#else
     function hipsparseCcsrgeam2_(handle,m,n,alpha,descrA,nnzA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,beta,descrB,nnzB,csrSortedValB,csrSortedRowPtrB,csrSortedColIndB,descrC, &
         csrSortedValC,csrSortedRowPtrC,csrSortedColIndC,pBuffer) &
         bind(c, name="hipsparseCcsrgeam2")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -8443,17 +7779,10 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsrgeam2
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsrgeam2_(handle,m,n,alpha,descrA,nnzA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,beta,descrB,nnzB,csrSortedValB,csrSortedRowPtrB,csrSortedColIndB,descrC, &
-        csrSortedValC,csrSortedRowPtrC,csrSortedColIndC,pBuffer) &
-        bind(c, name="cusparseZcsrgeam2")
-#else
     function hipsparseZcsrgeam2_(handle,m,n,alpha,descrA,nnzA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,beta,descrB,nnzB,csrSortedValB,csrSortedRowPtrB,csrSortedColIndB,descrC, &
         csrSortedValC,csrSortedRowPtrC,csrSortedColIndC,pBuffer) &
         bind(c, name="hipsparseZcsrgeam2")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -8566,7 +7895,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED \p transA is not `HIPSPARSE_OPERATION_NON_TRANSPOSE`,
   !>           \p transB is not `HIPSPARSE_OPERATION_NON_TRANSPOSE`, or
   !>           `hipsparseMatrixType_t` is not `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseXcsrgemmNnz
     function hipsparseXcsrgemmNnz_(handle,transA,transB,m,n,k,descrA,nnzA,csrRowPtrA,csrColIndA, &
         descrB,nnzB,csrRowPtrB,csrColIndB,descrC,csrRowPtrC,nnzTotalDevHostPtr) &
@@ -8604,7 +7932,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup extra_module
   !>   \brief Sparse matrix and sparse matrix multiplication using the CSR storage format.
@@ -8700,7 +8027,6 @@ module hipfort_hipsparse
   !>           \p transA != `HIPSPARSE_OPERATION_NON_TRANSPOSE`,
   !>           \p transB != `HIPSPARSE_OPERATION_NON_TRANSPOSE`, or
   !>           `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsrgemm
     function hipsparseScsrgemm_(handle,transA,transB,m,n,k,descrA,nnzA,csrValA,csrRowPtrA, &
         csrColIndA,descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,descrC,csrValC,csrRowPtrC,csrColIndC) &
@@ -8741,9 +8067,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsrgemm
     function hipsparseDcsrgemm_(handle,transA,transB,m,n,k,descrA,nnzA,csrValA,csrRowPtrA, &
         csrColIndA,descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,descrC,csrValC,csrRowPtrC,csrColIndC) &
@@ -8784,9 +8108,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsrgemm
     function hipsparseCcsrgemm_(handle,transA,transB,m,n,k,descrA,nnzA,csrValA,csrRowPtrA, &
         csrColIndA,descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,descrC,csrValC,csrRowPtrC,csrColIndC) &
@@ -8827,9 +8149,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsrgemm
     function hipsparseZcsrgemm_(handle,transA,transB,m,n,k,descrA,nnzA,csrValA,csrRowPtrA, &
         csrColIndA,descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,descrC,csrValC,csrRowPtrC,csrColIndC) &
@@ -8870,7 +8190,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup extra_module
   !>   \details
@@ -8934,7 +8253,6 @@ module hipfort_hipsparse
   !>           is invalid.
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED
   !>           `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsrgemm2_bufferSizeExt
     function hipsparseScsrgemm2_bufferSizeExt_(handle,m,n,k,alpha,descrA,nnzA,csrRowPtrA, &
         csrColIndA,descrB,nnzB,csrRowPtrB,csrColIndB,beta,descrD,nnzD,csrRowPtrD,csrColIndD, &
@@ -8976,9 +8294,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsrgemm2_bufferSizeExt
     function hipsparseDcsrgemm2_bufferSizeExt_(handle,m,n,k,alpha,descrA,nnzA,csrRowPtrA, &
         csrColIndA,descrB,nnzB,csrRowPtrB,csrColIndB,beta,descrD,nnzD,csrRowPtrD,csrColIndD, &
@@ -9020,9 +8336,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsrgemm2_bufferSizeExt
     function hipsparseCcsrgemm2_bufferSizeExt_(handle,m,n,k,alpha,descrA,nnzA,csrRowPtrA, &
         csrColIndA,descrB,nnzB,csrRowPtrB,csrColIndB,beta,descrD,nnzD,csrRowPtrD,csrColIndD, &
@@ -9064,9 +8378,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsrgemm2_bufferSizeExt
     function hipsparseZcsrgemm2_bufferSizeExt_(handle,m,n,k,alpha,descrA,nnzA,csrRowPtrA, &
         csrColIndA,descrB,nnzB,csrRowPtrB,csrColIndB,beta,descrD,nnzD,csrRowPtrD,csrColIndD, &
@@ -9108,7 +8420,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup extra_module
   !>   \details
@@ -9187,7 +8498,6 @@ module hipfort_hipsparse
   !>           allocated.
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED
   !>           `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseXcsrgemm2Nnz
     function hipsparseXcsrgemm2Nnz_(handle,m,n,k,descrA,nnzA,csrRowPtrA,csrColIndA,descrB,nnzB, &
         csrRowPtrB,csrColIndB,descrD,nnzD,csrRowPtrD,csrColIndD,descrC,csrRowPtrC, &
@@ -9230,7 +8540,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup extra_module
   !>   \brief Sparse matrix and sparse matrix multiplication using CSR storage format
@@ -9323,7 +8632,6 @@ module hipfort_hipsparse
   !>           allocated.
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED
   !>           `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsrgemm2
     function hipsparseScsrgemm2_(handle,m,n,k,alpha,descrA,nnzA,csrValA,csrRowPtrA,csrColIndA, &
         descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,beta,descrD,nnzD,csrValD,csrRowPtrD,csrColIndD, &
@@ -9372,9 +8680,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsrgemm2
     function hipsparseDcsrgemm2_(handle,m,n,k,alpha,descrA,nnzA,csrValA,csrRowPtrA,csrColIndA, &
         descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,beta,descrD,nnzD,csrValD,csrRowPtrD,csrColIndD, &
@@ -9423,9 +8729,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsrgemm2
     function hipsparseCcsrgemm2_(handle,m,n,k,alpha,descrA,nnzA,csrValA,csrRowPtrA,csrColIndA, &
         descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,beta,descrD,nnzD,csrValD,csrRowPtrD,csrColIndD, &
@@ -9474,9 +8778,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsrgemm2
     function hipsparseZcsrgemm2_(handle,m,n,k,alpha,descrA,nnzA,csrValA,csrRowPtrA,csrColIndA, &
         descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,beta,descrD,nnzD,csrValD,csrRowPtrD,csrColIndD, &
@@ -9525,7 +8827,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup precond_module
   !>   \details
@@ -9561,13 +8862,8 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   !>   \retval HIPSPARSE_STATUS_ZERO_PIVOT zero pivot has been found.
   interface hipsparseXbsric02_zeroPivot
-#ifdef USE_CUDA_NAMES
-    function hipsparseXbsric02_zeroPivot_(handle,myInfo,position) &
-        bind(c, name="cusparseXbsric02_zeroPivot")
-#else
     function hipsparseXbsric02_zeroPivot_(handle,myInfo,position) &
         bind(c, name="hipsparseXbsric02_zeroPivot")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -9619,15 +8915,9 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED `hipsparseMatrixType_t` !=
   !>   `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSbsric02_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsric02_bufferSize_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA, &
-        bsrColIndA,blockDim,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseSbsric02_bufferSize")
-#else
     function hipsparseSbsric02_bufferSize_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA, &
         bsrColIndA,blockDim,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseSbsric02_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -9657,15 +8947,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsric02_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsric02_bufferSize_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA, &
-        bsrColIndA,blockDim,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseDbsric02_bufferSize")
-#else
     function hipsparseDbsric02_bufferSize_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA, &
         bsrColIndA,blockDim,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseDbsric02_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -9695,15 +8979,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsric02_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsric02_bufferSize_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA, &
-        bsrColIndA,blockDim,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseCbsric02_bufferSize")
-#else
     function hipsparseCbsric02_bufferSize_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA, &
         bsrColIndA,blockDim,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseCbsric02_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -9733,15 +9011,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsric02_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsric02_bufferSize_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA, &
-        bsrColIndA,blockDim,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseZbsric02_bufferSize")
-#else
     function hipsparseZbsric02_bufferSize_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA, &
         bsrColIndA,blockDim,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseZbsric02_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -9811,15 +9083,9 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSbsric02_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsric02_analysis_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
-        blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseSbsric02_analysis")
-#else
     function hipsparseSbsric02_analysis_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
         blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseSbsric02_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -9850,15 +9116,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsric02_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsric02_analysis_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
-        blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseDbsric02_analysis")
-#else
     function hipsparseDbsric02_analysis_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
         blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseDbsric02_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -9889,15 +9149,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsric02_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsric02_analysis_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
-        blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseCbsric02_analysis")
-#else
     function hipsparseCbsric02_analysis_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
         blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseCbsric02_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -9928,15 +9182,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsric02_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsric02_analysis_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
-        blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseZbsric02_analysis")
-#else
     function hipsparseZbsric02_analysis_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
         blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseZbsric02_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10036,15 +9284,9 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSbsric02
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsric02_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA,blockDim, &
-        myInfo,policy,pBuffer) &
-        bind(c, name="cusparseSbsric02")
-#else
     function hipsparseSbsric02_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA,blockDim, &
         myInfo,policy,pBuffer) &
         bind(c, name="hipsparseSbsric02")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10075,15 +9317,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsric02
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsric02_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA,blockDim, &
-        myInfo,policy,pBuffer) &
-        bind(c, name="cusparseDbsric02")
-#else
     function hipsparseDbsric02_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA,blockDim, &
         myInfo,policy,pBuffer) &
         bind(c, name="hipsparseDbsric02")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10114,15 +9350,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsric02
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsric02_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA,blockDim, &
-        myInfo,policy,pBuffer) &
-        bind(c, name="cusparseCbsric02")
-#else
     function hipsparseCbsric02_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA,blockDim, &
         myInfo,policy,pBuffer) &
         bind(c, name="hipsparseCbsric02")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10153,15 +9383,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsric02
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsric02_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA,blockDim, &
-        myInfo,policy,pBuffer) &
-        bind(c, name="cusparseZbsric02")
-#else
     function hipsparseZbsric02_(handle,dirA,mb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA,blockDim, &
         myInfo,policy,pBuffer) &
         bind(c, name="hipsparseZbsric02")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10225,13 +9449,8 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   !>   \retval HIPSPARSE_STATUS_ZERO_PIVOT zero pivot has been found.
   interface hipsparseXbsrilu02_zeroPivot
-#ifdef USE_CUDA_NAMES
-    function hipsparseXbsrilu02_zeroPivot_(handle,myInfo,position) &
-        bind(c, name="cusparseXbsrilu02_zeroPivot")
-#else
     function hipsparseXbsrilu02_zeroPivot_(handle,myInfo,position) &
         bind(c, name="hipsparseXbsrilu02_zeroPivot")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10270,13 +9489,8 @@ module hipfort_hipsparse
   !>   nullptr.
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseSbsrilu02_numericBoost
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsrilu02_numericBoost_(handle,myInfo,enable_boost,tol,boost_val) &
-        bind(c, name="cusparseSbsrilu02_numericBoost")
-#else
     function hipsparseSbsrilu02_numericBoost_(handle,myInfo,enable_boost,tol,boost_val) &
         bind(c, name="hipsparseSbsrilu02_numericBoost")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10290,13 +9504,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsrilu02_numericBoost
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsrilu02_numericBoost_(handle,myInfo,enable_boost,tol,boost_val) &
-        bind(c, name="cusparseDbsrilu02_numericBoost")
-#else
     function hipsparseDbsrilu02_numericBoost_(handle,myInfo,enable_boost,tol,boost_val) &
         bind(c, name="hipsparseDbsrilu02_numericBoost")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10310,13 +9519,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsrilu02_numericBoost
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsrilu02_numericBoost_(handle,myInfo,enable_boost,tol,boost_val) &
-        bind(c, name="cusparseCbsrilu02_numericBoost")
-#else
     function hipsparseCbsrilu02_numericBoost_(handle,myInfo,enable_boost,tol,boost_val) &
         bind(c, name="hipsparseCbsrilu02_numericBoost")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10330,13 +9534,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsrilu02_numericBoost
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsrilu02_numericBoost_(handle,myInfo,enable_boost,tol,boost_val) &
-        bind(c, name="cusparseZbsrilu02_numericBoost")
-#else
     function hipsparseZbsrilu02_numericBoost_(handle,myInfo,enable_boost,tol,boost_val) &
         bind(c, name="hipsparseZbsrilu02_numericBoost")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10387,15 +9586,9 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSbsrilu02_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsrilu02_bufferSize_(handle,dirA,mb,nnzb,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseSbsrilu02_bufferSize")
-#else
     function hipsparseSbsrilu02_bufferSize_(handle,dirA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseSbsrilu02_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10425,15 +9618,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsrilu02_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsrilu02_bufferSize_(handle,dirA,mb,nnzb,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseDbsrilu02_bufferSize")
-#else
     function hipsparseDbsrilu02_bufferSize_(handle,dirA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseDbsrilu02_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10463,15 +9650,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsrilu02_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsrilu02_bufferSize_(handle,dirA,mb,nnzb,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseCbsrilu02_bufferSize")
-#else
     function hipsparseCbsrilu02_bufferSize_(handle,dirA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseCbsrilu02_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10501,15 +9682,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsrilu02_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsrilu02_bufferSize_(handle,dirA,mb,nnzb,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseZbsrilu02_bufferSize")
-#else
     function hipsparseZbsrilu02_bufferSize_(handle,dirA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseZbsrilu02_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10579,15 +9754,9 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSbsrilu02_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsrilu02_analysis_(handle,dirA,mb,nnzb,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseSbsrilu02_analysis")
-#else
     function hipsparseSbsrilu02_analysis_(handle,dirA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseSbsrilu02_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10618,15 +9787,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsrilu02_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsrilu02_analysis_(handle,dirA,mb,nnzb,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseDbsrilu02_analysis")
-#else
     function hipsparseDbsrilu02_analysis_(handle,dirA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseDbsrilu02_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10657,15 +9820,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsrilu02_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsrilu02_analysis_(handle,dirA,mb,nnzb,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseCbsrilu02_analysis")
-#else
     function hipsparseCbsrilu02_analysis_(handle,dirA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseCbsrilu02_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10696,15 +9853,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsrilu02_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsrilu02_analysis_(handle,dirA,mb,nnzb,descrA,bsrSortedValA, &
-        bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseZbsrilu02_analysis")
-#else
     function hipsparseZbsrilu02_analysis_(handle,dirA,mb,nnzb,descrA,bsrSortedValA, &
         bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseZbsrilu02_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10794,15 +9945,9 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseSbsrilu02
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsrilu02_(handle,dirA,mb,nnzb,descrA,bsrSortedValA_valM,bsrSortedRowPtrA, &
-        bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseSbsrilu02")
-#else
     function hipsparseSbsrilu02_(handle,dirA,mb,nnzb,descrA,bsrSortedValA_valM,bsrSortedRowPtrA, &
         bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseSbsrilu02")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10833,15 +9978,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsrilu02
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsrilu02_(handle,dirA,mb,nnzb,descrA,bsrSortedValA_valM,bsrSortedRowPtrA, &
-        bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseDbsrilu02")
-#else
     function hipsparseDbsrilu02_(handle,dirA,mb,nnzb,descrA,bsrSortedValA_valM,bsrSortedRowPtrA, &
         bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseDbsrilu02")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10872,15 +10011,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsrilu02
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsrilu02_(handle,dirA,mb,nnzb,descrA,bsrSortedValA_valM,bsrSortedRowPtrA, &
-        bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseCbsrilu02")
-#else
     function hipsparseCbsrilu02_(handle,dirA,mb,nnzb,descrA,bsrSortedValA_valM,bsrSortedRowPtrA, &
         bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseCbsrilu02")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10911,15 +10044,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsrilu02
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsrilu02_(handle,dirA,mb,nnzb,descrA,bsrSortedValA_valM,bsrSortedRowPtrA, &
-        bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseZbsrilu02")
-#else
     function hipsparseZbsrilu02_(handle,dirA,mb,nnzb,descrA,bsrSortedValA_valM,bsrSortedRowPtrA, &
         bsrSortedColIndA,blockDim,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseZbsrilu02")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -10978,13 +10105,8 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   !>   \retval HIPSPARSE_STATUS_ZERO_PIVOT zero pivot has been found.
   interface hipsparseXcsric02_zeroPivot
-#ifdef USE_CUDA_NAMES
-    function hipsparseXcsric02_zeroPivot_(handle,myInfo,position) &
-        bind(c, name="cusparseXcsric02_zeroPivot")
-#else
     function hipsparseXcsric02_zeroPivot_(handle,myInfo,position) &
         bind(c, name="hipsparseXcsric02_zeroPivot")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11027,15 +10149,9 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseScsric02_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsric02_bufferSize_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseScsric02_bufferSize")
-#else
     function hipsparseScsric02_bufferSize_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseScsric02_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11063,15 +10179,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsric02_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsric02_bufferSize_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseDcsric02_bufferSize")
-#else
     function hipsparseDcsric02_bufferSize_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseDcsric02_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11099,15 +10209,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsric02_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsric02_bufferSize_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseCcsric02_bufferSize")
-#else
     function hipsparseCcsric02_bufferSize_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseCcsric02_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11135,15 +10239,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsric02_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsric02_bufferSize_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseZcsric02_bufferSize")
-#else
     function hipsparseZcsric02_bufferSize_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseZcsric02_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11201,7 +10299,6 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsric02_bufferSizeExt
     function hipsparseScsric02_bufferSizeExt_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,pBufferSizeInBytes) &
@@ -11231,9 +10328,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsric02_bufferSizeExt
     function hipsparseDcsric02_bufferSizeExt_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,pBufferSizeInBytes) &
@@ -11263,9 +10358,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsric02_bufferSizeExt
     function hipsparseCcsric02_bufferSizeExt_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,pBufferSizeInBytes) &
@@ -11295,9 +10388,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsric02_bufferSizeExt
     function hipsparseZcsric02_bufferSizeExt_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,pBufferSizeInBytes) &
@@ -11327,7 +10418,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup precond_module
   !>   \details
@@ -11365,15 +10455,9 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseScsric02_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsric02_analysis_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseScsric02_analysis")
-#else
     function hipsparseScsric02_analysis_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseScsric02_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11402,15 +10486,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsric02_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsric02_analysis_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseDcsric02_analysis")
-#else
     function hipsparseDcsric02_analysis_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseDcsric02_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11439,15 +10517,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsric02_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsric02_analysis_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseCcsric02_analysis")
-#else
     function hipsparseCcsric02_analysis_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseCcsric02_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11476,15 +10548,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsric02_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsric02_analysis_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseZcsric02_analysis")
-#else
     function hipsparseZcsric02_analysis_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseZcsric02_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11672,15 +10738,9 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseScsric02
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsric02_(handle,m,nnz,descrA,csrSortedValA_valM,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseScsric02")
-#else
     function hipsparseScsric02_(handle,m,nnz,descrA,csrSortedValA_valM,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseScsric02")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11709,15 +10769,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsric02
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsric02_(handle,m,nnz,descrA,csrSortedValA_valM,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseDcsric02")
-#else
     function hipsparseDcsric02_(handle,m,nnz,descrA,csrSortedValA_valM,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseDcsric02")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11746,15 +10800,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsric02
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsric02_(handle,m,nnz,descrA,csrSortedValA_valM,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseCcsric02")
-#else
     function hipsparseCcsric02_(handle,m,nnz,descrA,csrSortedValA_valM,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseCcsric02")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11783,15 +10831,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsric02
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsric02_(handle,m,nnz,descrA,csrSortedValA_valM,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseZcsric02")
-#else
     function hipsparseZcsric02_(handle,m,nnz,descrA,csrSortedValA_valM,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseZcsric02")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11849,13 +10891,8 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   !>   \retval HIPSPARSE_STATUS_ZERO_PIVOT zero pivot has been found.
   interface hipsparseXcsrilu02_zeroPivot
-#ifdef USE_CUDA_NAMES
-    function hipsparseXcsrilu02_zeroPivot_(handle,myInfo,position) &
-        bind(c, name="cusparseXcsrilu02_zeroPivot")
-#else
     function hipsparseXcsrilu02_zeroPivot_(handle,myInfo,position) &
         bind(c, name="hipsparseXcsrilu02_zeroPivot")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11894,13 +10931,8 @@ module hipfort_hipsparse
   !>   nullptr.
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseScsrilu02_numericBoost
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsrilu02_numericBoost_(handle,myInfo,enable_boost,tol,boost_val) &
-        bind(c, name="cusparseScsrilu02_numericBoost")
-#else
     function hipsparseScsrilu02_numericBoost_(handle,myInfo,enable_boost,tol,boost_val) &
         bind(c, name="hipsparseScsrilu02_numericBoost")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11914,13 +10946,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsrilu02_numericBoost
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsrilu02_numericBoost_(handle,myInfo,enable_boost,tol,boost_val) &
-        bind(c, name="cusparseDcsrilu02_numericBoost")
-#else
     function hipsparseDcsrilu02_numericBoost_(handle,myInfo,enable_boost,tol,boost_val) &
         bind(c, name="hipsparseDcsrilu02_numericBoost")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11934,13 +10961,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsrilu02_numericBoost
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsrilu02_numericBoost_(handle,myInfo,enable_boost,tol,boost_val) &
-        bind(c, name="cusparseCcsrilu02_numericBoost")
-#else
     function hipsparseCcsrilu02_numericBoost_(handle,myInfo,enable_boost,tol,boost_val) &
         bind(c, name="hipsparseCcsrilu02_numericBoost")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -11954,13 +10976,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsrilu02_numericBoost
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsrilu02_numericBoost_(handle,myInfo,enable_boost,tol,boost_val) &
-        bind(c, name="cusparseZcsrilu02_numericBoost")
-#else
     function hipsparseZcsrilu02_numericBoost_(handle,myInfo,enable_boost,tol,boost_val) &
         bind(c, name="hipsparseZcsrilu02_numericBoost")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -12003,15 +11020,9 @@ module hipfort_hipsparse
   !>               is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseScsrilu02_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsrilu02_bufferSize_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseScsrilu02_bufferSize")
-#else
     function hipsparseScsrilu02_bufferSize_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseScsrilu02_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -12039,15 +11050,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsrilu02_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsrilu02_bufferSize_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseDcsrilu02_bufferSize")
-#else
     function hipsparseDcsrilu02_bufferSize_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseDcsrilu02_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -12075,15 +11080,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsrilu02_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsrilu02_bufferSize_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseCcsrilu02_bufferSize")
-#else
     function hipsparseCcsrilu02_bufferSize_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseCcsrilu02_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -12111,15 +11110,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsrilu02_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsrilu02_bufferSize_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseZcsrilu02_bufferSize")
-#else
     function hipsparseZcsrilu02_bufferSize_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseZcsrilu02_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -12175,7 +11168,6 @@ module hipfort_hipsparse
   !>               pointer
   !>               is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsrilu02_bufferSizeExt
     function hipsparseScsrilu02_bufferSizeExt_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,pBufferSizeInBytes) &
@@ -12205,9 +11197,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsrilu02_bufferSizeExt
     function hipsparseDcsrilu02_bufferSizeExt_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,pBufferSizeInBytes) &
@@ -12237,9 +11227,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsrilu02_bufferSizeExt
     function hipsparseCcsrilu02_bufferSizeExt_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,pBufferSizeInBytes) &
@@ -12269,9 +11257,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsrilu02_bufferSizeExt
     function hipsparseZcsrilu02_bufferSizeExt_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,pBufferSizeInBytes) &
@@ -12301,7 +11287,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup precond_module
   !>   \details
@@ -12338,15 +11323,9 @@ module hipfort_hipsparse
   !>               invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseScsrilu02_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsrilu02_analysis_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseScsrilu02_analysis")
-#else
     function hipsparseScsrilu02_analysis_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseScsrilu02_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -12375,15 +11354,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsrilu02_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsrilu02_analysis_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseDcsrilu02_analysis")
-#else
     function hipsparseDcsrilu02_analysis_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseDcsrilu02_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -12412,15 +11385,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsrilu02_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsrilu02_analysis_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseCcsrilu02_analysis")
-#else
     function hipsparseCcsrilu02_analysis_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseCcsrilu02_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -12449,15 +11416,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsrilu02_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsrilu02_analysis_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseZcsrilu02_analysis")
-#else
     function hipsparseZcsrilu02_analysis_(handle,m,nnz,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseZcsrilu02_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -12628,15 +11589,9 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_ARCH_MISMATCH the device is not supported.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseScsrilu02
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsrilu02_(handle,m,nnz,descrA,csrSortedValA_valM,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseScsrilu02")
-#else
     function hipsparseScsrilu02_(handle,m,nnz,descrA,csrSortedValA_valM,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseScsrilu02")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -12665,15 +11620,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsrilu02
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsrilu02_(handle,m,nnz,descrA,csrSortedValA_valM,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseDcsrilu02")
-#else
     function hipsparseDcsrilu02_(handle,m,nnz,descrA,csrSortedValA_valM,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseDcsrilu02")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -12702,15 +11651,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsrilu02
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsrilu02_(handle,m,nnz,descrA,csrSortedValA_valM,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseCcsrilu02")
-#else
     function hipsparseCcsrilu02_(handle,m,nnz,descrA,csrSortedValA_valM,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseCcsrilu02")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -12739,15 +11682,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsrilu02
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsrilu02_(handle,m,nnz,descrA,csrSortedValA_valM,csrSortedRowPtrA, &
-        csrSortedColIndA,myInfo,policy,pBuffer) &
-        bind(c, name="cusparseZcsrilu02")
-#else
     function hipsparseZcsrilu02_(handle,m,nnz,descrA,csrSortedValA_valM,csrSortedRowPtrA, &
         csrSortedColIndA,myInfo,policy,pBuffer) &
         bind(c, name="hipsparseZcsrilu02")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -12802,15 +11739,9 @@ module hipfort_hipsparse
   !>               \p d, \p du, \p dw, \p x, or \p pBufferSizeInBytes pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseSgpsvInterleavedBatch_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgpsvInterleavedBatch_bufferSizeExt_(handle,algo,m,ds,dl,d,du,dw,x, &
-        batchCount,pBufferSizeInBytes) &
-        bind(c, name="cusparseSgpsvInterleavedBatch_bufferSizeExt")
-#else
     function hipsparseSgpsvInterleavedBatch_bufferSizeExt_(handle,algo,m,ds,dl,d,du,dw,x, &
         batchCount,pBufferSizeInBytes) &
         bind(c, name="hipsparseSgpsvInterleavedBatch_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -12840,15 +11771,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgpsvInterleavedBatch_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgpsvInterleavedBatch_bufferSizeExt_(handle,algo,m,ds,dl,d,du,dw,x, &
-        batchCount,pBufferSizeInBytes) &
-        bind(c, name="cusparseDgpsvInterleavedBatch_bufferSizeExt")
-#else
     function hipsparseDgpsvInterleavedBatch_bufferSizeExt_(handle,algo,m,ds,dl,d,du,dw,x, &
         batchCount,pBufferSizeInBytes) &
         bind(c, name="hipsparseDgpsvInterleavedBatch_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -12878,15 +11803,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgpsvInterleavedBatch_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgpsvInterleavedBatch_bufferSizeExt_(handle,algo,m,ds,dl,d,du,dw,x, &
-        batchCount,pBufferSizeInBytes) &
-        bind(c, name="cusparseCgpsvInterleavedBatch_bufferSizeExt")
-#else
     function hipsparseCgpsvInterleavedBatch_bufferSizeExt_(handle,algo,m,ds,dl,d,du,dw,x, &
         batchCount,pBufferSizeInBytes) &
         bind(c, name="hipsparseCgpsvInterleavedBatch_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -12916,15 +11835,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgpsvInterleavedBatch_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgpsvInterleavedBatch_bufferSizeExt_(handle,algo,m,ds,dl,d,du,dw,x, &
-        batchCount,pBufferSizeInBytes) &
-        bind(c, name="cusparseZgpsvInterleavedBatch_bufferSizeExt")
-#else
     function hipsparseZgpsvInterleavedBatch_bufferSizeExt_(handle,algo,m,ds,dl,d,du,dw,x, &
         batchCount,pBufferSizeInBytes) &
         bind(c, name="hipsparseZgpsvInterleavedBatch_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13053,13 +11966,8 @@ module hipfort_hipsparse
   !>               \p dl, \p d, \p du, \p dw, \p x, or \p pBuffer pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseSgpsvInterleavedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgpsvInterleavedBatch_(handle,algo,m,ds,dl,d,du,dw,x,batchCount,pBuffer) &
-        bind(c, name="cusparseSgpsvInterleavedBatch")
-#else
     function hipsparseSgpsvInterleavedBatch_(handle,algo,m,ds,dl,d,du,dw,x,batchCount,pBuffer) &
         bind(c, name="hipsparseSgpsvInterleavedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13089,13 +11997,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgpsvInterleavedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgpsvInterleavedBatch_(handle,algo,m,ds,dl,d,du,dw,x,batchCount,pBuffer) &
-        bind(c, name="cusparseDgpsvInterleavedBatch")
-#else
     function hipsparseDgpsvInterleavedBatch_(handle,algo,m,ds,dl,d,du,dw,x,batchCount,pBuffer) &
         bind(c, name="hipsparseDgpsvInterleavedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13125,13 +12028,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgpsvInterleavedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgpsvInterleavedBatch_(handle,algo,m,ds,dl,d,du,dw,x,batchCount,pBuffer) &
-        bind(c, name="cusparseCgpsvInterleavedBatch")
-#else
     function hipsparseCgpsvInterleavedBatch_(handle,algo,m,ds,dl,d,du,dw,x,batchCount,pBuffer) &
         bind(c, name="hipsparseCgpsvInterleavedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13161,13 +12059,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgpsvInterleavedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgpsvInterleavedBatch_(handle,algo,m,ds,dl,d,du,dw,x,batchCount,pBuffer) &
-        bind(c, name="cusparseZgpsvInterleavedBatch")
-#else
     function hipsparseZgpsvInterleavedBatch_(handle,algo,m,ds,dl,d,du,dw,x,batchCount,pBuffer) &
         bind(c, name="hipsparseZgpsvInterleavedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13227,13 +12120,8 @@ module hipfort_hipsparse
   !>           or \p ldb is invalid.
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseSgtsv2_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgtsv2_bufferSizeExt_(handle,m,n,dl,d,du,B,ldb,pBufferSizeInBytes) &
-        bind(c, name="cusparseSgtsv2_bufferSizeExt")
-#else
     function hipsparseSgtsv2_bufferSizeExt_(handle,m,n,dl,d,du,B,ldb,pBufferSizeInBytes) &
         bind(c, name="hipsparseSgtsv2_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13262,13 +12150,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgtsv2_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgtsv2_bufferSizeExt_(handle,m,n,dl,d,du,B,ldb,pBufferSizeInBytes) &
-        bind(c, name="cusparseDgtsv2_bufferSizeExt")
-#else
     function hipsparseDgtsv2_bufferSizeExt_(handle,m,n,dl,d,du,B,ldb,pBufferSizeInBytes) &
         bind(c, name="hipsparseDgtsv2_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13297,13 +12180,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgtsv2_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgtsv2_bufferSizeExt_(handle,m,n,dl,d,du,B,ldb,pBufferSizeInBytes) &
-        bind(c, name="cusparseCgtsv2_bufferSizeExt")
-#else
     function hipsparseCgtsv2_bufferSizeExt_(handle,m,n,dl,d,du,B,ldb,pBufferSizeInBytes) &
         bind(c, name="hipsparseCgtsv2_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13332,13 +12210,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgtsv2_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgtsv2_bufferSizeExt_(handle,m,n,dl,d,du,B,ldb,pBufferSizeInBytes) &
-        bind(c, name="cusparseZgtsv2_bufferSizeExt")
-#else
     function hipsparseZgtsv2_bufferSizeExt_(handle,m,n,dl,d,du,B,ldb,pBufferSizeInBytes) &
         bind(c, name="hipsparseZgtsv2_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13413,11 +12286,7 @@ module hipfort_hipsparse
   !>               \p du, \p B, or \p pBuffer pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseSgtsv2
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgtsv2_(handle,m,n,dl,d,du,B,ldb,pBuffer) bind(c, name="cusparseSgtsv2")
-#else
     function hipsparseSgtsv2_(handle,m,n,dl,d,du,B,ldb,pBuffer) bind(c, name="hipsparseSgtsv2")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13446,11 +12315,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgtsv2
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgtsv2_(handle,m,n,dl,d,du,B,ldb,pBuffer) bind(c, name="cusparseDgtsv2")
-#else
     function hipsparseDgtsv2_(handle,m,n,dl,d,du,B,ldb,pBuffer) bind(c, name="hipsparseDgtsv2")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13479,11 +12344,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgtsv2
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgtsv2_(handle,m,n,dl,d,du,B,ldb,pBuffer) bind(c, name="cusparseCgtsv2")
-#else
     function hipsparseCgtsv2_(handle,m,n,dl,d,du,B,ldb,pBuffer) bind(c, name="hipsparseCgtsv2")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13512,11 +12373,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgtsv2
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgtsv2_(handle,m,n,dl,d,du,B,ldb,pBuffer) bind(c, name="cusparseZgtsv2")
-#else
     function hipsparseZgtsv2_(handle,m,n,dl,d,du,B,ldb,pBuffer) bind(c, name="hipsparseZgtsv2")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13573,15 +12430,9 @@ module hipfort_hipsparse
   !>               \p x, or \p pBufferSizeInBytes pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseSgtsvInterleavedBatch_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgtsvInterleavedBatch_bufferSizeExt_(handle,algo,m,dl,d,du,x,batchCount, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseSgtsvInterleavedBatch_bufferSizeExt")
-#else
     function hipsparseSgtsvInterleavedBatch_bufferSizeExt_(handle,algo,m,dl,d,du,x,batchCount, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseSgtsvInterleavedBatch_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13599,15 +12450,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgtsvInterleavedBatch_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgtsvInterleavedBatch_bufferSizeExt_(handle,algo,m,dl,d,du,x,batchCount, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseDgtsvInterleavedBatch_bufferSizeExt")
-#else
     function hipsparseDgtsvInterleavedBatch_bufferSizeExt_(handle,algo,m,dl,d,du,x,batchCount, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseDgtsvInterleavedBatch_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13625,15 +12470,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgtsvInterleavedBatch_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgtsvInterleavedBatch_bufferSizeExt_(handle,algo,m,dl,d,du,x,batchCount, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseCgtsvInterleavedBatch_bufferSizeExt")
-#else
     function hipsparseCgtsvInterleavedBatch_bufferSizeExt_(handle,algo,m,dl,d,du,x,batchCount, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseCgtsvInterleavedBatch_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13651,15 +12490,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgtsvInterleavedBatch_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgtsvInterleavedBatch_bufferSizeExt_(handle,algo,m,dl,d,du,x,batchCount, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseZgtsvInterleavedBatch_bufferSizeExt")
-#else
     function hipsparseZgtsvInterleavedBatch_bufferSizeExt_(handle,algo,m,dl,d,du,x,batchCount, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseZgtsvInterleavedBatch_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13773,13 +12606,8 @@ module hipfort_hipsparse
   !>               \p du, \p x, or \p pBuffer pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseSgtsvInterleavedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgtsvInterleavedBatch_(handle,algo,m,dl,d,du,x,batchCount,pBuffer) &
-        bind(c, name="cusparseSgtsvInterleavedBatch")
-#else
     function hipsparseSgtsvInterleavedBatch_(handle,algo,m,dl,d,du,x,batchCount,pBuffer) &
         bind(c, name="hipsparseSgtsvInterleavedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13797,13 +12625,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgtsvInterleavedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgtsvInterleavedBatch_(handle,algo,m,dl,d,du,x,batchCount,pBuffer) &
-        bind(c, name="cusparseDgtsvInterleavedBatch")
-#else
     function hipsparseDgtsvInterleavedBatch_(handle,algo,m,dl,d,du,x,batchCount,pBuffer) &
         bind(c, name="hipsparseDgtsvInterleavedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13821,13 +12644,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgtsvInterleavedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgtsvInterleavedBatch_(handle,algo,m,dl,d,du,x,batchCount,pBuffer) &
-        bind(c, name="cusparseCgtsvInterleavedBatch")
-#else
     function hipsparseCgtsvInterleavedBatch_(handle,algo,m,dl,d,du,x,batchCount,pBuffer) &
         bind(c, name="hipsparseCgtsvInterleavedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13845,13 +12663,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgtsvInterleavedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgtsvInterleavedBatch_(handle,algo,m,dl,d,du,x,batchCount,pBuffer) &
-        bind(c, name="cusparseZgtsvInterleavedBatch")
-#else
     function hipsparseZgtsvInterleavedBatch_(handle,algo,m,dl,d,du,x,batchCount,pBuffer) &
         bind(c, name="hipsparseZgtsvInterleavedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13892,13 +12705,8 @@ module hipfort_hipsparse
   !>           or \p ldb is invalid.
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseSgtsv2_nopivot_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgtsv2_nopivot_bufferSizeExt_(handle,m,n,dl,d,du,B,ldb,pBufferSizeInBytes) &
-        bind(c, name="cusparseSgtsv2_nopivot_bufferSizeExt")
-#else
     function hipsparseSgtsv2_nopivot_bufferSizeExt_(handle,m,n,dl,d,du,B,ldb,pBufferSizeInBytes) &
         bind(c, name="hipsparseSgtsv2_nopivot_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13927,13 +12735,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgtsv2_nopivot_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgtsv2_nopivot_bufferSizeExt_(handle,m,n,dl,d,du,B,ldb,pBufferSizeInBytes) &
-        bind(c, name="cusparseDgtsv2_nopivot_bufferSizeExt")
-#else
     function hipsparseDgtsv2_nopivot_bufferSizeExt_(handle,m,n,dl,d,du,B,ldb,pBufferSizeInBytes) &
         bind(c, name="hipsparseDgtsv2_nopivot_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13962,13 +12765,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgtsv2_nopivot_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgtsv2_nopivot_bufferSizeExt_(handle,m,n,dl,d,du,B,ldb,pBufferSizeInBytes) &
-        bind(c, name="cusparseCgtsv2_nopivot_bufferSizeExt")
-#else
     function hipsparseCgtsv2_nopivot_bufferSizeExt_(handle,m,n,dl,d,du,B,ldb,pBufferSizeInBytes) &
         bind(c, name="hipsparseCgtsv2_nopivot_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -13997,13 +12795,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgtsv2_nopivot_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgtsv2_nopivot_bufferSizeExt_(handle,m,n,dl,d,du,B,ldb,pBufferSizeInBytes) &
-        bind(c, name="cusparseZgtsv2_nopivot_bufferSizeExt")
-#else
     function hipsparseZgtsv2_nopivot_bufferSizeExt_(handle,m,n,dl,d,du,B,ldb,pBufferSizeInBytes) &
         bind(c, name="hipsparseZgtsv2_nopivot_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14078,13 +12871,8 @@ module hipfort_hipsparse
   !>               \p du, \p B, or \p pBuffer pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseSgtsv2_nopivot
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgtsv2_nopivot_(handle,m,n,dl,d,du,B,ldb,pBuffer) &
-        bind(c, name="cusparseSgtsv2_nopivot")
-#else
     function hipsparseSgtsv2_nopivot_(handle,m,n,dl,d,du,B,ldb,pBuffer) &
         bind(c, name="hipsparseSgtsv2_nopivot")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14113,13 +12901,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgtsv2_nopivot
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgtsv2_nopivot_(handle,m,n,dl,d,du,B,ldb,pBuffer) &
-        bind(c, name="cusparseDgtsv2_nopivot")
-#else
     function hipsparseDgtsv2_nopivot_(handle,m,n,dl,d,du,B,ldb,pBuffer) &
         bind(c, name="hipsparseDgtsv2_nopivot")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14148,13 +12931,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgtsv2_nopivot
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgtsv2_nopivot_(handle,m,n,dl,d,du,B,ldb,pBuffer) &
-        bind(c, name="cusparseCgtsv2_nopivot")
-#else
     function hipsparseCgtsv2_nopivot_(handle,m,n,dl,d,du,B,ldb,pBuffer) &
         bind(c, name="hipsparseCgtsv2_nopivot")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14183,13 +12961,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgtsv2_nopivot
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgtsv2_nopivot_(handle,m,n,dl,d,du,B,ldb,pBuffer) &
-        bind(c, name="cusparseZgtsv2_nopivot")
-#else
     function hipsparseZgtsv2_nopivot_(handle,m,n,dl,d,du,B,ldb,pBuffer) &
         bind(c, name="hipsparseZgtsv2_nopivot")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14248,15 +13021,9 @@ module hipfort_hipsparse
   !>               \p d, \p du, \p x, or \p pBufferSizeInBytes pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseSgtsv2StridedBatch_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgtsv2StridedBatch_bufferSizeExt_(handle,m,dl,d,du,x,batchCount,batchStride, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseSgtsv2StridedBatch_bufferSizeExt")
-#else
     function hipsparseSgtsv2StridedBatch_bufferSizeExt_(handle,m,dl,d,du,x,batchCount,batchStride, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseSgtsv2StridedBatch_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14284,15 +13051,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgtsv2StridedBatch_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgtsv2StridedBatch_bufferSizeExt_(handle,m,dl,d,du,x,batchCount,batchStride, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseDgtsv2StridedBatch_bufferSizeExt")
-#else
     function hipsparseDgtsv2StridedBatch_bufferSizeExt_(handle,m,dl,d,du,x,batchCount,batchStride, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseDgtsv2StridedBatch_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14320,15 +13081,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgtsv2StridedBatch_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgtsv2StridedBatch_bufferSizeExt_(handle,m,dl,d,du,x,batchCount,batchStride, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseCgtsv2StridedBatch_bufferSizeExt")
-#else
     function hipsparseCgtsv2StridedBatch_bufferSizeExt_(handle,m,dl,d,du,x,batchCount,batchStride, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseCgtsv2StridedBatch_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14356,15 +13111,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgtsv2StridedBatch_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgtsv2StridedBatch_bufferSizeExt_(handle,m,dl,d,du,x,batchCount,batchStride, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseZgtsv2StridedBatch_bufferSizeExt")
-#else
     function hipsparseZgtsv2StridedBatch_bufferSizeExt_(handle,m,dl,d,du,x,batchCount,batchStride, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseZgtsv2StridedBatch_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14477,13 +13226,8 @@ module hipfort_hipsparse
   !>               \p du, \p x, or \p pBuffer pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseSgtsv2StridedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgtsv2StridedBatch_(handle,m,dl,d,du,x,batchCount,batchStride,pBuffer) &
-        bind(c, name="cusparseSgtsv2StridedBatch")
-#else
     function hipsparseSgtsv2StridedBatch_(handle,m,dl,d,du,x,batchCount,batchStride,pBuffer) &
         bind(c, name="hipsparseSgtsv2StridedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14511,13 +13255,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgtsv2StridedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgtsv2StridedBatch_(handle,m,dl,d,du,x,batchCount,batchStride,pBuffer) &
-        bind(c, name="cusparseDgtsv2StridedBatch")
-#else
     function hipsparseDgtsv2StridedBatch_(handle,m,dl,d,du,x,batchCount,batchStride,pBuffer) &
         bind(c, name="hipsparseDgtsv2StridedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14545,13 +13284,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgtsv2StridedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgtsv2StridedBatch_(handle,m,dl,d,du,x,batchCount,batchStride,pBuffer) &
-        bind(c, name="cusparseCgtsv2StridedBatch")
-#else
     function hipsparseCgtsv2StridedBatch_(handle,m,dl,d,du,x,batchCount,batchStride,pBuffer) &
         bind(c, name="hipsparseCgtsv2StridedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14579,13 +13313,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgtsv2StridedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgtsv2StridedBatch_(handle,m,dl,d,du,x,batchCount,batchStride,pBuffer) &
-        bind(c, name="cusparseZgtsv2StridedBatch")
-#else
     function hipsparseZgtsv2StridedBatch_(handle,m,dl,d,du,x,batchCount,batchStride,pBuffer) &
         bind(c, name="hipsparseZgtsv2StridedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14693,15 +13422,9 @@ module hipfort_hipsparse
   !>           \p bsrRowPtrA, \p bsrColIndA, \p csrValC, \p csrRowPtrC, or \p csrColIndC is nullptr,
   !>           \p mb or \p nb is negative, or \p blockDim is invalid.
   interface hipsparseSbsr2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseSbsr2csr_(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA,bsrColIndA,blockDim, &
-        descrC,csrValC,csrRowPtrC,csrColIndC) &
-        bind(c, name="cusparseSbsr2csr")
-#else
     function hipsparseSbsr2csr_(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA,bsrColIndA,blockDim, &
         descrC,csrValC,csrRowPtrC,csrColIndC) &
         bind(c, name="hipsparseSbsr2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14733,15 +13456,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDbsr2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseDbsr2csr_(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA,bsrColIndA,blockDim, &
-        descrC,csrValC,csrRowPtrC,csrColIndC) &
-        bind(c, name="cusparseDbsr2csr")
-#else
     function hipsparseDbsr2csr_(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA,bsrColIndA,blockDim, &
         descrC,csrValC,csrRowPtrC,csrColIndC) &
         bind(c, name="hipsparseDbsr2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14773,15 +13490,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCbsr2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseCbsr2csr_(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA,bsrColIndA,blockDim, &
-        descrC,csrValC,csrRowPtrC,csrColIndC) &
-        bind(c, name="cusparseCbsr2csr")
-#else
     function hipsparseCbsr2csr_(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA,bsrColIndA,blockDim, &
         descrC,csrValC,csrRowPtrC,csrColIndC) &
         bind(c, name="hipsparseCbsr2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14813,15 +13524,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZbsr2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseZbsr2csr_(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA,bsrColIndA,blockDim, &
-        descrC,csrValC,csrRowPtrC,csrColIndC) &
-        bind(c, name="cusparseZbsr2csr")
-#else
     function hipsparseZbsr2csr_(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA,bsrColIndA,blockDim, &
         descrC,csrValC,csrRowPtrC,csrColIndC) &
         bind(c, name="hipsparseZbsr2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14900,13 +13605,8 @@ module hipfort_hipsparse
   !>           \p cooRowInd or \p csrRowPtr is nullptr when \p nnz is greater than zero, or
   !>           \p idxBase is neither `HIPSPARSE_INDEX_BASE_ZERO` nor `HIPSPARSE_INDEX_BASE_ONE`.
   interface hipsparseXcoo2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseXcoo2csr_(handle,cooRowInd,nnz,m,csrRowPtr,idxBase) &
-        bind(c, name="cusparseXcoo2csr")
-#else
     function hipsparseXcoo2csr_(handle,cooRowInd,nnz,m,csrRowPtr,idxBase) &
         bind(c, name="hipsparseXcoo2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -14954,13 +13654,8 @@ module hipfort_hipsparse
   !>               \p cooCols, or \p pBufferSizeInBytes pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseXcoosort_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseXcoosort_bufferSizeExt_(handle,m,n,nnz,cooRows,cooCols,pBufferSizeInBytes) &
-        bind(c, name="cusparseXcoosort_bufferSizeExt")
-#else
     function hipsparseXcoosort_bufferSizeExt_(handle,m,n,nnz,cooRows,cooCols,pBufferSizeInBytes) &
         bind(c, name="hipsparseXcoosort_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -15024,13 +13719,8 @@ module hipfort_hipsparse
   !>               \p cooCols, or \p pBuffer pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseXcoosortByRow
-#ifdef USE_CUDA_NAMES
-    function hipsparseXcoosortByRow_(handle,m,n,nnz,cooRows,cooCols,P,pBuffer) &
-        bind(c, name="cusparseXcoosortByRow")
-#else
     function hipsparseXcoosortByRow_(handle,m,n,nnz,cooRows,cooCols,P,pBuffer) &
         bind(c, name="hipsparseXcoosortByRow")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -15095,13 +13785,8 @@ module hipfort_hipsparse
   !>               \p cooCols, or \p pBuffer pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseXcoosortByColumn
-#ifdef USE_CUDA_NAMES
-    function hipsparseXcoosortByColumn_(handle,m,n,nnz,cooRows,cooCols,P,pBuffer) &
-        bind(c, name="cusparseXcoosortByColumn")
-#else
     function hipsparseXcoosortByColumn_(handle,m,n,nnz,cooRows,cooCols,P,pBuffer) &
         bind(c, name="hipsparseXcoosortByColumn")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -15152,13 +13837,8 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_SUCCESS the operation completed successfully.
   !>   \retval     HIPSPARSE_STATUS_INVALID_VALUE \p handle, \p n, or \p p pointer is invalid.
   interface hipsparseCreateIdentityPermutation
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateIdentityPermutation_(handle,n,p) &
-        bind(c, name="cusparseCreateIdentityPermutation")
-#else
     function hipsparseCreateIdentityPermutation_(handle,n,p) &
         bind(c, name="hipsparseCreateIdentityPermutation")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -15245,7 +13925,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_NOT_INITIALIZED \p handle is not initialized.
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle, \p descr, \p cscVal, \p cscColPtr,
   !>           \p cscRowInd, or \p A is nullptr, \p m or \p n is negative, or \p ld is invalid.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsc2dense
     function hipsparseScsc2dense_(handle,m,n,descr,cscVal,cscRowInd,cscColPtr,A,ld) &
         bind(c, name="hipsparseScsc2dense")
@@ -15275,9 +13954,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsc2dense
     function hipsparseDcsc2dense_(handle,m,n,descr,cscVal,cscRowInd,cscColPtr,A,ld) &
         bind(c, name="hipsparseDcsc2dense")
@@ -15307,9 +13984,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsc2dense
     function hipsparseCcsc2dense_(handle,m,n,descr,cscVal,cscRowInd,cscColPtr,A,ld) &
         bind(c, name="hipsparseCcsc2dense")
@@ -15339,9 +14014,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsc2dense
     function hipsparseZcsc2dense_(handle,m,n,descr,cscVal,cscRowInd,cscColPtr,A,ld) &
         bind(c, name="hipsparseZcsc2dense")
@@ -15371,7 +14044,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup conv_module
   !>   \brief Sort a sparse CSC matrix.
@@ -15397,15 +14069,9 @@ module hipfort_hipsparse
   !>   cscRowInd, or
   !>               \p pBufferSizeInBytes pointer is invalid.
   interface hipsparseXcscsort_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseXcscsort_bufferSizeExt_(handle,m,n,nnz,cscColPtr,cscRowInd, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseXcscsort_bufferSizeExt")
-#else
     function hipsparseXcscsort_bufferSizeExt_(handle,m,n,nnz,cscColPtr,cscRowInd, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseXcscsort_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -15473,13 +14139,8 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseXcscsort
-#ifdef USE_CUDA_NAMES
-    function hipsparseXcscsort_(handle,m,n,nnz,descrA,cscColPtr,cscRowInd,P,pBuffer) &
-        bind(c, name="cusparseXcscsort")
-#else
     function hipsparseXcscsort_(handle,m,n,nnz,descrA,cscColPtr,cscRowInd,P,pBuffer) &
         bind(c, name="hipsparseXcscsort")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -15641,15 +14302,9 @@ module hipfort_hipsparse
   !>   csrColIndA,
   !>               \p bsrRowPtrC, or \p bsrNnzb pointer is invalid.
   interface hipsparseXcsr2bsrNnz
-#ifdef USE_CUDA_NAMES
-    function hipsparseXcsr2bsrNnz_(handle,dirA,m,n,descrA,csrRowPtrA,csrColIndA,blockDim,descrC, &
-        bsrRowPtrC,bsrNnzb) &
-        bind(c, name="cusparseXcsr2bsrNnz")
-#else
     function hipsparseXcsr2bsrNnz_(handle,dirA,m,n,descrA,csrRowPtrA,csrColIndA,blockDim,descrC, &
         bsrRowPtrC,bsrNnzb) &
         bind(c, name="hipsparseXcsr2bsrNnz")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -15794,15 +14449,9 @@ module hipfort_hipsparse
   !>   bsrRowPtrC,
   !>               \p bsrColIndC, \p csrValA, \p csrRowPtrA, or \p csrColIndA pointer is invalid.
   interface hipsparseScsr2bsr
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsr2bsr_(handle,dirA,m,n,descrA,csrValA,csrRowPtrA,csrColIndA,blockDim, &
-        descrC,bsrValC,bsrRowPtrC,bsrColIndC) &
-        bind(c, name="cusparseScsr2bsr")
-#else
     function hipsparseScsr2bsr_(handle,dirA,m,n,descrA,csrValA,csrRowPtrA,csrColIndA,blockDim, &
         descrC,bsrValC,bsrRowPtrC,bsrColIndC) &
         bind(c, name="hipsparseScsr2bsr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -15834,15 +14483,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsr2bsr
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsr2bsr_(handle,dirA,m,n,descrA,csrValA,csrRowPtrA,csrColIndA,blockDim, &
-        descrC,bsrValC,bsrRowPtrC,bsrColIndC) &
-        bind(c, name="cusparseDcsr2bsr")
-#else
     function hipsparseDcsr2bsr_(handle,dirA,m,n,descrA,csrValA,csrRowPtrA,csrColIndA,blockDim, &
         descrC,bsrValC,bsrRowPtrC,bsrColIndC) &
         bind(c, name="hipsparseDcsr2bsr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -15874,15 +14517,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsr2bsr
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsr2bsr_(handle,dirA,m,n,descrA,csrValA,csrRowPtrA,csrColIndA,blockDim, &
-        descrC,bsrValC,bsrRowPtrC,bsrColIndC) &
-        bind(c, name="cusparseCcsr2bsr")
-#else
     function hipsparseCcsr2bsr_(handle,dirA,m,n,descrA,csrValA,csrRowPtrA,csrColIndA,blockDim, &
         descrC,bsrValC,bsrRowPtrC,bsrColIndC) &
         bind(c, name="hipsparseCcsr2bsr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -15914,15 +14551,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsr2bsr
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsr2bsr_(handle,dirA,m,n,descrA,csrValA,csrRowPtrA,csrColIndA,blockDim, &
-        descrC,bsrValC,bsrRowPtrC,bsrColIndC) &
-        bind(c, name="cusparseZcsr2bsr")
-#else
     function hipsparseZcsr2bsr_(handle,dirA,m,n,descrA,csrValA,csrRowPtrA,csrColIndA,blockDim, &
         descrC,bsrValC,bsrRowPtrC,bsrColIndC) &
         bind(c, name="hipsparseZcsr2bsr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -16001,13 +14632,8 @@ module hipfort_hipsparse
   !>           \p idxBase is neither `HIPSPARSE_INDEX_BASE_ZERO` nor `HIPSPARSE_INDEX_BASE_ONE`.
   !>   \retval HIPSPARSE_STATUS_ARCH_MISMATCH the device is not supported.
   interface hipsparseXcsr2coo
-#ifdef USE_CUDA_NAMES
-    function hipsparseXcsr2coo_(handle,csrRowPtr,nnz,m,cooRowInd,idxBase) &
-        bind(c, name="cusparseXcsr2coo")
-#else
     function hipsparseXcsr2coo_(handle,csrRowPtr,nnz,m,cooRowInd,idxBase) &
         bind(c, name="hipsparseXcsr2coo")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -16117,7 +14743,6 @@ module hipfort_hipsparse
   !>           `HIPSPARSE_INDEX_BASE_ZERO` nor `HIPSPARSE_INDEX_BASE_ONE`.
   !>   \retval HIPSPARSE_STATUS_ARCH_MISMATCH the device is not supported.
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsr2csc
     function hipsparseScsr2csc_(handle,m,n,nnz,csrSortedVal,csrSortedRowPtr,csrSortedColInd, &
         cscSortedVal,cscSortedRowInd,cscSortedColPtr,copyValues,idxBase) &
@@ -16150,9 +14775,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsr2csc
     function hipsparseDcsr2csc_(handle,m,n,nnz,csrSortedVal,csrSortedRowPtr,csrSortedColInd, &
         cscSortedVal,cscSortedRowInd,cscSortedColPtr,copyValues,idxBase) &
@@ -16185,9 +14808,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsr2csc
     function hipsparseCcsr2csc_(handle,m,n,nnz,csrSortedVal,csrSortedRowPtr,csrSortedColInd, &
         cscSortedVal,cscSortedRowInd,cscSortedColPtr,copyValues,idxBase) &
@@ -16220,9 +14841,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsr2csc
     function hipsparseZcsr2csc_(handle,m,n,nnz,csrSortedVal,csrSortedRowPtr,csrSortedColInd, &
         cscSortedVal,cscSortedRowInd,cscSortedColPtr,copyValues,idxBase) &
@@ -16255,7 +14874,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup conv_module
   !>   \brief This function computes the size of the user-allocated temporary storage buffer used
@@ -16307,15 +14925,9 @@ module hipfort_hipsparse
   !>               \p pBufferSizeInBytes pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseCsr2cscEx2_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseCsr2cscEx2_bufferSize_(handle,m,n,nnz,csrVal,csrRowPtr,csrColInd,cscVal, &
-        cscColPtr,cscRowInd,valType,copyValues,idxBase,alg,pBufferSizeInBytes) &
-        bind(c, name="cusparseCsr2cscEx2_bufferSize")
-#else
     function hipsparseCsr2cscEx2_bufferSize_(handle,m,n,nnz,csrVal,csrRowPtr,csrColInd,cscVal, &
         cscColPtr,cscRowInd,valType,copyValues,idxBase,alg,pBufferSizeInBytes) &
         bind(c, name="hipsparseCsr2cscEx2_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -16386,15 +14998,9 @@ module hipfort_hipsparse
   !>               \p pBufferSizeInBytes pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseCsr2cscEx2
-#ifdef USE_CUDA_NAMES
-    function hipsparseCsr2cscEx2_(handle,m,n,nnz,csrVal,csrRowPtr,csrColInd,cscVal,cscColPtr, &
-        cscRowInd,valType,copyValues,idxBase,alg,buffer) &
-        bind(c, name="cusparseCsr2cscEx2")
-#else
     function hipsparseCsr2cscEx2_(handle,m,n,nnz,csrVal,csrRowPtr,csrColInd,cscVal,cscColPtr, &
         cscRowInd,valType,copyValues,idxBase,alg,buffer) &
         bind(c, name="hipsparseCsr2cscEx2")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -16476,15 +15082,9 @@ module hipfort_hipsparse
   !>               \p csrColIndA, \p csrValC, \p csrRowPtrC, \p csrColIndC, or \p nnzPerRow pointer
   !>               is invalid.
   interface hipsparseScsr2csr_compress
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsr2csr_compress_(handle,m,n,descrA,csrValA,csrColIndA,csrRowPtrA,nnzA, &
-        nnzPerRow,csrValC,csrColIndC,csrRowPtrC,tol) &
-        bind(c, name="cusparseScsr2csr_compress")
-#else
     function hipsparseScsr2csr_compress_(handle,m,n,descrA,csrValA,csrColIndA,csrRowPtrA,nnzA, &
         nnzPerRow,csrValC,csrColIndC,csrRowPtrC,tol) &
         bind(c, name="hipsparseScsr2csr_compress")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -16516,15 +15116,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsr2csr_compress
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsr2csr_compress_(handle,m,n,descrA,csrValA,csrColIndA,csrRowPtrA,nnzA, &
-        nnzPerRow,csrValC,csrColIndC,csrRowPtrC,tol) &
-        bind(c, name="cusparseDcsr2csr_compress")
-#else
     function hipsparseDcsr2csr_compress_(handle,m,n,descrA,csrValA,csrColIndA,csrRowPtrA,nnzA, &
         nnzPerRow,csrValC,csrColIndC,csrRowPtrC,tol) &
         bind(c, name="hipsparseDcsr2csr_compress")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -16556,15 +15150,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsr2csr_compress
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsr2csr_compress_(handle,m,n,descrA,csrValA,csrColIndA,csrRowPtrA,nnzA, &
-        nnzPerRow,csrValC,csrColIndC,csrRowPtrC,tol) &
-        bind(c, name="cusparseCcsr2csr_compress")
-#else
     function hipsparseCcsr2csr_compress_(handle,m,n,descrA,csrValA,csrColIndA,csrRowPtrA,nnzA, &
         nnzPerRow,csrValC,csrColIndC,csrRowPtrC,tol) &
         bind(c, name="hipsparseCcsr2csr_compress")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -16596,15 +15184,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsr2csr_compress
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsr2csr_compress_(handle,m,n,descrA,csrValA,csrColIndA,csrRowPtrA,nnzA, &
-        nnzPerRow,csrValC,csrColIndC,csrRowPtrC,tol) &
-        bind(c, name="cusparseZcsr2csr_compress")
-#else
     function hipsparseZcsr2csr_compress_(handle,m,n,descrA,csrValA,csrColIndA,csrRowPtrA,nnzA, &
         nnzPerRow,csrValC,csrColIndC,csrRowPtrC,tol) &
         bind(c, name="hipsparseZcsr2csr_compress")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -16640,13 +15222,8 @@ module hipfort_hipsparse
   !>   This function converts the sorted CSR format to the unsorted CSR format. The required
   !>   temporary storage has to be allocated by the user.
   interface hipsparseScsr2csru
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsr2csru_(handle,m,n,nnz,descrA,csrVal,csrRowPtr,csrColInd,myInfo,pBuffer) &
-        bind(c, name="cusparseScsr2csru")
-#else
     function hipsparseScsr2csru_(handle,m,n,nnz,descrA,csrVal,csrRowPtr,csrColInd,myInfo,pBuffer) &
         bind(c, name="hipsparseScsr2csru")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -16675,13 +15252,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsr2csru
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsr2csru_(handle,m,n,nnz,descrA,csrVal,csrRowPtr,csrColInd,myInfo,pBuffer) &
-        bind(c, name="cusparseDcsr2csru")
-#else
     function hipsparseDcsr2csru_(handle,m,n,nnz,descrA,csrVal,csrRowPtr,csrColInd,myInfo,pBuffer) &
         bind(c, name="hipsparseDcsr2csru")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -16710,13 +15282,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsr2csru
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsr2csru_(handle,m,n,nnz,descrA,csrVal,csrRowPtr,csrColInd,myInfo,pBuffer) &
-        bind(c, name="cusparseCcsr2csru")
-#else
     function hipsparseCcsr2csru_(handle,m,n,nnz,descrA,csrVal,csrRowPtr,csrColInd,myInfo,pBuffer) &
         bind(c, name="hipsparseCcsr2csru")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -16745,13 +15312,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsr2csru
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsr2csru_(handle,m,n,nnz,descrA,csrVal,csrRowPtr,csrColInd,myInfo,pBuffer) &
-        bind(c, name="cusparseZcsr2csru")
-#else
     function hipsparseZcsr2csru_(handle,m,n,nnz,descrA,csrVal,csrRowPtr,csrColInd,myInfo,pBuffer) &
         bind(c, name="hipsparseZcsr2csru")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -16845,7 +15407,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_NOT_INITIALIZED \p handle is not initialized.
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle, \p descr, \p csrVal, \p csrRowPtr,
   !>           \p csrColInd, or \p A is nullptr, \p m or \p n is negative, or \p ld is invalid.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsr2dense
     function hipsparseScsr2dense_(handle,m,n,descr,csrVal,csrRowPtr,csrColInd,A,ld) &
         bind(c, name="hipsparseScsr2dense")
@@ -16875,9 +15436,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsr2dense
     function hipsparseDcsr2dense_(handle,m,n,descr,csrVal,csrRowPtr,csrColInd,A,ld) &
         bind(c, name="hipsparseDcsr2dense")
@@ -16907,9 +15466,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsr2dense
     function hipsparseCcsr2dense_(handle,m,n,descr,csrVal,csrRowPtr,csrColInd,A,ld) &
         bind(c, name="hipsparseCcsr2dense")
@@ -16939,9 +15496,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsr2dense
     function hipsparseZcsr2dense_(handle,m,n,descr,csrVal,csrRowPtr,csrColInd,A,ld) &
         bind(c, name="hipsparseZcsr2dense")
@@ -16971,7 +15526,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup conv_module
   !>   \brief Convert a sparse CSR matrix into a sparse GEBSR matrix.
@@ -17013,15 +15567,9 @@ module hipfort_hipsparse
   !>   \p csrVal,
   !>               \p csrRowPtr, \p csrColInd, or \p pBufferSizeInBytes pointer is invalid.
   interface hipsparseScsr2gebsr_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsr2gebsr_bufferSize_(handle,dir,m,n,csr_descr,csrVal,csrRowPtr,csrColInd, &
-        rowBlockDim,colBlockDim,pBufferSizeInBytes) &
-        bind(c, name="cusparseScsr2gebsr_bufferSize")
-#else
     function hipsparseScsr2gebsr_bufferSize_(handle,dir,m,n,csr_descr,csrVal,csrRowPtr,csrColInd, &
         rowBlockDim,colBlockDim,pBufferSizeInBytes) &
         bind(c, name="hipsparseScsr2gebsr_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -17051,15 +15599,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsr2gebsr_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsr2gebsr_bufferSize_(handle,dir,m,n,csr_descr,csrVal,csrRowPtr,csrColInd, &
-        rowBlockDim,colBlockDim,pBufferSizeInBytes) &
-        bind(c, name="cusparseDcsr2gebsr_bufferSize")
-#else
     function hipsparseDcsr2gebsr_bufferSize_(handle,dir,m,n,csr_descr,csrVal,csrRowPtr,csrColInd, &
         rowBlockDim,colBlockDim,pBufferSizeInBytes) &
         bind(c, name="hipsparseDcsr2gebsr_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -17089,15 +15631,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsr2gebsr_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsr2gebsr_bufferSize_(handle,dir,m,n,csr_descr,csrVal,csrRowPtr,csrColInd, &
-        rowBlockDim,colBlockDim,pBufferSizeInBytes) &
-        bind(c, name="cusparseCcsr2gebsr_bufferSize")
-#else
     function hipsparseCcsr2gebsr_bufferSize_(handle,dir,m,n,csr_descr,csrVal,csrRowPtr,csrColInd, &
         rowBlockDim,colBlockDim,pBufferSizeInBytes) &
         bind(c, name="hipsparseCcsr2gebsr_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -17127,15 +15663,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsr2gebsr_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsr2gebsr_bufferSize_(handle,dir,m,n,csr_descr,csrVal,csrRowPtr,csrColInd, &
-        rowBlockDim,colBlockDim,pBufferSizeInBytes) &
-        bind(c, name="cusparseZcsr2gebsr_bufferSize")
-#else
     function hipsparseZcsr2gebsr_bufferSize_(handle,dir,m,n,csr_descr,csrVal,csrRowPtr,csrColInd, &
         rowBlockDim,colBlockDim,pBufferSizeInBytes) &
         bind(c, name="hipsparseZcsr2gebsr_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -17293,15 +15823,9 @@ module hipfort_hipsparse
   !>   \p csrRowPtr,
   !>               \p csrColInd, \p bsrRowPtr, or \p bsrNnzDevhost pointer is invalid.
   interface hipsparseXcsr2gebsrNnz
-#ifdef USE_CUDA_NAMES
-    function hipsparseXcsr2gebsrNnz_(handle,dir,m,n,csr_descr,csrRowPtr,csrColInd,bsr_descr, &
-        bsrRowPtr,rowBlockDim,colBlockDim,bsrNnzDevhost,pbuffer) &
-        bind(c, name="cusparseXcsr2gebsrNnz")
-#else
     function hipsparseXcsr2gebsrNnz_(handle,dir,m,n,csr_descr,csrRowPtr,csrColInd,bsr_descr, &
         bsrRowPtr,rowBlockDim,colBlockDim,bsrNnzDevhost,pbuffer) &
         bind(c, name="hipsparseXcsr2gebsrNnz")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -17500,15 +16024,9 @@ module hipfort_hipsparse
   !>               \p bsrRowPtr, \p bsrColInd, \p csrVal, \p csrRowPtr, or \p csrColInd pointer is
   !>               invalid.
   interface hipsparseScsr2gebsr
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsr2gebsr_(handle,dir,m,n,csr_descr,csrVal,csrRowPtr,csrColInd,bsr_descr, &
-        bsrVal,bsrRowPtr,bsrColInd,rowBlockDim,colBlockDim,pbuffer) &
-        bind(c, name="cusparseScsr2gebsr")
-#else
     function hipsparseScsr2gebsr_(handle,dir,m,n,csr_descr,csrVal,csrRowPtr,csrColInd,bsr_descr, &
         bsrVal,bsrRowPtr,bsrColInd,rowBlockDim,colBlockDim,pbuffer) &
         bind(c, name="hipsparseScsr2gebsr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -17542,15 +16060,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsr2gebsr
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsr2gebsr_(handle,dir,m,n,csr_descr,csrVal,csrRowPtr,csrColInd,bsr_descr, &
-        bsrVal,bsrRowPtr,bsrColInd,rowBlockDim,colBlockDim,pbuffer) &
-        bind(c, name="cusparseDcsr2gebsr")
-#else
     function hipsparseDcsr2gebsr_(handle,dir,m,n,csr_descr,csrVal,csrRowPtr,csrColInd,bsr_descr, &
         bsrVal,bsrRowPtr,bsrColInd,rowBlockDim,colBlockDim,pbuffer) &
         bind(c, name="hipsparseDcsr2gebsr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -17584,15 +16096,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsr2gebsr
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsr2gebsr_(handle,dir,m,n,csr_descr,csrVal,csrRowPtr,csrColInd,bsr_descr, &
-        bsrVal,bsrRowPtr,bsrColInd,rowBlockDim,colBlockDim,pbuffer) &
-        bind(c, name="cusparseCcsr2gebsr")
-#else
     function hipsparseCcsr2gebsr_(handle,dir,m,n,csr_descr,csrVal,csrRowPtr,csrColInd,bsr_descr, &
         bsrVal,bsrRowPtr,bsrColInd,rowBlockDim,colBlockDim,pbuffer) &
         bind(c, name="hipsparseCcsr2gebsr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -17626,15 +16132,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsr2gebsr
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsr2gebsr_(handle,dir,m,n,csr_descr,csrVal,csrRowPtr,csrColInd,bsr_descr, &
-        bsrVal,bsrRowPtr,bsrColInd,rowBlockDim,colBlockDim,pbuffer) &
-        bind(c, name="cusparseZcsr2gebsr")
-#else
     function hipsparseZcsr2gebsr_(handle,dir,m,n,csr_descr,csrVal,csrRowPtr,csrColInd,bsr_descr, &
         bsrVal,bsrRowPtr,bsrColInd,rowBlockDim,colBlockDim,pbuffer) &
         bind(c, name="hipsparseZcsr2gebsr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -17712,7 +16212,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED `hipsparseMatrixType_t` !=
   !>   `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseScsr2hyb
     function hipsparseScsr2hyb_(handle,m,n,descrA,csrSortedValA,csrSortedRowPtrA,csrSortedColIndA, &
         hybA,userEllWidth,partitionType) &
@@ -17743,9 +16242,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDcsr2hyb
     function hipsparseDcsr2hyb_(handle,m,n,descrA,csrSortedValA,csrSortedRowPtrA,csrSortedColIndA, &
         hybA,userEllWidth,partitionType) &
@@ -17776,9 +16273,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCcsr2hyb
     function hipsparseCcsr2hyb_(handle,m,n,descrA,csrSortedValA,csrSortedRowPtrA,csrSortedColIndA, &
         hybA,userEllWidth,partitionType) &
@@ -17809,9 +16304,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZcsr2hyb
     function hipsparseZcsr2hyb_(handle,m,n,descrA,csrSortedValA,csrSortedRowPtrA,csrSortedColIndA, &
         hybA,userEllWidth,partitionType) &
@@ -17842,7 +16335,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup conv_module
   !>   \brief Sort a sparse CSR matrix.
@@ -17868,15 +16360,9 @@ module hipfort_hipsparse
   !>   csrColInd, or
   !>               \p pBufferSizeInBytes pointer is invalid.
   interface hipsparseXcsrsort_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseXcsrsort_bufferSizeExt_(handle,m,n,nnz,csrRowPtr,csrColInd, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseXcsrsort_bufferSizeExt")
-#else
     function hipsparseXcsrsort_bufferSizeExt_(handle,m,n,nnz,csrRowPtr,csrColInd, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseXcsrsort_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -17945,13 +16431,8 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_NOT_SUPPORTED
   !>               `hipsparseMatrixType_t` != `HIPSPARSE_MATRIX_TYPE_GENERAL`.
   interface hipsparseXcsrsort
-#ifdef USE_CUDA_NAMES
-    function hipsparseXcsrsort_(handle,m,n,nnz,descrA,csrRowPtr,csrColInd,P,pBuffer) &
-        bind(c, name="cusparseXcsrsort")
-#else
     function hipsparseXcsrsort_(handle,m,n,nnz,descrA,csrRowPtr,csrColInd,P,pBuffer) &
         bind(c, name="hipsparseXcsrsort")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -17983,15 +16464,9 @@ module hipfort_hipsparse
   !>   This function calculates the amount of temporary storage in bytes required for
   !>   \p hipsparseXcsru2csr() and \p hipsparseXcsr2csru().
   interface hipsparseScsru2csr_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsru2csr_bufferSizeExt_(handle,m,n,nnz,csrVal,csrRowPtr,csrColInd,myInfo, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseScsru2csr_bufferSizeExt")
-#else
     function hipsparseScsru2csr_bufferSizeExt_(handle,m,n,nnz,csrVal,csrRowPtr,csrColInd,myInfo, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseScsru2csr_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -18019,15 +16494,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsru2csr_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsru2csr_bufferSizeExt_(handle,m,n,nnz,csrVal,csrRowPtr,csrColInd,myInfo, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseDcsru2csr_bufferSizeExt")
-#else
     function hipsparseDcsru2csr_bufferSizeExt_(handle,m,n,nnz,csrVal,csrRowPtr,csrColInd,myInfo, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseDcsru2csr_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -18055,15 +16524,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsru2csr_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsru2csr_bufferSizeExt_(handle,m,n,nnz,csrVal,csrRowPtr,csrColInd,myInfo, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseCcsru2csr_bufferSizeExt")
-#else
     function hipsparseCcsru2csr_bufferSizeExt_(handle,m,n,nnz,csrVal,csrRowPtr,csrColInd,myInfo, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseCcsru2csr_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -18091,15 +16554,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsru2csr_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsru2csr_bufferSizeExt_(handle,m,n,nnz,csrVal,csrRowPtr,csrColInd,myInfo, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseZcsru2csr_bufferSizeExt")
-#else
     function hipsparseZcsru2csr_bufferSizeExt_(handle,m,n,nnz,csrVal,csrRowPtr,csrColInd,myInfo, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseZcsru2csr_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -18131,13 +16588,8 @@ module hipfort_hipsparse
   !>   This function converts the unsorted CSR format to the sorted CSR format. The required
   !>   temporary storage has to be allocated by the user.
   interface hipsparseScsru2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsru2csr_(handle,m,n,nnz,descrA,csrVal,csrRowPtr,csrColInd,myInfo,pBuffer) &
-        bind(c, name="cusparseScsru2csr")
-#else
     function hipsparseScsru2csr_(handle,m,n,nnz,descrA,csrVal,csrRowPtr,csrColInd,myInfo,pBuffer) &
         bind(c, name="hipsparseScsru2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -18166,13 +16618,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsru2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsru2csr_(handle,m,n,nnz,descrA,csrVal,csrRowPtr,csrColInd,myInfo,pBuffer) &
-        bind(c, name="cusparseDcsru2csr")
-#else
     function hipsparseDcsru2csr_(handle,m,n,nnz,descrA,csrVal,csrRowPtr,csrColInd,myInfo,pBuffer) &
         bind(c, name="hipsparseDcsru2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -18201,13 +16648,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsru2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsru2csr_(handle,m,n,nnz,descrA,csrVal,csrRowPtr,csrColInd,myInfo,pBuffer) &
-        bind(c, name="cusparseCcsru2csr")
-#else
     function hipsparseCcsru2csr_(handle,m,n,nnz,descrA,csrVal,csrRowPtr,csrColInd,myInfo,pBuffer) &
         bind(c, name="hipsparseCcsru2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -18236,13 +16678,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsru2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsru2csr_(handle,m,n,nnz,descrA,csrVal,csrRowPtr,csrColInd,myInfo,pBuffer) &
-        bind(c, name="cusparseZcsru2csr")
-#else
     function hipsparseZcsru2csr_(handle,m,n,nnz,descrA,csrVal,csrRowPtr,csrColInd,myInfo,pBuffer) &
         bind(c, name="hipsparseZcsru2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -18343,7 +16780,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle, \p descr, \p A, \p nnzPerColumn, \p cscVal,
   !>           \p cscColPtr, or \p cscRowInd is nullptr, \p m or \p n is negative, or \p ld is
   !>           invalid.
-#ifndef USE_CUDA_NAMES
   interface hipsparseSdense2csc
     function hipsparseSdense2csc_(handle,m,n,descr,A,ld,nnzPerColumn,cscVal,cscRowInd,cscColPtr) &
         bind(c, name="hipsparseSdense2csc")
@@ -18374,9 +16810,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDdense2csc
     function hipsparseDdense2csc_(handle,m,n,descr,A,ld,nnzPerColumn,cscVal,cscRowInd,cscColPtr) &
         bind(c, name="hipsparseDdense2csc")
@@ -18407,9 +16841,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCdense2csc
     function hipsparseCdense2csc_(handle,m,n,descr,A,ld,nnzPerColumn,cscVal,cscRowInd,cscColPtr) &
         bind(c, name="hipsparseCdense2csc")
@@ -18440,9 +16872,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZdense2csc
     function hipsparseZdense2csc_(handle,m,n,descr,A,ld,nnzPerColumn,cscVal,cscRowInd,cscColPtr) &
         bind(c, name="hipsparseZdense2csc")
@@ -18473,7 +16903,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup conv_module
   !>   \brief
@@ -18536,7 +16965,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle, \p descr, \p A, \p nnzPerRow, \p csrVal,
   !>           \p csrRowPtr, or \p csrColInd is nullptr, \p m or \p n is negative, or \p ld is
   !>           invalid.
-#ifndef USE_CUDA_NAMES
   interface hipsparseSdense2csr
     function hipsparseSdense2csr_(handle,m,n,descr,A,ld,nnzPerRow,csrVal,csrRowPtr,csrColInd) &
         bind(c, name="hipsparseSdense2csr")
@@ -18567,9 +16995,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDdense2csr
     function hipsparseDdense2csr_(handle,m,n,descr,A,ld,nnzPerRow,csrVal,csrRowPtr,csrColInd) &
         bind(c, name="hipsparseDdense2csr")
@@ -18600,9 +17026,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCdense2csr
     function hipsparseCdense2csr_(handle,m,n,descr,A,ld,nnzPerRow,csrVal,csrRowPtr,csrColInd) &
         bind(c, name="hipsparseCdense2csr")
@@ -18633,9 +17057,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZdense2csr
     function hipsparseZdense2csr_(handle,m,n,descr,A,ld,nnzPerRow,csrVal,csrRowPtr,csrColInd) &
         bind(c, name="hipsparseZdense2csr")
@@ -18666,7 +17088,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup conv_module
   !>   \brief Convert a sparse GEBSR matrix into a sparse CSR matrix.
@@ -18763,15 +17184,9 @@ module hipfort_hipsparse
   !>               \p bsrRowPtrA, \p bsrColIndA, \p csrValC, \p csrRowPtrC, or \p csrColIndC pointer
   !>               is invalid.
   interface hipsparseSgebsr2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgebsr2csr_(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
-        rowBlockDim,colBlockDim,descrC,csrValC,csrRowPtrC,csrColIndC) &
-        bind(c, name="cusparseSgebsr2csr")
-#else
     function hipsparseSgebsr2csr_(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
         rowBlockDim,colBlockDim,descrC,csrValC,csrRowPtrC,csrColIndC) &
         bind(c, name="hipsparseSgebsr2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -18804,15 +17219,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgebsr2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgebsr2csr_(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
-        rowBlockDim,colBlockDim,descrC,csrValC,csrRowPtrC,csrColIndC) &
-        bind(c, name="cusparseDgebsr2csr")
-#else
     function hipsparseDgebsr2csr_(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
         rowBlockDim,colBlockDim,descrC,csrValC,csrRowPtrC,csrColIndC) &
         bind(c, name="hipsparseDgebsr2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -18845,15 +17254,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgebsr2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgebsr2csr_(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
-        rowBlockDim,colBlockDim,descrC,csrValC,csrRowPtrC,csrColIndC) &
-        bind(c, name="cusparseCgebsr2csr")
-#else
     function hipsparseCgebsr2csr_(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
         rowBlockDim,colBlockDim,descrC,csrValC,csrRowPtrC,csrColIndC) &
         bind(c, name="hipsparseCgebsr2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -18886,15 +17289,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgebsr2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgebsr2csr_(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
-        rowBlockDim,colBlockDim,descrC,csrValC,csrRowPtrC,csrColIndC) &
-        bind(c, name="cusparseZgebsr2csr")
-#else
     function hipsparseZgebsr2csr_(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
         rowBlockDim,colBlockDim,descrC,csrValC,csrRowPtrC,csrColIndC) &
         bind(c, name="hipsparseZgebsr2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -18962,15 +17359,9 @@ module hipfort_hipsparse
   !>               or \p pBufferSizeInBytes pointer is invalid.
   !>   \retval     rocsparse_status_internal_error an internal error occurred.
   interface hipsparseSgebsr2gebsc_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgebsr2gebsc_bufferSize_(handle,mb,nb,nnzb,bsrVal,bsrRowPtr,bsrColInd, &
-        rowBlockDim,colBlockDim,pBufferSizeInBytes) &
-        bind(c, name="cusparseSgebsr2gebsc_bufferSize")
-#else
     function hipsparseSgebsr2gebsc_bufferSize_(handle,mb,nb,nnzb,bsrVal,bsrRowPtr,bsrColInd, &
         rowBlockDim,colBlockDim,pBufferSizeInBytes) &
         bind(c, name="hipsparseSgebsr2gebsc_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -18989,15 +17380,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgebsr2gebsc_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgebsr2gebsc_bufferSize_(handle,mb,nb,nnzb,bsrVal,bsrRowPtr,bsrColInd, &
-        rowBlockDim,colBlockDim,pBufferSizeInBytes) &
-        bind(c, name="cusparseDgebsr2gebsc_bufferSize")
-#else
     function hipsparseDgebsr2gebsc_bufferSize_(handle,mb,nb,nnzb,bsrVal,bsrRowPtr,bsrColInd, &
         rowBlockDim,colBlockDim,pBufferSizeInBytes) &
         bind(c, name="hipsparseDgebsr2gebsc_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -19016,15 +17401,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgebsr2gebsc_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgebsr2gebsc_bufferSize_(handle,mb,nb,nnzb,bsrVal,bsrRowPtr,bsrColInd, &
-        rowBlockDim,colBlockDim,pBufferSizeInBytes) &
-        bind(c, name="cusparseCgebsr2gebsc_bufferSize")
-#else
     function hipsparseCgebsr2gebsc_bufferSize_(handle,mb,nb,nnzb,bsrVal,bsrRowPtr,bsrColInd, &
         rowBlockDim,colBlockDim,pBufferSizeInBytes) &
         bind(c, name="hipsparseCgebsr2gebsc_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -19043,15 +17422,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgebsr2gebsc_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgebsr2gebsc_bufferSize_(handle,mb,nb,nnzb,bsrVal,bsrRowPtr,bsrColInd, &
-        rowBlockDim,colBlockDim,pBufferSizeInBytes) &
-        bind(c, name="cusparseZgebsr2gebsc_bufferSize")
-#else
     function hipsparseZgebsr2gebsc_bufferSize_(handle,mb,nb,nnzb,bsrVal,bsrRowPtr,bsrColInd, &
         rowBlockDim,colBlockDim,pBufferSizeInBytes) &
         bind(c, name="hipsparseZgebsr2gebsc_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -19176,15 +17549,9 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_ARCH_MISMATCH the device is not supported.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseSgebsr2gebsc
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgebsr2gebsc_(handle,mb,nb,nnzb,bsrVal,bsrRowPtr,bsrColInd,rowBlockDim, &
-        colBlockDim,bscVal,bscRowInd,bscColPtr,copyValues,idxBase,temp_buffer) &
-        bind(c, name="cusparseSgebsr2gebsc")
-#else
     function hipsparseSgebsr2gebsc_(handle,mb,nb,nnzb,bsrVal,bsrRowPtr,bsrColInd,rowBlockDim, &
         colBlockDim,bscVal,bscRowInd,bscColPtr,copyValues,idxBase,temp_buffer) &
         bind(c, name="hipsparseSgebsr2gebsc")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -19208,15 +17575,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgebsr2gebsc
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgebsr2gebsc_(handle,mb,nb,nnzb,bsrVal,bsrRowPtr,bsrColInd,rowBlockDim, &
-        colBlockDim,bscVal,bscRowInd,bscColPtr,copyValues,idxBase,temp_buffer) &
-        bind(c, name="cusparseDgebsr2gebsc")
-#else
     function hipsparseDgebsr2gebsc_(handle,mb,nb,nnzb,bsrVal,bsrRowPtr,bsrColInd,rowBlockDim, &
         colBlockDim,bscVal,bscRowInd,bscColPtr,copyValues,idxBase,temp_buffer) &
         bind(c, name="hipsparseDgebsr2gebsc")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -19240,15 +17601,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgebsr2gebsc
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgebsr2gebsc_(handle,mb,nb,nnzb,bsrVal,bsrRowPtr,bsrColInd,rowBlockDim, &
-        colBlockDim,bscVal,bscRowInd,bscColPtr,copyValues,idxBase,temp_buffer) &
-        bind(c, name="cusparseCgebsr2gebsc")
-#else
     function hipsparseCgebsr2gebsc_(handle,mb,nb,nnzb,bsrVal,bsrRowPtr,bsrColInd,rowBlockDim, &
         colBlockDim,bscVal,bscRowInd,bscColPtr,copyValues,idxBase,temp_buffer) &
         bind(c, name="hipsparseCgebsr2gebsc")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -19272,15 +17627,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgebsr2gebsc
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgebsr2gebsc_(handle,mb,nb,nnzb,bsrVal,bsrRowPtr,bsrColInd,rowBlockDim, &
-        colBlockDim,bscVal,bscRowInd,bscColPtr,copyValues,idxBase,temp_buffer) &
-        bind(c, name="cusparseZgebsr2gebsc")
-#else
     function hipsparseZgebsr2gebsc_(handle,mb,nb,nnzb,bsrVal,bsrRowPtr,bsrColInd,rowBlockDim, &
         colBlockDim,bscVal,bscRowInd,bscColPtr,copyValues,idxBase,temp_buffer) &
         bind(c, name="hipsparseZgebsr2gebsc")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -19350,15 +17699,9 @@ module hipfort_hipsparse
   !>               pBufferSizeInBytes pointer
   !>               is invalid.
   interface hipsparseSgebsr2gebsr_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgebsr2gebsr_bufferSize_(handle,dirA,mb,nb,nnzb,descrA,bsrValA,bsrRowPtrA, &
-        bsrColIndA,rowBlockDimA,colBlockDimA,rowBlockDimC,colBlockDimC,pBufferSizeInBytes) &
-        bind(c, name="cusparseSgebsr2gebsr_bufferSize")
-#else
     function hipsparseSgebsr2gebsr_bufferSize_(handle,dirA,mb,nb,nnzb,descrA,bsrValA,bsrRowPtrA, &
         bsrColIndA,rowBlockDimA,colBlockDimA,rowBlockDimC,colBlockDimC,pBufferSizeInBytes) &
         bind(c, name="hipsparseSgebsr2gebsr_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -19391,15 +17734,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgebsr2gebsr_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgebsr2gebsr_bufferSize_(handle,dirA,mb,nb,nnzb,descrA,bsrValA,bsrRowPtrA, &
-        bsrColIndA,rowBlockDimA,colBlockDimA,rowBlockDimC,colBlockDimC,pBufferSizeInBytes) &
-        bind(c, name="cusparseDgebsr2gebsr_bufferSize")
-#else
     function hipsparseDgebsr2gebsr_bufferSize_(handle,dirA,mb,nb,nnzb,descrA,bsrValA,bsrRowPtrA, &
         bsrColIndA,rowBlockDimA,colBlockDimA,rowBlockDimC,colBlockDimC,pBufferSizeInBytes) &
         bind(c, name="hipsparseDgebsr2gebsr_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -19432,15 +17769,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgebsr2gebsr_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgebsr2gebsr_bufferSize_(handle,dirA,mb,nb,nnzb,descrA,bsrValA,bsrRowPtrA, &
-        bsrColIndA,rowBlockDimA,colBlockDimA,rowBlockDimC,colBlockDimC,pBufferSizeInBytes) &
-        bind(c, name="cusparseCgebsr2gebsr_bufferSize")
-#else
     function hipsparseCgebsr2gebsr_bufferSize_(handle,dirA,mb,nb,nnzb,descrA,bsrValA,bsrRowPtrA, &
         bsrColIndA,rowBlockDimA,colBlockDimA,rowBlockDimC,colBlockDimC,pBufferSizeInBytes) &
         bind(c, name="hipsparseCgebsr2gebsr_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -19473,15 +17804,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgebsr2gebsr_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgebsr2gebsr_bufferSize_(handle,dirA,mb,nb,nnzb,descrA,bsrValA,bsrRowPtrA, &
-        bsrColIndA,rowBlockDimA,colBlockDimA,rowBlockDimC,colBlockDimC,pBufferSizeInBytes) &
-        bind(c, name="cusparseZgebsr2gebsr_bufferSize")
-#else
     function hipsparseZgebsr2gebsr_bufferSize_(handle,dirA,mb,nb,nnzb,descrA,bsrValA,bsrRowPtrA, &
         bsrColIndA,rowBlockDimA,colBlockDimA,rowBlockDimC,colBlockDimC,pBufferSizeInBytes) &
         bind(c, name="hipsparseZgebsr2gebsr_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -19562,17 +17887,10 @@ module hipfort_hipsparse
   !>               \p colBlockDimC, \p bsrRowPtrA, \p bsrColIndA, \p bsrRowPtrC, \p descrA, \p
   !>               descrC, \p buffer pointer is invalid.
   interface hipsparseXgebsr2gebsrNnz
-#ifdef USE_CUDA_NAMES
-    function hipsparseXgebsr2gebsrNnz_(handle,dirA,mb,nb,nnzb,descrA,bsrRowPtrA,bsrColIndA, &
-        rowBlockDimA,colBlockDimA,descrC,bsrRowPtrC,rowBlockDimC,colBlockDimC,nnzTotalDevHostPtr, &
-        buffer) &
-        bind(c, name="cusparseXgebsr2gebsrNnz")
-#else
     function hipsparseXgebsr2gebsrNnz_(handle,dirA,mb,nb,nnzb,descrA,bsrRowPtrA,bsrColIndA, &
         rowBlockDimA,colBlockDimA,descrC,bsrRowPtrC,rowBlockDimC,colBlockDimC,nnzTotalDevHostPtr, &
         buffer) &
         bind(c, name="hipsparseXgebsr2gebsrNnz")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -19747,17 +18065,10 @@ module hipfort_hipsparse
   !>               bsrRowPtrC, \p bsrColIndC,
   !>               \p bsrValC, \p descrA, \p descrC, or \p buffer pointer is invalid.
   interface hipsparseSgebsr2gebsr
-#ifdef USE_CUDA_NAMES
-    function hipsparseSgebsr2gebsr_(handle,dirA,mb,nb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
-        rowBlockDimA,colBlockDimA,descrC,bsrValC,bsrRowPtrC,bsrColIndC,rowBlockDimC,colBlockDimC, &
-        buffer) &
-        bind(c, name="cusparseSgebsr2gebsr")
-#else
     function hipsparseSgebsr2gebsr_(handle,dirA,mb,nb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
         rowBlockDimA,colBlockDimA,descrC,bsrValC,bsrRowPtrC,bsrColIndC,rowBlockDimC,colBlockDimC, &
         buffer) &
         bind(c, name="hipsparseSgebsr2gebsr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -19794,17 +18105,10 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDgebsr2gebsr
-#ifdef USE_CUDA_NAMES
-    function hipsparseDgebsr2gebsr_(handle,dirA,mb,nb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
-        rowBlockDimA,colBlockDimA,descrC,bsrValC,bsrRowPtrC,bsrColIndC,rowBlockDimC,colBlockDimC, &
-        buffer) &
-        bind(c, name="cusparseDgebsr2gebsr")
-#else
     function hipsparseDgebsr2gebsr_(handle,dirA,mb,nb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
         rowBlockDimA,colBlockDimA,descrC,bsrValC,bsrRowPtrC,bsrColIndC,rowBlockDimC,colBlockDimC, &
         buffer) &
         bind(c, name="hipsparseDgebsr2gebsr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -19841,17 +18145,10 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCgebsr2gebsr
-#ifdef USE_CUDA_NAMES
-    function hipsparseCgebsr2gebsr_(handle,dirA,mb,nb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
-        rowBlockDimA,colBlockDimA,descrC,bsrValC,bsrRowPtrC,bsrColIndC,rowBlockDimC,colBlockDimC, &
-        buffer) &
-        bind(c, name="cusparseCgebsr2gebsr")
-#else
     function hipsparseCgebsr2gebsr_(handle,dirA,mb,nb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
         rowBlockDimA,colBlockDimA,descrC,bsrValC,bsrRowPtrC,bsrColIndC,rowBlockDimC,colBlockDimC, &
         buffer) &
         bind(c, name="hipsparseCgebsr2gebsr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -19888,17 +18185,10 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZgebsr2gebsr
-#ifdef USE_CUDA_NAMES
-    function hipsparseZgebsr2gebsr_(handle,dirA,mb,nb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
-        rowBlockDimA,colBlockDimA,descrC,bsrValC,bsrRowPtrC,bsrColIndC,rowBlockDimC,colBlockDimC, &
-        buffer) &
-        bind(c, name="cusparseZgebsr2gebsr")
-#else
     function hipsparseZgebsr2gebsr_(handle,dirA,mb,nb,nnzb,descrA,bsrValA,bsrRowPtrA,bsrColIndA, &
         rowBlockDimA,colBlockDimA,descrC,bsrValC,bsrRowPtrC,bsrColIndC,rowBlockDimC,colBlockDimC, &
         buffer) &
         bind(c, name="hipsparseZgebsr2gebsr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -19965,7 +18255,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   !>   \retval HIPSPARSE_STATUS_NOT_SUPPORTED `hipsparseMatrixType_t` !=
   !>   `HIPSPARSE_MATRIX_TYPE_GENERAL`.
-#ifndef USE_CUDA_NAMES
   interface hipsparseShyb2csr
     function hipsparseShyb2csr_(handle,descrA,hybA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA) &
@@ -19992,9 +18281,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDhyb2csr
     function hipsparseDhyb2csr_(handle,descrA,hybA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA) &
@@ -20021,9 +18308,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseChyb2csr
     function hipsparseChyb2csr_(handle,descrA,hybA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA) &
@@ -20050,9 +18335,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseZhyb2csr
     function hipsparseZhyb2csr_(handle,descrA,hybA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA) &
@@ -20079,7 +18362,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup conv_module
   !>   \brief
@@ -20146,13 +18428,8 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle, \p descrA, \p A, \p nnzPerRowColumn,
   !>           or \p nnzTotalDevHostPtr is nullptr, \p m or \p n is negative, or \p lda is invalid.
   interface hipsparseSnnz
-#ifdef USE_CUDA_NAMES
-    function hipsparseSnnz_(handle,dirA,m,n,descrA,A,lda,nnzPerRowColumn,nnzTotalDevHostPtr) &
-        bind(c, name="cusparseSnnz")
-#else
     function hipsparseSnnz_(handle,dirA,m,n,descrA,A,lda,nnzPerRowColumn,nnzTotalDevHostPtr) &
         bind(c, name="hipsparseSnnz")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -20181,13 +18458,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDnnz
-#ifdef USE_CUDA_NAMES
-    function hipsparseDnnz_(handle,dirA,m,n,descrA,A,lda,nnzPerRowColumn,nnzTotalDevHostPtr) &
-        bind(c, name="cusparseDnnz")
-#else
     function hipsparseDnnz_(handle,dirA,m,n,descrA,A,lda,nnzPerRowColumn,nnzTotalDevHostPtr) &
         bind(c, name="hipsparseDnnz")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -20216,13 +18488,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCnnz
-#ifdef USE_CUDA_NAMES
-    function hipsparseCnnz_(handle,dirA,m,n,descrA,A,lda,nnzPerRowColumn,nnzTotalDevHostPtr) &
-        bind(c, name="cusparseCnnz")
-#else
     function hipsparseCnnz_(handle,dirA,m,n,descrA,A,lda,nnzPerRowColumn,nnzTotalDevHostPtr) &
         bind(c, name="hipsparseCnnz")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -20251,13 +18518,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZnnz
-#ifdef USE_CUDA_NAMES
-    function hipsparseZnnz_(handle,dirA,m,n,descrA,A,lda,nnzPerRowColumn,nnzTotalDevHostPtr) &
-        bind(c, name="cusparseZnnz")
-#else
     function hipsparseZnnz_(handle,dirA,m,n,descrA,A,lda,nnzPerRowColumn,nnzTotalDevHostPtr) &
         bind(c, name="hipsparseZnnz")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -20336,13 +18598,8 @@ module hipfort_hipsparse
   !>   csrRowPtrA, \p nnzPerRow, or \p nnzC
   !>               pointer is invalid.
   interface hipsparseSnnz_compress
-#ifdef USE_CUDA_NAMES
-    function hipsparseSnnz_compress_(handle,m,descrA,csrValA,csrRowPtrA,nnzPerRow,nnzC,tol) &
-        bind(c, name="cusparseSnnz_compress")
-#else
     function hipsparseSnnz_compress_(handle,m,descrA,csrValA,csrRowPtrA,nnzPerRow,nnzC,tol) &
         bind(c, name="hipsparseSnnz_compress")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -20369,13 +18626,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDnnz_compress
-#ifdef USE_CUDA_NAMES
-    function hipsparseDnnz_compress_(handle,m,descrA,csrValA,csrRowPtrA,nnzPerRow,nnzC,tol) &
-        bind(c, name="cusparseDnnz_compress")
-#else
     function hipsparseDnnz_compress_(handle,m,descrA,csrValA,csrRowPtrA,nnzPerRow,nnzC,tol) &
         bind(c, name="hipsparseDnnz_compress")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -20402,13 +18654,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCnnz_compress
-#ifdef USE_CUDA_NAMES
-    function hipsparseCnnz_compress_(handle,m,descrA,csrValA,csrRowPtrA,nnzPerRow,nnzC,tol) &
-        bind(c, name="cusparseCnnz_compress")
-#else
     function hipsparseCnnz_compress_(handle,m,descrA,csrValA,csrRowPtrA,nnzPerRow,nnzC,tol) &
         bind(c, name="hipsparseCnnz_compress")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -20435,13 +18682,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZnnz_compress
-#ifdef USE_CUDA_NAMES
-    function hipsparseZnnz_compress_(handle,m,descrA,csrValA,csrRowPtrA,nnzPerRow,nnzC,tol) &
-        bind(c, name="cusparseZnnz_compress")
-#else
     function hipsparseZnnz_compress_(handle,m,descrA,csrValA,csrRowPtrA,nnzPerRow,nnzC,tol) &
         bind(c, name="hipsparseZnnz_compress")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -20505,7 +18747,6 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_SUCCESS the operation completed successfully.
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle or \p pBufferSizeInBytes pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
-#ifndef USE_CUDA_NAMES
   interface hipsparseSpruneCsr2csr_bufferSize
     function hipsparseSpruneCsr2csr_bufferSize_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA, &
         csrColIndA,threshold,descrC,csrValC,csrRowPtrC,csrColIndC,pBufferSizeInBytes) &
@@ -20540,9 +18781,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDpruneCsr2csr_bufferSize
     function hipsparseDpruneCsr2csr_bufferSize_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA, &
         csrColIndA,threshold,descrC,csrValC,csrRowPtrC,csrColIndC,pBufferSizeInBytes) &
@@ -20577,7 +18816,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup conv_module
   !>   \brief Convert and prune sparse a CSR matrix into a sparse CSR matrix.
@@ -20619,15 +18857,9 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle or \p pBufferSizeInBytes pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseSpruneCsr2csr_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpruneCsr2csr_bufferSizeExt_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA, &
-        csrColIndA,threshold,descrC,csrValC,csrRowPtrC,csrColIndC,pBufferSizeInBytes) &
-        bind(c, name="cusparseSpruneCsr2csr_bufferSizeExt")
-#else
     function hipsparseSpruneCsr2csr_bufferSizeExt_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA, &
         csrColIndA,threshold,descrC,csrValC,csrRowPtrC,csrColIndC,pBufferSizeInBytes) &
         bind(c, name="hipsparseSpruneCsr2csr_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -20660,15 +18892,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDpruneCsr2csr_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseDpruneCsr2csr_bufferSizeExt_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA, &
-        csrColIndA,threshold,descrC,csrValC,csrRowPtrC,csrColIndC,pBufferSizeInBytes) &
-        bind(c, name="cusparseDpruneCsr2csr_bufferSizeExt")
-#else
     function hipsparseDpruneCsr2csr_bufferSizeExt_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA, &
         csrColIndA,threshold,descrC,csrValC,csrRowPtrC,csrColIndC,pBufferSizeInBytes) &
         bind(c, name="hipsparseDpruneCsr2csr_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -20740,15 +18966,9 @@ module hipfort_hipsparse
   !>               nnzTotalDevHostPtr,
   !>               or \p buffer pointer is invalid.
   interface hipsparseSpruneCsr2csrNnz
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpruneCsr2csrNnz_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA,csrColIndA, &
-        threshold,descrC,csrRowPtrC,nnzTotalDevHostPtr,buffer) &
-        bind(c, name="cusparseSpruneCsr2csrNnz")
-#else
     function hipsparseSpruneCsr2csrNnz_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA,csrColIndA, &
         threshold,descrC,csrRowPtrC,nnzTotalDevHostPtr,buffer) &
         bind(c, name="hipsparseSpruneCsr2csrNnz")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -20780,15 +19000,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDpruneCsr2csrNnz
-#ifdef USE_CUDA_NAMES
-    function hipsparseDpruneCsr2csrNnz_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA,csrColIndA, &
-        threshold,descrC,csrRowPtrC,nnzTotalDevHostPtr,buffer) &
-        bind(c, name="cusparseDpruneCsr2csrNnz")
-#else
     function hipsparseDpruneCsr2csrNnz_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA,csrColIndA, &
         threshold,descrC,csrRowPtrC,nnzTotalDevHostPtr,buffer) &
         bind(c, name="hipsparseDpruneCsr2csrNnz")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -20874,15 +19088,9 @@ module hipfort_hipsparse
   !>               \p csrRowPtrA, \p csrcolindA, \p csrvalC, \p csrrowptrC, \p csrcolIndC, or \p
   !>               buffer pointer is invalid.
   interface hipsparseSpruneCsr2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpruneCsr2csr_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA,csrColIndA, &
-        threshold,descrC,csrValC,csrRowPtrC,csrColIndC,buffer) &
-        bind(c, name="cusparseSpruneCsr2csr")
-#else
     function hipsparseSpruneCsr2csr_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA,csrColIndA, &
         threshold,descrC,csrValC,csrRowPtrC,csrColIndC,buffer) &
         bind(c, name="hipsparseSpruneCsr2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -20915,15 +19123,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDpruneCsr2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseDpruneCsr2csr_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA,csrColIndA, &
-        threshold,descrC,csrValC,csrRowPtrC,csrColIndC,buffer) &
-        bind(c, name="cusparseDpruneCsr2csr")
-#else
     function hipsparseDpruneCsr2csr_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA,csrColIndA, &
         threshold,descrC,csrValC,csrRowPtrC,csrColIndC,buffer) &
         bind(c, name="hipsparseDpruneCsr2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -20996,7 +19198,6 @@ module hipfort_hipsparse
   !>   \retval     HIPSPARSE_STATUS_SUCCESS the operation completed successfully.
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle or \p pBufferSizeInBytes pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
-#ifndef USE_CUDA_NAMES
   interface hipsparseSpruneCsr2csrByPercentage_bufferSize
     function hipsparseSpruneCsr2csrByPercentage_bufferSize_(handle,m,n,nnzA,descrA,csrValA, &
         csrRowPtrA,csrColIndA,percentage,descrC,csrValC,csrRowPtrC,csrColIndC,myInfo, &
@@ -21033,9 +19234,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDpruneCsr2csrByPercentage_bufferSize
     function hipsparseDpruneCsr2csrByPercentage_bufferSize_(handle,m,n,nnzA,descrA,csrValA, &
         csrRowPtrA,csrColIndA,percentage,descrC,csrValC,csrRowPtrC,csrColIndC,myInfo, &
@@ -21072,7 +19271,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup conv_module
   !>   \brief Convert and prune by percentage a sparse CSR matrix into a sparse CSR matrix.
@@ -21116,17 +19314,10 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle or \p pBufferSizeInBytes pointer is invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseSpruneCsr2csrByPercentage_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpruneCsr2csrByPercentage_bufferSizeExt_(handle,m,n,nnzA,descrA,csrValA, &
-        csrRowPtrA,csrColIndA,percentage,descrC,csrValC,csrRowPtrC,csrColIndC,myInfo, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseSpruneCsr2csrByPercentage_bufferSizeExt")
-#else
     function hipsparseSpruneCsr2csrByPercentage_bufferSizeExt_(handle,m,n,nnzA,descrA,csrValA, &
         csrRowPtrA,csrColIndA,percentage,descrC,csrValC,csrRowPtrC,csrColIndC,myInfo, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseSpruneCsr2csrByPercentage_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -21160,17 +19351,10 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDpruneCsr2csrByPercentage_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseDpruneCsr2csrByPercentage_bufferSizeExt_(handle,m,n,nnzA,descrA,csrValA, &
-        csrRowPtrA,csrColIndA,percentage,descrC,csrValC,csrRowPtrC,csrColIndC,myInfo, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseDpruneCsr2csrByPercentage_bufferSizeExt")
-#else
     function hipsparseDpruneCsr2csrByPercentage_bufferSizeExt_(handle,m,n,nnzA,descrA,csrValA, &
         csrRowPtrA,csrColIndA,percentage,descrC,csrValC,csrRowPtrC,csrColIndC,myInfo, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseDpruneCsr2csrByPercentage_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -21244,15 +19428,9 @@ module hipfort_hipsparse
   !>               nnzTotalDevHostPtr, or \p buffer
   !>               pointer is invalid.
   interface hipsparseSpruneCsr2csrNnzByPercentage
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpruneCsr2csrNnzByPercentage_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA, &
-        csrColIndA,percentage,descrC,csrRowPtrC,nnzTotalDevHostPtr,myInfo,buffer) &
-        bind(c, name="cusparseSpruneCsr2csrNnzByPercentage")
-#else
     function hipsparseSpruneCsr2csrNnzByPercentage_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA, &
         csrColIndA,percentage,descrC,csrRowPtrC,nnzTotalDevHostPtr,myInfo,buffer) &
         bind(c, name="hipsparseSpruneCsr2csrNnzByPercentage")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -21285,15 +19463,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDpruneCsr2csrNnzByPercentage
-#ifdef USE_CUDA_NAMES
-    function hipsparseDpruneCsr2csrNnzByPercentage_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA, &
-        csrColIndA,percentage,descrC,csrRowPtrC,nnzTotalDevHostPtr,myInfo,buffer) &
-        bind(c, name="cusparseDpruneCsr2csrNnzByPercentage")
-#else
     function hipsparseDpruneCsr2csrNnzByPercentage_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA, &
         csrColIndA,percentage,descrC,csrRowPtrC,nnzTotalDevHostPtr,myInfo,buffer) &
         bind(c, name="hipsparseDpruneCsr2csrNnzByPercentage")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -21382,15 +19554,9 @@ module hipfort_hipsparse
   !>               csrColIndC, or \p buffer pointer is
   !>               invalid.
   interface hipsparseSpruneCsr2csrByPercentage
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpruneCsr2csrByPercentage_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA, &
-        csrColIndA,percentage,descrC,csrValC,csrRowPtrC,csrColIndC,myInfo,buffer) &
-        bind(c, name="cusparseSpruneCsr2csrByPercentage")
-#else
     function hipsparseSpruneCsr2csrByPercentage_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA, &
         csrColIndA,percentage,descrC,csrValC,csrRowPtrC,csrColIndC,myInfo,buffer) &
         bind(c, name="hipsparseSpruneCsr2csrByPercentage")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -21424,15 +19590,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDpruneCsr2csrByPercentage
-#ifdef USE_CUDA_NAMES
-    function hipsparseDpruneCsr2csrByPercentage_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA, &
-        csrColIndA,percentage,descrC,csrValC,csrRowPtrC,csrColIndC,myInfo,buffer) &
-        bind(c, name="cusparseDpruneCsr2csrByPercentage")
-#else
     function hipsparseDpruneCsr2csrByPercentage_(handle,m,n,nnzA,descrA,csrValA,csrRowPtrA, &
         csrColIndA,percentage,descrC,csrValC,csrRowPtrC,csrColIndC,myInfo,buffer) &
         bind(c, name="hipsparseDpruneCsr2csrByPercentage")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -21521,7 +19681,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE \p handle or \p pBufferSizeInBytes is nullptr,
   !>           or \p m or \p n is negative.
   !>   \retval HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
-#ifndef USE_CUDA_NAMES
   interface hipsparseSpruneDense2csr_bufferSize
     function hipsparseSpruneDense2csr_bufferSize_(handle,m,n,A,lda,threshold,descr,csrVal, &
         csrRowPtr,csrColInd,pBufferSizeInBytes) &
@@ -21554,9 +19713,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDpruneDense2csr_bufferSize
     function hipsparseDpruneDense2csr_bufferSize_(handle,m,n,A,lda,threshold,descr,csrVal, &
         csrRowPtr,csrColInd,pBufferSizeInBytes) &
@@ -21589,18 +19746,11 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   interface hipsparseSpruneDense2csr_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpruneDense2csr_bufferSizeExt_(handle,m,n,A,lda,threshold,descr,csrVal, &
-        csrRowPtr,csrColInd,pBufferSizeInBytes) &
-        bind(c, name="cusparseSpruneDense2csr_bufferSizeExt")
-#else
     function hipsparseSpruneDense2csr_bufferSizeExt_(handle,m,n,A,lda,threshold,descr,csrVal, &
         csrRowPtr,csrColInd,pBufferSizeInBytes) &
         bind(c, name="hipsparseSpruneDense2csr_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -21631,15 +19781,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDpruneDense2csr_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseDpruneDense2csr_bufferSizeExt_(handle,m,n,A,lda,threshold,descr,csrVal, &
-        csrRowPtr,csrColInd,pBufferSizeInBytes) &
-        bind(c, name="cusparseDpruneDense2csr_bufferSizeExt")
-#else
     function hipsparseDpruneDense2csr_bufferSizeExt_(handle,m,n,A,lda,threshold,descr,csrVal, &
         csrRowPtr,csrColInd,pBufferSizeInBytes) &
         bind(c, name="hipsparseDpruneDense2csr_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -21756,15 +19900,9 @@ module hipfort_hipsparse
   !>   descr, \p csrRowPtr,
   !>               \p nnzTotalDevHostPtr, or \p buffer pointer is invalid.
   interface hipsparseSpruneDense2csrNnz
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpruneDense2csrNnz_(handle,m,n,A,lda,threshold,descr,csrRowPtr, &
-        nnzTotalDevHostPtr,buffer) &
-        bind(c, name="cusparseSpruneDense2csrNnz")
-#else
     function hipsparseSpruneDense2csrNnz_(handle,m,n,A,lda,threshold,descr,csrRowPtr, &
         nnzTotalDevHostPtr,buffer) &
         bind(c, name="hipsparseSpruneDense2csrNnz")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -21794,15 +19932,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDpruneDense2csrNnz
-#ifdef USE_CUDA_NAMES
-    function hipsparseDpruneDense2csrNnz_(handle,m,n,A,lda,threshold,descr,csrRowPtr, &
-        nnzTotalDevHostPtr,buffer) &
-        bind(c, name="cusparseDpruneDense2csrNnz")
-#else
     function hipsparseDpruneDense2csrNnz_(handle,m,n,A,lda,threshold,descr,csrRowPtr, &
         nnzTotalDevHostPtr,buffer) &
         bind(c, name="hipsparseDpruneDense2csrNnz")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -21921,15 +20053,9 @@ module hipfort_hipsparse
   !>   threshold, \p csrVal,
   !>               \p csrRowPtr, \p csrColInd, or \p buffer pointer is invalid.
   interface hipsparseSpruneDense2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpruneDense2csr_(handle,m,n,A,lda,threshold,descr,csrVal,csrRowPtr, &
-        csrColInd,buffer) &
-        bind(c, name="cusparseSpruneDense2csr")
-#else
     function hipsparseSpruneDense2csr_(handle,m,n,A,lda,threshold,descr,csrVal,csrRowPtr, &
         csrColInd,buffer) &
         bind(c, name="hipsparseSpruneDense2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -21960,15 +20086,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDpruneDense2csr
-#ifdef USE_CUDA_NAMES
-    function hipsparseDpruneDense2csr_(handle,m,n,A,lda,threshold,descr,csrVal,csrRowPtr, &
-        csrColInd,buffer) &
-        bind(c, name="cusparseDpruneDense2csr")
-#else
     function hipsparseDpruneDense2csr_(handle,m,n,A,lda,threshold,descr,csrVal,csrRowPtr, &
         csrColInd,buffer) &
         bind(c, name="hipsparseDpruneDense2csr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22059,7 +20179,6 @@ module hipfort_hipsparse
   !>   \retval HIPSPARSE_STATUS_INVALID_VALUE the \p handle or \p pBufferSizeInBytes pointer is
   !>   invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
-#ifndef USE_CUDA_NAMES
   interface hipsparseSpruneDense2csrByPercentage_bufferSize
     function hipsparseSpruneDense2csrByPercentage_bufferSize_(handle,m,n,A,lda,percentage,descr, &
         csrVal,csrRowPtr,csrColInd,myInfo,pBufferSizeInBytes) &
@@ -22093,9 +20212,7 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseDpruneDense2csrByPercentage_bufferSize
     function hipsparseDpruneDense2csrByPercentage_bufferSize_(handle,m,n,A,lda,percentage,descr, &
         csrVal,csrRowPtr,csrColInd,myInfo,pBufferSizeInBytes) &
@@ -22129,7 +20246,6 @@ module hipfort_hipsparse
 #endif
 #endif
   end interface
-#endif
 
   !>  \ingroup conv_module
   !>   \brief
@@ -22190,15 +20306,9 @@ module hipfort_hipsparse
   !>   invalid.
   !>   \retval     HIPSPARSE_STATUS_INTERNAL_ERROR an internal error occurred.
   interface hipsparseSpruneDense2csrByPercentage_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpruneDense2csrByPercentage_bufferSizeExt_(handle,m,n,A,lda,percentage, &
-        descr,csrVal,csrRowPtr,csrColInd,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseSpruneDense2csrByPercentage_bufferSizeExt")
-#else
     function hipsparseSpruneDense2csrByPercentage_bufferSizeExt_(handle,m,n,A,lda,percentage, &
         descr,csrVal,csrRowPtr,csrColInd,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseSpruneDense2csrByPercentage_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22230,15 +20340,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDpruneDense2csrByPercentage_bufferSizeExt
-#ifdef USE_CUDA_NAMES
-    function hipsparseDpruneDense2csrByPercentage_bufferSizeExt_(handle,m,n,A,lda,percentage, &
-        descr,csrVal,csrRowPtr,csrColInd,myInfo,pBufferSizeInBytes) &
-        bind(c, name="cusparseDpruneDense2csrByPercentage_bufferSizeExt")
-#else
     function hipsparseDpruneDense2csrByPercentage_bufferSizeExt_(handle,m,n,A,lda,percentage, &
         descr,csrVal,csrRowPtr,csrColInd,myInfo,pBufferSizeInBytes) &
         bind(c, name="hipsparseDpruneDense2csrByPercentage_bufferSizeExt")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22327,15 +20431,9 @@ module hipfort_hipsparse
   !>   descr, \p info, \p csrRowPtr,
   !>               \p nnzTotalDevHostPtr, or \p buffer pointer is invalid.
   interface hipsparseSpruneDense2csrNnzByPercentage
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpruneDense2csrNnzByPercentage_(handle,m,n,A,lda,percentage,descr,csrRowPtr, &
-        nnzTotalDevHostPtr,myInfo,buffer) &
-        bind(c, name="cusparseSpruneDense2csrNnzByPercentage")
-#else
     function hipsparseSpruneDense2csrNnzByPercentage_(handle,m,n,A,lda,percentage,descr,csrRowPtr, &
         nnzTotalDevHostPtr,myInfo,buffer) &
         bind(c, name="hipsparseSpruneDense2csrNnzByPercentage")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22366,15 +20464,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDpruneDense2csrNnzByPercentage
-#ifdef USE_CUDA_NAMES
-    function hipsparseDpruneDense2csrNnzByPercentage_(handle,m,n,A,lda,percentage,descr,csrRowPtr, &
-        nnzTotalDevHostPtr,myInfo,buffer) &
-        bind(c, name="cusparseDpruneDense2csrNnzByPercentage")
-#else
     function hipsparseDpruneDense2csrNnzByPercentage_(handle,m,n,A,lda,percentage,descr,csrRowPtr, &
         nnzTotalDevHostPtr,myInfo,buffer) &
         bind(c, name="hipsparseDpruneDense2csrNnzByPercentage")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22467,15 +20559,9 @@ module hipfort_hipsparse
   !>   descr, \p info, \p csrVal,
   !>               \p csrRowPtr, \p csrColInd, or \p buffer pointer is invalid.
   interface hipsparseSpruneDense2csrByPercentage
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpruneDense2csrByPercentage_(handle,m,n,A,lda,percentage,descr,csrVal, &
-        csrRowPtr,csrColInd,myInfo,buffer) &
-        bind(c, name="cusparseSpruneDense2csrByPercentage")
-#else
     function hipsparseSpruneDense2csrByPercentage_(handle,m,n,A,lda,percentage,descr,csrVal, &
         csrRowPtr,csrColInd,myInfo,buffer) &
         bind(c, name="hipsparseSpruneDense2csrByPercentage")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22507,15 +20593,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDpruneDense2csrByPercentage
-#ifdef USE_CUDA_NAMES
-    function hipsparseDpruneDense2csrByPercentage_(handle,m,n,A,lda,percentage,descr,csrVal, &
-        csrRowPtr,csrColInd,myInfo,buffer) &
-        bind(c, name="cusparseDpruneDense2csrByPercentage")
-#else
     function hipsparseDpruneDense2csrByPercentage_(handle,m,n,A,lda,percentage,descr,csrVal, &
         csrRowPtr,csrColInd,myInfo,buffer) &
         bind(c, name="hipsparseDpruneDense2csrByPercentage")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22594,15 +20674,9 @@ module hipfort_hipsparse
   !>           \p csrValA, \p csrRowPtrA, or \p csrColIndA is nullptr when \p nnz is greater than
   !>           zero.
   interface hipsparseScsrcolor
-#ifdef USE_CUDA_NAMES
-    function hipsparseScsrcolor_(handle,m,nnz,descrA,csrValA,csrRowPtrA,csrColIndA, &
-        fractionToColor,ncolors,coloring,reordering,myInfo) &
-        bind(c, name="cusparseScsrcolor")
-#else
     function hipsparseScsrcolor_(handle,m,nnz,descrA,csrValA,csrRowPtrA,csrColIndA, &
         fractionToColor,ncolors,coloring,reordering,myInfo) &
         bind(c, name="hipsparseScsrcolor")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22633,15 +20707,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDcsrcolor
-#ifdef USE_CUDA_NAMES
-    function hipsparseDcsrcolor_(handle,m,nnz,descrA,csrValA,csrRowPtrA,csrColIndA, &
-        fractionToColor,ncolors,coloring,reordering,myInfo) &
-        bind(c, name="cusparseDcsrcolor")
-#else
     function hipsparseDcsrcolor_(handle,m,nnz,descrA,csrValA,csrRowPtrA,csrColIndA, &
         fractionToColor,ncolors,coloring,reordering,myInfo) &
         bind(c, name="hipsparseDcsrcolor")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22672,15 +20740,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCcsrcolor
-#ifdef USE_CUDA_NAMES
-    function hipsparseCcsrcolor_(handle,m,nnz,descrA,csrValA,csrRowPtrA,csrColIndA, &
-        fractionToColor,ncolors,coloring,reordering,myInfo) &
-        bind(c, name="cusparseCcsrcolor")
-#else
     function hipsparseCcsrcolor_(handle,m,nnz,descrA,csrValA,csrRowPtrA,csrColIndA, &
         fractionToColor,ncolors,coloring,reordering,myInfo) &
         bind(c, name="hipsparseCcsrcolor")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22711,15 +20773,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseZcsrcolor
-#ifdef USE_CUDA_NAMES
-    function hipsparseZcsrcolor_(handle,m,nnz,descrA,csrValA,csrRowPtrA,csrColIndA, &
-        fractionToColor,ncolors,coloring,reordering,myInfo) &
-        bind(c, name="cusparseZcsrcolor")
-#else
     function hipsparseZcsrcolor_(handle,m,nnz,descrA,csrValA,csrRowPtrA,csrColIndA, &
         fractionToColor,ncolors,coloring,reordering,myInfo) &
         bind(c, name="hipsparseZcsrcolor")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22750,13 +20806,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateSpVec
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateSpVec_(spVecDescr,mySize,nnz,indices,values,idxType,idxBase,valueType) &
-        bind(c, name="cusparseCreateSpVec")
-#else
     function hipsparseCreateSpVec_(spVecDescr,mySize,nnz,indices,values,idxType,idxBase,valueType) &
         bind(c, name="hipsparseCreateSpVec")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -22774,15 +20825,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateConstSpVec
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateConstSpVec_(spVecDescr,mySize,nnz,indices,values,idxType,idxBase, &
-        valueType) &
-        bind(c, name="cusparseCreateConstSpVec")
-#else
     function hipsparseCreateConstSpVec_(spVecDescr,mySize,nnz,indices,values,idxType,idxBase, &
         valueType) &
         bind(c, name="hipsparseCreateConstSpVec")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -22800,11 +20845,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDestroySpVec
-#ifdef USE_CUDA_NAMES
-    function hipsparseDestroySpVec_(spVecDescr) bind(c, name="cusparseDestroySpVec")
-#else
     function hipsparseDestroySpVec_(spVecDescr) bind(c, name="hipsparseDestroySpVec")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22814,13 +20855,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpVecGet
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpVecGet_(spVecDescr,mySize,nnz,indices,values,idxType,idxBase,valueType) &
-        bind(c, name="cusparseSpVecGet")
-#else
     function hipsparseSpVecGet_(spVecDescr,mySize,nnz,indices,values,idxType,idxBase,valueType) &
         bind(c, name="hipsparseSpVecGet")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22837,15 +20873,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseConstSpVecGet
-#ifdef USE_CUDA_NAMES
-    function hipsparseConstSpVecGet_(spVecDescr,mySize,nnz,indices,values,idxType,idxBase, &
-        valueType) &
-        bind(c, name="cusparseConstSpVecGet")
-#else
     function hipsparseConstSpVecGet_(spVecDescr,mySize,nnz,indices,values,idxType,idxBase, &
         valueType) &
         bind(c, name="hipsparseConstSpVecGet")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22862,13 +20892,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpVecGetIndexBase
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpVecGetIndexBase_(spVecDescr,idxBase) &
-        bind(c, name="cusparseSpVecGetIndexBase")
-#else
     function hipsparseSpVecGetIndexBase_(spVecDescr,idxBase) &
         bind(c, name="hipsparseSpVecGetIndexBase")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22879,11 +20904,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpVecGetValues
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpVecGetValues_(spVecDescr,values) bind(c, name="cusparseSpVecGetValues")
-#else
     function hipsparseSpVecGetValues_(spVecDescr,values) bind(c, name="hipsparseSpVecGetValues")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22894,13 +20915,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseConstSpVecGetValues
-#ifdef USE_CUDA_NAMES
-    function hipsparseConstSpVecGetValues_(spVecDescr,values) &
-        bind(c, name="cusparseConstSpVecGetValues")
-#else
     function hipsparseConstSpVecGetValues_(spVecDescr,values) &
         bind(c, name="hipsparseConstSpVecGetValues")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22911,11 +20927,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpVecSetValues
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpVecSetValues_(spVecDescr,values) bind(c, name="cusparseSpVecSetValues")
-#else
     function hipsparseSpVecSetValues_(spVecDescr,values) bind(c, name="hipsparseSpVecSetValues")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -22926,15 +20938,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateCoo
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateCoo_(spMatDescr,rows,cols,nnz,cooRowInd,cooColInd,cooValues, &
-        cooIdxType,idxBase,valueType) &
-        bind(c, name="cusparseCreateCoo")
-#else
     function hipsparseCreateCoo_(spMatDescr,rows,cols,nnz,cooRowInd,cooColInd,cooValues, &
         cooIdxType,idxBase,valueType) &
         bind(c, name="hipsparseCreateCoo")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -22954,15 +20960,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateConstCoo
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateConstCoo_(spMatDescr,rows,cols,nnz,cooRowInd,cooColInd,cooValues, &
-        cooIdxType,idxBase,valueType) &
-        bind(c, name="cusparseCreateConstCoo")
-#else
     function hipsparseCreateConstCoo_(spMatDescr,rows,cols,nnz,cooRowInd,cooColInd,cooValues, &
         cooIdxType,idxBase,valueType) &
         bind(c, name="hipsparseCreateConstCoo")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -22981,7 +20981,6 @@ module hipfort_hipsparse
     end function
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCreateCooAoS
     function hipsparseCreateCooAoS_(spMatDescr,rows,cols,nnz,cooInd,cooValues,cooIdxType,idxBase, &
         valueType) &
@@ -23002,18 +21001,11 @@ module hipfort_hipsparse
       integer(kind(HIP_R_32F)),value :: valueType
     end function
   end interface
-#endif
 
   interface hipsparseCreateCsr
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateCsr_(spMatDescr,rows,cols,nnz,csrRowOffsets,csrColInd,csrValues, &
-        csrRowOffsetsType,csrColIndType,idxBase,valueType) &
-        bind(c, name="cusparseCreateCsr")
-#else
     function hipsparseCreateCsr_(spMatDescr,rows,cols,nnz,csrRowOffsets,csrColInd,csrValues, &
         csrRowOffsetsType,csrColIndType,idxBase,valueType) &
         bind(c, name="hipsparseCreateCsr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -23034,15 +21026,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateConstCsr
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateConstCsr_(spMatDescr,rows,cols,nnz,csrRowOffsets,csrColInd,csrValues, &
-        csrRowOffsetsType,csrColIndType,idxBase,valueType) &
-        bind(c, name="cusparseCreateConstCsr")
-#else
     function hipsparseCreateConstCsr_(spMatDescr,rows,cols,nnz,csrRowOffsets,csrColInd,csrValues, &
         csrRowOffsetsType,csrColIndType,idxBase,valueType) &
         bind(c, name="hipsparseCreateConstCsr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -23063,15 +21049,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateCsc
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateCsc_(spMatDescr,rows,cols,nnz,cscColOffsets,cscRowInd,cscValues, &
-        cscColOffsetsType,cscRowIndType,idxBase,valueType) &
-        bind(c, name="cusparseCreateCsc")
-#else
     function hipsparseCreateCsc_(spMatDescr,rows,cols,nnz,cscColOffsets,cscRowInd,cscValues, &
         cscColOffsetsType,cscRowIndType,idxBase,valueType) &
         bind(c, name="hipsparseCreateCsc")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -23092,15 +21072,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateConstCsc
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateConstCsc_(spMatDescr,rows,cols,nnz,cscColOffsets,cscRowInd,cscValues, &
-        cscColOffsetsType,cscRowIndType,idxBase,valueType) &
-        bind(c, name="cusparseCreateConstCsc")
-#else
     function hipsparseCreateConstCsc_(spMatDescr,rows,cols,nnz,cscColOffsets,cscRowInd,cscValues, &
         cscColOffsetsType,cscRowIndType,idxBase,valueType) &
         bind(c, name="hipsparseCreateConstCsc")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -23121,15 +21095,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateBlockedEll
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateBlockedEll_(spMatDescr,rows,cols,ellBlockSize,ellCols,ellColInd, &
-        ellValue,ellIdxType,idxBase,valueType) &
-        bind(c, name="cusparseCreateBlockedEll")
-#else
     function hipsparseCreateBlockedEll_(spMatDescr,rows,cols,ellBlockSize,ellCols,ellColInd, &
         ellValue,ellIdxType,idxBase,valueType) &
         bind(c, name="hipsparseCreateBlockedEll")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -23149,15 +21117,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateConstBlockedEll
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateConstBlockedEll_(spMatDescr,rows,cols,ellBlockSize,ellCols,ellColInd, &
-        ellValue,ellIdxType,idxBase,valueType) &
-        bind(c, name="cusparseCreateConstBlockedEll")
-#else
     function hipsparseCreateConstBlockedEll_(spMatDescr,rows,cols,ellBlockSize,ellCols,ellColInd, &
         ellValue,ellIdxType,idxBase,valueType) &
         bind(c, name="hipsparseCreateConstBlockedEll")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -23177,17 +21139,10 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateSlicedEll
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateSlicedEll_(spMatDescr,rows,cols,nnz,sellValuesSize,sliceSize, &
-        sellSliceOffsets,sellColInd,sellValues,sellSliceOffsetsType,sellColIndType,idxBase, &
-        valueType) &
-        bind(c, name="cusparseCreateSlicedEll")
-#else
     function hipsparseCreateSlicedEll_(spMatDescr,rows,cols,nnz,sellValuesSize,sliceSize, &
         sellSliceOffsets,sellColInd,sellValues,sellSliceOffsetsType,sellColIndType,idxBase, &
         valueType) &
         bind(c, name="hipsparseCreateSlicedEll")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -23210,17 +21165,10 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateConstSlicedEll
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateConstSlicedEll_(spMatDescr,rows,cols,nnz,sellValuesSize,sliceSize, &
-        sellSliceOffsets,sellColInd,sellValues,sellSliceOffsetsType,sellColIndType,idxBase, &
-        valueType) &
-        bind(c, name="cusparseCreateConstSlicedEll")
-#else
     function hipsparseCreateConstSlicedEll_(spMatDescr,rows,cols,nnz,sellValuesSize,sliceSize, &
         sellSliceOffsets,sellColInd,sellValues,sellSliceOffsetsType,sellColIndType,idxBase, &
         valueType) &
         bind(c, name="hipsparseCreateConstSlicedEll")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -23243,15 +21191,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateBsr
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateBsr_(spMatDescr,mb,nb,nnzb,rowBlockDim,colBlockDim,bsrRowPtr, &
-        bsrColInd,bsrValues,bsrRowPtrType,bsrColIndType,idxBase,valueType,order) &
-        bind(c, name="cusparseCreateBsr")
-#else
     function hipsparseCreateBsr_(spMatDescr,mb,nb,nnzb,rowBlockDim,colBlockDim,bsrRowPtr, &
         bsrColInd,bsrValues,bsrRowPtrType,bsrColIndType,idxBase,valueType,order) &
         bind(c, name="hipsparseCreateBsr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -23275,15 +21217,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateConstBsr
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateConstBsr_(spMatDescr,mb,nb,nnzb,rowBlockDim,colBlockDim,bsrRowPtr, &
-        bsrColInd,bsrValues,bsrRowPtrType,bsrColIndType,idxBase,valueType,order) &
-        bind(c, name="cusparseCreateConstBsr")
-#else
     function hipsparseCreateConstBsr_(spMatDescr,mb,nb,nnzb,rowBlockDim,colBlockDim,bsrRowPtr, &
         bsrColInd,bsrValues,bsrRowPtrType,bsrColIndType,idxBase,valueType,order) &
         bind(c, name="hipsparseCreateConstBsr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -23307,11 +21243,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDestroySpMat
-#ifdef USE_CUDA_NAMES
-    function hipsparseDestroySpMat_(spMatDescr) bind(c, name="cusparseDestroySpMat")
-#else
     function hipsparseDestroySpMat_(spMatDescr) bind(c, name="hipsparseDestroySpMat")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23321,15 +21253,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCooGet
-#ifdef USE_CUDA_NAMES
-    function hipsparseCooGet_(spMatDescr,rows,cols,nnz,cooRowInd,cooColInd,cooValues,idxType, &
-        idxBase,valueType) &
-        bind(c, name="cusparseCooGet")
-#else
     function hipsparseCooGet_(spMatDescr,rows,cols,nnz,cooRowInd,cooColInd,cooValues,idxType, &
         idxBase,valueType) &
         bind(c, name="hipsparseCooGet")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23348,15 +21274,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseConstCooGet
-#ifdef USE_CUDA_NAMES
-    function hipsparseConstCooGet_(spMatDescr,rows,cols,nnz,cooRowInd,cooColInd,cooValues,idxType, &
-        idxBase,valueType) &
-        bind(c, name="cusparseConstCooGet")
-#else
     function hipsparseConstCooGet_(spMatDescr,rows,cols,nnz,cooRowInd,cooColInd,cooValues,idxType, &
         idxBase,valueType) &
         bind(c, name="hipsparseConstCooGet")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23374,7 +21294,6 @@ module hipfort_hipsparse
     end function
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseCooAoSGet
     function hipsparseCooAoSGet_(spMatDescr,rows,cols,nnz,cooInd,cooValues,idxType,idxBase, &
         valueType) &
@@ -23394,18 +21313,11 @@ module hipfort_hipsparse
       type(c_ptr),value :: valueType
     end function
   end interface
-#endif
 
   interface hipsparseCsrGet
-#ifdef USE_CUDA_NAMES
-    function hipsparseCsrGet_(spMatDescr,rows,cols,nnz,csrRowOffsets,csrColInd,csrValues, &
-        csrRowOffsetsType,csrColIndType,idxBase,valueType) &
-        bind(c, name="cusparseCsrGet")
-#else
     function hipsparseCsrGet_(spMatDescr,rows,cols,nnz,csrRowOffsets,csrColInd,csrValues, &
         csrRowOffsetsType,csrColIndType,idxBase,valueType) &
         bind(c, name="hipsparseCsrGet")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23425,15 +21337,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseConstCsrGet
-#ifdef USE_CUDA_NAMES
-    function hipsparseConstCsrGet_(spMatDescr,rows,cols,nnz,csrRowOffsets,csrColInd,csrValues, &
-        csrRowOffsetsType,csrColIndType,idxBase,valueType) &
-        bind(c, name="cusparseConstCsrGet")
-#else
     function hipsparseConstCsrGet_(spMatDescr,rows,cols,nnz,csrRowOffsets,csrColInd,csrValues, &
         csrRowOffsetsType,csrColIndType,idxBase,valueType) &
         bind(c, name="hipsparseConstCsrGet")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23453,15 +21359,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCscGet
-#ifdef USE_CUDA_NAMES
-    function hipsparseCscGet_(spMatDescr,rows,cols,nnz,cscColOffsets,cscRowInd,cscValues, &
-        cscColOffsetsType,cscRowIndType,idxBase,valueType) &
-        bind(c, name="cusparseCscGet")
-#else
     function hipsparseCscGet_(spMatDescr,rows,cols,nnz,cscColOffsets,cscRowInd,cscValues, &
         cscColOffsetsType,cscRowIndType,idxBase,valueType) &
         bind(c, name="hipsparseCscGet")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23481,15 +21381,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseConstCscGet
-#ifdef USE_CUDA_NAMES
-    function hipsparseConstCscGet_(spMatDescr,rows,cols,nnz,cscColOffsets,cscRowInd,cscValues, &
-        cscColOffsetsType,cscRowIndType,idxBase,valueType) &
-        bind(c, name="cusparseConstCscGet")
-#else
     function hipsparseConstCscGet_(spMatDescr,rows,cols,nnz,cscColOffsets,cscRowInd,cscValues, &
         cscColOffsetsType,cscRowIndType,idxBase,valueType) &
         bind(c, name="hipsparseConstCscGet")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23509,15 +21403,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseBlockedEllGet
-#ifdef USE_CUDA_NAMES
-    function hipsparseBlockedEllGet_(spMatDescr,rows,cols,ellBlockSize,ellCols,ellColInd,ellValue, &
-        ellIdxType,idxBase,valueType) &
-        bind(c, name="cusparseBlockedEllGet")
-#else
     function hipsparseBlockedEllGet_(spMatDescr,rows,cols,ellBlockSize,ellCols,ellColInd,ellValue, &
         ellIdxType,idxBase,valueType) &
         bind(c, name="hipsparseBlockedEllGet")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23536,15 +21424,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseConstBlockedEllGet
-#ifdef USE_CUDA_NAMES
-    function hipsparseConstBlockedEllGet_(spMatDescr,rows,cols,ellBlockSize,ellCols,ellColInd, &
-        ellValue,ellIdxType,idxBase,valueType) &
-        bind(c, name="cusparseConstBlockedEllGet")
-#else
     function hipsparseConstBlockedEllGet_(spMatDescr,rows,cols,ellBlockSize,ellCols,ellColInd, &
         ellValue,ellIdxType,idxBase,valueType) &
         bind(c, name="hipsparseConstBlockedEllGet")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23563,13 +21445,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCsrSetPointers
-#ifdef USE_CUDA_NAMES
-    function hipsparseCsrSetPointers_(spMatDescr,csrRowOffsets,csrColInd,csrValues) &
-        bind(c, name="cusparseCsrSetPointers")
-#else
     function hipsparseCsrSetPointers_(spMatDescr,csrRowOffsets,csrColInd,csrValues) &
         bind(c, name="hipsparseCsrSetPointers")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23582,13 +21459,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCscSetPointers
-#ifdef USE_CUDA_NAMES
-    function hipsparseCscSetPointers_(spMatDescr,cscColOffsets,cscRowInd,cscValues) &
-        bind(c, name="cusparseCscSetPointers")
-#else
     function hipsparseCscSetPointers_(spMatDescr,cscColOffsets,cscRowInd,cscValues) &
         bind(c, name="hipsparseCscSetPointers")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23601,13 +21473,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCooSetPointers
-#ifdef USE_CUDA_NAMES
-    function hipsparseCooSetPointers_(spMatDescr,cooRowInd,cooColInd,cooValues) &
-        bind(c, name="cusparseCooSetPointers")
-#else
     function hipsparseCooSetPointers_(spMatDescr,cooRowInd,cooColInd,cooValues) &
         bind(c, name="hipsparseCooSetPointers")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23619,7 +21486,6 @@ module hipfort_hipsparse
     end function
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseBlockedEllSetPointers
     function hipsparseBlockedEllSetPointers_(spMatDescr,ellColInd,ellValue) &
         bind(c, name="hipsparseBlockedEllSetPointers")
@@ -23632,14 +21498,9 @@ module hipfort_hipsparse
       type(c_ptr),value :: ellValue
     end function
   end interface
-#endif
 
   interface hipsparseSpMatGetSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpMatGetSize_(spMatDescr,rows,cols,nnz) bind(c, name="cusparseSpMatGetSize")
-#else
     function hipsparseSpMatGetSize_(spMatDescr,rows,cols,nnz) bind(c, name="hipsparseSpMatGetSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23652,11 +21513,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpMatGetFormat
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpMatGetFormat_(spMatDescr,myFormat) bind(c, name="cusparseSpMatGetFormat")
-#else
     function hipsparseSpMatGetFormat_(spMatDescr,myFormat) bind(c, name="hipsparseSpMatGetFormat")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23667,13 +21524,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpMatGetIndexBase
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpMatGetIndexBase_(spMatDescr,idxBase) &
-        bind(c, name="cusparseSpMatGetIndexBase")
-#else
     function hipsparseSpMatGetIndexBase_(spMatDescr,idxBase) &
         bind(c, name="hipsparseSpMatGetIndexBase")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23684,11 +21536,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpMatGetValues
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpMatGetValues_(spMatDescr,values) bind(c, name="cusparseSpMatGetValues")
-#else
     function hipsparseSpMatGetValues_(spMatDescr,values) bind(c, name="hipsparseSpMatGetValues")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23699,13 +21547,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseConstSpMatGetValues
-#ifdef USE_CUDA_NAMES
-    function hipsparseConstSpMatGetValues_(spMatDescr,values) &
-        bind(c, name="cusparseConstSpMatGetValues")
-#else
     function hipsparseConstSpMatGetValues_(spMatDescr,values) &
         bind(c, name="hipsparseConstSpMatGetValues")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23716,11 +21559,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpMatSetValues
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpMatSetValues_(spMatDescr,values) bind(c, name="cusparseSpMatSetValues")
-#else
     function hipsparseSpMatSetValues_(spMatDescr,values) bind(c, name="hipsparseSpMatSetValues")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23731,13 +21570,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpMatGetStridedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpMatGetStridedBatch_(spMatDescr,batchCount) &
-        bind(c, name="cusparseSpMatGetStridedBatch")
-#else
     function hipsparseSpMatGetStridedBatch_(spMatDescr,batchCount) &
         bind(c, name="hipsparseSpMatGetStridedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23747,7 +21581,6 @@ module hipfort_hipsparse
     end function
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseSpMatSetStridedBatch
     function hipsparseSpMatSetStridedBatch_(spMatDescr,batchCount) &
         bind(c, name="hipsparseSpMatSetStridedBatch")
@@ -23759,16 +21592,10 @@ module hipfort_hipsparse
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
   interface hipsparseCooSetStridedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseCooSetStridedBatch_(spMatDescr,batchCount,batchStride) &
-        bind(c, name="cusparseCooSetStridedBatch")
-#else
     function hipsparseCooSetStridedBatch_(spMatDescr,batchCount,batchStride) &
         bind(c, name="hipsparseCooSetStridedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23780,15 +21607,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCsrSetStridedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseCsrSetStridedBatch_(spMatDescr,batchCount,offsetsBatchStride, &
-        columnsValuesBatchStride) &
-        bind(c, name="cusparseCsrSetStridedBatch")
-#else
     function hipsparseCsrSetStridedBatch_(spMatDescr,batchCount,offsetsBatchStride, &
         columnsValuesBatchStride) &
         bind(c, name="hipsparseCsrSetStridedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23801,13 +21622,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpMatGetAttribute
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpMatGetAttribute_(spMatDescr,attribute,myData,dataSize) &
-        bind(c, name="cusparseSpMatGetAttribute")
-#else
     function hipsparseSpMatGetAttribute_(spMatDescr,attribute,myData,dataSize) &
         bind(c, name="hipsparseSpMatGetAttribute")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23820,13 +21636,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpMatSetAttribute
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpMatSetAttribute_(spMatDescr,attribute,myData,dataSize) &
-        bind(c, name="cusparseSpMatSetAttribute")
-#else
     function hipsparseSpMatSetAttribute_(spMatDescr,attribute,myData,dataSize) &
         bind(c, name="hipsparseSpMatSetAttribute")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23839,13 +21650,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateDnVec
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateDnVec_(dnVecDescr,mySize,values,valueType) &
-        bind(c, name="cusparseCreateDnVec")
-#else
     function hipsparseCreateDnVec_(dnVecDescr,mySize,values,valueType) &
         bind(c, name="hipsparseCreateDnVec")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -23859,13 +21665,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateConstDnVec
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateConstDnVec_(dnVecDescr,mySize,values,valueType) &
-        bind(c, name="cusparseCreateConstDnVec")
-#else
     function hipsparseCreateConstDnVec_(dnVecDescr,mySize,values,valueType) &
         bind(c, name="hipsparseCreateConstDnVec")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -23879,11 +21680,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDestroyDnVec
-#ifdef USE_CUDA_NAMES
-    function hipsparseDestroyDnVec_(dnVecDescr) bind(c, name="cusparseDestroyDnVec")
-#else
     function hipsparseDestroyDnVec_(dnVecDescr) bind(c, name="hipsparseDestroyDnVec")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23893,12 +21690,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDnVecGet
-#ifdef USE_CUDA_NAMES
-    function hipsparseDnVecGet_(dnVecDescr,mySize,values,valueType) bind(c, name="cusparseDnVecGet")
-#else
     function hipsparseDnVecGet_(dnVecDescr,mySize,values,valueType) &
         bind(c, name="hipsparseDnVecGet")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23911,13 +21704,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseConstDnVecGet
-#ifdef USE_CUDA_NAMES
-    function hipsparseConstDnVecGet_(dnVecDescr,mySize,values,valueType) &
-        bind(c, name="cusparseConstDnVecGet")
-#else
     function hipsparseConstDnVecGet_(dnVecDescr,mySize,values,valueType) &
         bind(c, name="hipsparseConstDnVecGet")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23930,11 +21718,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDnVecGetValues
-#ifdef USE_CUDA_NAMES
-    function hipsparseDnVecGetValues_(dnVecDescr,values) bind(c, name="cusparseDnVecGetValues")
-#else
     function hipsparseDnVecGetValues_(dnVecDescr,values) bind(c, name="hipsparseDnVecGetValues")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23945,13 +21729,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseConstDnVecGetValues
-#ifdef USE_CUDA_NAMES
-    function hipsparseConstDnVecGetValues_(dnVecDescr,values) &
-        bind(c, name="cusparseConstDnVecGetValues")
-#else
     function hipsparseConstDnVecGetValues_(dnVecDescr,values) &
         bind(c, name="hipsparseConstDnVecGetValues")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23962,11 +21741,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDnVecSetValues
-#ifdef USE_CUDA_NAMES
-    function hipsparseDnVecSetValues_(dnVecDescr,values) bind(c, name="cusparseDnVecSetValues")
-#else
     function hipsparseDnVecSetValues_(dnVecDescr,values) bind(c, name="hipsparseDnVecSetValues")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -23977,13 +21752,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateDnMat
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateDnMat_(dnMatDescr,rows,cols,ld,values,valueType,order) &
-        bind(c, name="cusparseCreateDnMat")
-#else
     function hipsparseCreateDnMat_(dnMatDescr,rows,cols,ld,values,valueType,order) &
         bind(c, name="hipsparseCreateDnMat")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24000,13 +21770,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseCreateConstDnMat
-#ifdef USE_CUDA_NAMES
-    function hipsparseCreateConstDnMat_(dnMatDescr,rows,cols,ld,values,valueType,order) &
-        bind(c, name="cusparseCreateConstDnMat")
-#else
     function hipsparseCreateConstDnMat_(dnMatDescr,rows,cols,ld,values,valueType,order) &
         bind(c, name="hipsparseCreateConstDnMat")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24023,11 +21788,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDestroyDnMat
-#ifdef USE_CUDA_NAMES
-    function hipsparseDestroyDnMat_(dnMatDescr) bind(c, name="cusparseDestroyDnMat")
-#else
     function hipsparseDestroyDnMat_(dnMatDescr) bind(c, name="hipsparseDestroyDnMat")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24037,13 +21798,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDnMatGet
-#ifdef USE_CUDA_NAMES
-    function hipsparseDnMatGet_(dnMatDescr,rows,cols,ld,values,valueType,order) &
-        bind(c, name="cusparseDnMatGet")
-#else
     function hipsparseDnMatGet_(dnMatDescr,rows,cols,ld,values,valueType,order) &
         bind(c, name="hipsparseDnMatGet")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24059,13 +21815,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseConstDnMatGet
-#ifdef USE_CUDA_NAMES
-    function hipsparseConstDnMatGet_(dnMatDescr,rows,cols,ld,values,valueType,order) &
-        bind(c, name="cusparseConstDnMatGet")
-#else
     function hipsparseConstDnMatGet_(dnMatDescr,rows,cols,ld,values,valueType,order) &
         bind(c, name="hipsparseConstDnMatGet")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24081,11 +21832,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDnMatGetValues
-#ifdef USE_CUDA_NAMES
-    function hipsparseDnMatGetValues_(dnMatDescr,values) bind(c, name="cusparseDnMatGetValues")
-#else
     function hipsparseDnMatGetValues_(dnMatDescr,values) bind(c, name="hipsparseDnMatGetValues")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24096,13 +21843,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseConstDnMatGetValues
-#ifdef USE_CUDA_NAMES
-    function hipsparseConstDnMatGetValues_(dnMatDescr,values) &
-        bind(c, name="cusparseConstDnMatGetValues")
-#else
     function hipsparseConstDnMatGetValues_(dnMatDescr,values) &
         bind(c, name="hipsparseConstDnMatGetValues")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24113,11 +21855,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDnMatSetValues
-#ifdef USE_CUDA_NAMES
-    function hipsparseDnMatSetValues_(dnMatDescr,values) bind(c, name="cusparseDnMatSetValues")
-#else
     function hipsparseDnMatSetValues_(dnMatDescr,values) bind(c, name="hipsparseDnMatSetValues")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24128,13 +21866,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDnMatGetStridedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseDnMatGetStridedBatch_(dnMatDescr,batchCount,batchStride) &
-        bind(c, name="cusparseDnMatGetStridedBatch")
-#else
     function hipsparseDnMatGetStridedBatch_(dnMatDescr,batchCount,batchStride) &
         bind(c, name="hipsparseDnMatGetStridedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24146,13 +21879,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDnMatSetStridedBatch
-#ifdef USE_CUDA_NAMES
-    function hipsparseDnMatSetStridedBatch_(dnMatDescr,batchCount,batchStride) &
-        bind(c, name="cusparseDnMatSetStridedBatch")
-#else
     function hipsparseDnMatSetStridedBatch_(dnMatDescr,batchCount,batchStride) &
         bind(c, name="hipsparseDnMatSetStridedBatch")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24164,11 +21892,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseAxpby
-#ifdef USE_CUDA_NAMES
-    function hipsparseAxpby_(handle,alpha,vecX,beta,vecY) bind(c, name="cusparseAxpby")
-#else
     function hipsparseAxpby_(handle,alpha,vecX,beta,vecY) bind(c, name="hipsparseAxpby")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24182,13 +21906,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDenseToSparse_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseDenseToSparse_bufferSize_(handle,matA,matB,alg,pBufferSizeInBytes) &
-        bind(c, name="cusparseDenseToSparse_bufferSize")
-#else
     function hipsparseDenseToSparse_bufferSize_(handle,matA,matB,alg,pBufferSizeInBytes) &
         bind(c, name="hipsparseDenseToSparse_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24202,13 +21921,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDenseToSparse_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseDenseToSparse_analysis_(handle,matA,matB,alg,externalBuffer) &
-        bind(c, name="cusparseDenseToSparse_analysis")
-#else
     function hipsparseDenseToSparse_analysis_(handle,matA,matB,alg,externalBuffer) &
         bind(c, name="hipsparseDenseToSparse_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24222,13 +21936,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseDenseToSparse_convert
-#ifdef USE_CUDA_NAMES
-    function hipsparseDenseToSparse_convert_(handle,matA,matB,alg,externalBuffer) &
-        bind(c, name="cusparseDenseToSparse_convert")
-#else
     function hipsparseDenseToSparse_convert_(handle,matA,matB,alg,externalBuffer) &
         bind(c, name="hipsparseDenseToSparse_convert")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24242,11 +21951,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseGather
-#ifdef USE_CUDA_NAMES
-    function hipsparseGather_(handle,vecY,vecX) bind(c, name="cusparseGather")
-#else
     function hipsparseGather_(handle,vecY,vecX) bind(c, name="hipsparseGather")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24258,11 +21963,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseRot
-#ifdef USE_CUDA_NAMES
-    function hipsparseRot_(handle,c_coeff,s_coeff,vecX,vecY) bind(c, name="cusparseRot")
-#else
     function hipsparseRot_(handle,c_coeff,s_coeff,vecX,vecY) bind(c, name="hipsparseRot")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24276,11 +21977,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseScatter
-#ifdef USE_CUDA_NAMES
-    function hipsparseScatter_(handle,vecX,vecY) bind(c, name="cusparseScatter")
-#else
     function hipsparseScatter_(handle,vecX,vecY) bind(c, name="hipsparseScatter")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24292,15 +21989,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSDDMM_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseSDDMM_bufferSize_(handle,opA,opB,alpha,A,B,beta,C,computeType,alg, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseSDDMM_bufferSize")
-#else
     function hipsparseSDDMM_bufferSize_(handle,opA,opB,alpha,A,B,beta,C,computeType,alg, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseSDDMM_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24321,15 +22012,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSDDMM_preprocess
-#ifdef USE_CUDA_NAMES
-    function hipsparseSDDMM_preprocess_(handle,opA,opB,alpha,A,B,beta,C,computeType,alg, &
-        tempBuffer) &
-        bind(c, name="cusparseSDDMM_preprocess")
-#else
     function hipsparseSDDMM_preprocess_(handle,opA,opB,alpha,A,B,beta,C,computeType,alg, &
         tempBuffer) &
         bind(c, name="hipsparseSDDMM_preprocess")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24350,13 +22035,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSDDMM
-#ifdef USE_CUDA_NAMES
-    function hipsparseSDDMM_(handle,opA,opB,alpha,A,B,beta,C,computeType,alg,tempBuffer) &
-        bind(c, name="cusparseSDDMM")
-#else
     function hipsparseSDDMM_(handle,opA,opB,alpha,A,B,beta,C,computeType,alg,tempBuffer) &
         bind(c, name="hipsparseSDDMM")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24377,13 +22057,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSparseToDense_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseSparseToDense_bufferSize_(handle,matA,matB,alg,pBufferSizeInBytes) &
-        bind(c, name="cusparseSparseToDense_bufferSize")
-#else
     function hipsparseSparseToDense_bufferSize_(handle,matA,matB,alg,pBufferSizeInBytes) &
         bind(c, name="hipsparseSparseToDense_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24397,13 +22072,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSparseToDense
-#ifdef USE_CUDA_NAMES
-    function hipsparseSparseToDense_(handle,matA,matB,alg,externalBuffer) &
-        bind(c, name="cusparseSparseToDense")
-#else
     function hipsparseSparseToDense_(handle,matA,matB,alg,externalBuffer) &
         bind(c, name="hipsparseSparseToDense")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24417,11 +22087,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpGEMM_createDescr
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpGEMM_createDescr_(descr) bind(c, name="cusparseSpGEMM_createDescr")
-#else
     function hipsparseSpGEMM_createDescr_(descr) bind(c, name="hipsparseSpGEMM_createDescr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24431,11 +22097,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpGEMM_destroyDescr
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpGEMM_destroyDescr_(descr) bind(c, name="cusparseSpGEMM_destroyDescr")
-#else
     function hipsparseSpGEMM_destroyDescr_(descr) bind(c, name="hipsparseSpGEMM_destroyDescr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24445,15 +22107,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpGEMM_workEstimation
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpGEMM_workEstimation_(handle,opA,opB,alpha,matA,matB,beta,matC,computeType, &
-        alg,spgemmDescr,bufferSize1,externalBuffer1) &
-        bind(c, name="cusparseSpGEMM_workEstimation")
-#else
     function hipsparseSpGEMM_workEstimation_(handle,opA,opB,alpha,matA,matB,beta,matC,computeType, &
         alg,spgemmDescr,bufferSize1,externalBuffer1) &
         bind(c, name="hipsparseSpGEMM_workEstimation")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24476,15 +22132,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpGEMM_compute
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpGEMM_compute_(handle,opA,opB,alpha,matA,matB,beta,matC,computeType,alg, &
-        spgemmDescr,bufferSize2,externalBuffer2) &
-        bind(c, name="cusparseSpGEMM_compute")
-#else
     function hipsparseSpGEMM_compute_(handle,opA,opB,alpha,matA,matB,beta,matC,computeType,alg, &
         spgemmDescr,bufferSize2,externalBuffer2) &
         bind(c, name="hipsparseSpGEMM_compute")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24507,15 +22157,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpGEMM_copy
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpGEMM_copy_(handle,opA,opB,alpha,matA,matB,beta,matC,computeType,alg, &
-        spgemmDescr) &
-        bind(c, name="cusparseSpGEMM_copy")
-#else
     function hipsparseSpGEMM_copy_(handle,opA,opB,alpha,matA,matB,beta,matC,computeType,alg, &
         spgemmDescr) &
         bind(c, name="hipsparseSpGEMM_copy")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24536,15 +22180,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpGEMMreuse_workEstimation
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpGEMMreuse_workEstimation_(handle,opA,opB,matA,matB,matC,alg,spgemmDescr, &
-        bufferSize1,externalBuffer1) &
-        bind(c, name="cusparseSpGEMMreuse_workEstimation")
-#else
     function hipsparseSpGEMMreuse_workEstimation_(handle,opA,opB,matA,matB,matC,alg,spgemmDescr, &
         bufferSize1,externalBuffer1) &
         bind(c, name="hipsparseSpGEMMreuse_workEstimation")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24563,15 +22201,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpGEMMreuse_nnz
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpGEMMreuse_nnz_(handle,opA,opB,matA,matB,matC,alg,spgemmDescr,bufferSize2, &
-        externalBuffer2,bufferSize3,externalBuffer3,bufferSize4,externalBuffer4) &
-        bind(c, name="cusparseSpGEMMreuse_nnz")
-#else
     function hipsparseSpGEMMreuse_nnz_(handle,opA,opB,matA,matB,matC,alg,spgemmDescr,bufferSize2, &
         externalBuffer2,bufferSize3,externalBuffer3,bufferSize4,externalBuffer4) &
         bind(c, name="hipsparseSpGEMMreuse_nnz")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24594,15 +22226,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpGEMMreuse_copy
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpGEMMreuse_copy_(handle,opA,opB,matA,matB,matC,alg,spgemmDescr,bufferSize5, &
-        externalBuffer5) &
-        bind(c, name="cusparseSpGEMMreuse_copy")
-#else
     function hipsparseSpGEMMreuse_copy_(handle,opA,opB,matA,matB,matC,alg,spgemmDescr,bufferSize5, &
         externalBuffer5) &
         bind(c, name="hipsparseSpGEMMreuse_copy")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24621,15 +22247,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpGEMMreuse_compute
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpGEMMreuse_compute_(handle,opA,opB,alpha,matA,matB,beta,matC,computeType, &
-        alg,spgemmDescr) &
-        bind(c, name="cusparseSpGEMMreuse_compute")
-#else
     function hipsparseSpGEMMreuse_compute_(handle,opA,opB,alpha,matA,matB,beta,matC,computeType, &
         alg,spgemmDescr) &
         bind(c, name="hipsparseSpGEMMreuse_compute")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24650,15 +22270,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpMM_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpMM_bufferSize_(handle,opA,opB,alpha,matA,matB,beta,matC,computeType,alg, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseSpMM_bufferSize")
-#else
     function hipsparseSpMM_bufferSize_(handle,opA,opB,alpha,matA,matB,beta,matC,computeType,alg, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseSpMM_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24679,15 +22293,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpMM_preprocess
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpMM_preprocess_(handle,opA,opB,alpha,matA,matB,beta,matC,computeType,alg, &
-        externalBuffer) &
-        bind(c, name="cusparseSpMM_preprocess")
-#else
     function hipsparseSpMM_preprocess_(handle,opA,opB,alpha,matA,matB,beta,matC,computeType,alg, &
         externalBuffer) &
         bind(c, name="hipsparseSpMM_preprocess")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24708,15 +22316,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpMM
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpMM_(handle,opA,opB,alpha,matA,matB,beta,matC,computeType,alg, &
-        externalBuffer) &
-        bind(c, name="cusparseSpMM")
-#else
     function hipsparseSpMM_(handle,opA,opB,alpha,matA,matB,beta,matC,computeType,alg, &
         externalBuffer) &
         bind(c, name="hipsparseSpMM")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24737,15 +22339,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpMV_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpMV_bufferSize_(handle,opA,alpha,matA,vecX,beta,vecY,computeType,alg, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseSpMV_bufferSize")
-#else
     function hipsparseSpMV_bufferSize_(handle,opA,alpha,matA,vecX,beta,vecY,computeType,alg, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseSpMV_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24765,15 +22361,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpMV_preprocess
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpMV_preprocess_(handle,opA,alpha,matA,vecX,beta,vecY,computeType,alg, &
-        externalBuffer) &
-        bind(c, name="cusparseSpMV_preprocess")
-#else
     function hipsparseSpMV_preprocess_(handle,opA,alpha,matA,vecX,beta,vecY,computeType,alg, &
         externalBuffer) &
         bind(c, name="hipsparseSpMV_preprocess")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24793,13 +22383,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpMV
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpMV_(handle,opA,alpha,matA,vecX,beta,vecY,computeType,alg,externalBuffer) &
-        bind(c, name="cusparseSpMV")
-#else
     function hipsparseSpMV_(handle,opA,alpha,matA,vecX,beta,vecY,computeType,alg,externalBuffer) &
         bind(c, name="hipsparseSpMV")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24819,11 +22404,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpSM_createDescr
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpSM_createDescr_(descr) bind(c, name="cusparseSpSM_createDescr")
-#else
     function hipsparseSpSM_createDescr_(descr) bind(c, name="hipsparseSpSM_createDescr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24833,11 +22414,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpSM_destroyDescr
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpSM_destroyDescr_(descr) bind(c, name="cusparseSpSM_destroyDescr")
-#else
     function hipsparseSpSM_destroyDescr_(descr) bind(c, name="hipsparseSpSM_destroyDescr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24847,15 +22424,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpSM_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpSM_bufferSize_(handle,opA,opB,alpha,matA,matB,matC,computeType,alg, &
-        spsmDescr,pBufferSizeInBytes) &
-        bind(c, name="cusparseSpSM_bufferSize")
-#else
     function hipsparseSpSM_bufferSize_(handle,opA,opB,alpha,matA,matB,matC,computeType,alg, &
         spsmDescr,pBufferSizeInBytes) &
         bind(c, name="hipsparseSpSM_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24876,15 +22447,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpSM_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpSM_analysis_(handle,opA,opB,alpha,matA,matB,matC,computeType,alg, &
-        spsmDescr,externalBuffer) &
-        bind(c, name="cusparseSpSM_analysis")
-#else
     function hipsparseSpSM_analysis_(handle,opA,opB,alpha,matA,matB,matC,computeType,alg, &
         spsmDescr,externalBuffer) &
         bind(c, name="hipsparseSpSM_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24905,15 +22470,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpSM_solve
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpSM_solve_(handle,opA,opB,alpha,matA,matB,matC,computeType,alg,spsmDescr, &
-        externalBuffer) &
-        bind(c, name="cusparseSpSM_solve")
-#else
     function hipsparseSpSM_solve_(handle,opA,opB,alpha,matA,matB,matC,computeType,alg,spsmDescr, &
         externalBuffer) &
         bind(c, name="hipsparseSpSM_solve")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -24933,7 +22492,6 @@ module hipfort_hipsparse
     end function
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipsparseSpSM_solve_ex
     function hipsparseSpSM_solve_ex_(handle,opA,opB,alpha,matA,matB,matC,computeType,alg, &
         spsmDescr) &
@@ -24955,14 +22513,9 @@ module hipfort_hipsparse
       type(c_ptr),value :: spsmDescr
     end function
   end interface
-#endif
 
   interface hipsparseSpSV_createDescr
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpSV_createDescr_(descr) bind(c, name="cusparseSpSV_createDescr")
-#else
     function hipsparseSpSV_createDescr_(descr) bind(c, name="hipsparseSpSV_createDescr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24972,11 +22525,7 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpSV_destroyDescr
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpSV_destroyDescr_(descr) bind(c, name="cusparseSpSV_destroyDescr")
-#else
     function hipsparseSpSV_destroyDescr_(descr) bind(c, name="hipsparseSpSV_destroyDescr")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       implicit none
@@ -24986,15 +22535,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpSV_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpSV_bufferSize_(handle,opA,alpha,matA,x,y,computeType,alg,spsvDescr, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseSpSV_bufferSize")
-#else
     function hipsparseSpSV_bufferSize_(handle,opA,alpha,matA,x,y,computeType,alg,spsvDescr, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseSpSV_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -25014,15 +22557,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpSV_analysis
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpSV_analysis_(handle,opA,alpha,matA,x,y,computeType,alg,spsvDescr, &
-        externalBuffer) &
-        bind(c, name="cusparseSpSV_analysis")
-#else
     function hipsparseSpSV_analysis_(handle,opA,alpha,matA,x,y,computeType,alg,spsvDescr, &
         externalBuffer) &
         bind(c, name="hipsparseSpSV_analysis")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -25042,13 +22579,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpSV_solve
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpSV_solve_(handle,opA,alpha,matA,x,y,computeType,alg,spsvDescr) &
-        bind(c, name="cusparseSpSV_solve")
-#else
     function hipsparseSpSV_solve_(handle,opA,alpha,matA,x,y,computeType,alg,spsvDescr) &
         bind(c, name="hipsparseSpSV_solve")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -25067,15 +22599,9 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpVV_bufferSize
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpVV_bufferSize_(handle,opX,vecX,vecY,myResult,computeType, &
-        pBufferSizeInBytes) &
-        bind(c, name="cusparseSpVV_bufferSize")
-#else
     function hipsparseSpVV_bufferSize_(handle,opX,vecX,vecY,myResult,computeType, &
         pBufferSizeInBytes) &
         bind(c, name="hipsparseSpVV_bufferSize")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -25092,13 +22618,8 @@ module hipfort_hipsparse
   end interface
 
   interface hipsparseSpVV
-#ifdef USE_CUDA_NAMES
-    function hipsparseSpVV_(handle,opX,vecX,vecY,myResult,computeType,externalBuffer) &
-        bind(c, name="cusparseSpVV")
-#else
     function hipsparseSpVV_(handle,opX,vecX,vecY,myResult,computeType,externalBuffer) &
         bind(c, name="hipsparseSpVV")
-#endif
       use iso_c_binding
       use hipfort_hipsparse_enums
       use hipfort_enums
@@ -25118,7 +22639,6 @@ module hipfort_hipsparse
 #ifdef USE_FPOINTER_INTERFACES
   contains
 
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSaxpyi_assumed_rank(handle,nnz,alpha,xVal,xInd,y,idxBase)
       use iso_c_binding
@@ -25173,8 +22693,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDaxpyi_assumed_rank(handle,nnz,alpha,xVal,xInd,y,idxBase)
       use iso_c_binding
@@ -25229,8 +22747,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCaxpyi_assumed_rank(handle,nnz,alpha,xVal,xInd,y,idxBase)
       use iso_c_binding
@@ -25285,8 +22801,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZaxpyi_assumed_rank(handle,nnz,alpha,xVal,xInd,y,idxBase)
       use iso_c_binding
@@ -25341,8 +22855,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCdotci_assumed_rank(handle,nnz,xVal,xInd,y,myResult,idxBase)
       use iso_c_binding
@@ -25397,8 +22909,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZdotci_assumed_rank(handle,nnz,xVal,xInd,y,myResult,idxBase)
       use iso_c_binding
@@ -25453,8 +22963,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSdoti_assumed_rank(handle,nnz,xVal,xInd,y,myResult,idxBase)
       use iso_c_binding
@@ -25509,8 +23017,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDdoti_assumed_rank(handle,nnz,xVal,xInd,y,myResult,idxBase)
       use iso_c_binding
@@ -25565,8 +23071,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCdoti_assumed_rank(handle,nnz,xVal,xInd,y,myResult,idxBase)
       use iso_c_binding
@@ -25621,8 +23125,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZdoti_assumed_rank(handle,nnz,xVal,xInd,y,myResult,idxBase)
       use iso_c_binding
@@ -25677,8 +23179,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSgthr_assumed_rank(handle,nnz,y,xVal,xInd,idxBase)
       use iso_c_binding
@@ -25728,8 +23228,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDgthr_assumed_rank(handle,nnz,y,xVal,xInd,idxBase)
       use iso_c_binding
@@ -25779,8 +23277,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCgthr_assumed_rank(handle,nnz,y,xVal,xInd,idxBase)
       use iso_c_binding
@@ -25830,8 +23326,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZgthr_assumed_rank(handle,nnz,y,xVal,xInd,idxBase)
       use iso_c_binding
@@ -25881,8 +23375,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSgthrz_assumed_rank(handle,nnz,y,xVal,xInd,idxBase)
       use iso_c_binding
@@ -25932,8 +23424,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDgthrz_assumed_rank(handle,nnz,y,xVal,xInd,idxBase)
       use iso_c_binding
@@ -25983,8 +23473,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCgthrz_assumed_rank(handle,nnz,y,xVal,xInd,idxBase)
       use iso_c_binding
@@ -26034,8 +23522,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZgthrz_assumed_rank(handle,nnz,y,xVal,xInd,idxBase)
       use iso_c_binding
@@ -26085,8 +23571,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSroti_assumed_rank(handle,nnz,xVal,xInd,y,c,s,idxBase)
       use iso_c_binding
@@ -26144,8 +23628,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDroti_assumed_rank(handle,nnz,xVal,xInd,y,c,s,idxBase)
       use iso_c_binding
@@ -26203,8 +23685,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSsctr_assumed_rank(handle,nnz,xVal,xInd,y,idxBase)
       use iso_c_binding
@@ -26254,8 +23734,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDsctr_assumed_rank(handle,nnz,xVal,xInd,y,idxBase)
       use iso_c_binding
@@ -26305,8 +23783,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCsctr_assumed_rank(handle,nnz,xVal,xInd,y,idxBase)
       use iso_c_binding
@@ -26356,8 +23832,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZsctr_assumed_rank(handle,nnz,xVal,xInd,y,idxBase)
       use iso_c_binding
@@ -26406,7 +23880,6 @@ module hipfort_hipsparse
       hipsparseZsctr_rank_1 = hipsparseZsctr_(handle,nnz,c_loc(xVal),c_loc(xInd),c_loc(y),idxBase)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSbsrmv_assumed_rank(handle,dirA,transA,mb,nb,nnzb,alpha,descrA, &
@@ -27044,7 +24517,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSbsrsv2_bufferSizeExt_assumed_rank(handle,dirA,transA,mb,nnzb,descrA, &
         bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes)
@@ -27120,8 +24592,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDbsrsv2_bufferSizeExt_assumed_rank(handle,dirA,transA,mb,nnzb,descrA, &
         bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes)
@@ -27197,8 +24667,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCbsrsv2_bufferSizeExt_assumed_rank(handle,dirA,transA,mb,nnzb,descrA, &
         bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes)
@@ -27274,8 +24742,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZbsrsv2_bufferSizeExt_assumed_rank(handle,dirA,transA,mb,nnzb,descrA, &
         bsrSortedValA,bsrSortedRowPtrA,bsrSortedColIndA,blockDim,myInfo,pBufferSizeInBytes)
@@ -27350,7 +24816,6 @@ module hipfort_hipsparse
         blockDim,myInfo,pBufferSizeInBytes)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSbsrsv2_analysis_assumed_rank(handle,dirA,transA,mb,nnzb,descrA, &
@@ -28384,7 +25849,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrmv_assumed_rank(handle,transA,m,n,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,x,beta,y)
@@ -28460,8 +25924,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsrmv_assumed_rank(handle,transA,m,n,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,x,beta,y)
@@ -28537,8 +25999,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsrmv_assumed_rank(handle,transA,m,n,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,x,beta,y)
@@ -28614,8 +26074,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsrmv_assumed_rank(handle,transA,m,n,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,x,beta,y)
@@ -28691,8 +26149,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrsv2_bufferSize_assumed_rank(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes)
@@ -28762,8 +26218,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsrsv2_bufferSize_assumed_rank(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes)
@@ -28833,8 +26287,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsrsv2_bufferSize_assumed_rank(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes)
@@ -28904,8 +26356,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsrsv2_bufferSize_assumed_rank(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes)
@@ -28975,8 +26425,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrsv2_bufferSizeExt_assumed_rank(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes)
@@ -29046,8 +26494,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsrsv2_bufferSizeExt_assumed_rank(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes)
@@ -29117,8 +26563,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsrsv2_bufferSizeExt_assumed_rank(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes)
@@ -29188,8 +26632,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsrsv2_bufferSizeExt_assumed_rank(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes)
@@ -29259,8 +26701,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrsv2_analysis_assumed_rank(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,policy,pBuffer)
@@ -29331,8 +26771,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsrsv2_analysis_assumed_rank(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,policy,pBuffer)
@@ -29403,8 +26841,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsrsv2_analysis_assumed_rank(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,policy,pBuffer)
@@ -29475,8 +26911,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsrsv2_analysis_assumed_rank(handle,transA,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,policy,pBuffer)
@@ -29547,8 +26981,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrsv2_solve_assumed_rank(handle,transA,m,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,f,x,policy,pBuffer)
@@ -29630,8 +27062,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsrsv2_solve_assumed_rank(handle,transA,m,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,f,x,policy,pBuffer)
@@ -29713,8 +27143,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsrsv2_solve_assumed_rank(handle,transA,m,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,f,x,policy,pBuffer)
@@ -29796,8 +27224,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsrsv2_solve_assumed_rank(handle,transA,m,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,f,x,policy,pBuffer)
@@ -29878,7 +27304,6 @@ module hipfort_hipsparse
         c_loc(x),policy,pBuffer)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSgemvi_assumed_rank(handle,transA,m,n,alpha,A,lda,nnz,x,xInd,beta,y,idxBase, &
@@ -30284,7 +27709,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseShybmv_assumed_rank(handle,transA,alpha,descrA,hybA,x,beta,y)
       use iso_c_binding
@@ -30342,8 +27766,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDhybmv_assumed_rank(handle,transA,alpha,descrA,hybA,x,beta,y)
       use iso_c_binding
@@ -30401,8 +27823,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseChybmv_assumed_rank(handle,transA,alpha,descrA,hybA,x,beta,y)
       use iso_c_binding
@@ -30460,8 +27880,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZhybmv_assumed_rank(handle,transA,alpha,descrA,hybA,x,beta,y)
       use iso_c_binding
@@ -30518,7 +27936,6 @@ module hipfort_hipsparse
         c_loc(y))
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSbsrmm_assumed_rank(handle,dirA,transA,transB,mb,n,kb,nnzb,alpha,descrA, &
@@ -32216,7 +29633,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrmm_assumed_rank(handle,transA,m,n,k,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,B,ldb,beta,C,ldc)
@@ -32332,8 +29748,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsrmm_assumed_rank(handle,transA,m,n,k,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,B,ldb,beta,C,ldc)
@@ -32449,8 +29863,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsrmm_assumed_rank(handle,transA,m,n,k,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,B,ldb,beta,C,ldc)
@@ -32566,8 +29978,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsrmm_assumed_rank(handle,transA,m,n,k,nnz,alpha,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,B,ldb,beta,C,ldc)
@@ -32683,8 +30093,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrmm2_assumed_rank(handle,transA,transB,m,n,k,nnz,alpha,descrA, &
         csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,beta,C,ldc)
@@ -32804,8 +30212,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsrmm2_assumed_rank(handle,transA,transB,m,n,k,nnz,alpha,descrA, &
         csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,beta,C,ldc)
@@ -32925,8 +30331,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsrmm2_assumed_rank(handle,transA,transB,m,n,k,nnz,alpha,descrA, &
         csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,beta,C,ldc)
@@ -33046,8 +30450,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsrmm2_assumed_rank(handle,transA,transB,m,n,k,nnz,alpha,descrA, &
         csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,beta,C,ldc)
@@ -33167,8 +30569,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrsm2_bufferSizeExt_assumed_rank(handle,algo,transA,transB,m,nrhs,nnz, &
         alpha,descrA,csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy, &
@@ -33292,8 +30692,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsrsm2_bufferSizeExt_assumed_rank(handle,algo,transA,transB,m,nrhs,nnz, &
         alpha,descrA,csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy, &
@@ -33417,8 +30815,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsrsm2_bufferSizeExt_assumed_rank(handle,algo,transA,transB,m,nrhs,nnz, &
         alpha,descrA,csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy, &
@@ -33542,8 +30938,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsrsm2_bufferSizeExt_assumed_rank(handle,algo,transA,transB,m,nrhs,nnz, &
         alpha,descrA,csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy, &
@@ -33667,8 +31061,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrsm2_analysis_assumed_rank(handle,algo,transA,transB,m,nrhs,nnz,alpha, &
         descrA,csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBuffer)
@@ -33788,8 +31180,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsrsm2_analysis_assumed_rank(handle,algo,transA,transB,m,nrhs,nnz,alpha, &
         descrA,csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBuffer)
@@ -33909,8 +31299,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsrsm2_analysis_assumed_rank(handle,algo,transA,transB,m,nrhs,nnz,alpha, &
         descrA,csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBuffer)
@@ -34030,8 +31418,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsrsm2_analysis_assumed_rank(handle,algo,transA,transB,m,nrhs,nnz,alpha, &
         descrA,csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBuffer)
@@ -34151,8 +31537,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrsm2_solve_assumed_rank(handle,algo,transA,transB,m,nrhs,nnz,alpha, &
         descrA,csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBuffer)
@@ -34272,8 +31656,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsrsm2_solve_assumed_rank(handle,algo,transA,transB,m,nrhs,nnz,alpha, &
         descrA,csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBuffer)
@@ -34393,8 +31775,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsrsm2_solve_assumed_rank(handle,algo,transA,transB,m,nrhs,nnz,alpha, &
         descrA,csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBuffer)
@@ -34514,8 +31894,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsrsm2_solve_assumed_rank(handle,algo,transA,transB,m,nrhs,nnz,alpha, &
         descrA,csrSortedValA,csrSortedRowPtrA,csrSortedColIndA,B,ldb,myInfo,policy,pBuffer)
@@ -34635,8 +32013,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSgemmi_assumed_rank(handle,m,n,k,nnz,alpha,A,lda,cscValB,cscColPtrB, &
         cscRowIndB,beta,C,ldc)
@@ -34740,8 +32116,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDgemmi_assumed_rank(handle,m,n,k,nnz,alpha,A,lda,cscValB,cscColPtrB, &
         cscRowIndB,beta,C,ldc)
@@ -34845,8 +32219,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCgemmi_assumed_rank(handle,m,n,k,nnz,alpha,A,lda,cscValB,cscColPtrB, &
         cscRowIndB,beta,C,ldc)
@@ -34950,8 +32322,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZgemmi_assumed_rank(handle,m,n,k,nnz,alpha,A,lda,cscValB,cscColPtrB, &
         cscRowIndB,beta,C,ldc)
@@ -35055,8 +32425,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseXcsrgeamNnz_assumed_rank(handle,m,n,descrA,nnzA,csrRowPtrA,csrColIndA, &
         descrB,nnzB,csrRowPtrB,csrColIndB,descrC,csrRowPtrC,nnzTotalDevHostPtr)
@@ -35138,8 +32506,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrgeam_assumed_rank(handle,m,n,alpha,descrA,nnzA,csrValA,csrRowPtrA, &
         csrColIndA,beta,descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,descrC,csrValC,csrRowPtrC, &
@@ -35238,8 +32604,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsrgeam_assumed_rank(handle,m,n,alpha,descrA,nnzA,csrValA,csrRowPtrA, &
         csrColIndA,beta,descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,descrC,csrValC,csrRowPtrC, &
@@ -35338,8 +32702,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsrgeam_assumed_rank(handle,m,n,alpha,descrA,nnzA,csrValA,csrRowPtrA, &
         csrColIndA,beta,descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,descrC,csrValC,csrRowPtrC, &
@@ -35438,8 +32800,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsrgeam_assumed_rank(handle,m,n,alpha,descrA,nnzA,csrValA,csrRowPtrA, &
         csrColIndA,beta,descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,descrC,csrValC,csrRowPtrC, &
@@ -35537,7 +32897,6 @@ module hipfort_hipsparse
         c_loc(csrColIndB),descrC,c_loc(csrValC),c_loc(csrRowPtrC),c_loc(csrColIndC))
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrgeam2_bufferSizeExt_assumed_rank(handle,m,n,alpha,descrA,nnzA, &
@@ -36482,7 +33841,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseXcsrgemmNnz_assumed_rank(handle,transA,transB,m,n,k,descrA,nnzA,csrRowPtrA, &
         csrColIndA,descrB,nnzB,csrRowPtrB,csrColIndB,descrC,csrRowPtrC,nnzTotalDevHostPtr)
@@ -36573,8 +33931,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrgemm_assumed_rank(handle,transA,transB,m,n,k,descrA,nnzA,csrValA, &
         csrRowPtrA,csrColIndA,descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,descrC,csrValC,csrRowPtrC, &
@@ -36678,8 +34034,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsrgemm_assumed_rank(handle,transA,transB,m,n,k,descrA,nnzA,csrValA, &
         csrRowPtrA,csrColIndA,descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,descrC,csrValC,csrRowPtrC, &
@@ -36783,8 +34137,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsrgemm_assumed_rank(handle,transA,transB,m,n,k,descrA,nnzA,csrValA, &
         csrRowPtrA,csrColIndA,descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,descrC,csrValC,csrRowPtrC, &
@@ -36888,8 +34240,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsrgemm_assumed_rank(handle,transA,transB,m,n,k,descrA,nnzA,csrValA, &
         csrRowPtrA,csrColIndA,descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,descrC,csrValC,csrRowPtrC, &
@@ -36993,8 +34343,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrgemm2_bufferSizeExt_assumed_rank(handle,m,n,k,alpha,descrA,nnzA, &
         csrRowPtrA,csrColIndA,descrB,nnzB,csrRowPtrB,csrColIndB,beta,descrD,nnzD,csrRowPtrD, &
@@ -37100,8 +34448,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsrgemm2_bufferSizeExt_assumed_rank(handle,m,n,k,alpha,descrA,nnzA, &
         csrRowPtrA,csrColIndA,descrB,nnzB,csrRowPtrB,csrColIndB,beta,descrD,nnzD,csrRowPtrD, &
@@ -37207,8 +34553,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsrgemm2_bufferSizeExt_assumed_rank(handle,m,n,k,alpha,descrA,nnzA, &
         csrRowPtrA,csrColIndA,descrB,nnzB,csrRowPtrB,csrColIndB,beta,descrD,nnzD,csrRowPtrD, &
@@ -37314,8 +34658,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsrgemm2_bufferSizeExt_assumed_rank(handle,m,n,k,alpha,descrA,nnzA, &
         csrRowPtrA,csrColIndA,descrB,nnzB,csrRowPtrB,csrColIndB,beta,descrD,nnzD,csrRowPtrD, &
@@ -37421,8 +34763,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseXcsrgemm2Nnz_assumed_rank(handle,m,n,k,descrA,nnzA,csrRowPtrA,csrColIndA, &
         descrB,nnzB,csrRowPtrB,csrColIndB,descrD,nnzD,csrRowPtrD,csrColIndD,descrC,csrRowPtrC, &
@@ -37531,8 +34871,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrgemm2_assumed_rank(handle,m,n,k,alpha,descrA,nnzA,csrValA,csrRowPtrA, &
         csrColIndA,descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,beta,descrD,nnzD,csrValD,csrRowPtrD, &
@@ -37659,8 +34997,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsrgemm2_assumed_rank(handle,m,n,k,alpha,descrA,nnzA,csrValA,csrRowPtrA, &
         csrColIndA,descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,beta,descrD,nnzD,csrValD,csrRowPtrD, &
@@ -37787,8 +35123,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsrgemm2_assumed_rank(handle,m,n,k,alpha,descrA,nnzA,csrValA,csrRowPtrA, &
         csrColIndA,descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,beta,descrD,nnzD,csrValD,csrRowPtrD, &
@@ -37915,8 +35249,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsrgemm2_assumed_rank(handle,m,n,k,alpha,descrA,nnzA,csrValA,csrRowPtrA, &
         csrColIndA,descrB,nnzB,csrValB,csrRowPtrB,csrColIndB,beta,descrD,nnzD,csrValD,csrRowPtrD, &
@@ -38042,7 +35374,6 @@ module hipfort_hipsparse
         c_loc(csrColIndD),descrC,c_loc(csrValC),c_loc(csrRowPtrC),c_loc(csrColIndC),myInfo,pBuffer)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSbsric02_bufferSize_assumed_rank(handle,dirA,mb,nnzb,descrA,bsrValA, &
@@ -40060,7 +37391,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsric02_bufferSizeExt_assumed_rank(handle,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes)
@@ -40127,8 +37457,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsric02_bufferSizeExt_assumed_rank(handle,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes)
@@ -40195,8 +37523,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsric02_bufferSizeExt_assumed_rank(handle,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes)
@@ -40263,8 +37589,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsric02_bufferSizeExt_assumed_rank(handle,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes)
@@ -40330,7 +37654,6 @@ module hipfort_hipsparse
         pBufferSizeInBytes)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsric02_analysis_assumed_rank(handle,m,nnz,descrA,csrSortedValA, &
@@ -41128,7 +38451,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrilu02_bufferSizeExt_assumed_rank(handle,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes)
@@ -41195,8 +38517,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsrilu02_bufferSizeExt_assumed_rank(handle,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes)
@@ -41263,8 +38583,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsrilu02_bufferSizeExt_assumed_rank(handle,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes)
@@ -41331,8 +38649,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsrilu02_bufferSizeExt_assumed_rank(handle,m,nnz,descrA,csrSortedValA, &
         csrSortedRowPtrA,csrSortedColIndA,myInfo,pBufferSizeInBytes)
@@ -41398,7 +38714,6 @@ module hipfort_hipsparse
         pBufferSizeInBytes)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsrilu02_analysis_assumed_rank(handle,m,nnz,descrA,csrSortedValA, &
@@ -44860,7 +42175,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsc2dense_assumed_rank(handle,m,n,descr,cscVal,cscRowInd,cscColPtr,A,ld)
       use iso_c_binding
@@ -44940,8 +42254,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsc2dense_assumed_rank(handle,m,n,descr,cscVal,cscRowInd,cscColPtr,A,ld)
       use iso_c_binding
@@ -45021,8 +42333,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsc2dense_assumed_rank(handle,m,n,descr,cscVal,cscRowInd,cscColPtr,A,ld)
       use iso_c_binding
@@ -45102,8 +42412,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsc2dense_assumed_rank(handle,m,n,descr,cscVal,cscRowInd,cscColPtr,A,ld)
       use iso_c_binding
@@ -45182,7 +42490,6 @@ module hipfort_hipsparse
         c_loc(cscRowInd),c_loc(cscColPtr),c_loc(A),ld)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseXcscsort_bufferSizeExt_assumed_rank(handle,m,n,nnz,cscColPtr,cscRowInd, &
@@ -45733,7 +43040,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsr2csc_assumed_rank(handle,m,n,nnz,csrSortedVal,csrSortedRowPtr, &
         csrSortedColInd,cscSortedVal,cscSortedRowInd,cscSortedColPtr,copyValues,idxBase)
@@ -45809,8 +43115,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsr2csc_assumed_rank(handle,m,n,nnz,csrSortedVal,csrSortedRowPtr, &
         csrSortedColInd,cscSortedVal,cscSortedRowInd,cscSortedColPtr,copyValues,idxBase)
@@ -45886,8 +43190,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsr2csc_assumed_rank(handle,m,n,nnz,csrSortedVal,csrSortedRowPtr, &
         csrSortedColInd,cscSortedVal,cscSortedRowInd,cscSortedColPtr,copyValues,idxBase)
@@ -45963,8 +43265,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsr2csc_assumed_rank(handle,m,n,nnz,csrSortedVal,csrSortedRowPtr, &
         csrSortedColInd,cscSortedVal,cscSortedRowInd,cscSortedColPtr,copyValues,idxBase)
@@ -46039,7 +43339,6 @@ module hipfort_hipsparse
         c_loc(cscSortedColPtr),copyValues,idxBase)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsr2csr_compress_assumed_rank(handle,m,n,descrA,csrValA,csrColIndA, &
@@ -46617,7 +43916,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsr2dense_assumed_rank(handle,m,n,descr,csrVal,csrRowPtr,csrColInd,A,ld)
       use iso_c_binding
@@ -46697,8 +43995,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsr2dense_assumed_rank(handle,m,n,descr,csrVal,csrRowPtr,csrColInd,A,ld)
       use iso_c_binding
@@ -46778,8 +44074,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsr2dense_assumed_rank(handle,m,n,descr,csrVal,csrRowPtr,csrColInd,A,ld)
       use iso_c_binding
@@ -46859,8 +44153,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsr2dense_assumed_rank(handle,m,n,descr,csrVal,csrRowPtr,csrColInd,A,ld)
       use iso_c_binding
@@ -46939,7 +44231,6 @@ module hipfort_hipsparse
         c_loc(csrRowPtr),c_loc(csrColInd),c_loc(A),ld)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsr2gebsr_bufferSize_assumed_rank(handle,dir,m,n,csr_descr,csrVal, &
@@ -47643,7 +44934,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseScsr2hyb_assumed_rank(handle,m,n,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,hybA,userEllWidth,partitionType)
@@ -47710,8 +45000,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDcsr2hyb_assumed_rank(handle,m,n,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,hybA,userEllWidth,partitionType)
@@ -47778,8 +45066,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCcsr2hyb_assumed_rank(handle,m,n,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,hybA,userEllWidth,partitionType)
@@ -47846,8 +45132,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZcsr2hyb_assumed_rank(handle,m,n,descrA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA,hybA,userEllWidth,partitionType)
@@ -47913,7 +45197,6 @@ module hipfort_hipsparse
         c_loc(csrSortedRowPtrA),c_loc(csrSortedColIndA),hybA,userEllWidth,partitionType)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseXcsrsort_bufferSizeExt_assumed_rank(handle,m,n,nnz,csrRowPtr,csrColInd, &
@@ -48548,7 +45831,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSdense2csc_assumed_rank(handle,m,n,descr,A,ld,nnzPerColumn,cscVal,cscRowInd, &
         cscColPtr)
@@ -48636,8 +45918,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDdense2csc_assumed_rank(handle,m,n,descr,A,ld,nnzPerColumn,cscVal,cscRowInd, &
         cscColPtr)
@@ -48725,8 +46005,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCdense2csc_assumed_rank(handle,m,n,descr,A,ld,nnzPerColumn,cscVal,cscRowInd, &
         cscColPtr)
@@ -48814,8 +46092,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZdense2csc_assumed_rank(handle,m,n,descr,A,ld,nnzPerColumn,cscVal,cscRowInd, &
         cscColPtr)
@@ -48903,8 +46179,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSdense2csr_assumed_rank(handle,m,n,descr,A,ld,nnzPerRow,csrVal,csrRowPtr, &
         csrColInd)
@@ -48990,8 +46264,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDdense2csr_assumed_rank(handle,m,n,descr,A,ld,nnzPerRow,csrVal,csrRowPtr, &
         csrColInd)
@@ -49077,8 +46349,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseCdense2csr_assumed_rank(handle,m,n,descr,A,ld,nnzPerRow,csrVal,csrRowPtr, &
         csrColInd)
@@ -49164,8 +46434,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZdense2csr_assumed_rank(handle,m,n,descr,A,ld,nnzPerRow,csrVal,csrRowPtr, &
         csrColInd)
@@ -49250,7 +46518,6 @@ module hipfort_hipsparse
         c_loc(nnzPerRow),c_loc(csrVal),c_loc(csrRowPtr),c_loc(csrColInd))
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSgebsr2csr_assumed_rank(handle,dirA,mb,nb,descrA,bsrValA,bsrRowPtrA, &
@@ -50386,7 +47653,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseShyb2csr_assumed_rank(handle,descrA,hybA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA)
@@ -50441,8 +47707,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDhyb2csr_assumed_rank(handle,descrA,hybA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA)
@@ -50497,8 +47761,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseChyb2csr_assumed_rank(handle,descrA,hybA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA)
@@ -50553,8 +47815,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseZhyb2csr_assumed_rank(handle,descrA,hybA,csrSortedValA,csrSortedRowPtrA, &
         csrSortedColIndA)
@@ -50608,7 +47868,6 @@ module hipfort_hipsparse
         c_loc(csrSortedRowPtrA),c_loc(csrSortedColIndA))
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSnnz_assumed_rank(handle,dirA,m,n,descrA,A,lda,nnzPerRowColumn, &
@@ -51166,7 +48425,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSpruneCsr2csr_bufferSize_assumed_rank(handle,m,n,nnzA,descrA,csrValA, &
         csrRowPtrA,csrColIndA,threshold,descrC,csrValC,csrRowPtrC,csrColIndC,pBufferSizeInBytes)
@@ -51248,8 +48506,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDpruneCsr2csr_bufferSize_assumed_rank(handle,m,n,nnzA,descrA,csrValA, &
         csrRowPtrA,csrColIndA,threshold,descrC,csrValC,csrRowPtrC,csrColIndC,pBufferSizeInBytes)
@@ -51330,7 +48586,6 @@ module hipfort_hipsparse
         c_loc(csrValC),c_loc(csrRowPtrC),c_loc(csrColIndC),pBufferSizeInBytes)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSpruneCsr2csr_bufferSizeExt_assumed_rank(handle,m,n,nnzA,descrA,csrValA, &
@@ -51814,7 +49069,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSpruneCsr2csrByPercentage_bufferSize_assumed_rank(handle,m,n,nnzA,descrA, &
         csrValA,csrRowPtrA,csrColIndA,percentage,descrC,csrValC,csrRowPtrC,csrColIndC,myInfo, &
@@ -51905,8 +49159,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDpruneCsr2csrByPercentage_bufferSize_assumed_rank(handle,m,n,nnzA,descrA, &
         csrValA,csrRowPtrA,csrColIndA,percentage,descrC,csrValC,csrRowPtrC,csrColIndC,myInfo, &
@@ -51996,7 +49248,6 @@ module hipfort_hipsparse
         c_loc(csrColIndC),myInfo,pBufferSizeInBytes)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSpruneCsr2csrByPercentage_bufferSizeExt_assumed_rank(handle,m,n,nnzA,descrA, &
@@ -52508,7 +49759,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSpruneDense2csr_bufferSize_assumed_rank(handle,m,n,A,lda,threshold,descr, &
         csrVal,csrRowPtr,csrColInd,pBufferSizeInBytes)
@@ -52604,8 +49854,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDpruneDense2csr_bufferSize_assumed_rank(handle,m,n,A,lda,threshold,descr, &
         csrVal,csrRowPtr,csrColInd,pBufferSizeInBytes)
@@ -52700,7 +49948,6 @@ module hipfort_hipsparse
         pBufferSizeInBytes)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSpruneDense2csr_bufferSizeExt_assumed_rank(handle,m,n,A,lda,threshold,descr, &
@@ -53248,7 +50495,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSpruneDense2csrByPercentage_bufferSize_assumed_rank(handle,m,n,A,lda, &
         percentage,descr,csrVal,csrRowPtr,csrColInd,myInfo,pBufferSizeInBytes)
@@ -53348,8 +50594,6 @@ module hipfort_hipsparse
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseDpruneDense2csrByPercentage_bufferSize_assumed_rank(handle,m,n,A,lda, &
         percentage,descr,csrVal,csrRowPtr,csrColInd,myInfo,pBufferSizeInBytes)
@@ -53448,7 +50692,6 @@ module hipfort_hipsparse
         c_loc(csrVal),c_loc(csrRowPtr),c_loc(csrColInd),myInfo,pBufferSizeInBytes)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipsparseSpruneDense2csrByPercentage_bufferSizeExt_assumed_rank(handle,m,n,A,lda, &

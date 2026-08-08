@@ -37,11 +37,7 @@ module hipfort_hipfft
   !>   @param[in] myType - FFT type.
   !>   @param[in] batch - Number of batched transforms to compute.
   interface hipfftPlan1d
-#ifdef USE_CUDA_NAMES
-    function hipfftPlan1d_(plan,nx,myType,batch) bind(c, name="cufftPlan1d")
-#else
     function hipfftPlan1d_(plan,nx,myType,batch) bind(c, name="hipfftPlan1d")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -65,11 +61,7 @@ module hipfort_hipfft
   !>   @param[in] ny - Number of elements in the y-direction (fast index).
   !>   @param[in] myType - FFT type.
   interface hipfftPlan2d
-#ifdef USE_CUDA_NAMES
-    function hipfftPlan2d_(plan,nx,ny,myType) bind(c, name="cufftPlan2d")
-#else
     function hipfftPlan2d_(plan,nx,ny,myType) bind(c, name="hipfftPlan2d")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -94,11 +86,7 @@ module hipfort_hipfft
   !>   @param[in] nz - Number of elements in the z-direction (fastest index).
   !>   @param[in] myType - FFT type.
   interface hipfftPlan3d
-#ifdef USE_CUDA_NAMES
-    function hipfftPlan3d_(plan,nx,ny,nz,myType) bind(c, name="cufftPlan3d")
-#else
     function hipfftPlan3d_(plan,nx,ny,nz,myType) bind(c, name="hipfftPlan3d")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -146,13 +134,8 @@ module hipfort_hipfft
   !>   @param[in] myType - FFT type.
   !>   @param[in] batch - Number of batched transforms to perform.
   interface hipfftPlanMany
-#ifdef USE_CUDA_NAMES
-    function hipfftPlanMany_(plan,rank,n,inembed,istride,idist,onembed,ostride,odist,myType,batch) &
-        bind(c, name="cufftPlanMany")
-#else
     function hipfftPlanMany_(plan,rank,n,inembed,istride,idist,onembed,ostride,odist,myType,batch) &
         bind(c, name="hipfftPlanMany")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -185,11 +168,7 @@ module hipfort_hipfft
   !>
   !>   @param[out] plan - Pointer to the FFT plan handle to be allocated.
   interface hipfftCreate
-#ifdef USE_CUDA_NAMES
-    function hipfftCreate_(plan) bind(c, name="cufftCreate")
-#else
     function hipfftCreate_(plan) bind(c, name="hipfftCreate")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -213,7 +192,6 @@ module hipfort_hipfft
   !>
   !>   Note that the scale factor applies to both forward and
   !>   backward transforms executed with the specified plan handle.
-#ifndef USE_CUDA_NAMES
   interface hipfftExtPlanScaleFactor
     function hipfftExtPlanScaleFactor_(plan,scalefactor) bind(c, name="hipfftExtPlanScaleFactor")
       use iso_c_binding
@@ -224,7 +202,6 @@ module hipfort_hipfft
       real(c_double),value :: scalefactor
     end function
   end interface
-#endif
 
   !>  @brief Initialize a new one-dimensional FFT plan.
   !>
@@ -237,11 +214,7 @@ module hipfort_hipfft
   !>   @param[in] batch - Number of batched transforms to compute.
   !>   @param[out] workSize - Pointer to work area size (returned value).
   interface hipfftMakePlan1d
-#ifdef USE_CUDA_NAMES
-    function hipfftMakePlan1d_(plan,nx,myType,batch,workSize) bind(c, name="cufftMakePlan1d")
-#else
     function hipfftMakePlan1d_(plan,nx,myType,batch,workSize) bind(c, name="hipfftMakePlan1d")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -268,11 +241,7 @@ module hipfort_hipfft
   !>   @param[in] myType - FFT type.
   !>   @param[out] workSize - Pointer to work area size (returned value).
   interface hipfftMakePlan2d
-#ifdef USE_CUDA_NAMES
-    function hipfftMakePlan2d_(plan,nx,ny,myType,workSize) bind(c, name="cufftMakePlan2d")
-#else
     function hipfftMakePlan2d_(plan,nx,ny,myType,workSize) bind(c, name="hipfftMakePlan2d")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -300,11 +269,7 @@ module hipfort_hipfft
   !>   @param[in] myType - FFT type.
   !>   @param[out] workSize - Pointer to work area size (returned value).
   interface hipfftMakePlan3d
-#ifdef USE_CUDA_NAMES
-    function hipfftMakePlan3d_(plan,nx,ny,nz,myType,workSize) bind(c, name="cufftMakePlan3d")
-#else
     function hipfftMakePlan3d_(plan,nx,ny,nz,myType,workSize) bind(c, name="hipfftMakePlan3d")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -355,15 +320,9 @@ module hipfort_hipfft
   !>   @param[in] batch - Number of batched transforms to perform.
   !>   @param[out] workSize - Pointer to work area size (returned value).
   interface hipfftMakePlanMany
-#ifdef USE_CUDA_NAMES
-    function hipfftMakePlanMany_(plan,rank,n,inembed,istride,idist,onembed,ostride,odist,myType, &
-        batch,workSize) &
-        bind(c, name="cufftMakePlanMany")
-#else
     function hipfftMakePlanMany_(plan,rank,n,inembed,istride,idist,onembed,ostride,odist,myType, &
         batch,workSize) &
         bind(c, name="hipfftMakePlanMany")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -394,15 +353,9 @@ module hipfort_hipfft
   end interface
 
   interface hipfftMakePlanMany64
-#ifdef USE_CUDA_NAMES
-    function hipfftMakePlanMany64_(plan,rank,n,inembed,istride,idist,onembed,ostride,odist,myType, &
-        batch,workSize) &
-        bind(c, name="cufftMakePlanMany64")
-#else
     function hipfftMakePlanMany64_(plan,rank,n,inembed,istride,idist,onembed,ostride,odist,myType, &
         batch,workSize) &
         bind(c, name="hipfftMakePlanMany64")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -439,11 +392,7 @@ module hipfort_hipfft
   !>   @param[in] batch - Number of batched transforms to perform.
   !>   @param[out] workSize - Pointer to work area size (returned value).
   interface hipfftEstimate1d
-#ifdef USE_CUDA_NAMES
-    function hipfftEstimate1d_(nx,myType,batch,workSize) bind(c, name="cufftEstimate1d")
-#else
     function hipfftEstimate1d_(nx,myType,batch,workSize) bind(c, name="hipfftEstimate1d")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -462,11 +411,7 @@ module hipfort_hipfft
   !>   @param[in] myType - FFT type.
   !>   @param[out] workSize - Pointer to work area size (returned value).
   interface hipfftEstimate2d
-#ifdef USE_CUDA_NAMES
-    function hipfftEstimate2d_(nx,ny,myType,workSize) bind(c, name="cufftEstimate2d")
-#else
     function hipfftEstimate2d_(nx,ny,myType,workSize) bind(c, name="hipfftEstimate2d")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -486,11 +431,7 @@ module hipfort_hipfft
   !>   @param[in] myType - FFT type.
   !>   @param[out] workSize - Pointer to work area size (returned value).
   interface hipfftEstimate3d
-#ifdef USE_CUDA_NAMES
-    function hipfftEstimate3d_(nx,ny,nz,myType,workSize) bind(c, name="cufftEstimate3d")
-#else
     function hipfftEstimate3d_(nx,ny,nz,myType,workSize) bind(c, name="hipfftEstimate3d")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -517,15 +458,9 @@ module hipfort_hipfft
   !>   @param[in] batch - Number of batched transforms to perform.
   !>   @param[out] workSize - Pointer to work area size (returned value).
   interface hipfftEstimateMany
-#ifdef USE_CUDA_NAMES
-    function hipfftEstimateMany_(rank,n,inembed,istride,idist,onembed,ostride,odist,myType,batch, &
-        workSize) &
-        bind(c, name="cufftEstimateMany")
-#else
     function hipfftEstimateMany_(rank,n,inembed,istride,idist,onembed,ostride,odist,myType,batch, &
         workSize) &
         bind(c, name="hipfftEstimateMany")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -562,11 +497,7 @@ module hipfort_hipfft
   !>   @param[in] batch - Number of batched transforms to perform.
   !>   @param[out] workSize - Pointer to work area size (returned value).
   interface hipfftGetSize1d
-#ifdef USE_CUDA_NAMES
-    function hipfftGetSize1d_(plan,nx,myType,batch,workSize) bind(c, name="cufftGetSize1d")
-#else
     function hipfftGetSize1d_(plan,nx,myType,batch,workSize) bind(c, name="hipfftGetSize1d")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -587,11 +518,7 @@ module hipfort_hipfft
   !>   @param[in] myType - FFT type.
   !>   @param[out] workSize - Pointer to work area size (returned value).
   interface hipfftGetSize2d
-#ifdef USE_CUDA_NAMES
-    function hipfftGetSize2d_(plan,nx,ny,myType,workSize) bind(c, name="cufftGetSize2d")
-#else
     function hipfftGetSize2d_(plan,nx,ny,myType,workSize) bind(c, name="hipfftGetSize2d")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -613,11 +540,7 @@ module hipfort_hipfft
   !>   @param[in] myType - FFT type.
   !>   @param[out] workSize - Pointer to work area size (returned value).
   interface hipfftGetSize3d
-#ifdef USE_CUDA_NAMES
-    function hipfftGetSize3d_(plan,nx,ny,nz,myType,workSize) bind(c, name="cufftGetSize3d")
-#else
     function hipfftGetSize3d_(plan,nx,ny,nz,myType,workSize) bind(c, name="hipfftGetSize3d")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -646,15 +569,9 @@ module hipfort_hipfft
   !>   @param[in] batch - Number of batched transforms to perform.
   !>   @param[out] workSize - Pointer to work area size (returned value).
   interface hipfftGetSizeMany
-#ifdef USE_CUDA_NAMES
-    function hipfftGetSizeMany_(plan,rank,n,inembed,istride,idist,onembed,ostride,odist,myType, &
-        batch,workSize) &
-        bind(c, name="cufftGetSizeMany")
-#else
     function hipfftGetSizeMany_(plan,rank,n,inembed,istride,idist,onembed,ostride,odist,myType, &
         batch,workSize) &
         bind(c, name="hipfftGetSizeMany")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -685,15 +602,9 @@ module hipfort_hipfft
   end interface
 
   interface hipfftGetSizeMany64
-#ifdef USE_CUDA_NAMES
-    function hipfftGetSizeMany64_(plan,rank,n,inembed,istride,idist,onembed,ostride,odist,myType, &
-        batch,workSize) &
-        bind(c, name="cufftGetSizeMany64")
-#else
     function hipfftGetSizeMany64_(plan,rank,n,inembed,istride,idist,onembed,ostride,odist,myType, &
         batch,workSize) &
         bind(c, name="hipfftGetSizeMany64")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -728,11 +639,7 @@ module hipfort_hipfft
   !>   @param[in] plan - Pointer to the FFT plan.
   !>   @param[out] workSize - Pointer to work area size (returned value).
   interface hipfftGetSize
-#ifdef USE_CUDA_NAMES
-    function hipfftGetSize_(plan,workSize) bind(c, name="cufftGetSize")
-#else
     function hipfftGetSize_(plan,workSize) bind(c, name="hipfftGetSize")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -747,11 +654,7 @@ module hipfort_hipfft
   !>   @param[in] plan - Pointer to the FFT plan.
   !>   @param[in] autoAllocate - 0 to disable auto-allocation, non-zero to enable.
   interface hipfftSetAutoAllocation
-#ifdef USE_CUDA_NAMES
-    function hipfftSetAutoAllocation_(plan,autoAllocate) bind(c, name="cufftSetAutoAllocation")
-#else
     function hipfftSetAutoAllocation_(plan,autoAllocate) bind(c, name="hipfftSetAutoAllocation")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -766,11 +669,7 @@ module hipfort_hipfft
   !>   @param[in] plan - Pointer to the FFT plan.
   !>   @param[in] workArea - Pointer to the work area (on device).
   interface hipfftSetWorkArea
-#ifdef USE_CUDA_NAMES
-    function hipfftSetWorkArea_(plan,workArea) bind(c, name="cufftSetWorkArea")
-#else
     function hipfftSetWorkArea_(plan,workArea) bind(c, name="hipfftSetWorkArea")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -790,11 +689,7 @@ module hipfort_hipfft
   !>   @param[out] odata - Output data (on device).
   !>   @param[in] direction - Either `HIPFFT_FORWARD` or `HIPFFT_BACKWARD`.
   interface hipfftExecC2C
-#ifdef USE_CUDA_NAMES
-    function hipfftExecC2C_(plan,idata,odata,direction) bind(c, name="cufftExecC2C")
-#else
     function hipfftExecC2C_(plan,idata,odata,direction) bind(c, name="hipfftExecC2C")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -827,11 +722,7 @@ module hipfort_hipfft
   !>   @param[in] idata - Input data (on device).
   !>   @param[out] odata - Output data (on device).
   interface hipfftExecR2C
-#ifdef USE_CUDA_NAMES
-    function hipfftExecR2C_(plan,idata,odata) bind(c, name="cufftExecR2C")
-#else
     function hipfftExecR2C_(plan,idata,odata) bind(c, name="hipfftExecR2C")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -863,11 +754,7 @@ module hipfort_hipfft
   !>   @param[in] idata - Input data (on device).
   !>   @param[out] odata - Output data (on device).
   interface hipfftExecC2R
-#ifdef USE_CUDA_NAMES
-    function hipfftExecC2R_(plan,idata,odata) bind(c, name="cufftExecC2R")
-#else
     function hipfftExecC2R_(plan,idata,odata) bind(c, name="hipfftExecC2R")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -900,11 +787,7 @@ module hipfort_hipfft
   !>   @param[out] odata - Output data (on device).
   !>   @param[in] direction - Either `HIPFFT_FORWARD` or `HIPFFT_BACKWARD`.
   interface hipfftExecZ2Z
-#ifdef USE_CUDA_NAMES
-    function hipfftExecZ2Z_(plan,idata,odata,direction) bind(c, name="cufftExecZ2Z")
-#else
     function hipfftExecZ2Z_(plan,idata,odata,direction) bind(c, name="hipfftExecZ2Z")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -937,11 +820,7 @@ module hipfort_hipfft
   !>   @param[in] idata - Input data (on device).
   !>   @param[out] odata - Output data (on device).
   interface hipfftExecD2Z
-#ifdef USE_CUDA_NAMES
-    function hipfftExecD2Z_(plan,idata,odata) bind(c, name="cufftExecD2Z")
-#else
     function hipfftExecD2Z_(plan,idata,odata) bind(c, name="hipfftExecD2Z")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -973,11 +852,7 @@ module hipfort_hipfft
   !>   @param[in] idata - Input data (on device).
   !>   @param[out] odata - Output data (on device).
   interface hipfftExecZ2D
-#ifdef USE_CUDA_NAMES
-    function hipfftExecZ2D_(plan,idata,odata) bind(c, name="cufftExecZ2D")
-#else
     function hipfftExecZ2D_(plan,idata,odata) bind(c, name="hipfftExecZ2D")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -1008,11 +883,7 @@ module hipfort_hipfft
   !>  @param[in] plan - The FFT plan.
   !>  @param[in] stream - The HIP stream.
   interface hipfftSetStream
-#ifdef USE_CUDA_NAMES
-    function hipfftSetStream_(plan,stream) bind(c, name="cufftSetStream")
-#else
     function hipfftSetStream_(plan,stream) bind(c, name="hipfftSetStream")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -1026,11 +897,7 @@ module hipfort_hipfft
   !>
   !>   @param[in] plan - Handle of the FFT plan to be destroyed.
   interface hipfftDestroy
-#ifdef USE_CUDA_NAMES
-    function hipfftDestroy_(plan) bind(c, name="cufftDestroy")
-#else
     function hipfftDestroy_(plan) bind(c, name="hipfftDestroy")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -1043,11 +910,7 @@ module hipfort_hipfft
   !>
   !>   @param[out] version - cuFFT/rocFFT version (returned value).
   interface hipfftGetVersion
-#ifdef USE_CUDA_NAMES
-    function hipfftGetVersion_(version) bind(c, name="cufftGetVersion")
-#else
     function hipfftGetVersion_(version) bind(c, name="hipfftGetVersion")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none
@@ -1061,11 +924,7 @@ module hipfort_hipfft
   !>   @param[in] myType - Property type.
   !>   @param[out] myValue - Returned value.
   interface hipfftGetProperty
-#ifdef USE_CUDA_NAMES
-    function hipfftGetProperty_(myType,myValue) bind(c, name="cufftGetProperty")
-#else
     function hipfftGetProperty_(myType,myValue) bind(c, name="hipfftGetProperty")
-#endif
       use iso_c_binding
       use hipfort_hipfft_enums
       implicit none

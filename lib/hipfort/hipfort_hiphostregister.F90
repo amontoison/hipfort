@@ -68,11 +68,7 @@ module hipfort_hiphostregister
   !>   @returns `hipSuccess`, `hipErrorOutOfMemory`
   !>
   !>   @see hipHostUnregister, hipHostGetFlags, hipHostGetDevicePointer
-#ifdef USE_CUDA_NAMES
-    function hipHostRegister_(hostPtr, sizeBytes, flags) bind(c, name="cudaHostRegister")
-#else
     function hipHostRegister_(hostPtr, sizeBytes, flags) bind(c, name="hipHostRegister")
-#endif
       use iso_c_binding
       implicit none
       integer(c_int) :: hipHostRegister_
@@ -243,11 +239,7 @@ module hipfort_hiphostregister
   !>   @returns Error code
   !>
   !>   @see hipHostRegister
-#ifdef USE_CUDA_NAMES
-    function hipHostUnregister_(hostPtr) bind(c, name="cudaHostUnregister")
-#else
     function hipHostUnregister_(hostPtr) bind(c, name="hipHostUnregister")
-#endif
       use iso_c_binding
       implicit none
       integer(c_int) :: hipHostUnregister_
@@ -321,12 +313,7 @@ module hipfort_hiphostregister
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorOutOfMemory`
   !>
   !>   @see hipSetDeviceFlags, hipHostMalloc
-#ifdef USE_CUDA_NAMES
-    function hipHostGetDevicePointer_(devPtr, hstPtr, flags) &
-        bind(c, name="cudaHostGetDevicePointer")
-#else
     function hipHostGetDevicePointer_(devPtr, hstPtr, flags) bind(c, name="hipHostGetDevicePointer")
-#endif
       use iso_c_binding
       implicit none
       integer(c_int) :: hipHostGetDevicePointer_
@@ -400,11 +387,7 @@ module hipfort_hiphostregister
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   !>
   !>   @see hipHostMalloc
-#ifdef USE_CUDA_NAMES
-    function hipHostGetFlags_(flagsPtr, hostPtr) bind(c, name="cudaHostGetFlags")
-#else
     function hipHostGetFlags_(flagsPtr, hostPtr) bind(c, name="hipHostGetFlags")
-#endif
       use iso_c_binding
       implicit none
       integer(c_int) :: hipHostGetFlags_

@@ -25,9 +25,6 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 module hipfort
-#ifdef USE_CUDA_NAMES
-  use hipfort_cuda_errors
-#endif
   use hipfort_enums
   use hipfort_types
   use hipfort_hipmalloc
@@ -37,11 +34,7 @@ module hipfort
   implicit none
 
   interface hipCreateChannelDesc
-#ifdef USE_CUDA_NAMES
-    function hipCreateChannelDesc_(x,y,z,w,f) bind(c, name="cudaCreateChannelDesc")
-#else
     function hipCreateChannelDesc_(x,y,z,w,f) bind(c, name="hipCreateChannelDesc")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -74,7 +67,6 @@ module hipfort
   !>  This API provides control over the timing of the initialization.
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipInit
     function hipInit_(flags) bind(c, name="hipInit")
       use iso_c_binding
@@ -84,7 +76,6 @@ module hipfort
       integer(c_int),value :: flags
     end function
   end interface
-#endif
 
   !>  @brief Returns the approximate HIP driver version.
   !>
@@ -102,11 +93,7 @@ module hipfort
   !>
   !>  @see hipRuntimeGetVersion
   interface hipDriverGetVersion
-#ifdef USE_CUDA_NAMES
-    function hipDriverGetVersion_(driverVersion) bind(c, name="cudaDriverGetVersion")
-#else
     function hipDriverGetVersion_(driverVersion) bind(c, name="hipDriverGetVersion")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -128,11 +115,7 @@ module hipfort
   !>
   !>  @see hipDriverGetVersion
   interface hipRuntimeGetVersion
-#ifdef USE_CUDA_NAMES
-    function hipRuntimeGetVersion_(runtimeVersion) bind(c, name="cudaRuntimeGetVersion")
-#else
     function hipRuntimeGetVersion_(runtimeVersion) bind(c, name="hipRuntimeGetVersion")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -146,7 +129,6 @@ module hipfort
   !>  @param [in] ordinal Device ordinal
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidDevice`
-#ifndef USE_CUDA_NAMES
   interface hipDeviceGet
     function hipDeviceGet_(device,ordinal) bind(c, name="hipDeviceGet")
       use iso_c_binding
@@ -157,7 +139,6 @@ module hipfort
       integer(c_int),value :: ordinal
     end function
   end interface
-#endif
 
   !>  @brief Returns the compute capability of the device
   !>  @param [out] major Major compute capability version number
@@ -165,7 +146,6 @@ module hipfort
   !>  @param [in] device Device ordinal
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidDevice`
-#ifndef USE_CUDA_NAMES
   interface hipDeviceComputeCapability
     function hipDeviceComputeCapability_(major,minor,device) &
         bind(c, name="hipDeviceComputeCapability")
@@ -178,7 +158,6 @@ module hipfort
       integer(c_int),value :: device
     end function
   end interface
-#endif
 
   !>  @brief Returns an identifer string for the device.
   !>  @param [out] name String of the device name
@@ -186,7 +165,6 @@ module hipfort
   !>  @param [in] device Device ordinal
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidDevice`
-#ifndef USE_CUDA_NAMES
   interface hipDeviceGetName
     function hipDeviceGetName_(name,len,device) bind(c, name="hipDeviceGetName")
       use iso_c_binding
@@ -198,7 +176,6 @@ module hipfort
       integer(c_int),value :: device
     end function
   end interface
-#endif
 
   !>  @brief Returns an UUID for the device.[BETA]
   !>  @param [out] uuid UUID for the device
@@ -211,11 +188,7 @@ module hipfort
   !>  `hipErrorNotInitialized`,
   !>  `hipErrorDeinitialized`
   interface hipDeviceGetUuid
-#ifdef USE_CUDA_NAMES
-    function hipDeviceGetUuid_(uuid,device) bind(c, name="cuDeviceGetUuid")
-#else
     function hipDeviceGetUuid_(uuid,device) bind(c, name="hipDeviceGetUuid")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -234,13 +207,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidDevice`
   interface hipDeviceGetP2PAttribute
-#ifdef USE_CUDA_NAMES
-    function hipDeviceGetP2PAttribute_(myValue,attr,srcDevice,dstDevice) &
-        bind(c, name="cudaDeviceGetP2PAttribute")
-#else
     function hipDeviceGetP2PAttribute_(myValue,attr,srcDevice,dstDevice) &
         bind(c, name="hipDeviceGetP2PAttribute")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -259,11 +227,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidDevice`
   interface hipDeviceGetPCIBusId
-#ifdef USE_CUDA_NAMES
-    function hipDeviceGetPCIBusId_(pciBusId,len,device) bind(c, name="cudaDeviceGetPCIBusId")
-#else
     function hipDeviceGetPCIBusId_(pciBusId,len,device) bind(c, name="hipDeviceGetPCIBusId")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -280,11 +244,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidDevice`, `hipErrorInvalidValue`
   interface hipDeviceGetByPCIBusId
-#ifdef USE_CUDA_NAMES
-    function hipDeviceGetByPCIBusId_(device,pciBusId) bind(c, name="cudaDeviceGetByPCIBusId")
-#else
     function hipDeviceGetByPCIBusId_(device,pciBusId) bind(c, name="hipDeviceGetByPCIBusId")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -299,7 +259,6 @@ module hipfort
   !>  @param [in] device The ordinal of the device
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidDevice`
-#ifndef USE_CUDA_NAMES
   interface hipDeviceTotalMem
     function hipDeviceTotalMem_(bytes,device) bind(c, name="hipDeviceTotalMem")
       use iso_c_binding
@@ -310,7 +269,6 @@ module hipfort
       integer(c_int),value :: device
     end function
   end interface
-#endif
 
   !>   @defgroup Device Device Management
   !>
@@ -326,11 +284,7 @@ module hipfort
   !>
   !>  @see hipSetDevice, hipDeviceReset
   interface hipDeviceSynchronize
-#ifdef USE_CUDA_NAMES
-    function hipDeviceSynchronize_() bind(c, name="cudaDeviceSynchronize")
-#else
     function hipDeviceSynchronize_() bind(c, name="hipDeviceSynchronize")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -349,11 +303,7 @@ module hipfort
   !>
   !>  @see hipDeviceSynchronize
   interface hipDeviceReset
-#ifdef USE_CUDA_NAMES
-    function hipDeviceReset_() bind(c, name="cudaDeviceReset")
-#else
     function hipDeviceReset_() bind(c, name="hipDeviceReset")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -396,11 +346,7 @@ module hipfort
   !>
   !>  @see `hipGetDevice`, `hipGetDeviceCount`
   interface hipSetDevice
-#ifdef USE_CUDA_NAMES
-    function hipSetDevice_(deviceId) bind(c, name="cudaSetDevice")
-#else
     function hipSetDevice_(deviceId) bind(c, name="hipSetDevice")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -419,11 +365,7 @@ module hipfort
   !>  @see `hipGetDevice`, `hipGetDeviceCount`. `hipSetDevice`. `hipGetDeviceProperties`.
   !>  `hipSetDeviceFlags`. `hipChooseDevice`
   interface hipSetValidDevices
-#ifdef USE_CUDA_NAMES
-    function hipSetValidDevices_(device_arr,len) bind(c, name="cudaSetValidDevices")
-#else
     function hipSetValidDevices_(device_arr,len) bind(c, name="hipSetValidDevices")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -445,11 +387,7 @@ module hipfort
   !>
   !>  @see hipSetDevice, hipGetDevicesizeBytes
   interface hipGetDevice
-#ifdef USE_CUDA_NAMES
-    function hipGetDevice_(deviceId) bind(c, name="cudaGetDevice")
-#else
     function hipGetDevice_(deviceId) bind(c, name="hipGetDevice")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -469,11 +407,7 @@ module hipfort
   !>  are no such devices, then `hipGetDeviceCount` will return `hipErrorNoDevice`. If 1 or more
   !>  devices can be found, then hipGetDeviceCount returns `hipSuccess`.
   interface hipGetDeviceCount
-#ifdef USE_CUDA_NAMES
-    function hipGetDeviceCount_(count) bind(c, name="cudaGetDeviceCount")
-#else
     function hipGetDeviceCount_(count) bind(c, name="hipGetDeviceCount")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -490,11 +424,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidDevice`, `hipErrorInvalidValue`
   interface hipDeviceGetAttribute
-#ifdef USE_CUDA_NAMES
-    function hipDeviceGetAttribute_(pi,attr,deviceId) bind(c, name="cudaDeviceGetAttribute")
-#else
     function hipDeviceGetAttribute_(pi,attr,deviceId) bind(c, name="hipDeviceGetAttribute")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -518,12 +448,7 @@ module hipfort
   !>  @warning This API is marked as Beta. While this feature is complete, it can
   !>           change and might have outstanding issues.
   interface hipDeviceGetDefaultMemPool
-#ifdef USE_CUDA_NAMES
-    function hipDeviceGetDefaultMemPool_(mem_pool,device) &
-        bind(c, name="cudaDeviceGetDefaultMemPool")
-#else
     function hipDeviceGetDefaultMemPool_(mem_pool,device) bind(c, name="hipDeviceGetDefaultMemPool")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -553,11 +478,7 @@ module hipfort
   !>  @warning This API is marked as Beta. While this feature is complete, it can
   !>           change and might have outstanding issues.
   interface hipDeviceSetMemPool
-#ifdef USE_CUDA_NAMES
-    function hipDeviceSetMemPool_(device,mem_pool) bind(c, name="cudaDeviceSetMemPool")
-#else
     function hipDeviceSetMemPool_(device,mem_pool) bind(c, name="hipDeviceSetMemPool")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -585,11 +506,7 @@ module hipfort
   !>  @warning This API is marked as Beta. While this feature is complete, it can
   !>           change and might have outstanding issues.
   interface hipDeviceGetMemPool
-#ifdef USE_CUDA_NAMES
-    function hipDeviceGetMemPool_(mem_pool,device) bind(c, name="cudaDeviceGetMemPool")
-#else
     function hipDeviceGetMemPool_(mem_pool,device) bind(c, name="hipDeviceGetMemPool")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -616,13 +533,8 @@ module hipfort
   !>
   !>  @see hipDeviceGetAttribute, hipMalloc, hipTexRefSetAddressMode
   interface hipDeviceGetTexture1DLinearMaxWidth
-#ifdef USE_CUDA_NAMES
-    function hipDeviceGetTexture1DLinearMaxWidth_(max_width,desc,device) &
-        bind(c, name="cudaDeviceGetTexture1DLinearMaxWidth")
-#else
     function hipDeviceGetTexture1DLinearMaxWidth_(max_width,desc,device) &
         bind(c, name="hipDeviceGetTexture1DLinearMaxWidth")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -643,11 +555,7 @@ module hipfort
   !>  Note: AMD devices do not support reconfigurable cache. This API is not implemented
   !>  on AMD platform. If the function is called, it will return hipErrorNotSupported.
   interface hipDeviceSetCacheConfig
-#ifdef USE_CUDA_NAMES
-    function hipDeviceSetCacheConfig_(cacheConfig) bind(c, name="cudaDeviceSetCacheConfig")
-#else
     function hipDeviceSetCacheConfig_(cacheConfig) bind(c, name="hipDeviceSetCacheConfig")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -664,11 +572,7 @@ module hipfort
   !>  Note: AMD devices do not support reconfigurable cache. This hint is ignored
   !>  on these architectures.
   interface hipDeviceGetCacheConfig
-#ifdef USE_CUDA_NAMES
-    function hipDeviceGetCacheConfig_(cacheConfig) bind(c, name="cudaDeviceGetCacheConfig")
-#else
     function hipDeviceGetCacheConfig_(cacheConfig) bind(c, name="hipDeviceGetCacheConfig")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -688,11 +592,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorUnsupportedLimit`, `hipErrorInvalidValue`
   interface hipDeviceGetLimit
-#ifdef USE_CUDA_NAMES
-    function hipDeviceGetLimit_(pValue,limit) bind(c, name="cudaDeviceGetLimit")
-#else
     function hipDeviceGetLimit_(pValue,limit) bind(c, name="hipDeviceGetLimit")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -721,11 +621,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorUnsupportedLimit`, `hipErrorInvalidValue`
   interface hipDeviceSetLimit
-#ifdef USE_CUDA_NAMES
-    function hipDeviceSetLimit_(limit,myValue) bind(c, name="cudaDeviceSetLimit")
-#else
     function hipDeviceSetLimit_(limit,myValue) bind(c, name="hipDeviceSetLimit")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -744,11 +640,7 @@ module hipfort
   !>  Note: AMD devices and some Nvidia GPUS do not support shared cache banking, and the hint is
   !>  ignored on those architectures.
   interface hipDeviceGetSharedMemConfig
-#ifdef USE_CUDA_NAMES
-    function hipDeviceGetSharedMemConfig_(pConfig) bind(c, name="cudaDeviceGetSharedMemConfig")
-#else
     function hipDeviceGetSharedMemConfig_(pConfig) bind(c, name="hipDeviceGetSharedMemConfig")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -763,11 +655,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidDevice`, `hipErrorInvalidValue`
   interface hipGetDeviceFlags
-#ifdef USE_CUDA_NAMES
-    function hipGetDeviceFlags_(flags) bind(c, name="cudaGetDeviceFlags")
-#else
     function hipGetDeviceFlags_(flags) bind(c, name="hipGetDeviceFlags")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -785,11 +673,7 @@ module hipfort
   !>  Note: AMD devices and some Nvidia GPUS do not support shared cache banking, and the hint is
   !>  ignored on those architectures.
   interface hipDeviceSetSharedMemConfig
-#ifdef USE_CUDA_NAMES
-    function hipDeviceSetSharedMemConfig_(config) bind(c, name="cudaDeviceSetSharedMemConfig")
-#else
     function hipDeviceSetSharedMemConfig_(config) bind(c, name="hipDeviceSetSharedMemConfig")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -828,11 +712,7 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorNoDevice`, `hipErrorInvalidDevice`,
   !>  `hipErrorSetOnActiveProcess`
   interface hipSetDeviceFlags
-#ifdef USE_CUDA_NAMES
-    function hipSetDeviceFlags_(flags) bind(c, name="cudaSetDeviceFlags")
-#else
     function hipSetDeviceFlags_(flags) bind(c, name="hipSetDeviceFlags")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -848,11 +728,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipChooseDeviceR0600
-#ifdef USE_CUDA_NAMES
-    function hipChooseDeviceR0600_(device,prop) bind(c, name="cudaChooseDevice")
-#else
     function hipChooseDeviceR0600_(device,prop) bind(c, name="hipChooseDeviceR0600")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -874,7 +750,6 @@ module hipfort
   !>  Queries and returns the HSA link type and the hop count between the two specified devices.
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipExtGetLinkTypeAndHopCount
     function hipExtGetLinkTypeAndHopCount_(device1,device2,linktype,hopcount) &
         bind(c, name="hipExtGetLinkTypeAndHopCount")
@@ -888,7 +763,6 @@ module hipfort
       integer(c_int32_t) :: hopcount
     end function
   end interface
-#endif
 
   !>  @brief Gets an interprocess memory handle for an existing device memory
   !>           allocation
@@ -911,11 +785,7 @@ module hipfort
   !>
   !>  @note This IPC memory related feature API on Windows may behave differently from Linux.
   interface hipIpcGetMemHandle
-#ifdef USE_CUDA_NAMES
-    function hipIpcGetMemHandle_(handle,devPtr) bind(c, name="cudaIpcGetMemHandle")
-#else
     function hipIpcGetMemHandle_(handle,devPtr) bind(c, name="hipIpcGetMemHandle")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -959,11 +829,7 @@ module hipfort
   !>  This is diffrent from CUDA.
   !>  @note This IPC memory related feature API on Windows may behave differently from Linux.
   interface hipIpcOpenMemHandle
-#ifdef USE_CUDA_NAMES
-    function hipIpcOpenMemHandle_(devPtr,handle,flags) bind(c, name="cudaIpcOpenMemHandle")
-#else
     function hipIpcOpenMemHandle_(devPtr,handle,flags) bind(c, name="hipIpcOpenMemHandle")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -989,11 +855,7 @@ module hipfort
   !>
   !>  @note This IPC memory related feature API on Windows may behave differently from Linux.
   interface hipIpcCloseMemHandle
-#ifdef USE_CUDA_NAMES
-    function hipIpcCloseMemHandle_(devPtr) bind(c, name="cudaIpcCloseMemHandle")
-#else
     function hipIpcCloseMemHandle_(devPtr) bind(c, name="hipIpcCloseMemHandle")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1016,11 +878,7 @@ module hipfort
   !>
   !>  @note This IPC event related feature API is currently applicable on Linux.
   interface hipIpcGetEventHandle
-#ifdef USE_CUDA_NAMES
-    function hipIpcGetEventHandle_(handle,event) bind(c, name="cudaIpcGetEventHandle")
-#else
     function hipIpcGetEventHandle_(handle,event) bind(c, name="hipIpcGetEventHandle")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -1051,11 +909,7 @@ module hipfort
   !>
   !>  @note This IPC event related feature API is currently applicable on Linux.
   interface hipIpcOpenEventHandle
-#ifdef USE_CUDA_NAMES
-    function hipIpcOpenEventHandle_(event,handle) bind(c, name="cudaIpcOpenEventHandle")
-#else
     function hipIpcOpenEventHandle_(event,handle) bind(c, name="hipIpcOpenEventHandle")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1082,11 +936,7 @@ module hipfort
   !>  Note: AMD devices and some Nvidia GPUS do not support shared cache banking, and the hint is
   !>  ignored on those architectures.
   interface hipFuncSetAttribute
-#ifdef USE_CUDA_NAMES
-    function hipFuncSetAttribute_(func,attr,myValue) bind(c, name="cudaFuncSetAttribute")
-#else
     function hipFuncSetAttribute_(func,attr,myValue) bind(c, name="hipFuncSetAttribute")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1107,11 +957,7 @@ module hipfort
   !>  ignored
   !>  on those architectures.
   interface hipFuncSetCacheConfig
-#ifdef USE_CUDA_NAMES
-    function hipFuncSetCacheConfig_(func,config) bind(c, name="cudaFuncSetCacheConfig")
-#else
     function hipFuncSetCacheConfig_(func,config) bind(c, name="hipFuncSetCacheConfig")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1131,11 +977,7 @@ module hipfort
   !>  Note: AMD devices and some Nvidia GPUS do not support shared cache banking, and the hint is
   !>  ignored on those architectures.
   interface hipFuncSetSharedMemConfig
-#ifdef USE_CUDA_NAMES
-    function hipFuncSetSharedMemConfig_(func,config) bind(c, name="cudaFuncSetSharedMemConfig")
-#else
     function hipFuncSetSharedMemConfig_(func,config) bind(c, name="hipFuncSetSharedMemConfig")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1163,11 +1005,7 @@ module hipfort
   !>
   !>  @see hipGetErrorString, hipGetLastError, hipPeakAtLastError, hipError_t
   interface hipGetLastError
-#ifdef USE_CUDA_NAMES
-    function hipGetLastError_() bind(c, name="cudaGetLastError")
-#else
     function hipGetLastError_() bind(c, name="hipGetLastError")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1185,7 +1023,6 @@ module hipfort
   !>  thread, and then resets the saved error to `hipSuccess`.
   !>
   !>  @see hipGetErrorString, hipGetLastError, hipPeakAtLastError, hipError_t
-#ifndef USE_CUDA_NAMES
   interface hipExtGetLastError
     function hipExtGetLastError_() bind(c, name="hipExtGetLastError")
       use iso_c_binding
@@ -1194,7 +1031,6 @@ module hipfort
       integer(kind(hipSuccess)) :: hipExtGetLastError_
     end function
   end interface
-#endif
 
   !>  @brief Return last error returned by any HIP runtime API call.
   !>
@@ -1205,11 +1041,7 @@ module hipfort
   !>
   !>  @see hipGetErrorString, hipGetLastError, hipPeakAtLastError, hipError_t
   interface hipPeekAtLastError
-#ifdef USE_CUDA_NAMES
-    function hipPeekAtLastError_() bind(c, name="cudaPeekAtLastError")
-#else
     function hipPeekAtLastError_() bind(c, name="hipPeekAtLastError")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1224,11 +1056,7 @@ module hipfort
   !>
   !>  @see hipGetErrorString, hipGetLastError, hipPeakAtLastError, hipError_t
   interface hipGetErrorName
-#ifdef USE_CUDA_NAMES
-    function hipGetErrorName_(hip_error) bind(c, name="cudaGetErrorName")
-#else
     function hipGetErrorName_(hip_error) bind(c, name="hipGetErrorName")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1244,11 +1072,7 @@ module hipfort
   !>
   !>  @see hipGetErrorName, hipGetLastError, hipPeakAtLastError, hipError_t
   interface hipGetErrorString
-#ifdef USE_CUDA_NAMES
-    function hipGetErrorString_(hipError) bind(c, name="cudaGetErrorString")
-#else
     function hipGetErrorString_(hipError) bind(c, name="hipGetErrorString")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1264,7 +1088,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   !>
   !>  @see hipGetErrorName, hipGetLastError, hipPeakAtLastError, hipError_t
-#ifndef USE_CUDA_NAMES
   interface hipDrvGetErrorName
     function hipDrvGetErrorName_(hipError,errorString) bind(c, name="hipDrvGetErrorName")
       use iso_c_binding
@@ -1275,7 +1098,6 @@ module hipfort
       type(c_ptr) :: errorString
     end function
   end interface
-#endif
 
   !>  @brief Return handy text string message to explain the error which occurred
   !>
@@ -1284,7 +1106,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   !>
   !>  @see hipGetErrorName, hipGetLastError, hipPeakAtLastError, hipError_t
-#ifndef USE_CUDA_NAMES
   interface hipDrvGetErrorString
     function hipDrvGetErrorString_(hipError,errorString) bind(c, name="hipDrvGetErrorString")
       use iso_c_binding
@@ -1295,7 +1116,6 @@ module hipfort
       type(c_ptr) :: errorString
     end function
   end interface
-#endif
 
   !>  @brief Creates an asynchronous stream.
   !>
@@ -1316,11 +1136,7 @@ module hipfort
   !>  @see hipStreamCreateWithFlags, hipStreamCreateWithPriority, hipStreamSynchronize,
   !>  hipStreamWaitEvent, hipStreamDestroy
   interface hipStreamCreate
-#ifdef USE_CUDA_NAMES
-    function hipStreamCreate_(stream) bind(c, name="cudaStreamCreate")
-#else
     function hipStreamCreate_(stream) bind(c, name="hipStreamCreate")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1348,11 +1164,7 @@ module hipfort
   !>  @see hipStreamCreate, hipStreamCreateWithPriority, hipStreamSynchronize, hipStreamWaitEvent,
   !>  hipStreamDestroy.
   interface hipStreamCreateWithFlags
-#ifdef USE_CUDA_NAMES
-    function hipStreamCreateWithFlags_(stream,flags) bind(c, name="cudaStreamCreateWithFlags")
-#else
     function hipStreamCreateWithFlags_(stream,flags) bind(c, name="hipStreamCreateWithFlags")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1383,13 +1195,8 @@ module hipfort
   !>
   !>  @see hipStreamCreate, hipStreamSynchronize, hipStreamWaitEvent, hipStreamDestroy
   interface hipStreamCreateWithPriority
-#ifdef USE_CUDA_NAMES
-    function hipStreamCreateWithPriority_(stream,flags,priority) &
-        bind(c, name="cudaStreamCreateWithPriority")
-#else
     function hipStreamCreateWithPriority_(stream,flags,priority) &
         bind(c, name="hipStreamCreateWithPriority")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1417,13 +1224,8 @@ module hipfort
   !>
   !>  @warning This API is under development on AMD GPUs and simply returns `hipSuccess`.
   interface hipDeviceGetStreamPriorityRange
-#ifdef USE_CUDA_NAMES
-    function hipDeviceGetStreamPriorityRange_(leastPriority,greatestPriority) &
-        bind(c, name="cudaDeviceGetStreamPriorityRange")
-#else
     function hipDeviceGetStreamPriorityRange_(leastPriority,greatestPriority) &
         bind(c, name="hipDeviceGetStreamPriorityRange")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1451,11 +1253,7 @@ module hipfort
   !>  @see hipStreamCreate, hipStreamCreateWithFlags, hipStreamCreateWithPriority, hipStreamQuery,
   !>  hipStreamWaitEvent, hipStreamSynchronize
   interface hipStreamDestroy
-#ifdef USE_CUDA_NAMES
-    function hipStreamDestroy_(stream) bind(c, name="cudaStreamDestroy")
-#else
     function hipStreamDestroy_(stream) bind(c, name="hipStreamDestroy")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1482,11 +1280,7 @@ module hipfort
   !>  hipStreamWaitEvent,
   !>  hipStreamSynchronize, hipStreamDestroy
   interface hipStreamQuery
-#ifdef USE_CUDA_NAMES
-    function hipStreamQuery_(stream) bind(c, name="cudaStreamQuery")
-#else
     function hipStreamQuery_(stream) bind(c, name="hipStreamQuery")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1516,11 +1310,7 @@ module hipfort
   !>  hipStreamWaitEvent,
   !>  hipStreamDestroy
   interface hipStreamSynchronize
-#ifdef USE_CUDA_NAMES
-    function hipStreamSynchronize_(stream) bind(c, name="cudaStreamSynchronize")
-#else
     function hipStreamSynchronize_(stream) bind(c, name="hipStreamSynchronize")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1555,11 +1345,7 @@ module hipfort
   !>  @see hipStreamCreate, hipStreamCreateWithFlags, hipStreamCreateWithPriority,
   !>  hipStreamSynchronize, hipStreamDestroy
   interface hipStreamWaitEvent
-#ifdef USE_CUDA_NAMES
-    function hipStreamWaitEvent_(stream,event,flags) bind(c, name="cudaStreamWaitEvent")
-#else
     function hipStreamWaitEvent_(stream,event,flags) bind(c, name="hipStreamWaitEvent")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1578,11 +1364,7 @@ module hipfort
   !>
   !>  @see hipStreamCreateWithFlags
   interface hipStreamGetFlags
-#ifdef USE_CUDA_NAMES
-    function hipStreamGetFlags_(stream,flags) bind(c, name="cudaStreamGetFlags")
-#else
     function hipStreamGetFlags_(stream,flags) bind(c, name="hipStreamGetFlags")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1601,11 +1383,7 @@ module hipfort
   !>  @see hipStreamCreateWithFlags, hipStreamGetFlags, hipStreamCreateWithPriority,
   !>  hipStreamGetPriority
   interface hipStreamGetId
-#ifdef USE_CUDA_NAMES
-    function hipStreamGetId_(stream,streamId) bind(c, name="cudaStreamGetId")
-#else
     function hipStreamGetId_(stream,streamId) bind(c, name="hipStreamGetId")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1625,11 +1403,7 @@ module hipfort
   !>
   !>  @see hipStreamCreateWithPriority
   interface hipStreamGetPriority
-#ifdef USE_CUDA_NAMES
-    function hipStreamGetPriority_(stream,priority) bind(c, name="cudaStreamGetPriority")
-#else
     function hipStreamGetPriority_(stream,priority) bind(c, name="hipStreamGetPriority")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1649,11 +1423,7 @@ module hipfort
   !>
   !>  @see hipStreamCreate, hipStreamDestroy, hipDeviceGetStreamPriorityRange
   interface hipStreamGetDevice
-#ifdef USE_CUDA_NAMES
-    function hipStreamGetDevice_(stream,device) bind(c, name="cudaStreamGetDevice")
-#else
     function hipStreamGetDevice_(stream,device) bind(c, name="hipStreamGetDevice")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1683,7 +1453,6 @@ module hipfort
   !>  hipStreamDestroy.
   !>
   !>  @see hipStreamCreate, hipStreamSynchronize, hipStreamWaitEvent, hipStreamDestroy
-#ifndef USE_CUDA_NAMES
   interface hipExtStreamCreateWithCUMask
     function hipExtStreamCreateWithCUMask_(stream,cuMaskSize,cuMask) &
         bind(c, name="hipExtStreamCreateWithCUMask")
@@ -1696,7 +1465,6 @@ module hipfort
       type(c_ptr),value :: cuMask
     end function
   end interface
-#endif
 
   !>  @brief Gets CU mask associated with an asynchronous stream
   !>
@@ -1708,7 +1476,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidHandle`, `hipErrorInvalidValue`
   !>
   !>  @see hipStreamCreate, hipStreamSynchronize, hipStreamWaitEvent, hipStreamDestroy
-#ifndef USE_CUDA_NAMES
   interface hipExtStreamGetCUMask
     function hipExtStreamGetCUMask_(stream,cuMaskSize,cuMask) bind(c, name="hipExtStreamGetCUMask")
       use iso_c_binding
@@ -1720,7 +1487,6 @@ module hipfort
       type(c_ptr),value :: cuMask
     end function
   end interface
-#endif
 
   !>  @brief Adds a callback to be called on the host after all currently enqueued items in the
   !>  stream
@@ -1736,13 +1502,8 @@ module hipfort
   !>  @see hipStreamCreate, hipStreamCreateWithFlags, hipStreamQuery, hipStreamSynchronize,
   !>  hipStreamWaitEvent, hipStreamDestroy, hipStreamCreateWithPriority
   interface hipStreamAddCallback
-#ifdef USE_CUDA_NAMES
-    function hipStreamAddCallback_(stream,callback,userData,flags) &
-        bind(c, name="cudaStreamAddCallback")
-#else
     function hipStreamAddCallback_(stream,callback,userData,flags) &
         bind(c, name="hipStreamAddCallback")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1760,11 +1521,7 @@ module hipfort
   !>  @param[in] myValue - Attribute value for the attribute to set
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorInvalidResourceHandle`
   interface hipStreamSetAttribute
-#ifdef USE_CUDA_NAMES
-    function hipStreamSetAttribute_(stream,attr,myValue) bind(c, name="cudaStreamSetAttribute")
-#else
     function hipStreamSetAttribute_(stream,attr,myValue) bind(c, name="hipStreamSetAttribute")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1781,11 +1538,7 @@ module hipfort
   !>  value - Attribute value output
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorInvalidResourceHandle`
   interface hipStreamGetAttribute
-#ifdef USE_CUDA_NAMES
-    function hipStreamGetAttribute_(stream,attr,value_out) bind(c, name="cudaStreamGetAttribute")
-#else
     function hipStreamGetAttribute_(stream,attr,value_out) bind(c, name="hipStreamGetAttribute")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1801,11 +1554,7 @@ module hipfort
   !>  @param[in] src - Source stream
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipStreamCopyAttributes
-#ifdef USE_CUDA_NAMES
-    function hipStreamCopyAttributes_(dst,src) bind(c, name="cudaStreamCopyAttributes")
-#else
     function hipStreamCopyAttributes_(dst,src) bind(c, name="hipStreamCopyAttributes")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1850,13 +1599,8 @@ module hipfort
   !>  @see hipExtMallocWithFlags, hipFree, hipStreamWaitValue64, hipStreamWriteValue64,
   !>  hipStreamWriteValue32, hipDeviceGetAttribute
   interface hipStreamWaitValue32
-#ifdef USE_CUDA_NAMES
-    function hipStreamWaitValue32_(stream,ptr,myValue,flags,mask) &
-        bind(c, name="cuStreamWaitValue32")
-#else
     function hipStreamWaitValue32_(stream,ptr,myValue,flags,mask) &
         bind(c, name="hipStreamWaitValue32")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1904,13 +1648,8 @@ module hipfort
   !>  @see hipExtMallocWithFlags, hipFree, hipStreamWaitValue32, hipStreamWriteValue64,
   !>  hipStreamWriteValue32, hipDeviceGetAttribute
   interface hipStreamWaitValue64
-#ifdef USE_CUDA_NAMES
-    function hipStreamWaitValue64_(stream,ptr,myValue,flags,mask) &
-        bind(c, name="cuStreamWaitValue64")
-#else
     function hipStreamWaitValue64_(stream,ptr,myValue,flags,mask) &
         bind(c, name="hipStreamWaitValue64")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -1941,7 +1680,6 @@ module hipfort
   !>
   !>  @see hipExtMallocWithFlags, hipFree, hipStreamWriteValue32, hipStreamWaitValue32,
   !>  hipStreamWaitValue64
-#ifndef USE_CUDA_NAMES
   interface hipStreamWriteValue32
     function hipStreamWriteValue32_(stream,ptr,myValue,flags) bind(c, name="hipStreamWriteValue32")
       use iso_c_binding
@@ -1954,7 +1692,6 @@ module hipfort
       integer(c_int),value :: flags
     end function
   end interface
-#endif
 
   !>  @brief Enqueues a write command to the stream.[BETA]
   !>
@@ -1974,7 +1711,6 @@ module hipfort
   !>
   !>  @see hipExtMallocWithFlags, hipFree, hipStreamWriteValue32, hipStreamWaitValue32,
   !>  hipStreamWaitValue64
-#ifndef USE_CUDA_NAMES
   interface hipStreamWriteValue64
     function hipStreamWriteValue64_(stream,ptr,myValue,flags) bind(c, name="hipStreamWriteValue64")
       use iso_c_binding
@@ -1987,7 +1723,6 @@ module hipfort
       integer(c_int),value :: flags
     end function
   end interface
-#endif
 
   !>  @brief Enqueues an array of stream memory operations in the stream.[BETA]
   !>
@@ -2006,11 +1741,7 @@ module hipfort
   !>  @see hipStreamWriteValue32, hipStreamWaitValue32,
   !>  hipStreamWaitValue64. hipStreamWriteValue64
   interface hipStreamBatchMemOp
-#ifdef USE_CUDA_NAMES
-    function hipStreamBatchMemOp_(stream,count,paramArray,flags) bind(c, name="cuStreamBatchMemOp")
-#else
     function hipStreamBatchMemOp_(stream,count,paramArray,flags) bind(c, name="hipStreamBatchMemOp")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -2038,15 +1769,9 @@ module hipfort
   !>  @see hipStreamWriteValue32, hipStreamWaitValue32,
   !>  hipStreamWaitValue64. hipStreamWriteValue64, hipStreamBatchMemOp
   interface hipGraphAddBatchMemOpNode
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddBatchMemOpNode_(phGraphNode,hGraph,dependencies,numDependencies, &
-        nodeParams) &
-        bind(c, name="cuGraphAddBatchMemOpNode")
-#else
     function hipGraphAddBatchMemOpNode_(phGraphNode,hGraph,dependencies,numDependencies, &
         nodeParams) &
         bind(c, name="hipGraphAddBatchMemOpNode")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -2078,13 +1803,8 @@ module hipfort
   !>  @see hipStreamWriteValue32, hipStreamWaitValue32,
   !>  hipStreamWaitValue64. hipStreamWriteValue64. hipGraphBatchMemOpNodeSetParams
   interface hipGraphBatchMemOpNodeGetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphBatchMemOpNodeGetParams_(hNode,nodeParams_out) &
-        bind(c, name="cuGraphBatchMemOpNodeGetParams")
-#else
     function hipGraphBatchMemOpNodeGetParams_(hNode,nodeParams_out) &
         bind(c, name="hipGraphBatchMemOpNodeGetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -2110,13 +1830,8 @@ module hipfort
   !>  @see hipStreamWriteValue32, hipStreamWaitValue32,
   !>  hipStreamWaitValue64. hipStreamWriteValue64, hipGraphBatchMemOpNodeGetParams
   interface hipGraphBatchMemOpNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphBatchMemOpNodeSetParams_(hNode,nodeParams) &
-        bind(c, name="cuGraphBatchMemOpNodeSetParams")
-#else
     function hipGraphBatchMemOpNodeSetParams_(hNode,nodeParams) &
         bind(c, name="hipGraphBatchMemOpNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -2145,13 +1860,8 @@ module hipfort
   !>  @see hipStreamWriteValue32, hipStreamWaitValue32,
   !>  hipStreamWaitValue64. hipStreamWriteValue64, hipStreamBatchMemOp
   interface hipGraphExecBatchMemOpNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecBatchMemOpNodeSetParams_(hGraphExec,hNode,nodeParams) &
-        bind(c, name="cuGraphExecBatchMemOpNodeSetParams")
-#else
     function hipGraphExecBatchMemOpNodeSetParams_(hGraphExec,hNode,nodeParams) &
         bind(c, name="hipGraphExecBatchMemOpNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -2198,11 +1908,7 @@ module hipfort
   !>
   !>  @see hipEventCreate, hipEventSynchronize, hipEventDestroy, hipEventElapsedTime
   interface hipEventCreateWithFlags
-#ifdef USE_CUDA_NAMES
-    function hipEventCreateWithFlags_(event,flags) bind(c, name="cudaEventCreateWithFlags")
-#else
     function hipEventCreateWithFlags_(event,flags) bind(c, name="hipEventCreateWithFlags")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -2222,11 +1928,7 @@ module hipfort
   !>  @see hipEventCreateWithFlags, hipEventRecord, hipEventQuery, hipEventSynchronize,
   !>  hipEventDestroy, hipEventElapsedTime
   interface hipEventCreate
-#ifdef USE_CUDA_NAMES
-    function hipEventCreate_(event) bind(c, name="cudaEventCreate")
-#else
     function hipEventCreate_(event) bind(c, name="hipEventCreate")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -2270,11 +1972,7 @@ module hipfort
   !>  @see hipEventCreate, hipEventCreateWithFlags, hipEventQuery, hipEventSynchronize,
   !>  hipEventDestroy, hipEventElapsedTime
   interface hipEventRecordWithFlags
-#ifdef USE_CUDA_NAMES
-    function hipEventRecordWithFlags_(event,stream,flags) bind(c, name="cudaEventRecordWithFlags")
-#else
     function hipEventRecordWithFlags_(event,stream,flags) bind(c, name="hipEventRecordWithFlags")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -2286,11 +1984,7 @@ module hipfort
   end interface
 
   interface hipEventRecord
-#ifdef USE_CUDA_NAMES
-    function hipEventRecord_(event,stream) bind(c, name="cudaEventRecord")
-#else
     function hipEventRecord_(event,stream) bind(c, name="hipEventRecord")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -2316,11 +2010,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`
   interface hipEventDestroy
-#ifdef USE_CUDA_NAMES
-    function hipEventDestroy_(event) bind(c, name="cudaEventDestroy")
-#else
     function hipEventDestroy_(event) bind(c, name="hipEventDestroy")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -2348,11 +2038,7 @@ module hipfort
   !>   @see hipEventCreate, hipEventCreateWithFlags, hipEventQuery, hipEventDestroy, hipEventRecord,
   !>  hipEventElapsedTime
   interface hipEventSynchronize
-#ifdef USE_CUDA_NAMES
-    function hipEventSynchronize_(event) bind(c, name="cudaEventSynchronize")
-#else
     function hipEventSynchronize_(event) bind(c, name="hipEventSynchronize")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -2389,11 +2075,7 @@ module hipfort
   !>  @see hipEventCreate, hipEventCreateWithFlags, hipEventQuery, hipEventDestroy, hipEventRecord,
   !>  hipEventSynchronize
   interface hipEventElapsedTime
-#ifdef USE_CUDA_NAMES
-    function hipEventElapsedTime_(ms,start,myStop) bind(c, name="cudaEventElapsedTime")
-#else
     function hipEventElapsedTime_(ms,start,myStop) bind(c, name="hipEventElapsedTime")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -2419,11 +2101,7 @@ module hipfort
   !>  @see hipEventCreate, hipEventCreateWithFlags, hipEventRecord, hipEventDestroy,
   !>  hipEventSynchronize, hipEventElapsedTime
   interface hipEventQuery
-#ifdef USE_CUDA_NAMES
-    function hipEventQuery_(event) bind(c, name="cudaEventQuery")
-#else
     function hipEventQuery_(event) bind(c, name="hipEventQuery")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -2443,11 +2121,7 @@ module hipfort
   !>   @warning This API is marked as Beta. While this feature is complete, it can
   !>            change and might have outstanding issues.
   interface hipPointerSetAttribute
-#ifdef USE_CUDA_NAMES
-    function hipPointerSetAttribute_(myValue,attribute,ptr) bind(c, name="cuPointerSetAttribute")
-#else
     function hipPointerSetAttribute_(myValue,attribute,ptr) bind(c, name="hipPointerSetAttribute")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -2476,11 +2150,7 @@ module hipfort
   !>
   !>   @see hipPointerGetAttribute
   interface hipPointerGetAttributes
-#ifdef USE_CUDA_NAMES
-    function hipPointerGetAttributes_(attributes,ptr) bind(c, name="cudaPointerGetAttributes")
-#else
     function hipPointerGetAttributes_(attributes,ptr) bind(c, name="hipPointerGetAttributes")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -2503,7 +2173,6 @@ module hipfort
   !>            change and might have outstanding issues.
   !>
   !>   @see hipPointerGetAttributes
-#ifndef USE_CUDA_NAMES
   interface hipPointerGetAttribute
     function hipPointerGetAttribute_(myData,attribute,ptr) bind(c, name="hipPointerGetAttribute")
       use iso_c_binding
@@ -2515,7 +2184,6 @@ module hipfort
       type(c_ptr),value :: ptr
     end function
   end interface
-#endif
 
   !>   @brief Returns information about the specified pointer.[BETA]
   !>
@@ -2531,7 +2199,6 @@ module hipfort
   !>            change and might have outstanding issues.
   !>
   !>   @see hipPointerGetAttribute
-#ifndef USE_CUDA_NAMES
   interface hipDrvPointerGetAttributes
     function hipDrvPointerGetAttributes_(numAttributes,attributes,myData,ptr) &
         bind(c, name="hipDrvPointerGetAttributes")
@@ -2545,7 +2212,6 @@ module hipfort
       type(c_ptr),value :: ptr
     end function
   end interface
-#endif
 
   !> -------------------------------------------------------------------------------------------------
   !> -------------------------------------------------------------------------------------------------
@@ -2568,13 +2234,8 @@ module hipfort
   !>
   !>   @note  This API is currently not supported on Linux.
   interface hipImportExternalSemaphore
-#ifdef USE_CUDA_NAMES
-    function hipImportExternalSemaphore_(extSem_out,semHandleDesc) &
-        bind(c, name="cudaImportExternalSemaphore")
-#else
     function hipImportExternalSemaphore_(extSem_out,semHandleDesc) &
         bind(c, name="hipImportExternalSemaphore")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -2598,13 +2259,8 @@ module hipfort
   !>
   !>   @note  This API is currently not supported on Linux.
   interface hipSignalExternalSemaphoresAsync
-#ifdef USE_CUDA_NAMES
-    function hipSignalExternalSemaphoresAsync_(extSemArray,paramsArray,numExtSems,stream) &
-        bind(c, name="cudaSignalExternalSemaphoresAsync")
-#else
     function hipSignalExternalSemaphoresAsync_(extSemArray,paramsArray,numExtSems,stream) &
         bind(c, name="hipSignalExternalSemaphoresAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -2630,13 +2286,8 @@ module hipfort
   !>
   !>   @note  This API is currently not supported on Linux.
   interface hipWaitExternalSemaphoresAsync
-#ifdef USE_CUDA_NAMES
-    function hipWaitExternalSemaphoresAsync_(extSemArray,paramsArray,numExtSems,stream) &
-        bind(c, name="cudaWaitExternalSemaphoresAsync")
-#else
     function hipWaitExternalSemaphoresAsync_(extSemArray,paramsArray,numExtSems,stream) &
         bind(c, name="hipWaitExternalSemaphoresAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -2661,11 +2312,7 @@ module hipfort
   !>
   !>   @note  This API is currently not supported on Linux.
   interface hipDestroyExternalSemaphore
-#ifdef USE_CUDA_NAMES
-    function hipDestroyExternalSemaphore_(extSem) bind(c, name="cudaDestroyExternalSemaphore")
-#else
     function hipDestroyExternalSemaphore_(extSem) bind(c, name="hipDestroyExternalSemaphore")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -2683,13 +2330,8 @@ module hipfort
   !>
   !>   @see
   interface hipImportExternalMemory
-#ifdef USE_CUDA_NAMES
-    function hipImportExternalMemory_(extMem_out,memHandleDesc) &
-        bind(c, name="cudaImportExternalMemory")
-#else
     function hipImportExternalMemory_(extMem_out,memHandleDesc) &
         bind(c, name="hipImportExternalMemory")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -2710,13 +2352,8 @@ module hipfort
   !>
   !>   @see
   interface hipExternalMemoryGetMappedBuffer
-#ifdef USE_CUDA_NAMES
-    function hipExternalMemoryGetMappedBuffer_(devPtr,extMem,bufferDesc) &
-        bind(c, name="cudaExternalMemoryGetMappedBuffer")
-#else
     function hipExternalMemoryGetMappedBuffer_(devPtr,extMem,bufferDesc) &
         bind(c, name="hipExternalMemoryGetMappedBuffer")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -2736,11 +2373,7 @@ module hipfort
   !>
   !>   @see
   interface hipDestroyExternalMemory
-#ifdef USE_CUDA_NAMES
-    function hipDestroyExternalMemory_(extMem) bind(c, name="cudaDestroyExternalMemory")
-#else
     function hipDestroyExternalMemory_(extMem) bind(c, name="hipDestroyExternalMemory")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -2762,13 +2395,8 @@ module hipfort
   !>   @see hipImportExternalMemory, hipDestroyExternalMemory, hipExternalMemoryGetMappedBuffer,
   !>  hipFreeMipmappedArray
   interface hipExternalMemoryGetMappedMipmappedArray
-#ifdef USE_CUDA_NAMES
-    function hipExternalMemoryGetMappedMipmappedArray_(mipmap,extMem,mipmapDesc) &
-        bind(c, name="cudaExternalMemoryGetMappedMipmappedArray")
-#else
     function hipExternalMemoryGetMappedMipmappedArray_(mipmap,extMem,mipmapDesc) &
         bind(c, name="hipExternalMemoryGetMappedMipmappedArray")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -2797,7 +2425,6 @@ module hipfort
   !>
   !>   @see hipMallocPitch, hipFree, hipMallocArray, hipFreeArray, hipMalloc3D, hipMalloc3DArray,
   !>  hipHostFree, hiHostMalloc
-#ifndef USE_CUDA_NAMES
   interface hipExtMallocWithFlags
     function hipExtMallocWithFlags_(ptr,sizeBytes,flags) bind(c, name="hipExtMallocWithFlags")
       use iso_c_binding
@@ -2809,7 +2436,6 @@ module hipfort
       integer(c_int),value :: flags
     end function
   end interface
-#endif
 
   !>   @brief Allocate pinned host memory [Deprecated]
   !>
@@ -2822,11 +2448,7 @@ module hipfort
   !>
   !>   @warning  This API is deprecated, use hipHostMalloc() instead
   interface hipMallocHost
-#ifdef USE_CUDA_NAMES
-    function hipMallocHost_(ptr,mySize) bind(c, name="cudaMallocHost")
-#else
     function hipMallocHost_(ptr,mySize) bind(c, name="hipMallocHost")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -2846,7 +2468,6 @@ module hipfort
   !>   @returns `hipSuccess`, `hipErrorOutOfMemory`
   !>
   !>   @warning  This API is deprecated, use hipHostMalloc() instead
-#ifndef USE_CUDA_NAMES
   interface hipMemAllocHost
     function hipMemAllocHost_(ptr,mySize) bind(c, name="hipMemAllocHost")
       use iso_c_binding
@@ -2857,7 +2478,6 @@ module hipfort
       integer(c_size_t),value :: mySize
     end function
   end interface
-#endif
 
   !>  @brief Prefetches memory to the specified destination device using HIP.
   !>
@@ -2870,11 +2490,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemPrefetchAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemPrefetchAsync_(dev_ptr,count,device,stream) bind(c, name="cudaMemPrefetchAsync")
-#else
     function hipMemPrefetchAsync_(dev_ptr,count,device,stream) bind(c, name="hipMemPrefetchAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -2898,13 +2514,8 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemPrefetchAsync_v2
-#ifdef USE_CUDA_NAMES
-    function hipMemPrefetchAsync_v2_(dev_ptr,count,location,flags,stream) &
-        bind(c, name="cuMemPrefetchAsync_v2")
-#else
     function hipMemPrefetchAsync_v2_(dev_ptr,count,location,flags,stream) &
         bind(c, name="hipMemPrefetchAsync_v2")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -2936,11 +2547,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemAdvise
-#ifdef USE_CUDA_NAMES
-    function hipMemAdvise_(dev_ptr,count,advice,device) bind(c, name="cudaMemAdvise")
-#else
     function hipMemAdvise_(dev_ptr,count,advice,device) bind(c, name="hipMemAdvise")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -2971,11 +2578,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemAdvise_v2
-#ifdef USE_CUDA_NAMES
-    function hipMemAdvise_v2_(dev_ptr,count,advice,location) bind(c, name="cuMemAdvise_v2")
-#else
     function hipMemAdvise_v2_(dev_ptr,count,advice,location) bind(c, name="hipMemAdvise_v2")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3000,13 +2603,8 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemRangeGetAttribute
-#ifdef USE_CUDA_NAMES
-    function hipMemRangeGetAttribute_(myData,data_size,attribute,dev_ptr,count) &
-        bind(c, name="cudaMemRangeGetAttribute")
-#else
     function hipMemRangeGetAttribute_(myData,data_size,attribute,dev_ptr,count) &
         bind(c, name="hipMemRangeGetAttribute")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3034,13 +2632,8 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemRangeGetAttributes
-#ifdef USE_CUDA_NAMES
-    function hipMemRangeGetAttributes_(myData,data_sizes,attributes,num_attributes,dev_ptr,count) &
-        bind(c, name="cudaMemRangeGetAttributes")
-#else
     function hipMemRangeGetAttributes_(myData,data_sizes,attributes,num_attributes,dev_ptr,count) &
         bind(c, name="hipMemRangeGetAttributes")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3068,13 +2661,8 @@ module hipfort
   !>  @warning This API is under development. Currently it is a no-operation (NOP)
   !>           function on AMD GPUs and returns `hipSuccess`.
   interface hipStreamAttachMemAsync
-#ifdef USE_CUDA_NAMES
-    function hipStreamAttachMemAsync_(stream,dev_ptr,length,flags) &
-        bind(c, name="cudaStreamAttachMemAsync")
-#else
     function hipStreamAttachMemAsync_(stream,dev_ptr,length,flags) &
         bind(c, name="hipStreamAttachMemAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3116,11 +2704,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMallocAsync
-#ifdef USE_CUDA_NAMES
-    function hipMallocAsync_(dev_ptr,mySize,stream) bind(c, name="cudaMallocAsync")
-#else
     function hipMallocAsync_(dev_ptr,mySize,stream) bind(c, name="hipMallocAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3155,11 +2739,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipFreeAsync
-#ifdef USE_CUDA_NAMES
-    function hipFreeAsync_(dev_ptr,stream) bind(c, name="cudaFreeAsync")
-#else
     function hipFreeAsync_(dev_ptr,stream) bind(c, name="hipFreeAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3195,11 +2775,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemPoolTrimTo
-#ifdef USE_CUDA_NAMES
-    function hipMemPoolTrimTo_(mem_pool,min_bytes_to_hold) bind(c, name="cudaMemPoolTrimTo")
-#else
     function hipMemPoolTrimTo_(mem_pool,min_bytes_to_hold) bind(c, name="hipMemPoolTrimTo")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3249,11 +2825,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemPoolSetAttribute
-#ifdef USE_CUDA_NAMES
-    function hipMemPoolSetAttribute_(mem_pool,attr,myValue) bind(c, name="cudaMemPoolSetAttribute")
-#else
     function hipMemPoolSetAttribute_(mem_pool,attr,myValue) bind(c, name="hipMemPoolSetAttribute")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3305,11 +2877,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemPoolGetAttribute
-#ifdef USE_CUDA_NAMES
-    function hipMemPoolGetAttribute_(mem_pool,attr,myValue) bind(c, name="cudaMemPoolGetAttribute")
-#else
     function hipMemPoolGetAttribute_(mem_pool,attr,myValue) bind(c, name="hipMemPoolGetAttribute")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3337,11 +2905,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemPoolSetAccess
-#ifdef USE_CUDA_NAMES
-    function hipMemPoolSetAccess_(mem_pool,desc_list,count) bind(c, name="cudaMemPoolSetAccess")
-#else
     function hipMemPoolSetAccess_(mem_pool,desc_list,count) bind(c, name="hipMemPoolSetAccess")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -3371,11 +2935,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemPoolGetAccess
-#ifdef USE_CUDA_NAMES
-    function hipMemPoolGetAccess_(flags,mem_pool,location) bind(c, name="cudaMemPoolGetAccess")
-#else
     function hipMemPoolGetAccess_(flags,mem_pool,location) bind(c, name="hipMemPoolGetAccess")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -3410,11 +2970,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemPoolCreate
-#ifdef USE_CUDA_NAMES
-    function hipMemPoolCreate_(mem_pool,pool_props) bind(c, name="cudaMemPoolCreate")
-#else
     function hipMemPoolCreate_(mem_pool,pool_props) bind(c, name="hipMemPoolCreate")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -3451,11 +3007,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemPoolDestroy
-#ifdef USE_CUDA_NAMES
-    function hipMemPoolDestroy_(mem_pool) bind(c, name="cudaMemPoolDestroy")
-#else
     function hipMemPoolDestroy_(mem_pool) bind(c, name="hipMemPoolDestroy")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3499,13 +3051,8 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMallocFromPoolAsync
-#ifdef USE_CUDA_NAMES
-    function hipMallocFromPoolAsync_(dev_ptr,mySize,mem_pool,stream) &
-        bind(c, name="cudaMallocFromPoolAsync")
-#else
     function hipMallocFromPoolAsync_(dev_ptr,mySize,mem_pool,stream) &
         bind(c, name="hipMallocFromPoolAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3542,13 +3089,8 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemPoolExportToShareableHandle
-#ifdef USE_CUDA_NAMES
-    function hipMemPoolExportToShareableHandle_(shared_handle,mem_pool,handle_type,flags) &
-        bind(c, name="cudaMemPoolExportToShareableHandle")
-#else
     function hipMemPoolExportToShareableHandle_(shared_handle,mem_pool,handle_type,flags) &
         bind(c, name="hipMemPoolExportToShareableHandle")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3582,13 +3124,8 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemPoolImportFromShareableHandle
-#ifdef USE_CUDA_NAMES
-    function hipMemPoolImportFromShareableHandle_(mem_pool,shared_handle,handle_type,flags) &
-        bind(c, name="cudaMemPoolImportFromShareableHandle")
-#else
     function hipMemPoolImportFromShareableHandle_(mem_pool,shared_handle,handle_type,flags) &
         bind(c, name="hipMemPoolImportFromShareableHandle")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3619,11 +3156,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemPoolExportPointer
-#ifdef USE_CUDA_NAMES
-    function hipMemPoolExportPointer_(export_data,dev_ptr) bind(c, name="cudaMemPoolExportPointer")
-#else
     function hipMemPoolExportPointer_(export_data,dev_ptr) bind(c, name="hipMemPoolExportPointer")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -3662,13 +3195,8 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemPoolImportPointer
-#ifdef USE_CUDA_NAMES
-    function hipMemPoolImportPointer_(dev_ptr,mem_pool,export_data) &
-        bind(c, name="cudaMemPoolImportPointer")
-#else
     function hipMemPoolImportPointer_(dev_ptr,mem_pool,export_data) &
         bind(c, name="hipMemPoolImportPointer")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -3698,11 +3226,7 @@ module hipfort
   !>
   !>   @return `hipSuccess`, `hipErrorOutOfMemory`, `hipErrorInvalidValue`
   interface hipHostAlloc
-#ifdef USE_CUDA_NAMES
-    function hipHostAlloc_(ptr,mySize,flags) bind(c, name="cudaHostAlloc")
-#else
     function hipHostAlloc_(ptr,mySize,flags) bind(c, name="hipHostAlloc")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3730,11 +3254,7 @@ module hipfort
   !>   @see hipMalloc, hipFree, hipMallocArray, hipFreeArray, hipHostFree, hipMalloc3D,
   !>  hipMalloc3DArray, hipHostMalloc
   interface hipMallocPitch
-#ifdef USE_CUDA_NAMES
-    function hipMallocPitch_(ptr,pitch,width,height) bind(c, name="cudaMallocPitch")
-#else
     function hipMallocPitch_(ptr,pitch,width,height) bind(c, name="hipMallocPitch")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3766,7 +3286,6 @@ module hipfort
   !>
   !>   @see hipMalloc, hipFree, hipMallocArray, hipFreeArray, hipHostFree, hipMalloc3D,
   !>  hipMalloc3DArray, hipHostMalloc
-#ifndef USE_CUDA_NAMES
   interface hipMemAllocPitch
     function hipMemAllocPitch_(dptr,pitch,widthInBytes,height,elementSizeBytes) &
         bind(c, name="hipMemAllocPitch")
@@ -3781,7 +3300,6 @@ module hipfort
       integer(c_int),value :: elementSizeBytes
     end function
   end interface
-#endif
 
   !>   @brief Frees page-locked memory
   !>   This API performs an implicit hipDeviceSynchronize() call.
@@ -3792,11 +3310,7 @@ module hipfort
   !>           `hipErrorInvalidValue` (if pointer is invalid, including device pointers allocated
   !>   with hipMalloc)
   interface hipFreeHost
-#ifdef USE_CUDA_NAMES
-    function hipFreeHost_(ptr) bind(c, name="cudaFreeHost")
-#else
     function hipFreeHost_(ptr) bind(c, name="hipFreeHost")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3818,7 +3332,6 @@ module hipfort
   !>
   !>   @see hipMemcpy, hipStreamCreate, hipStreamSynchronize, hipStreamDestroy, hipSetDevice,
   !>  hipLaunchKernelGGL
-#ifndef USE_CUDA_NAMES
   interface hipMemcpyWithStream
     function hipMemcpyWithStream_(dst,src,sizeBytes,myKind,stream) &
         bind(c, name="hipMemcpyWithStream")
@@ -3833,7 +3346,6 @@ module hipfort
       type(c_ptr),value :: stream
     end function
   end interface
-#endif
 
   !>   @brief Copy data from Host to Device
   !>
@@ -3851,7 +3363,6 @@ module hipfort
   !>  hipMemcpyDtoDAsync, hipMemcpyDtoH, hipMemcpyDtoHAsync, hipMemcpyHtoA, hipMemcpyHtoAAsync,
   !>  hipMemcpyHtoDAsync, hipMemFree, hipMemFreeHost, hipMemGetAddressRange, hipMemGetInfo,
   !>  hipMemHostAlloc, hipMemHostGetDevicePointer
-#ifndef USE_CUDA_NAMES
   interface hipMemcpyHtoD
     function hipMemcpyHtoD_(dst,src,sizeBytes) bind(c, name="hipMemcpyHtoD")
       use iso_c_binding
@@ -3863,7 +3374,6 @@ module hipfort
       integer(c_size_t),value :: sizeBytes
     end function
   end interface
-#endif
 
   !>   @brief Copy data from Device to Host
   !>
@@ -3881,7 +3391,6 @@ module hipfort
   !>  hipMemcpyDtoDAsync, hipMemcpyDtoH, hipMemcpyDtoHAsync, hipMemcpyHtoA, hipMemcpyHtoAAsync,
   !>  hipMemcpyHtoDAsync, hipMemFree, hipMemFreeHost, hipMemGetAddressRange, hipMemGetInfo,
   !>  hipMemHostAlloc, hipMemHostGetDevicePointer
-#ifndef USE_CUDA_NAMES
   interface hipMemcpyDtoH
     function hipMemcpyDtoH_(dst,src,sizeBytes) bind(c, name="hipMemcpyDtoH")
       use iso_c_binding
@@ -3893,7 +3402,6 @@ module hipfort
       integer(c_size_t),value :: sizeBytes
     end function
   end interface
-#endif
 
   !>   @brief Copy data from Device to Device
   !>
@@ -3911,7 +3419,6 @@ module hipfort
   !>  hipMemcpyDtoDAsync, hipMemcpyDtoH, hipMemcpyDtoHAsync, hipMemcpyHtoA, hipMemcpyHtoAAsync,
   !>  hipMemcpyHtoDAsync, hipMemFree, hipMemFreeHost, hipMemGetAddressRange, hipMemGetInfo,
   !>  hipMemHostAlloc, hipMemHostGetDevicePointer
-#ifndef USE_CUDA_NAMES
   interface hipMemcpyDtoD
     function hipMemcpyDtoD_(dst,src,sizeBytes) bind(c, name="hipMemcpyDtoD")
       use iso_c_binding
@@ -3923,7 +3430,6 @@ module hipfort
       integer(c_size_t),value :: sizeBytes
     end function
   end interface
-#endif
 
   !>   @brief Copies from one 1D array to device memory.
   !>
@@ -3943,11 +3449,7 @@ module hipfort
   !>  hipMemcpyHtoDAsync, hipMemFree, hipMemFreeHost, hipMemGetAddressRange, hipMemGetInfo,
   !>  hipMemHostAlloc, hipMemHostGetDevicePointer
   interface hipMemcpyAtoD
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyAtoD_(dstDevice,srcArray,srcOffset,ByteCount) bind(c, name="cuMemcpyAtoD")
-#else
     function hipMemcpyAtoD_(dstDevice,srcArray,srcOffset,ByteCount) bind(c, name="hipMemcpyAtoD")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -3977,11 +3479,7 @@ module hipfort
   !>  hipMemcpyHtoDAsync, hipMemFree, hipMemFreeHost, hipMemGetAddressRange, hipMemGetInfo,
   !>  hipMemHostAlloc, hipMemHostGetDevicePointer
   interface hipMemcpyDtoA
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyDtoA_(dstArray,dstOffset,srcDevice,ByteCount) bind(c, name="cuMemcpyDtoA")
-#else
     function hipMemcpyDtoA_(dstArray,dstOffset,srcDevice,ByteCount) bind(c, name="hipMemcpyDtoA")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4012,13 +3510,8 @@ module hipfort
   !>  hipMemcpyHtoDAsync, hipMemFree, hipMemFreeHost, hipMemGetAddressRange, hipMemGetInfo,
   !>  hipMemHostAlloc, hipMemHostGetDevicePointer
   interface hipMemcpyAtoA
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyAtoA_(dstArray,dstOffset,srcArray,srcOffset,ByteCount) &
-        bind(c, name="cuMemcpyAtoA")
-#else
     function hipMemcpyAtoA_(dstArray,dstOffset,srcArray,srcOffset,ByteCount) &
         bind(c, name="hipMemcpyAtoA")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4048,7 +3541,6 @@ module hipfort
   !>  hipMemcpyDtoDAsync, hipMemcpyDtoH, hipMemcpyDtoHAsync, hipMemcpyHtoA, hipMemcpyHtoAAsync,
   !>  hipMemcpyHtoDAsync, hipMemFree, hipMemFreeHost, hipMemGetAddressRange, hipMemGetInfo,
   !>  hipMemHostAlloc, hipMemHostGetDevicePointer
-#ifndef USE_CUDA_NAMES
   interface hipMemcpyHtoDAsync
     function hipMemcpyHtoDAsync_(dst,src,sizeBytes,stream) bind(c, name="hipMemcpyHtoDAsync")
       use iso_c_binding
@@ -4061,7 +3553,6 @@ module hipfort
       type(c_ptr),value :: stream
     end function
   end interface
-#endif
 
   !>   @brief Copy data from Device to Host asynchronously
   !>
@@ -4080,7 +3571,6 @@ module hipfort
   !>  hipMemcpyDtoDAsync, hipMemcpyDtoH, hipMemcpyDtoHAsync, hipMemcpyHtoA, hipMemcpyHtoAAsync,
   !>  hipMemcpyHtoDAsync, hipMemFree, hipMemFreeHost, hipMemGetAddressRange, hipMemGetInfo,
   !>  hipMemHostAlloc, hipMemHostGetDevicePointer
-#ifndef USE_CUDA_NAMES
   interface hipMemcpyDtoHAsync
     function hipMemcpyDtoHAsync_(dst,src,sizeBytes,stream) bind(c, name="hipMemcpyDtoHAsync")
       use iso_c_binding
@@ -4093,7 +3583,6 @@ module hipfort
       type(c_ptr),value :: stream
     end function
   end interface
-#endif
 
   !>   @brief Copy data from Device to Device asynchronously
   !>
@@ -4112,7 +3601,6 @@ module hipfort
   !>  hipMemcpyDtoDAsync, hipMemcpyDtoH, hipMemcpyDtoHAsync, hipMemcpyHtoA, hipMemcpyHtoAAsync,
   !>  hipMemcpyHtoDAsync, hipMemFree, hipMemFreeHost, hipMemGetAddressRange, hipMemGetInfo,
   !>  hipMemHostAlloc, hipMemHostGetDevicePointer
-#ifndef USE_CUDA_NAMES
   interface hipMemcpyDtoDAsync
     function hipMemcpyDtoDAsync_(dst,src,sizeBytes,stream) bind(c, name="hipMemcpyDtoDAsync")
       use iso_c_binding
@@ -4125,7 +3613,6 @@ module hipfort
       type(c_ptr),value :: stream
     end function
   end interface
-#endif
 
   !>  @brief Copies from one 1D array to host memory.
   !>
@@ -4146,13 +3633,8 @@ module hipfort
   !>  hipMemcpyHtoDAsync, hipMemFree, hipMemFreeHost, hipMemGetAddressRange, hipMemGetInfo,
   !>  hipMemHostAlloc, hipMemHostGetDevicePointer
   interface hipMemcpyAtoHAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyAtoHAsync_(dstHost,srcArray,srcOffset,ByteCount,stream) &
-        bind(c, name="cuMemcpyAtoHAsync")
-#else
     function hipMemcpyAtoHAsync_(dstHost,srcArray,srcOffset,ByteCount,stream) &
         bind(c, name="hipMemcpyAtoHAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4184,13 +3666,8 @@ module hipfort
   !>  hipMemcpyHtoDAsync, hipMemFree, hipMemFreeHost, hipMemGetAddressRange, hipMemGetInfo,
   !>  hipMemHostAlloc, hipMemHostGetDevicePointer
   interface hipMemcpyHtoAAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyHtoAAsync_(dstArray,dstOffset,srcHost,ByteCount,stream) &
-        bind(c, name="cuMemcpyHtoAAsync")
-#else
     function hipMemcpyHtoAAsync_(dstArray,dstOffset,srcHost,ByteCount,stream) &
         bind(c, name="hipMemcpyHtoAAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4217,7 +3694,6 @@ module hipfort
   !>   @param[in] name - Name of global to retrieve
   !>
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotFound`, `hipErrorInvalidContext`
-#ifndef USE_CUDA_NAMES
   interface hipModuleGetGlobal
     function hipModuleGetGlobal_(dptr,bytes,hmod,name) bind(c, name="hipModuleGetGlobal")
       use iso_c_binding
@@ -4230,7 +3706,6 @@ module hipfort
       type(c_ptr),value :: name
     end function
   end interface
-#endif
 
   !>   @brief Gets device pointer associated with symbol on the device.
   !>
@@ -4239,11 +3714,7 @@ module hipfort
   !>
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGetSymbolAddress
-#ifdef USE_CUDA_NAMES
-    function hipGetSymbolAddress_(devPtr,symbol) bind(c, name="cudaGetSymbolAddress")
-#else
     function hipGetSymbolAddress_(devPtr,symbol) bind(c, name="hipGetSymbolAddress")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4260,11 +3731,7 @@ module hipfort
   !>
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGetSymbolSize
-#ifdef USE_CUDA_NAMES
-    function hipGetSymbolSize_(mySize,symbol) bind(c, name="cudaGetSymbolSize")
-#else
     function hipGetSymbolSize_(mySize,symbol) bind(c, name="hipGetSymbolSize")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4294,13 +3761,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`.
   interface hipGetProcAddress
-#ifdef USE_CUDA_NAMES
-    function hipGetProcAddress_(symbol,pfn,hipVersion,flags,symbolStatus) &
-        bind(c, name="cuGetProcAddress")
-#else
     function hipGetProcAddress_(symbol,pfn,hipVersion,flags,symbolStatus) &
         bind(c, name="hipGetProcAddress")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4332,13 +3794,8 @@ module hipfort
   !>
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemcpyToSymbol
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyToSymbol_(symbol,src,sizeBytes,offset,myKind) &
-        bind(c, name="cudaMemcpyToSymbol")
-#else
     function hipMemcpyToSymbol_(symbol,src,sizeBytes,offset,myKind) &
         bind(c, name="hipMemcpyToSymbol")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4362,13 +3819,8 @@ module hipfort
   !>
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemcpyToSymbolAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyToSymbolAsync_(symbol,src,sizeBytes,offset,myKind,stream) &
-        bind(c, name="cudaMemcpyToSymbolAsync")
-#else
     function hipMemcpyToSymbolAsync_(symbol,src,sizeBytes,offset,myKind,stream) &
         bind(c, name="hipMemcpyToSymbolAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4392,13 +3844,8 @@ module hipfort
   !>
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemcpyFromSymbol
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyFromSymbol_(dst,symbol,sizeBytes,offset,myKind) &
-        bind(c, name="cudaMemcpyFromSymbol")
-#else
     function hipMemcpyFromSymbol_(dst,symbol,sizeBytes,offset,myKind) &
         bind(c, name="hipMemcpyFromSymbol")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4422,13 +3869,8 @@ module hipfort
   !>
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemcpyFromSymbolAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyFromSymbolAsync_(dst,symbol,sizeBytes,offset,myKind,stream) &
-        bind(c, name="cudaMemcpyFromSymbolAsync")
-#else
     function hipMemcpyFromSymbolAsync_(dst,symbol,sizeBytes,offset,myKind,stream) &
         bind(c, name="hipMemcpyFromSymbolAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4451,11 +3893,7 @@ module hipfort
   !>   @param[in] sizeBytes - Data size in bytes
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotInitialized`
   interface hipMemset
-#ifdef USE_CUDA_NAMES
-    function hipMemset_(dst,myValue,sizeBytes) bind(c, name="cudaMemset")
-#else
     function hipMemset_(dst,myValue,sizeBytes) bind(c, name="hipMemset")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4474,7 +3912,6 @@ module hipfort
   !>   @param[in] myValue - Value to be set
   !>   @param[in] count - Number of values to be set
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotInitialized`
-#ifndef USE_CUDA_NAMES
   interface hipMemsetD8
     function hipMemsetD8_(dest,myValue,count) bind(c, name="hipMemsetD8")
       use iso_c_binding
@@ -4486,7 +3923,6 @@ module hipfort
       integer(c_size_t),value :: count
     end function
   end interface
-#endif
 
   !>   @brief Fills the first sizeBytes bytes of the memory area pointed to by dest with the
   !>   constant
@@ -4503,7 +3939,6 @@ module hipfort
   !>   @param[in] count - Number of values to be set
   !>   @param[in] stream - Stream identifier
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotInitialized`
-#ifndef USE_CUDA_NAMES
   interface hipMemsetD8Async
     function hipMemsetD8Async_(dest,myValue,count,stream) bind(c, name="hipMemsetD8Async")
       use iso_c_binding
@@ -4516,7 +3951,6 @@ module hipfort
       type(c_ptr),value :: stream
     end function
   end interface
-#endif
 
   !>   @brief Fills the first sizeBytes bytes of the memory area pointed to by dest with the
   !>   constant
@@ -4526,7 +3960,6 @@ module hipfort
   !>   @param[in] myValue - Constant value to be set
   !>   @param[in] count - Number of values to be set
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotInitialized`
-#ifndef USE_CUDA_NAMES
   interface hipMemsetD16
     function hipMemsetD16_(dest,myValue,count) bind(c, name="hipMemsetD16")
       use iso_c_binding
@@ -4538,7 +3971,6 @@ module hipfort
       integer(c_size_t),value :: count
     end function
   end interface
-#endif
 
   !>   @brief Fills the first sizeBytes bytes of the memory area pointed to by dest with the
   !>   constant
@@ -4556,7 +3988,6 @@ module hipfort
   !>   @param[in] count - Number of values to be set
   !>   @param[in] stream - Stream identifier
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotInitialized`
-#ifndef USE_CUDA_NAMES
   interface hipMemsetD16Async
     function hipMemsetD16Async_(dest,myValue,count,stream) bind(c, name="hipMemsetD16Async")
       use iso_c_binding
@@ -4569,7 +4000,6 @@ module hipfort
       type(c_ptr),value :: stream
     end function
   end interface
-#endif
 
   !>   @brief Fills the memory area pointed to by dest with the constant integer
   !>  value for specified number of times.
@@ -4578,7 +4008,6 @@ module hipfort
   !>   @param[in] myValue - Constant value to be set
   !>   @param[in] count - Number of values to be set
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotInitialized`
-#ifndef USE_CUDA_NAMES
   interface hipMemsetD32
     function hipMemsetD32_(dest,myValue,count) bind(c, name="hipMemsetD32")
       use iso_c_binding
@@ -4590,7 +4019,6 @@ module hipfort
       integer(c_size_t),value :: count
     end function
   end interface
-#endif
 
   !>   @brief Fills the first sizeBytes bytes of the memory area pointed to by dev with the constant
   !>  byte value value.
@@ -4607,11 +4035,7 @@ module hipfort
   !>   @param[in] stream - Stream identifier
   !>   @return `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemsetAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemsetAsync_(dst,myValue,sizeBytes,stream) bind(c, name="cudaMemsetAsync")
-#else
     function hipMemsetAsync_(dst,myValue,sizeBytes,stream) bind(c, name="hipMemsetAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4638,7 +4062,6 @@ module hipfort
   !>   @param[in] count - Number of values to be set
   !>   @param[in] stream - Stream identifier
   !>   @return `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipMemsetD32Async
     function hipMemsetD32Async_(dst,myValue,count,stream) bind(c, name="hipMemsetD32Async")
       use iso_c_binding
@@ -4651,7 +4074,6 @@ module hipfort
       type(c_ptr),value :: stream
     end function
   end interface
-#endif
 
   !>   @brief Fills the memory area pointed to by dst with the constant value.
   !>
@@ -4662,11 +4084,7 @@ module hipfort
   !>   @param[in] height - Height size in bytes in 2D memory
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemset2D
-#ifdef USE_CUDA_NAMES
-    function hipMemset2D_(dst,pitch,myValue,width,height) bind(c, name="cudaMemset2D")
-#else
     function hipMemset2D_(dst,pitch,myValue,width,height) bind(c, name="hipMemset2D")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4689,13 +4107,8 @@ module hipfort
   !>   @param[in] stream - Stream identifier
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemset2DAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemset2DAsync_(dst,pitch,myValue,width,height,stream) &
-        bind(c, name="cudaMemset2DAsync")
-#else
     function hipMemset2DAsync_(dst,pitch,myValue,width,height,stream) &
         bind(c, name="hipMemset2DAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4717,11 +4130,7 @@ module hipfort
   !>   @param[in] extent - Size parameters for width field in bytes in device memory
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemset3D
-#ifdef USE_CUDA_NAMES
-    function hipMemset3D_(pitchedDevPtr,myValue,extent) bind(c, name="cudaMemset3D")
-#else
     function hipMemset3D_(pitchedDevPtr,myValue,extent) bind(c, name="hipMemset3D")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4741,12 +4150,7 @@ module hipfort
   !>   @param[in] stream - Stream identifier
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemset3DAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemset3DAsync_(pitchedDevPtr,myValue,extent,stream) &
-        bind(c, name="cudaMemset3DAsync")
-#else
     function hipMemset3DAsync_(pitchedDevPtr,myValue,extent,stream) bind(c, name="hipMemset3DAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4770,11 +4174,7 @@ module hipfort
   !>   @param[in] height - Number of rows
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemsetD2D8
-#ifdef USE_CUDA_NAMES
-    function hipMemsetD2D8_(dst,dstPitch,myValue,width,height) bind(c, name="cuMemsetD2D8")
-#else
     function hipMemsetD2D8_(dst,dstPitch,myValue,width,height) bind(c, name="hipMemsetD2D8")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4800,13 +4200,8 @@ module hipfort
   !>   @param[in] stream - Stream Identifier
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemsetD2D8Async
-#ifdef USE_CUDA_NAMES
-    function hipMemsetD2D8Async_(dst,dstPitch,myValue,width,height,stream) &
-        bind(c, name="cuMemsetD2D8Async")
-#else
     function hipMemsetD2D8Async_(dst,dstPitch,myValue,width,height,stream) &
         bind(c, name="hipMemsetD2D8Async")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4830,11 +4225,7 @@ module hipfort
   !>   @param[in] height - Number of rows
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemsetD2D16
-#ifdef USE_CUDA_NAMES
-    function hipMemsetD2D16_(dst,dstPitch,myValue,width,height) bind(c, name="cuMemsetD2D16")
-#else
     function hipMemsetD2D16_(dst,dstPitch,myValue,width,height) bind(c, name="hipMemsetD2D16")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4858,13 +4249,8 @@ module hipfort
   !>   @param[in] stream - Stream Identifier
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemsetD2D16Async
-#ifdef USE_CUDA_NAMES
-    function hipMemsetD2D16Async_(dst,dstPitch,myValue,width,height,stream) &
-        bind(c, name="cuMemsetD2D16Async")
-#else
     function hipMemsetD2D16Async_(dst,dstPitch,myValue,width,height,stream) &
         bind(c, name="hipMemsetD2D16Async")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4890,11 +4276,7 @@ module hipfort
   !>   @param[in] height - Number of rows
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemsetD2D32
-#ifdef USE_CUDA_NAMES
-    function hipMemsetD2D32_(dst,dstPitch,myValue,width,height) bind(c, name="cuMemsetD2D32")
-#else
     function hipMemsetD2D32_(dst,dstPitch,myValue,width,height) bind(c, name="hipMemsetD2D32")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4918,13 +4300,8 @@ module hipfort
   !>   @param[in] stream - Stream Identifier
   !>   @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemsetD2D32Async
-#ifdef USE_CUDA_NAMES
-    function hipMemsetD2D32Async_(dst,dstPitch,myValue,width,height,stream) &
-        bind(c, name="cuMemsetD2D32Async")
-#else
     function hipMemsetD2D32Async_(dst,dstPitch,myValue,width,height,stream) &
         bind(c, name="hipMemsetD2D32Async")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4953,11 +4330,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidDevice`, `hipErrorInvalidValue`
   interface hipMemGetInfo
-#ifdef USE_CUDA_NAMES
-    function hipMemGetInfo_(free,total) bind(c, name="cudaMemGetInfo")
-#else
     function hipMemGetInfo_(free,total) bind(c, name="hipMemGetInfo")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -4975,7 +4348,6 @@ module hipfort
   !>  @param[out] mySize - Returns the allocated memory size in bytes
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipMemPtrGetInfo
     function hipMemPtrGetInfo_(ptr,mySize) bind(c, name="hipMemPtrGetInfo")
       use iso_c_binding
@@ -4986,7 +4358,6 @@ module hipfort
       integer(c_size_t) :: mySize
     end function
   end interface
-#endif
 
   !>   @brief Allocate an array on the device.
   !>
@@ -4999,11 +4370,7 @@ module hipfort
   !>
   !>   @see hipMalloc, hipMallocPitch, hipFree, hipFreeArray, hipHostMalloc, hipHostFree
   interface hipMallocArray
-#ifdef USE_CUDA_NAMES
-    function hipMallocArray_(array,desc,width,height,flags) bind(c, name="cudaMallocArray")
-#else
     function hipMallocArray_(array,desc,width,height,flags) bind(c, name="hipMallocArray")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -5025,7 +4392,6 @@ module hipfort
   !>   @returns     `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>   @see hipMallocArray, hipArrayDestroy, hipFreeArray
-#ifndef USE_CUDA_NAMES
   interface hipArrayCreate
     function hipArrayCreate_(pHandle,pAllocateArray) bind(c, name="hipArrayCreate")
       use iso_c_binding
@@ -5037,7 +4403,6 @@ module hipfort
       type(HIP_ARRAY_DESCRIPTOR) :: pAllocateArray
     end function
   end interface
-#endif
 
   !>   @brief Destroy an array memory pointer on the device.
   !>
@@ -5046,7 +4411,6 @@ module hipfort
   !>   @returns     `hipSuccess`, `hipErrorInvalidValue`
   !>
   !>   @see hipArrayCreate, hipArrayDestroy, hipFreeArray
-#ifndef USE_CUDA_NAMES
   interface hipArrayDestroy
     function hipArrayDestroy_(array) bind(c, name="hipArrayDestroy")
       use iso_c_binding
@@ -5056,7 +4420,6 @@ module hipfort
       type(c_ptr),value :: array
     end function
   end interface
-#endif
 
   !>   @brief Create a 3D array memory pointer on the device.
   !>
@@ -5066,7 +4429,6 @@ module hipfort
   !>   @returns     `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>   @see hipMallocArray, hipArrayDestroy, hipFreeArray
-#ifndef USE_CUDA_NAMES
   interface hipArray3DCreate
     function hipArray3DCreate_(array,pAllocateArray) bind(c, name="hipArray3DCreate")
       use iso_c_binding
@@ -5078,7 +4440,6 @@ module hipfort
       type(HIP_ARRAY3D_DESCRIPTOR) :: pAllocateArray
     end function
   end interface
-#endif
 
   !>   @brief Create a 3D memory pointer on the device.
   !>
@@ -5089,11 +4450,7 @@ module hipfort
   !>
   !>   @see hipMallocPitch, hipMemGetInfo, hipFree
   interface hipMalloc3D
-#ifdef USE_CUDA_NAMES
-    function hipMalloc3D_(pitchedDevPtr,extent) bind(c, name="cudaMalloc3D")
-#else
     function hipMalloc3D_(pitchedDevPtr,extent) bind(c, name="hipMalloc3D")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -5111,11 +4468,7 @@ module hipfort
   !>
   !>   @see hipMalloc, hipMallocPitch, hipFree, hipMallocArray, hipHostMalloc, hipHostFree
   interface hipFreeArray
-#ifdef USE_CUDA_NAMES
-    function hipFreeArray_(array) bind(c, name="cudaFreeArray")
-#else
     function hipFreeArray_(array) bind(c, name="hipFreeArray")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -5134,11 +4487,7 @@ module hipfort
   !>
   !>   @see hipMalloc, hipMallocPitch, hipFree, hipFreeArray, hipHostMalloc, hipHostFree
   interface hipMalloc3DArray
-#ifdef USE_CUDA_NAMES
-    function hipMalloc3DArray_(array,desc,extent,flags) bind(c, name="cudaMalloc3DArray")
-#else
     function hipMalloc3DArray_(array,desc,extent,flags) bind(c, name="hipMalloc3DArray")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -5162,11 +4511,7 @@ module hipfort
   !>
   !>  @see hipArrayGetDescriptor, hipArray3DGetDescriptor
   interface hipArrayGetInfo
-#ifdef USE_CUDA_NAMES
-    function hipArrayGetInfo_(desc,extent,flags,array) bind(c, name="cudaArrayGetInfo")
-#else
     function hipArrayGetInfo_(desc,extent,flags,array) bind(c, name="hipArrayGetInfo")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -5197,11 +4542,7 @@ module hipfort
   !>  hipMemFreeHost, hipMemGetAddressRange, hipMemGetInfo, hipMemHostAlloc,
   !>  hipMemHostGetDevicePointer, hipMemsetD8, hipMemsetD16, hipMemsetD32, hipArrayGetInfo
   interface hipArrayGetDescriptor
-#ifdef USE_CUDA_NAMES
-    function hipArrayGetDescriptor_(pArrayDescriptor,array) bind(c, name="cuArrayGetDescriptor")
-#else
     function hipArrayGetDescriptor_(pArrayDescriptor,array) bind(c, name="hipArrayGetDescriptor")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -5230,12 +4571,8 @@ module hipfort
   !>  hipMemFreeHost, hipMemGetAddressRange, hipMemGetInfo, hipMemHostAlloc,
   !>  hipMemHostGetDevicePointer, hipMemsetD8, hipMemsetD16, hipMemsetD32, hipArrayGetInfo
   interface hipArray3DGetDescriptor
-#ifdef USE_CUDA_NAMES
-    function hipArray3DGetDescriptor_(pArrayDescriptor,array) bind(c, name="cuArray3DGetDescriptor")
-#else
     function hipArray3DGetDescriptor_(pArrayDescriptor,array) &
         bind(c, name="hipArray3DGetDescriptor")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -5253,7 +4590,6 @@ module hipfort
   !>
   !>   @see hipMemcpy, hipMemcpy2D, hipMemcpyToArray, hipMemcpy2DToArray, hipMemcpyFromArray,
   !>  hipMemcpyToSymbol, hipMemcpyAsync
-#ifndef USE_CUDA_NAMES
   interface hipMemcpyParam2D
     function hipMemcpyParam2D_(pCopy) bind(c, name="hipMemcpyParam2D")
       use iso_c_binding
@@ -5264,7 +4600,6 @@ module hipfort
       type(hip_Memcpy2D) :: pCopy
     end function
   end interface
-#endif
 
   !>   @brief Copies memory for 2D arrays.
   !>   @param[in] pCopy - Parameters for the memory copy
@@ -5274,7 +4609,6 @@ module hipfort
   !>
   !>   @see hipMemcpy, hipMemcpy2D, hipMemcpyToArray, hipMemcpy2DToArray, hipMemcpyFromArray,
   !>  hipMemcpyToSymbol, hipMemcpyAsync
-#ifndef USE_CUDA_NAMES
   interface hipMemcpyParam2DAsync
     function hipMemcpyParam2DAsync_(pCopy,stream) bind(c, name="hipMemcpyParam2DAsync")
       use iso_c_binding
@@ -5286,7 +4620,6 @@ module hipfort
       type(c_ptr),value :: stream
     end function
   end interface
-#endif
 
   !>   @brief Copies data between host and device.
   !>
@@ -5304,13 +4637,8 @@ module hipfort
   !>   @see hipMemcpy, hipMemcpyToArray, hipMemcpy2D, hipMemcpyFromArray, hipMemcpyToSymbol,
   !>  hipMemcpyAsync
   interface hipMemcpy2DToArray
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy2DToArray_(dst,wOffset,hOffset,src,spitch,width,height,myKind) &
-        bind(c, name="cudaMemcpy2DToArray")
-#else
     function hipMemcpy2DToArray_(dst,wOffset,hOffset,src,spitch,width,height,myKind) &
         bind(c, name="hipMemcpy2DToArray")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -5343,13 +4671,8 @@ module hipfort
   !>   @see hipMemcpy, hipMemcpyToArray, hipMemcpy2D, hipMemcpyFromArray, hipMemcpyToSymbol,
   !>  hipMemcpyAsync
   interface hipMemcpy2DToArrayAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy2DToArrayAsync_(dst,wOffset,hOffset,src,spitch,width,height,myKind,stream) &
-        bind(c, name="cudaMemcpy2DToArrayAsync")
-#else
     function hipMemcpy2DToArrayAsync_(dst,wOffset,hOffset,src,spitch,width,height,myKind,stream) &
         bind(c, name="hipMemcpy2DToArrayAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -5383,15 +4706,9 @@ module hipfort
   !>   @see hipMemcpy, hipMemcpyToArray, hipMemcpy2D, hipMemcpyFromArray, hipMemcpyToSymbol,
   !>  hipMemcpyAsync
   interface hipMemcpy2DArrayToArray
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy2DArrayToArray_(dst,wOffsetDst,hOffsetDst,src,wOffsetSrc,hOffsetSrc,width, &
-        height,myKind) &
-        bind(c, name="cudaMemcpy2DArrayToArray")
-#else
     function hipMemcpy2DArrayToArray_(dst,wOffsetDst,hOffsetDst,src,wOffsetSrc,hOffsetSrc,width, &
         height,myKind) &
         bind(c, name="hipMemcpy2DArrayToArray")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -5425,13 +4742,8 @@ module hipfort
   !>   hipMemcpyAsync
   !>   @warning  This API is deprecated.
   interface hipMemcpyToArray
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyToArray_(dst,wOffset,hOffset,src,count,myKind) &
-        bind(c, name="cudaMemcpyToArray")
-#else
     function hipMemcpyToArray_(dst,wOffset,hOffset,src,count,myKind) &
         bind(c, name="hipMemcpyToArray")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -5462,13 +4774,8 @@ module hipfort
   !>  hipMemcpyAsync
   !>  @warning  This API is deprecated.
   interface hipMemcpyFromArray
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyFromArray_(dst,srcArray,wOffset,hOffset,count,myKind) &
-        bind(c, name="cudaMemcpyFromArray")
-#else
     function hipMemcpyFromArray_(dst,srcArray,wOffset,hOffset,count,myKind) &
         bind(c, name="hipMemcpyFromArray")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -5498,13 +4805,8 @@ module hipfort
   !>   @see hipMemcpy, hipMemcpy2DToArray, hipMemcpy2D, hipMemcpyFromArray, hipMemcpyToSymbol,
   !>  hipMemcpyAsync
   interface hipMemcpy2DFromArray
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy2DFromArray_(dst,dpitch,src,wOffset,hOffset,width,height,myKind) &
-        bind(c, name="cudaMemcpy2DFromArray")
-#else
     function hipMemcpy2DFromArray_(dst,dpitch,src,wOffset,hOffset,width,height,myKind) &
         bind(c, name="hipMemcpy2DFromArray")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -5537,13 +4839,8 @@ module hipfort
   !>   @see hipMemcpy, hipMemcpy2DToArray, hipMemcpy2D, hipMemcpyFromArray, hipMemcpyToSymbol,
   !>  hipMemcpyAsync
   interface hipMemcpy2DFromArrayAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy2DFromArrayAsync_(dst,dpitch,src,wOffset,hOffset,width,height,myKind,stream) &
-        bind(c, name="cudaMemcpy2DFromArrayAsync")
-#else
     function hipMemcpy2DFromArrayAsync_(dst,dpitch,src,wOffset,hOffset,width,height,myKind,stream) &
         bind(c, name="hipMemcpy2DFromArrayAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -5571,7 +4868,6 @@ module hipfort
   !>
   !>   @see hipMemcpy, hipMemcpy2DToArray, hipMemcpy2D, hipMemcpyFromArray, hipMemcpyToSymbol,
   !>  hipMemcpyAsync
-#ifndef USE_CUDA_NAMES
   interface hipMemcpyAtoH
     function hipMemcpyAtoH_(dst,srcArray,srcOffset,count) bind(c, name="hipMemcpyAtoH")
       use iso_c_binding
@@ -5584,7 +4880,6 @@ module hipfort
       integer(c_size_t),value :: count
     end function
   end interface
-#endif
 
   !>   @brief Copies data between host and device.
   !>
@@ -5597,7 +4892,6 @@ module hipfort
   !>
   !>   @see hipMemcpy, hipMemcpy2DToArray, hipMemcpy2D, hipMemcpyFromArray, hipMemcpyToSymbol,
   !>  hipMemcpyAsync
-#ifndef USE_CUDA_NAMES
   interface hipMemcpyHtoA
     function hipMemcpyHtoA_(dstArray,dstOffset,srcHost,count) bind(c, name="hipMemcpyHtoA")
       use iso_c_binding
@@ -5610,7 +4904,6 @@ module hipfort
       integer(c_size_t),value :: count
     end function
   end interface
-#endif
 
   !>   @brief Copies data between host and device.
   !>
@@ -5621,11 +4914,7 @@ module hipfort
   !>   @see hipMemcpy, hipMemcpy2DToArray, hipMemcpy2D, hipMemcpyFromArray, hipMemcpyToSymbol,
   !>  hipMemcpyAsync
   interface hipMemcpy3D
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy3D_(p) bind(c, name="cudaMemcpy3D")
-#else
     function hipMemcpy3D_(p) bind(c, name="hipMemcpy3D")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -5645,11 +4934,7 @@ module hipfort
   !>   @see hipMemcpy, hipMemcpy2DToArray, hipMemcpy2D, hipMemcpyFromArray, hipMemcpyToSymbol,
   !>  hipMemcpyAsync
   interface hipMemcpy3DAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy3DAsync_(p,stream) bind(c, name="cudaMemcpy3DAsync")
-#else
     function hipMemcpy3DAsync_(p,stream) bind(c, name="hipMemcpy3DAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -5668,7 +4953,6 @@ module hipfort
   !>
   !>   @see hipMemcpy, hipMemcpy2DToArray, hipMemcpy2D, hipMemcpyFromArray, hipMemcpyToSymbol,
   !>  hipMemcpyAsync
-#ifndef USE_CUDA_NAMES
   interface hipDrvMemcpy3D
     function hipDrvMemcpy3D_(pCopy) bind(c, name="hipDrvMemcpy3D")
       use iso_c_binding
@@ -5679,7 +4963,6 @@ module hipfort
       type(HIP_MEMCPY3D) :: pCopy
     end function
   end interface
-#endif
 
   !>   @brief Copies data between host and device asynchronously.
   !>
@@ -5690,7 +4973,6 @@ module hipfort
   !>
   !>   @see hipMemcpy, hipMemcpy2DToArray, hipMemcpy2D, hipMemcpyFromArray, hipMemcpyToSymbol,
   !>  hipMemcpyAsync
-#ifndef USE_CUDA_NAMES
   interface hipDrvMemcpy3DAsync
     function hipDrvMemcpy3DAsync_(pCopy,stream) bind(c, name="hipDrvMemcpy3DAsync")
       use iso_c_binding
@@ -5702,7 +4984,6 @@ module hipfort
       type(c_ptr),value :: stream
     end function
   end interface
-#endif
 
   !>  @brief Get information on memory allocations.
   !>
@@ -5714,7 +4995,6 @@ module hipfort
   !>
   !>  @see hipCtxCreate, hipCtxDestroy, hipCtxGetFlags, hipCtxPopCurrent, hipCtxGetCurrent,
   !>  hipCtxSetCurrent, hipCtxPushCurrent, hipCtxSetCacheConfig, hipCtxSynchronize, hipCtxGetDevice
-#ifndef USE_CUDA_NAMES
   interface hipMemGetAddressRange
     function hipMemGetAddressRange_(pbase,psize,dptr) bind(c, name="hipMemGetAddressRange")
       use iso_c_binding
@@ -5726,7 +5006,6 @@ module hipfort
       type(c_ptr),value :: dptr
     end function
   end interface
-#endif
 
   !>  @brief Perform Batch of 1D copies
   !>
@@ -5742,13 +5021,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemcpyBatchAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyBatchAsync_(dsts,srcs,sizes,count,attrs,attrsIdxs,numAttrs,failIdx,stream) &
-        bind(c, name="cudaMemcpyBatchAsync")
-#else
     function hipMemcpyBatchAsync_(dsts,srcs,sizes,count,attrs,attrsIdxs,numAttrs,failIdx,stream) &
         bind(c, name="hipMemcpyBatchAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -5777,13 +5051,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipMemcpy3DBatchAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy3DBatchAsync_(numOps,opList,failIdx,flags,stream) &
-        bind(c, name="cudaMemcpy3DBatchAsync")
-#else
     function hipMemcpy3DBatchAsync_(numOps,opList,failIdx,flags,stream) &
         bind(c, name="hipMemcpy3DBatchAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -5804,11 +5073,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, hipErrorInvalidDevice
   interface hipMemcpy3DPeer
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy3DPeer_(p) bind(c, name="cudaMemcpy3DPeer")
-#else
     function hipMemcpy3DPeer_(p) bind(c, name="hipMemcpy3DPeer")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -5825,11 +5090,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, hipErrorInvalidDevice
   interface hipMemcpy3DPeerAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy3DPeerAsync_(p,stream) bind(c, name="cudaMemcpy3DPeerAsync")
-#else
     function hipMemcpy3DPeerAsync_(p,stream) bind(c, name="hipMemcpy3DPeerAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -5870,13 +5131,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidDevice`
   interface hipDeviceCanAccessPeer
-#ifdef USE_CUDA_NAMES
-    function hipDeviceCanAccessPeer_(canAccessPeer,deviceId,peerDeviceId) &
-        bind(c, name="cudaDeviceCanAccessPeer")
-#else
     function hipDeviceCanAccessPeer_(canAccessPeer,deviceId,peerDeviceId) &
         bind(c, name="hipDeviceCanAccessPeer")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -5900,13 +5156,8 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidDevice`, `hipErrorInvalidValue`,
   !>  @returns `hipErrorPeerAccessAlreadyEnabled` if peer access is already enabled for this device.
   interface hipDeviceEnablePeerAccess
-#ifdef USE_CUDA_NAMES
-    function hipDeviceEnablePeerAccess_(peerDeviceId,flags) &
-        bind(c, name="cudaDeviceEnablePeerAccess")
-#else
     function hipDeviceEnablePeerAccess_(peerDeviceId,flags) &
         bind(c, name="hipDeviceEnablePeerAccess")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -5926,11 +5177,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorPeerAccessNotEnabled`
   interface hipDeviceDisablePeerAccess
-#ifdef USE_CUDA_NAMES
-    function hipDeviceDisablePeerAccess_(peerDeviceId) bind(c, name="cudaDeviceDisablePeerAccess")
-#else
     function hipDeviceDisablePeerAccess_(peerDeviceId) bind(c, name="hipDeviceDisablePeerAccess")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -5949,12 +5196,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorInvalidDevice`
   interface hipMemcpyPeer
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyPeer_(dst,dstDeviceId,src,srcDeviceId,sizeBytes) &
-        bind(c, name="cudaMemcpyPeer")
-#else
     function hipMemcpyPeer_(dst,dstDeviceId,src,srcDeviceId,sizeBytes) bind(c, name="hipMemcpyPeer")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -5978,13 +5220,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorInvalidDevice`
   interface hipMemcpyPeerAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyPeerAsync_(dst,dstDeviceId,src,srcDevice,sizeBytes,stream) &
-        bind(c, name="cudaMemcpyPeerAsync")
-#else
     function hipMemcpyPeerAsync_(dst,dstDeviceId,src,srcDevice,sizeBytes,stream) &
         bind(c, name="hipMemcpyPeerAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -6012,7 +5249,6 @@ module hipfort
   !>  @warning This API is deprecated on the AMD platform, only for equivalent cuCtx driver API on
   !>  the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipCtxCreate
     function hipCtxCreate_(ctx,flags,device) bind(c, name="hipCtxCreate")
       use iso_c_binding
@@ -6024,7 +5260,6 @@ module hipfort
       integer(c_int),value :: device
     end function
   end interface
-#endif
 
   !>  @brief Destroy a HIP context [Deprecated]
   !>
@@ -6038,7 +5273,6 @@ module hipfort
   !>  @warning This API is deprecated on the AMD platform, only for equivalent cuCtx driver API on
   !>  the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipCtxDestroy
     function hipCtxDestroy_(ctx) bind(c, name="hipCtxDestroy")
       use iso_c_binding
@@ -6048,7 +5282,6 @@ module hipfort
       type(c_ptr),value :: ctx
     end function
   end interface
-#endif
 
   !>  @brief Pop the current/default context and return the popped context [Deprecated]
   !>
@@ -6062,7 +5295,6 @@ module hipfort
   !>  @warning This API is deprecated on the AMD platform, only for equivalent cuCtx driver API on
   !>  the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipCtxPopCurrent
     function hipCtxPopCurrent_(ctx) bind(c, name="hipCtxPopCurrent")
       use iso_c_binding
@@ -6072,7 +5304,6 @@ module hipfort
       type(c_ptr) :: ctx
     end function
   end interface
-#endif
 
   !>  @brief Push the context to be set as current/ default context [Deprecated]
   !>
@@ -6086,7 +5317,6 @@ module hipfort
   !>  @warning This API is deprecated on the AMD platform, only for equivalent cuCtx driver API on
   !>  the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipCtxPushCurrent
     function hipCtxPushCurrent_(ctx) bind(c, name="hipCtxPushCurrent")
       use iso_c_binding
@@ -6096,7 +5326,6 @@ module hipfort
       type(c_ptr),value :: ctx
     end function
   end interface
-#endif
 
   !>  @brief Set the passed context as current/default [Deprecated]
   !>
@@ -6110,7 +5339,6 @@ module hipfort
   !>  @warning This API is deprecated on the AMD platform, only for equivalent cuCtx driver API on
   !>  the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipCtxSetCurrent
     function hipCtxSetCurrent_(ctx) bind(c, name="hipCtxSetCurrent")
       use iso_c_binding
@@ -6120,7 +5348,6 @@ module hipfort
       type(c_ptr),value :: ctx
     end function
   end interface
-#endif
 
   !>  @brief Get the handle of the current/ default context [Deprecated]
   !>
@@ -6134,7 +5361,6 @@ module hipfort
   !>  @warning This API is deprecated on the AMD platform, only for equivalent cuCtx driver API on
   !>  the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipCtxGetCurrent
     function hipCtxGetCurrent_(ctx) bind(c, name="hipCtxGetCurrent")
       use iso_c_binding
@@ -6144,7 +5370,6 @@ module hipfort
       type(c_ptr) :: ctx
     end function
   end interface
-#endif
 
   !>  @brief Get the handle of the device associated with current/default context [Deprecated]
   !>
@@ -6158,7 +5383,6 @@ module hipfort
   !>  @warning This API is deprecated on the AMD platform, only for equivalent cuCtx driver API on
   !>  the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipCtxGetDevice
     function hipCtxGetDevice_(device) bind(c, name="hipCtxGetDevice")
       use iso_c_binding
@@ -6168,7 +5392,6 @@ module hipfort
       integer(c_int) :: device
     end function
   end interface
-#endif
 
   !>  @brief Returns the approximate HIP api version.
   !>
@@ -6189,7 +5412,6 @@ module hipfort
   !>  @warning This API is deprecated on the AMD platform, only for equivalent cuCtx driver API on
   !>  the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipCtxGetApiVersion
     function hipCtxGetApiVersion_(ctx,apiVersion) bind(c, name="hipCtxGetApiVersion")
       use iso_c_binding
@@ -6200,7 +5422,6 @@ module hipfort
       integer(c_int) :: apiVersion
     end function
   end interface
-#endif
 
   !>  @brief Get Cache configuration for a specific function [Deprecated]
   !>
@@ -6217,7 +5438,6 @@ module hipfort
   !>  @warning This API is deprecated on the AMD platform, only for equivalent cuCtx driver API on
   !>  the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipCtxGetCacheConfig
     function hipCtxGetCacheConfig_(cacheConfig) bind(c, name="hipCtxGetCacheConfig")
       use iso_c_binding
@@ -6227,7 +5447,6 @@ module hipfort
       type(c_ptr),value :: cacheConfig
     end function
   end interface
-#endif
 
   !>  @brief Set L1/Shared cache partition [Deprecated]
   !>
@@ -6244,7 +5463,6 @@ module hipfort
   !>  @warning This API is deprecated on the AMD platform, only for equivalent cuCtx driver API on
   !>  the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipCtxSetCacheConfig
     function hipCtxSetCacheConfig_(cacheConfig) bind(c, name="hipCtxSetCacheConfig")
       use iso_c_binding
@@ -6254,7 +5472,6 @@ module hipfort
       integer(kind(hipFuncCachePreferNone)),value :: cacheConfig
     end function
   end interface
-#endif
 
   !>  @brief Set Shared memory bank configuration  [Deprecated]
   !>
@@ -6271,7 +5488,6 @@ module hipfort
   !>  @warning This API is deprecated on the AMD platform, only for equivalent cuCtx driver API on
   !>  the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipCtxSetSharedMemConfig
     function hipCtxSetSharedMemConfig_(config) bind(c, name="hipCtxSetSharedMemConfig")
       use iso_c_binding
@@ -6281,7 +5497,6 @@ module hipfort
       integer(kind(hipSharedMemBankSizeDefault)),value :: config
     end function
   end interface
-#endif
 
   !>  @brief Get Shared memory bank configuration [Deprecated]
   !>
@@ -6298,7 +5513,6 @@ module hipfort
   !>  @warning This API is deprecated on the AMD platform, only for equivalent cuCtx driver API on
   !>  the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipCtxGetSharedMemConfig
     function hipCtxGetSharedMemConfig_(pConfig) bind(c, name="hipCtxGetSharedMemConfig")
       use iso_c_binding
@@ -6308,7 +5522,6 @@ module hipfort
       type(c_ptr),value :: pConfig
     end function
   end interface
-#endif
 
   !>  @brief Blocks until the default context has completed all preceding requested tasks
   !>  [Deprecated]
@@ -6324,7 +5537,6 @@ module hipfort
   !>  @warning This API is deprecated on the AMD platform, only for equivalent cuCtx driver API on
   !>  the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipCtxSynchronize
     function hipCtxSynchronize_() bind(c, name="hipCtxSynchronize")
       use iso_c_binding
@@ -6333,7 +5545,6 @@ module hipfort
       integer(kind(hipSuccess)) :: hipCtxSynchronize_
     end function
   end interface
-#endif
 
   !>  @brief Return flags used for creating default context [Deprecated]
   !>
@@ -6347,7 +5558,6 @@ module hipfort
   !>  @warning This API is deprecated on the AMD platform, only for equivalent cuCtx driver API on
   !>  the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipCtxGetFlags
     function hipCtxGetFlags_(flags) bind(c, name="hipCtxGetFlags")
       use iso_c_binding
@@ -6357,7 +5567,6 @@ module hipfort
       integer(c_int) :: flags
     end function
   end interface
-#endif
 
   !>  @brief Enables direct access to memory allocations in a peer context [Deprecated]
   !>
@@ -6381,7 +5590,6 @@ module hipfort
   !>  @warning This API is deprecated on the AMD platform, only for equivalent cuCtx driver API on
   !>  the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipCtxEnablePeerAccess
     function hipCtxEnablePeerAccess_(peerCtx,flags) bind(c, name="hipCtxEnablePeerAccess")
       use iso_c_binding
@@ -6392,7 +5600,6 @@ module hipfort
       integer(c_int),value :: flags
     end function
   end interface
-#endif
 
   !>  @brief Disable direct access from current context's virtual address space to memory
   !>  allocations
@@ -6414,7 +5621,6 @@ module hipfort
   !>  @warning This API is deprecated on the AMD platform, only for equivalent cuCtx driver API on
   !>  the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipCtxDisablePeerAccess
     function hipCtxDisablePeerAccess_(peerCtx) bind(c, name="hipCtxDisablePeerAccess")
       use iso_c_binding
@@ -6424,7 +5630,6 @@ module hipfort
       type(c_ptr),value :: peerCtx
     end function
   end interface
-#endif
 
   !>  @brief Get the state of the primary context [Deprecated]
   !>
@@ -6439,7 +5644,6 @@ module hipfort
   !>
   !>  @warning  This API is deprecated on the AMD platform, only for equivalent driver API on the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipDevicePrimaryCtxGetState
     function hipDevicePrimaryCtxGetState_(dev,flags,active) &
         bind(c, name="hipDevicePrimaryCtxGetState")
@@ -6452,7 +5656,6 @@ module hipfort
       integer(c_int) :: active
     end function
   end interface
-#endif
 
   !>  @brief Release the primary context on the GPU.
   !>
@@ -6467,7 +5670,6 @@ module hipfort
   !>
   !>  @warning  This API is deprecated on the AMD platform, only for equivalent driver API on the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipDevicePrimaryCtxRelease
     function hipDevicePrimaryCtxRelease_(dev) bind(c, name="hipDevicePrimaryCtxRelease")
       use iso_c_binding
@@ -6477,7 +5679,6 @@ module hipfort
       integer(c_int),value :: dev
     end function
   end interface
-#endif
 
   !>  @brief Retain the primary context on the GPU [Deprecated]
   !>
@@ -6491,7 +5692,6 @@ module hipfort
   !>
   !>  @warning  This API is deprecated on the AMD platform, only for equivalent driver API on the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipDevicePrimaryCtxRetain
     function hipDevicePrimaryCtxRetain_(pctx,dev) bind(c, name="hipDevicePrimaryCtxRetain")
       use iso_c_binding
@@ -6502,7 +5702,6 @@ module hipfort
       integer(c_int),value :: dev
     end function
   end interface
-#endif
 
   !>  @brief Resets the primary context on the GPU [Deprecated]
   !>
@@ -6515,7 +5714,6 @@ module hipfort
   !>
   !>  @warning  This API is deprecated on the AMD platform, only for equivalent driver API on the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipDevicePrimaryCtxReset
     function hipDevicePrimaryCtxReset_(dev) bind(c, name="hipDevicePrimaryCtxReset")
       use iso_c_binding
@@ -6525,7 +5723,6 @@ module hipfort
       integer(c_int),value :: dev
     end function
   end interface
-#endif
 
   !>  @brief Set flags for the primary context [Deprecated]
   !>
@@ -6539,7 +5736,6 @@ module hipfort
   !>
   !>  @warning  This API is deprecated on the AMD platform, only for equivalent driver API on the
   !>  NVIDIA platform.
-#ifndef USE_CUDA_NAMES
   interface hipDevicePrimaryCtxSetFlags
     function hipDevicePrimaryCtxSetFlags_(dev,flags) bind(c, name="hipDevicePrimaryCtxSetFlags")
       use iso_c_binding
@@ -6550,7 +5746,6 @@ module hipfort
       integer(c_int),value :: flags
     end function
   end interface
-#endif
 
   !> -------------------------------------------------------------------------------------------------
   !> -------------------------------------------------------------------------------------------------
@@ -6571,11 +5766,7 @@ module hipfort
   !>  `hipErrorFileNotFound`,
   !>  `hipErrorOutOfMemory`, `hipErrorSharedObjectInitFailed`, `hipErrorNotInitialized`
   interface hipModuleLoadFatBinary
-#ifdef USE_CUDA_NAMES
-    function hipModuleLoadFatBinary_(myModule,fatbin) bind(c, name="cuModuleLoadFatBinary")
-#else
     function hipModuleLoadFatBinary_(myModule,fatbin) bind(c, name="hipModuleLoadFatBinary")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -6597,7 +5788,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorInvalidContext`,
   !>  `hipErrorFileNotFound`,
   !>  `hipErrorOutOfMemory`, `hipErrorSharedObjectInitFailed`, `hipErrorNotInitialized`
-#ifndef USE_CUDA_NAMES
   interface hipModuleLoad
     function hipModuleLoad_(myModule,fname) bind(c, name="hipModuleLoad")
       use iso_c_binding
@@ -6608,7 +5798,6 @@ module hipfort
       type(c_ptr),value :: fname
     end function
   end interface
-#endif
 
   !>  @brief Frees the module
   !>
@@ -6617,7 +5806,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidResourceHandle`
   !>
   !>  The module is freed, and the code objects associated with it are destroyed.
-#ifndef USE_CUDA_NAMES
   interface hipModuleUnload
     function hipModuleUnload_(myModule) bind(c, name="hipModuleUnload")
       use iso_c_binding
@@ -6627,7 +5815,6 @@ module hipfort
       type(c_ptr),value :: myModule
     end function
   end interface
-#endif
 
   !>  @brief Function with kname will be extracted if present in module
   !>
@@ -6638,7 +5825,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorInvalidContext`,
   !>  `hipErrorNotInitialized`,
   !>  `hipErrorNotFound`,
-#ifndef USE_CUDA_NAMES
   interface hipModuleGetFunction
     function hipModuleGetFunction_(myFunction,myModule,kname) bind(c, name="hipModuleGetFunction")
       use iso_c_binding
@@ -6650,7 +5836,6 @@ module hipfort
       type(c_ptr),value :: kname
     end function
   end interface
-#endif
 
   !>  @brief Returns the number of functions within a module.
   !>
@@ -6661,11 +5846,7 @@ module hipfort
   !>  `hipErrorNotInitialized`,
   !>  `hipErrorNotFound`,
   interface hipModuleGetFunctionCount
-#ifdef USE_CUDA_NAMES
-    function hipModuleGetFunctionCount_(count,mod) bind(c, name="cuModuleGetFunctionCount")
-#else
     function hipModuleGetFunctionCount_(count,mod) bind(c, name="hipModuleGetFunctionCount")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -6687,15 +5868,9 @@ module hipfort
   !>  @param [in] numLibraryOptions Number of library options
   !>  @return `hipSuccess`, `hipErrorInvalidValue`,
   interface hipLibraryLoadData
-#ifdef USE_CUDA_NAMES
-    function hipLibraryLoadData_(library,code,jitOptions,jitOptionsValues,numJitOptions, &
-        libraryOptions,libraryOptionValues,numLibraryOptions) &
-        bind(c, name="cudaLibraryLoadData")
-#else
     function hipLibraryLoadData_(library,code,jitOptions,jitOptionsValues,numJitOptions, &
         libraryOptions,libraryOptionValues,numLibraryOptions) &
         bind(c, name="hipLibraryLoadData")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -6723,15 +5898,9 @@ module hipfort
   !>  @param [in] numLibraryOptions Number of library options
   !>  @return `hipSuccess`, `hipErrorInvalidValue`
   interface hipLibraryLoadFromFile
-#ifdef USE_CUDA_NAMES
-    function hipLibraryLoadFromFile_(library,fileName,jitOptions,jitOptionsValues,numJitOptions, &
-        libraryOptions,libraryOptionValues,numLibraryOptions) &
-        bind(c, name="cudaLibraryLoadFromFile")
-#else
     function hipLibraryLoadFromFile_(library,fileName,jitOptions,jitOptionsValues,numJitOptions, &
         libraryOptions,libraryOptionValues,numLibraryOptions) &
         bind(c, name="hipLibraryLoadFromFile")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -6752,11 +5921,7 @@ module hipfort
   !>  @param [in] library Input created hip library
   !>  @return `hipSuccess`, `hipErrorInvalidValue`
   interface hipLibraryUnload
-#ifdef USE_CUDA_NAMES
-    function hipLibraryUnload_(library) bind(c, name="cudaLibraryUnload")
-#else
     function hipLibraryUnload_(library) bind(c, name="hipLibraryUnload")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -6772,11 +5937,7 @@ module hipfort
   !>  @param [in] name kernel name to be searched for
   !>  @return `hipSuccess`, `hipErrorInvalidValue`
   interface hipLibraryGetKernel
-#ifdef USE_CUDA_NAMES
-    function hipLibraryGetKernel_(pKernel,library,name) bind(c, name="cudaLibraryGetKernel")
-#else
     function hipLibraryGetKernel_(pKernel,library,name) bind(c, name="hipLibraryGetKernel")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -6793,11 +5954,7 @@ module hipfort
   !>  @param [in] library Input created hip library
   !>  @return `hipSuccess`, `hipErrorInvalidValue`
   interface hipLibraryGetKernelCount
-#ifdef USE_CUDA_NAMES
-    function hipLibraryGetKernelCount_(count,library) bind(c, name="cudaLibraryGetKernelCount")
-#else
     function hipLibraryGetKernelCount_(count,library) bind(c, name="hipLibraryGetKernelCount")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -6814,13 +5971,8 @@ module hipfort
   !>  @param [in] library Library handle to query from
   !>  @return `hipSuccess`, `hipErrorInvalidValue`
   interface hipLibraryEnumerateKernels
-#ifdef USE_CUDA_NAMES
-    function hipLibraryEnumerateKernels_(kernels,numKernels,library) &
-        bind(c, name="cudaLibraryEnumerateKernels")
-#else
     function hipLibraryEnumerateKernels_(kernels,numKernels,library) &
         bind(c, name="hipLibraryEnumerateKernels")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -6836,7 +5988,6 @@ module hipfort
   !>  @param [out] library Returned Library handle
   !>  @param [in] kernel Kernel to retrieve library Handle
   !>  @return `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipKernelGetLibrary
     function hipKernelGetLibrary_(library,kernel) bind(c, name="hipKernelGetLibrary")
       use iso_c_binding
@@ -6847,14 +5998,12 @@ module hipfort
       type(c_ptr),value :: kernel
     end function
   end interface
-#endif
 
   !>  @brief Returns a Kernel Name
   !>
   !>  @param [out] name Returned Kernel Name
   !>  @param [in] kernel Kernel handle to retrieve name
   !>  @return `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipKernelGetName
     function hipKernelGetName_(name,kernel) bind(c, name="hipKernelGetName")
       use iso_c_binding
@@ -6865,7 +6014,6 @@ module hipfort
       type(c_ptr),value :: kernel
     end function
   end interface
-#endif
 
   !>  @brief Find out attributes for a given function.
   !>  @ingroup Execution
@@ -6874,11 +6022,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorInvalidDeviceFunction`
   interface hipFuncGetAttributes
-#ifdef USE_CUDA_NAMES
-    function hipFuncGetAttributes_(attr,func) bind(c, name="cudaFuncGetAttributes")
-#else
     function hipFuncGetAttributes_(attr,func) bind(c, name="hipFuncGetAttributes")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -6896,7 +6040,6 @@ module hipfort
   !>  @param [in]  hfunc  Function to get attributes from
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorInvalidDeviceFunction`
-#ifndef USE_CUDA_NAMES
   interface hipFuncGetAttribute
     function hipFuncGetAttribute_(myValue,attrib,hfunc) bind(c, name="hipFuncGetAttribute")
       use iso_c_binding
@@ -6908,7 +6051,6 @@ module hipfort
       type(c_ptr),value :: hfunc
     end function
   end interface
-#endif
 
   !>  @brief Gets pointer to device entry function that matches entry function symbolPtr.
   !>
@@ -6917,11 +6059,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidDeviceFunction`
   interface hipGetFuncBySymbol
-#ifdef USE_CUDA_NAMES
-    function hipGetFuncBySymbol_(functionPtr,symbolPtr) bind(c, name="cudaGetFuncBySymbol")
-#else
     function hipGetFuncBySymbol_(functionPtr,symbolPtr) bind(c, name="hipGetFuncBySymbol")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -6940,13 +6078,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGetDriverEntryPoint
-#ifdef USE_CUDA_NAMES
-    function hipGetDriverEntryPoint_(symbol,funcPtr,flags,driverStatus) &
-        bind(c, name="cudaGetDriverEntryPoint")
-#else
     function hipGetDriverEntryPoint_(symbol,funcPtr,flags,driverStatus) &
         bind(c, name="hipGetDriverEntryPoint")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -6965,7 +6098,6 @@ module hipfort
   !>  @param [out] texRef  Pointer of texture reference
   !>
   !>  @returns `hipSuccess`, `hipErrorNotInitialized`, `hipErrorNotFound`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipModuleGetTexRef
     function hipModuleGetTexRef_(texRef,hmod,name) bind(c, name="hipModuleGetTexRef")
       use iso_c_binding
@@ -6977,7 +6109,6 @@ module hipfort
       type(c_ptr),value :: name
     end function
   end interface
-#endif
 
   !>  @brief builds module from code object data which resides in host memory.
   !>
@@ -7003,7 +6134,6 @@ module hipfort
   !>  @param [out] module  Retuned module
   !>
   !>  @returns hipSuccess, hipErrorNotInitialized, hipErrorOutOfMemory, hipErrorNotInitialized
-#ifndef USE_CUDA_NAMES
   interface hipModuleLoadData
     function hipModuleLoadData_(myModule,image) bind(c, name="hipModuleLoadData")
       use iso_c_binding
@@ -7014,7 +6144,6 @@ module hipfort
       type(c_ptr),value :: image
     end function
   end interface
-#endif
 
   !>  @brief builds module from code object which resides in host memory. Image is pointer to that
   !>  location. Options are not used. hipModuleLoadData is called.
@@ -7026,7 +6155,6 @@ module hipfort
   !>  @param [in] optionValues  Option values for JIT
   !>
   !>  @returns hipSuccess, hipErrorNotInitialized, hipErrorOutOfMemory, hipErrorNotInitialized
-#ifndef USE_CUDA_NAMES
   interface hipModuleLoadDataEx
     function hipModuleLoadDataEx_(myModule,image,numOptions,options,optionValues) &
         bind(c, name="hipModuleLoadDataEx")
@@ -7041,7 +6169,6 @@ module hipfort
       type(c_ptr) :: optionValues
     end function
   end interface
-#endif
 
   !>  @brief Adds bitcode data to be linked with options.
   !>  @param [in] state hip link state
@@ -7060,13 +6187,8 @@ module hipfort
   !>
   !>  @see hipError_t
   interface hipLinkAddData
-#ifdef USE_CUDA_NAMES
-    function hipLinkAddData_(state,myType,myData,mySize,name,numOptions,options,optionValues) &
-        bind(c, name="cuLinkAddData")
-#else
     function hipLinkAddData_(state,myType,myData,mySize,name,numOptions,options,optionValues) &
         bind(c, name="hipLinkAddData")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -7097,13 +6219,8 @@ module hipfort
   !>
   !>  @see hipError_t
   interface hipLinkAddFile
-#ifdef USE_CUDA_NAMES
-    function hipLinkAddFile_(state,myType,path,numOptions,options,optionValues) &
-        bind(c, name="cuLinkAddFile")
-#else
     function hipLinkAddFile_(state,myType,path,numOptions,options,optionValues) &
         bind(c, name="hipLinkAddFile")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -7129,11 +6246,7 @@ module hipfort
   !>
   !>  @see hipError_t
   interface hipLinkComplete
-#ifdef USE_CUDA_NAMES
-    function hipLinkComplete_(state,hipBinOut,sizeOut) bind(c, name="cuLinkComplete")
-#else
     function hipLinkComplete_(state,hipBinOut,sizeOut) bind(c, name="hipLinkComplete")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -7154,11 +6267,7 @@ module hipfort
   !>
   !>  @see hipSuccess
   interface hipLinkCreate
-#ifdef USE_CUDA_NAMES
-    function hipLinkCreate_(numOptions,options,optionValues,stateOut) bind(c, name="cuLinkCreate")
-#else
     function hipLinkCreate_(numOptions,options,optionValues,stateOut) bind(c, name="hipLinkCreate")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -7177,11 +6286,7 @@ module hipfort
   !>
   !>  @see hipSuccess
   interface hipLinkDestroy
-#ifdef USE_CUDA_NAMES
-    function hipLinkDestroy_(state) bind(c, name="cuLinkDestroy")
-#else
     function hipLinkDestroy_(state) bind(c, name="hipLinkDestroy")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -7218,7 +6323,6 @@ module hipfort
   !>  and gridDim.z * blockDim.z are always less than 2^32.
   !>
   !>  @returns `hipSuccess`, `hipErrorNotInitialized`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipModuleLaunchKernel
     function hipModuleLaunchKernel_(f,gridDimX,gridDimY,gridDimZ,blockDimX,blockDimY,blockDimZ, &
         sharedMemBytes,stream,kernelParams,extra) &
@@ -7240,7 +6344,6 @@ module hipfort
       type(c_ptr) :: extra
     end function
   end interface
-#endif
 
   !>  \addtogroup ModuleCooperativeG Cooperative groups kernel launch of Module management.
   !>  \ingroup Module
@@ -7272,7 +6375,6 @@ module hipfort
   !>  `hipErrorInvalidHandle`, `hipErrorInvalidImage`, `hipErrorInvalidValue`,
   !>  `hipErrorInvalidConfiguration`, `hipErrorLaunchFailure`, `hipErrorLaunchOutOfResources`,
   !>  `hipErrorLaunchTimeOut`, `hipErrorCooperativeLaunchTooLarge`, `hipErrorSharedObjectInitFailed`
-#ifndef USE_CUDA_NAMES
   interface hipModuleLaunchCooperativeKernel
     function hipModuleLaunchCooperativeKernel_(f,gridDimX,gridDimY,gridDimZ,blockDimX,blockDimY, &
         blockDimZ,sharedMemBytes,stream,kernelParams) &
@@ -7293,7 +6395,6 @@ module hipfort
       type(c_ptr) :: kernelParams
     end function
   end interface
-#endif
 
   !>  @brief Launches kernels on multiple devices where thread blocks can cooperate and
   !>  synchronize as they execute.
@@ -7308,7 +6409,6 @@ module hipfort
   !>  `hipErrorInvalidConfiguration`, `hipErrorInvalidResourceHandle`, `hipErrorLaunchFailure`,
   !>  `hipErrorLaunchOutOfResources`, `hipErrorLaunchTimeOut`, `hipErrorCooperativeLaunchTooLarge`,
   !>  `hipErrorSharedObjectInitFailed`
-#ifndef USE_CUDA_NAMES
   interface hipModuleLaunchCooperativeKernelMultiDevice
     function hipModuleLaunchCooperativeKernelMultiDevice_(launchParamsList,numDevices,flags) &
         bind(c, name="hipModuleLaunchCooperativeKernelMultiDevice")
@@ -7322,7 +6422,6 @@ module hipfort
       integer(c_int),value :: flags
     end function
   end interface
-#endif
 
   !>  @brief Launches kernel f with launch parameters and shared memory on stream with arguments
   !>  passed
@@ -7347,13 +6446,8 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorNotInitialized`, `hipErrorInvalidValue`,
   !>  `hipErrorCooperativeLaunchTooLarge`
   interface hipLaunchCooperativeKernel
-#ifdef USE_CUDA_NAMES
-    function hipLaunchCooperativeKernel_(f,gridDim,blockDimX,kernelParams,sharedMemBytes,stream) &
-        bind(c, name="cudaLaunchCooperativeKernel")
-#else
     function hipLaunchCooperativeKernel_(f,gridDim,blockDimX,kernelParams,sharedMemBytes,stream) &
         bind(c, name="hipLaunchCooperativeKernel")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -7376,7 +6470,6 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorNotInitialized`, `hipErrorInvalidValue`,
   !>   `hipErrorCooperativeLaunchTooLarge`
-#ifndef USE_CUDA_NAMES
   interface hipLaunchCooperativeKernelMultiDevice
     function hipLaunchCooperativeKernelMultiDevice_(launchParamsList,numDevices,flags) &
         bind(c, name="hipLaunchCooperativeKernelMultiDevice")
@@ -7390,7 +6483,6 @@ module hipfort
       integer(c_int),value :: flags
     end function
   end interface
-#endif
 
   !>  @brief Launches kernels on multiple devices and guarantees all specified kernels are
   !>  dispatched
@@ -7402,7 +6494,6 @@ module hipfort
   !>  @param [in] flags                    Flags to control launch behavior.
   !>
   !>  @returns `hipSuccess`, `hipErrorNotInitialized`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipExtLaunchMultiKernelMultiDevice
     function hipExtLaunchMultiKernelMultiDevice_(launchParamsList,numDevices,flags) &
         bind(c, name="hipExtLaunchMultiKernelMultiDevice")
@@ -7416,7 +6507,6 @@ module hipfort
       integer(c_int),value :: flags
     end function
   end interface
-#endif
 
   !>  @brief Launches a HIP kernel using a generic function pointer and the specified configuration.
   !>  @ingroup Execution
@@ -7431,11 +6521,7 @@ module hipfort
   !>  @returns `hipSuccess` if the kernel is launched successfully, otherwise an appropriate error
   !>  code.
   interface hipLaunchKernelExC
-#ifdef USE_CUDA_NAMES
-    function hipLaunchKernelExC_(config,fPtr,args) bind(c, name="cudaLaunchKernelExC")
-#else
     function hipLaunchKernelExC_(config,fPtr,args) bind(c, name="hipLaunchKernelExC")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -7462,7 +6548,6 @@ module hipfort
   !>
   !>  @returns `hipSuccess` if the kernel is launched successfully, otherwise an appropriate error
   !>  code.
-#ifndef USE_CUDA_NAMES
   interface hipDrvLaunchKernelEx
     function hipDrvLaunchKernelEx_(config,f,params,extra) bind(c, name="hipDrvLaunchKernelEx")
       use iso_c_binding
@@ -7476,7 +6561,6 @@ module hipfort
       type(c_ptr) :: extra
     end function
   end interface
-#endif
 
   !>  @brief Returns a handle for the address range requested.
   !>
@@ -7492,13 +6576,8 @@ module hipfort
   !>  @returns `hipSuccess` if the kernel is launched successfully, otherwise an appropriate error
   !>  code.
   interface hipMemGetHandleForAddressRange
-#ifdef USE_CUDA_NAMES
-    function hipMemGetHandleForAddressRange_(handle,dptr,mySize,handleType,flags) &
-        bind(c, name="cuMemGetHandleForAddressRange")
-#else
     function hipMemGetHandleForAddressRange_(handle,dptr,mySize,handleType,flags) &
         bind(c, name="hipMemGetHandleForAddressRange")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -7532,7 +6611,6 @@ module hipfort
   !>  size gridDim x blockDim >= 2^32.
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipModuleOccupancyMaxPotentialBlockSize
     function hipModuleOccupancyMaxPotentialBlockSize_(gridSize,blockSize,f,dynSharedMemPerBlk, &
         blockSizeLimit) &
@@ -7548,7 +6626,6 @@ module hipfort
       integer(c_int),value :: blockSizeLimit
     end function
   end interface
-#endif
 
   !>  @brief determine the grid and block sizes to achieves maximum occupancy for a kernel
   !>
@@ -7564,7 +6641,6 @@ module hipfort
   !>  size gridDim x blockDim >= 2^32.
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipModuleOccupancyMaxPotentialBlockSizeWithFlags
     function hipModuleOccupancyMaxPotentialBlockSizeWithFlags_(gridSize,blockSize,f, &
         dynSharedMemPerBlk,blockSizeLimit,flags) &
@@ -7581,7 +6657,6 @@ module hipfort
       integer(c_int),value :: flags
     end function
   end interface
-#endif
 
   !>  @brief Returns occupancy for a device function.
   !>
@@ -7590,7 +6665,6 @@ module hipfort
   !>  @param [in]  blockSize        Block size the kernel is intended to be launched with
   !>  @param [in]  dynSharedMemPerBlk Dynamic shared memory usage (in bytes) intended for each block
   !>  @returns  `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipModuleOccupancyMaxActiveBlocksPerMultiprocessor
     function hipModuleOccupancyMaxActiveBlocksPerMultiprocessor_(numBlocks,f,blockSize, &
         dynSharedMemPerBlk) &
@@ -7605,7 +6679,6 @@ module hipfort
       integer(c_size_t),value :: dynSharedMemPerBlk
     end function
   end interface
-#endif
 
   !>  @brief Returns occupancy for a device function.
   !>
@@ -7615,7 +6688,6 @@ module hipfort
   !>  @param [in]  dynSharedMemPerBlk Dynamic shared memory usage (in bytes) intended for each block
   !>  @param [in]  flags            Extra flags for occupancy calculation (only default supported)
   !>  @returns  `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipModuleOccupancyMaxActiveBlocksPerMultiprocessorWithFlags
     function hipModuleOccupancyMaxActiveBlocksPerMultiprocessorWithFlags_(numBlocks,f,blockSize, &
         dynSharedMemPerBlk,flags) &
@@ -7631,7 +6703,6 @@ module hipfort
       integer(c_int),value :: flags
     end function
   end interface
-#endif
 
   !>  @brief Returns occupancy for a device function.
   !>
@@ -7641,15 +6712,9 @@ module hipfort
   !>  @param [in]  dynSharedMemPerBlk Dynamic shared memory usage (in bytes) intended for each block
   !>  @returns  `hipSuccess`, `hipErrorInvalidDeviceFunction`, `hipErrorInvalidValue`
   interface hipOccupancyMaxActiveBlocksPerMultiprocessor
-#ifdef USE_CUDA_NAMES
-    function hipOccupancyMaxActiveBlocksPerMultiprocessor_(numBlocks,f,blockSize, &
-        dynSharedMemPerBlk) &
-        bind(c, name="cudaOccupancyMaxActiveBlocksPerMultiprocessor")
-#else
     function hipOccupancyMaxActiveBlocksPerMultiprocessor_(numBlocks,f,blockSize, &
         dynSharedMemPerBlk) &
         bind(c, name="hipOccupancyMaxActiveBlocksPerMultiprocessor")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -7670,15 +6735,9 @@ module hipfort
   !>  @param [in]  flags            Extra flags for occupancy calculation (currently ignored)
   !>  @returns  `hipSuccess`, `hipErrorInvalidDeviceFunction`, `hipErrorInvalidValue`
   interface hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags
-#ifdef USE_CUDA_NAMES
-    function hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags_(numBlocks,f,blockSize, &
-        dynSharedMemPerBlk,flags) &
-        bind(c, name="cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags")
-#else
     function hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags_(numBlocks,f,blockSize, &
         dynSharedMemPerBlk,flags) &
         bind(c, name="hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -7704,7 +6763,6 @@ module hipfort
   !>  size gridDim x blockDim >= 2^32.
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipOccupancyMaxPotentialBlockSize
     function hipOccupancyMaxPotentialBlockSize_(gridSize,blockSize,f,dynSharedMemPerBlk, &
         blockSizeLimit) &
@@ -7720,7 +6778,6 @@ module hipfort
       integer(c_int),value :: blockSizeLimit
     end function
   end interface
-#endif
 
   !>  @brief Returns dynamic shared memory available per block when launching numBlocks blocks on
   !>  SM.
@@ -7738,13 +6795,8 @@ module hipfort
   !>  `hipErrorInvalidValue`,
   !>  `hipErrorUnknown`
   interface hipOccupancyAvailableDynamicSMemPerBlock
-#ifdef USE_CUDA_NAMES
-    function hipOccupancyAvailableDynamicSMemPerBlock_(dynamicSmemSize,f,numBlocks,blockSize) &
-        bind(c, name="cudaOccupancyAvailableDynamicSMemPerBlock")
-#else
     function hipOccupancyAvailableDynamicSMemPerBlock_(dynamicSmemSize,f,numBlocks,blockSize) &
         bind(c, name="hipOccupancyAvailableDynamicSMemPerBlock")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -7761,11 +6813,7 @@ module hipfort
   !>  @returns  `hipErrorNotSupported`
   !>  @warning hipProfilerStart API is deprecated, use roctracer/rocTX instead.
   interface hipProfilerStart
-#ifdef USE_CUDA_NAMES
-    function hipProfilerStart_() bind(c, name="cudaProfilerStart")
-#else
     function hipProfilerStart_() bind(c, name="hipProfilerStart")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -7778,11 +6826,7 @@ module hipfort
   !>  @returns  `hipErrorNotSupported`
   !>  @warning  hipProfilerStart API is deprecated, use roctracer/rocTX instead.
   interface hipProfilerStop
-#ifdef USE_CUDA_NAMES
-    function hipProfilerStop_() bind(c, name="cudaProfilerStop")
-#else
     function hipProfilerStop_() bind(c, name="hipProfilerStop")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -7811,7 +6855,6 @@ module hipfort
   !>  size gridDim x blockDim >= 2^32.
   !>
   !>  @returns `hipSuccess`, `hipErrorNotInitialized`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipConfigureCall
     function hipConfigureCall_(gridDim,blockDim,sharedMem,stream) bind(c, name="hipConfigureCall")
       use iso_c_binding
@@ -7824,7 +6867,6 @@ module hipfort
       type(c_ptr),value :: stream
     end function
   end interface
-#endif
 
   !>  @brief Set a kernel argument.
   !>
@@ -7833,7 +6875,6 @@ module hipfort
   !>  @param [in] arg    Pointer the argument in host memory.
   !>  @param [in] size   Size of the argument.
   !>  @param [in] offset Offset of the argument on the argument stack.
-#ifndef USE_CUDA_NAMES
   interface hipSetupArgument
     function hipSetupArgument_(arg,mySize,offset) bind(c, name="hipSetupArgument")
       use iso_c_binding
@@ -7845,14 +6886,12 @@ module hipfort
       integer(c_size_t),value :: offset
     end function
   end interface
-#endif
 
   !>  @brief Launch a kernel.
   !>
   !>  @param [in] func Kernel to launch.
   !>
   !>  @returns `hipSuccess`, `hipErrorNotInitialized`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipLaunchByPtr
     function hipLaunchByPtr_(func) bind(c, name="hipLaunchByPtr")
       use iso_c_binding
@@ -7862,7 +6901,6 @@ module hipfort
       type(c_ptr),value :: func
     end function
   end interface
-#endif
 
   !>  @brief C compliant kernel launch API
   !>
@@ -7878,13 +6916,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipLaunchKernel
-#ifdef USE_CUDA_NAMES
-    function hipLaunchKernel_(function_address,numBlocks,dimBlocks,args,sharedMemBytes,stream) &
-        bind(c, name="cudaLaunchKernel")
-#else
     function hipLaunchKernel_(function_address,numBlocks,dimBlocks,args,sharedMemBytes,stream) &
         bind(c, name="hipLaunchKernel")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -7923,11 +6956,7 @@ module hipfort
   !>  @warning  This API is marked as beta, meaning, while this is feature complete,
   !>  it is still open to changes and may have outstanding issues.
   interface hipLaunchHostFunc
-#ifdef USE_CUDA_NAMES
-    function hipLaunchHostFunc_(stream,fn,userData) bind(c, name="cudaLaunchHostFunc")
-#else
     function hipLaunchHostFunc_(stream,fn,userData) bind(c, name="hipLaunchHostFunc")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -7943,7 +6972,6 @@ module hipfort
   !>  @param pCopy - Parameters for the memory copy
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipDrvMemcpy2DUnaligned
     function hipDrvMemcpy2DUnaligned_(pCopy) bind(c, name="hipDrvMemcpy2DUnaligned")
       use iso_c_binding
@@ -7954,7 +6982,6 @@ module hipfort
       type(hip_Memcpy2D) :: pCopy
     end function
   end interface
-#endif
 
   !>  @brief Launches kernel from the pointer address, with arguments and shared memory on stream.
   !>
@@ -7975,7 +7002,6 @@ module hipfort
   !>  @param [in] flags - The value of hipExtAnyOrderLaunch, signifies if kernel can be
   !>  launched in any order.
   !>  @returns `hipSuccess`, `hipErrorNotInitialized`, `hipErrorInvalidValue`.
-#ifndef USE_CUDA_NAMES
   interface hipExtLaunchKernel
     function hipExtLaunchKernel_(function_address,numBlocks,dimBlocks,args,sharedMemBytes,stream, &
         startEvent,stopEvent,flags) &
@@ -7995,7 +7021,6 @@ module hipfort
       integer(c_int),value :: flags
     end function
   end interface
-#endif
 
   !>  @brief Creates a texture object.
   !>
@@ -8009,13 +7034,8 @@ module hipfort
   !>  @note 3D linear filter isn't supported on GFX90A boards, on which the API @p
   !>  hipCreateTextureObject will return hipErrorNotSupported.
   interface hipCreateTextureObject
-#ifdef USE_CUDA_NAMES
-    function hipCreateTextureObject_(pTexObject,pResDesc,pTexDesc,pResViewDesc) &
-        bind(c, name="cudaCreateTextureObject")
-#else
     function hipCreateTextureObject_(pTexObject,pResDesc,pTexDesc,pResViewDesc) &
         bind(c, name="hipCreateTextureObject")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -8034,11 +7054,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipDestroyTextureObject
-#ifdef USE_CUDA_NAMES
-    function hipDestroyTextureObject_(textureObject) bind(c, name="cudaDestroyTextureObject")
-#else
     function hipDestroyTextureObject_(textureObject) bind(c, name="hipDestroyTextureObject")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -8054,11 +7070,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGetChannelDesc
-#ifdef USE_CUDA_NAMES
-    function hipGetChannelDesc_(desc,array) bind(c, name="cudaGetChannelDesc")
-#else
     function hipGetChannelDesc_(desc,array) bind(c, name="hipGetChannelDesc")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -8076,13 +7088,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGetTextureObjectResourceDesc
-#ifdef USE_CUDA_NAMES
-    function hipGetTextureObjectResourceDesc_(pResDesc,textureObject) &
-        bind(c, name="cudaGetTextureObjectResourceDesc")
-#else
     function hipGetTextureObjectResourceDesc_(pResDesc,textureObject) &
         bind(c, name="hipGetTextureObjectResourceDesc")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -8100,13 +7107,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGetTextureObjectResourceViewDesc
-#ifdef USE_CUDA_NAMES
-    function hipGetTextureObjectResourceViewDesc_(pResViewDesc,textureObject) &
-        bind(c, name="cudaGetTextureObjectResourceViewDesc")
-#else
     function hipGetTextureObjectResourceViewDesc_(pResViewDesc,textureObject) &
         bind(c, name="hipGetTextureObjectResourceViewDesc")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -8124,13 +7126,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGetTextureObjectTextureDesc
-#ifdef USE_CUDA_NAMES
-    function hipGetTextureObjectTextureDesc_(pTexDesc,textureObject) &
-        bind(c, name="cudaGetTextureObjectTextureDesc")
-#else
     function hipGetTextureObjectTextureDesc_(pTexDesc,textureObject) &
         bind(c, name="hipGetTextureObjectTextureDesc")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -8149,7 +7146,6 @@ module hipfort
   !>  @param [in] pResViewDesc  pointer to resource view descriptor
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipTexObjectCreate
     function hipTexObjectCreate_(pTexObject,pResDesc,pTexDesc,pResViewDesc) &
         bind(c, name="hipTexObjectCreate")
@@ -8164,14 +7160,12 @@ module hipfort
       type(HIP_RESOURCE_VIEW_DESC) :: pResViewDesc
     end function
   end interface
-#endif
 
   !>  @brief Destroys a texture object.
   !>
   !>  @param [in] texObject  texture object to destroy
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipTexObjectDestroy
     function hipTexObjectDestroy_(texObject) bind(c, name="hipTexObjectDestroy")
       use iso_c_binding
@@ -8181,7 +7175,6 @@ module hipfort
       type(c_ptr),value :: texObject
     end function
   end interface
-#endif
 
   !>  @brief Gets resource descriptor of a texture object.
   !>
@@ -8189,7 +7182,6 @@ module hipfort
   !>  @param [in] texObject  texture object
   !>
   !>  @returns `hipSuccess`, `hipErrorNotSupported`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipTexObjectGetResourceDesc
     function hipTexObjectGetResourceDesc_(pResDesc,texObject) &
         bind(c, name="hipTexObjectGetResourceDesc")
@@ -8202,7 +7194,6 @@ module hipfort
       type(c_ptr),value :: texObject
     end function
   end interface
-#endif
 
   !>  @brief Gets resource view descriptor of a texture object.
   !>
@@ -8210,7 +7201,6 @@ module hipfort
   !>  @param [in] texObject  texture object
   !>
   !>  @returns `hipSuccess`, `hipErrorNotSupported`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipTexObjectGetResourceViewDesc
     function hipTexObjectGetResourceViewDesc_(pResViewDesc,texObject) &
         bind(c, name="hipTexObjectGetResourceViewDesc")
@@ -8223,7 +7213,6 @@ module hipfort
       type(c_ptr),value :: texObject
     end function
   end interface
-#endif
 
   !>  @brief Gets texture descriptor of a texture object.
   !>
@@ -8231,7 +7220,6 @@ module hipfort
   !>  @param [in] texObject  texture object
   !>
   !>  @returns `hipSuccess`, `hipErrorNotSupported`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipTexObjectGetTextureDesc
     function hipTexObjectGetTextureDesc_(pTexDesc,texObject) &
         bind(c, name="hipTexObjectGetTextureDesc")
@@ -8244,7 +7232,6 @@ module hipfort
       type(c_ptr),value :: texObject
     end function
   end interface
-#endif
 
   !>  @brief Allocate a mipmapped array on the device.
   !>
@@ -8258,13 +7245,8 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMallocMipmappedArray
-#ifdef USE_CUDA_NAMES
-    function hipMallocMipmappedArray_(mipmappedArray,desc,extent,numLevels,flags) &
-        bind(c, name="cudaMallocMipmappedArray")
-#else
     function hipMallocMipmappedArray_(mipmappedArray,desc,extent,numLevels,flags) &
         bind(c, name="hipMallocMipmappedArray")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -8286,11 +7268,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipFreeMipmappedArray
-#ifdef USE_CUDA_NAMES
-    function hipFreeMipmappedArray_(mipmappedArray) bind(c, name="cudaFreeMipmappedArray")
-#else
     function hipFreeMipmappedArray_(mipmappedArray) bind(c, name="hipFreeMipmappedArray")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -8309,13 +7287,8 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipGetMipmappedArrayLevel
-#ifdef USE_CUDA_NAMES
-    function hipGetMipmappedArrayLevel_(levelArray,mipmappedArray,level) &
-        bind(c, name="cudaGetMipmappedArrayLevel")
-#else
     function hipGetMipmappedArrayLevel_(levelArray,mipmappedArray,level) &
         bind(c, name="hipGetMipmappedArrayLevel")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -8335,7 +7308,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorNotSupported`, `hipErrorInvalidValue`
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
-#ifndef USE_CUDA_NAMES
   interface hipMipmappedArrayCreate
     function hipMipmappedArrayCreate_(pHandle,pMipmappedArrayDesc,numMipmapLevels) &
         bind(c, name="hipMipmappedArrayCreate")
@@ -8349,7 +7321,6 @@ module hipfort
       integer(c_int),value :: numMipmapLevels
     end function
   end interface
-#endif
 
   !>  @brief Destroy a mipmapped array.
   !>
@@ -8358,7 +7329,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
-#ifndef USE_CUDA_NAMES
   interface hipMipmappedArrayDestroy
     function hipMipmappedArrayDestroy_(hMipmappedArray) bind(c, name="hipMipmappedArrayDestroy")
       use iso_c_binding
@@ -8368,7 +7338,6 @@ module hipfort
       type(c_ptr),value :: hMipmappedArray
     end function
   end interface
-#endif
 
   !>  @brief Get a mipmapped array on a mipmapped level.
   !>
@@ -8379,7 +7348,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
-#ifndef USE_CUDA_NAMES
   interface hipMipmappedArrayGetLevel
     function hipMipmappedArrayGetLevel_(pLevelArray,hMipMappedArray,level) &
         bind(c, name="hipMipmappedArrayGetLevel")
@@ -8392,7 +7360,6 @@ module hipfort
       integer(c_int),value :: level
     end function
   end interface
-#endif
 
   !>  @brief  Binds a mipmapped array to a texture [Deprecated]
   !>
@@ -8401,7 +7368,6 @@ module hipfort
   !>  @param [in] desc  opointer to the channel format
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipBindTextureToMipmappedArray
     function hipBindTextureToMipmappedArray_(tex,mipmappedArray,desc) &
         bind(c, name="hipBindTextureToMipmappedArray")
@@ -8415,7 +7381,6 @@ module hipfort
       type(hipChannelFormatDesc) :: desc
     end function
   end interface
-#endif
 
   !>  @brief Gets the texture reference related with the symbol [Deprecated]
   !>
@@ -8424,7 +7389,6 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipGetTextureReference
     function hipGetTextureReference_(texref,symbol) bind(c, name="hipGetTextureReference")
       use iso_c_binding
@@ -8435,7 +7399,6 @@ module hipfort
       type(c_ptr),value :: symbol
     end function
   end interface
-#endif
 
   !>  @brief Gets the border color used by a texture reference [Deprecated]
   !>
@@ -8445,11 +7408,7 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   !>  @warning This API is deprecated.
   interface hipTexRefGetBorderColor
-#ifdef USE_CUDA_NAMES
-    function hipTexRefGetBorderColor_(pBorderColor,texRef) bind(c, name="cuTexRefGetBorderColor")
-#else
     function hipTexRefGetBorderColor_(pBorderColor,texRef) bind(c, name="hipTexRefGetBorderColor")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -8469,11 +7428,7 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   !>  @warning This API is deprecated.
   interface hipTexRefGetArray
-#ifdef USE_CUDA_NAMES
-    function hipTexRefGetArray_(pArray,texRef) bind(c, name="cuTexRefGetArray")
-#else
     function hipTexRefGetArray_(pArray,texRef) bind(c, name="hipTexRefGetArray")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -8492,7 +7447,6 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefSetAddressMode
     function hipTexRefSetAddressMode_(texRef,dim,am) bind(c, name="hipTexRefSetAddressMode")
       use iso_c_binding
@@ -8505,7 +7459,6 @@ module hipfort
       integer(kind(hipAddressModeWrap)),value :: am
     end function
   end interface
-#endif
 
   !>  @brief Binds an array as a texture reference [Deprecated]
   !>
@@ -8516,7 +7469,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefSetArray
     function hipTexRefSetArray_(tex,array,flags) bind(c, name="hipTexRefSetArray")
       use iso_c_binding
@@ -8529,7 +7481,6 @@ module hipfort
       integer(c_int),value :: flags
     end function
   end interface
-#endif
 
   !>  @brief Set filter mode for a texture reference [Deprecated]
   !>
@@ -8539,7 +7490,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefSetFilterMode
     function hipTexRefSetFilterMode_(texRef,fm) bind(c, name="hipTexRefSetFilterMode")
       use iso_c_binding
@@ -8551,7 +7501,6 @@ module hipfort
       integer(kind(hipFilterModePoint)),value :: fm
     end function
   end interface
-#endif
 
   !>  @brief Set flags for a texture reference [Deprecated]
   !>
@@ -8561,7 +7510,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefSetFlags
     function hipTexRefSetFlags_(texRef,Flags) bind(c, name="hipTexRefSetFlags")
       use iso_c_binding
@@ -8573,7 +7521,6 @@ module hipfort
       integer(c_int),value :: Flags
     end function
   end interface
-#endif
 
   !>  @brief Set format for a texture reference [Deprecated]
   !>
@@ -8584,7 +7531,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefSetFormat
     function hipTexRefSetFormat_(texRef,fmt,NumPackedComponents) bind(c, name="hipTexRefSetFormat")
       use iso_c_binding
@@ -8597,7 +7543,6 @@ module hipfort
       integer(c_int),value :: NumPackedComponents
     end function
   end interface
-#endif
 
   !>  @brief Binds a memory area to a texture [Deprecated]
   !>
@@ -8610,7 +7555,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipBindTexture
     function hipBindTexture_(offset,tex,devPtr,desc,mySize) bind(c, name="hipBindTexture")
       use iso_c_binding
@@ -8625,7 +7569,6 @@ module hipfort
       integer(c_size_t),value :: mySize
     end function
   end interface
-#endif
 
   !>  @brief Binds a 2D memory area to a texture [Deprecated]
   !>
@@ -8640,7 +7583,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipBindTexture2D
     function hipBindTexture2D_(offset,tex,devPtr,desc,width,height,pitch) &
         bind(c, name="hipBindTexture2D")
@@ -8658,7 +7600,6 @@ module hipfort
       integer(c_size_t),value :: pitch
     end function
   end interface
-#endif
 
   !>  @brief Binds a memory area to a texture [Deprecated]
   !>
@@ -8669,7 +7610,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipBindTextureToArray
     function hipBindTextureToArray_(tex,array,desc) bind(c, name="hipBindTextureToArray")
       use iso_c_binding
@@ -8682,7 +7622,6 @@ module hipfort
       type(hipChannelFormatDesc) :: desc
     end function
   end interface
-#endif
 
   !>  @brief Get the offset of the alignment in a texture [Deprecated]
   !>
@@ -8692,7 +7631,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipGetTextureAlignmentOffset
     function hipGetTextureAlignmentOffset_(offset,texref) &
         bind(c, name="hipGetTextureAlignmentOffset")
@@ -8705,7 +7643,6 @@ module hipfort
       type(textureReference) :: texref
     end function
   end interface
-#endif
 
   !>  @brief Unbinds a texture [Deprecated]
   !>
@@ -8714,7 +7651,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipUnbindTexture
     function hipUnbindTexture_(tex) bind(c, name="hipUnbindTexture")
       use iso_c_binding
@@ -8725,7 +7661,6 @@ module hipfort
       type(textureReference) :: tex
     end function
   end interface
-#endif
 
   !>  @brief Gets the address for a texture reference [Deprecated]
   !>
@@ -8735,7 +7670,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefGetAddress
     function hipTexRefGetAddress_(dev_ptr,texRef) bind(c, name="hipTexRefGetAddress")
       use iso_c_binding
@@ -8747,7 +7681,6 @@ module hipfort
       type(textureReference) :: texRef
     end function
   end interface
-#endif
 
   !>  @brief Gets the address mode for a texture reference [Deprecated]
   !>
@@ -8758,7 +7691,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefGetAddressMode
     function hipTexRefGetAddressMode_(pam,texRef,dim) bind(c, name="hipTexRefGetAddressMode")
       use iso_c_binding
@@ -8771,7 +7703,6 @@ module hipfort
       integer(c_int),value :: dim
     end function
   end interface
-#endif
 
   !>  @brief Gets filter mode for a texture reference [Deprecated]
   !>
@@ -8781,7 +7712,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefGetFilterMode
     function hipTexRefGetFilterMode_(pfm,texRef) bind(c, name="hipTexRefGetFilterMode")
       use iso_c_binding
@@ -8793,7 +7723,6 @@ module hipfort
       type(textureReference) :: texRef
     end function
   end interface
-#endif
 
   !>  @brief Gets flags for a texture reference [Deprecated]
   !>
@@ -8803,7 +7732,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefGetFlags
     function hipTexRefGetFlags_(pFlags,texRef) bind(c, name="hipTexRefGetFlags")
       use iso_c_binding
@@ -8815,7 +7743,6 @@ module hipfort
       type(textureReference) :: texRef
     end function
   end interface
-#endif
 
   !>  @brief Gets texture format for a texture reference [Deprecated]
   !>
@@ -8826,7 +7753,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefGetFormat
     function hipTexRefGetFormat_(pFormat,pNumChannels,texRef) bind(c, name="hipTexRefGetFormat")
       use iso_c_binding
@@ -8839,7 +7765,6 @@ module hipfort
       type(textureReference) :: texRef
     end function
   end interface
-#endif
 
   !>  @brief Gets the maximum anisotropy for a texture reference [Deprecated]
   !>
@@ -8849,7 +7774,6 @@ module hipfort
   !>  @returns `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefGetMaxAnisotropy
     function hipTexRefGetMaxAnisotropy_(pmaxAnsio,texRef) bind(c, name="hipTexRefGetMaxAnisotropy")
       use iso_c_binding
@@ -8861,7 +7785,6 @@ module hipfort
       type(textureReference) :: texRef
     end function
   end interface
-#endif
 
   !>  @brief Gets the mipmap filter mode for a texture reference [Deprecated]
   !>
@@ -8871,7 +7794,6 @@ module hipfort
   !>  @returns `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefGetMipmapFilterMode
     function hipTexRefGetMipmapFilterMode_(pfm,texRef) bind(c, name="hipTexRefGetMipmapFilterMode")
       use iso_c_binding
@@ -8883,7 +7805,6 @@ module hipfort
       type(textureReference) :: texRef
     end function
   end interface
-#endif
 
   !>  @brief Gets the mipmap level bias for a texture reference [Deprecated]
   !>
@@ -8893,7 +7814,6 @@ module hipfort
   !>  @returns `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefGetMipmapLevelBias
     function hipTexRefGetMipmapLevelBias_(pbias,texRef) bind(c, name="hipTexRefGetMipmapLevelBias")
       use iso_c_binding
@@ -8905,7 +7825,6 @@ module hipfort
       type(textureReference) :: texRef
     end function
   end interface
-#endif
 
   !>  @brief Gets the minimum and maximum mipmap level clamps for a texture reference [Deprecated]
   !>
@@ -8916,7 +7835,6 @@ module hipfort
   !>  @returns `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefGetMipmapLevelClamp
     function hipTexRefGetMipmapLevelClamp_(pminMipmapLevelClamp,pmaxMipmapLevelClamp,texRef) &
         bind(c, name="hipTexRefGetMipmapLevelClamp")
@@ -8930,7 +7848,6 @@ module hipfort
       type(textureReference) :: texRef
     end function
   end interface
-#endif
 
   !>  @brief Gets the mipmapped array bound to a texture reference [Deprecated]
   !>
@@ -8940,7 +7857,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefGetMipMappedArray
     function hipTexRefGetMipMappedArray_(pArray,texRef) bind(c, name="hipTexRefGetMipMappedArray")
       use iso_c_binding
@@ -8952,7 +7868,6 @@ module hipfort
       type(textureReference) :: texRef
     end function
   end interface
-#endif
 
   !>  @brief Sets an bound address for a texture reference [Deprecated]
   !>
@@ -8964,7 +7879,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefSetAddress
     function hipTexRefSetAddress_(ByteOffset,texRef,dptr,bytes) bind(c, name="hipTexRefSetAddress")
       use iso_c_binding
@@ -8978,7 +7892,6 @@ module hipfort
       integer(c_size_t),value :: bytes
     end function
   end interface
-#endif
 
   !>  @brief Set a bind an address as a 2D texture reference [Deprecated]
   !>
@@ -8990,7 +7903,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefSetAddress2D
     function hipTexRefSetAddress2D_(texRef,desc,dptr,Pitch) bind(c, name="hipTexRefSetAddress2D")
       use iso_c_binding
@@ -9004,7 +7916,6 @@ module hipfort
       integer(c_size_t),value :: Pitch
     end function
   end interface
-#endif
 
   !>  @brief Sets the maximum anisotropy for a texture reference [Deprecated]
   !>
@@ -9014,7 +7925,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefSetMaxAnisotropy
     function hipTexRefSetMaxAnisotropy_(texRef,maxAniso) bind(c, name="hipTexRefSetMaxAnisotropy")
       use iso_c_binding
@@ -9026,7 +7936,6 @@ module hipfort
       integer(c_int),value :: maxAniso
     end function
   end interface
-#endif
 
   !>  @brief Sets border color for a texture reference [Deprecated]
   !>
@@ -9036,7 +7945,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefSetBorderColor
     function hipTexRefSetBorderColor_(texRef,pBorderColor) bind(c, name="hipTexRefSetBorderColor")
       use iso_c_binding
@@ -9048,7 +7956,6 @@ module hipfort
       type(c_ptr),value :: pBorderColor
     end function
   end interface
-#endif
 
   !>  @brief Sets mipmap filter mode for a texture reference [Deprecated]
   !>
@@ -9058,7 +7965,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefSetMipmapFilterMode
     function hipTexRefSetMipmapFilterMode_(texRef,fm) bind(c, name="hipTexRefSetMipmapFilterMode")
       use iso_c_binding
@@ -9070,7 +7976,6 @@ module hipfort
       integer(kind(hipFilterModePoint)),value :: fm
     end function
   end interface
-#endif
 
   !>  @brief Sets mipmap level bias for a texture reference [Deprecated]
   !>
@@ -9080,7 +7985,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefSetMipmapLevelBias
     function hipTexRefSetMipmapLevelBias_(texRef,bias) bind(c, name="hipTexRefSetMipmapLevelBias")
       use iso_c_binding
@@ -9092,7 +7996,6 @@ module hipfort
       real(c_float),value :: bias
     end function
   end interface
-#endif
 
   !>  @brief Sets mipmap level clamp for a texture reference [Deprecated]
   !>
@@ -9103,7 +8006,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorNotSupported`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefSetMipmapLevelClamp
     function hipTexRefSetMipmapLevelClamp_(texRef,minMipMapLevelClamp,maxMipMapLevelClamp) &
         bind(c, name="hipTexRefSetMipmapLevelClamp")
@@ -9117,7 +8019,6 @@ module hipfort
       real(c_float),value :: maxMipMapLevelClamp
     end function
   end interface
-#endif
 
   !>  @brief Binds mipmapped array to a texture reference [Deprecated]
   !>
@@ -9128,7 +8029,6 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   !>
   !>  @warning This API is deprecated.
-#ifndef USE_CUDA_NAMES
   interface hipTexRefSetMipmappedArray
     function hipTexRefSetMipmappedArray_(texRef,mipmappedArray,Flags) &
         bind(c, name="hipTexRefSetMipmappedArray")
@@ -9142,7 +8042,6 @@ module hipfort
       integer(c_int),value :: Flags
     end function
   end interface
-#endif
 
   !>   @defgroup Callback Callback Activity APIs
   !>
@@ -9154,7 +8053,6 @@ module hipfort
   !>  @param [in] id ID of HIP API
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipApiName
     function hipApiName_(id) bind(c, name="hipApiName")
       use iso_c_binding
@@ -9164,14 +8062,12 @@ module hipfort
       integer(c_int32_t),value :: id
     end function
   end interface
-#endif
 
   !>  @brief Returns kernel name reference by function name.
   !>
   !>  @param [in] f Name of function
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipKernelNameRef
     function hipKernelNameRef_(f) bind(c, name="hipKernelNameRef")
       use iso_c_binding
@@ -9181,7 +8077,6 @@ module hipfort
       type(c_ptr),value :: f
     end function
   end interface
-#endif
 
   !>  @brief Retrives kernel for a given host pointer, unless stated otherwise.
   !>
@@ -9189,7 +8084,6 @@ module hipfort
   !>  @param [in] stream Stream the kernel is executed on.
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipKernelNameRefByPtr
     function hipKernelNameRefByPtr_(hostFunction,stream) bind(c, name="hipKernelNameRefByPtr")
       use iso_c_binding
@@ -9200,14 +8094,12 @@ module hipfort
       type(c_ptr),value :: stream
     end function
   end interface
-#endif
 
   !>  @brief Returns device ID on the stream.
   !>
   !>  @param [in] stream Stream of device executed on.
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipGetStreamDeviceId
     function hipGetStreamDeviceId_(stream) bind(c, name="hipGetStreamDeviceId")
       use iso_c_binding
@@ -9217,7 +8109,6 @@ module hipfort
       type(c_ptr),value :: stream
     end function
   end interface
-#endif
 
   !>  @brief Begins graph capture on a stream.
   !>
@@ -9227,11 +8118,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipStreamBeginCapture
-#ifdef USE_CUDA_NAMES
-    function hipStreamBeginCapture_(stream,mode) bind(c, name="cudaStreamBeginCapture")
-#else
     function hipStreamBeginCapture_(stream,mode) bind(c, name="hipStreamBeginCapture")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9261,15 +8148,9 @@ module hipfort
   !> still
   !> open to changes and may have outstanding issues.
   interface hipStreamBeginCaptureToGraph
-#ifdef USE_CUDA_NAMES
-    function hipStreamBeginCaptureToGraph_(stream,graph,dependencies,dependencyData, &
-        numDependencies,mode) &
-        bind(c, name="cudaStreamBeginCaptureToGraph")
-#else
     function hipStreamBeginCaptureToGraph_(stream,graph,dependencies,dependencyData, &
         numDependencies,mode) &
         bind(c, name="hipStreamBeginCaptureToGraph")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -9291,11 +8172,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipStreamEndCapture
-#ifdef USE_CUDA_NAMES
-    function hipStreamEndCapture_(stream,pGraph) bind(c, name="cudaStreamEndCapture")
-#else
     function hipStreamEndCapture_(stream,pGraph) bind(c, name="hipStreamEndCapture")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9313,13 +8190,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorStreamCaptureImplicit`
   interface hipStreamGetCaptureInfo
-#ifdef USE_CUDA_NAMES
-    function hipStreamGetCaptureInfo_(stream,pCaptureStatus,pId) &
-        bind(c, name="cudaStreamGetCaptureInfo")
-#else
     function hipStreamGetCaptureInfo_(stream,pCaptureStatus,pId) &
         bind(c, name="hipStreamGetCaptureInfo")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9341,7 +8213,6 @@ module hipfort
   !>  @param [out] numDependencies_out - Returns size of the array returned in dependencies_out.
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorStreamCaptureImplicit`
-#ifndef USE_CUDA_NAMES
   interface hipStreamGetCaptureInfo_v2
     function hipStreamGetCaptureInfo_v2_(stream,captureStatus_out,id_out,graph_out, &
         dependencies_out,numDependencies_out) &
@@ -9358,7 +8229,6 @@ module hipfort
       type(c_ptr),value :: numDependencies_out
     end function
   end interface
-#endif
 
   !>  @brief Get stream's capture state
   !>
@@ -9367,11 +8237,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorStreamCaptureImplicit`
   interface hipStreamIsCapturing
-#ifdef USE_CUDA_NAMES
-    function hipStreamIsCapturing_(stream,pCaptureStatus) bind(c, name="cudaStreamIsCapturing")
-#else
     function hipStreamIsCapturing_(stream,pCaptureStatus) bind(c, name="hipStreamIsCapturing")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9390,13 +8256,8 @@ module hipfort
   !>  in enum `hipStreamUpdateCaptureDependenciesFlags`.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorIllegalState`
   interface hipStreamUpdateCaptureDependencies
-#ifdef USE_CUDA_NAMES
-    function hipStreamUpdateCaptureDependencies_(stream,dependencies,numDependencies,flags) &
-        bind(c, name="cudaStreamUpdateCaptureDependencies")
-#else
     function hipStreamUpdateCaptureDependencies_(stream,dependencies,numDependencies,flags) &
         bind(c, name="hipStreamUpdateCaptureDependencies")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9413,13 +8274,8 @@ module hipfort
   !>  @param [in] mode - Pointer to mode value to swap with the current mode.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipThreadExchangeStreamCaptureMode
-#ifdef USE_CUDA_NAMES
-    function hipThreadExchangeStreamCaptureMode_(mode) &
-        bind(c, name="cudaThreadExchangeStreamCaptureMode")
-#else
     function hipThreadExchangeStreamCaptureMode_(mode) &
         bind(c, name="hipThreadExchangeStreamCaptureMode")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9435,11 +8291,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorMemoryAllocation`
   interface hipGraphCreate
-#ifdef USE_CUDA_NAMES
-    function hipGraphCreate_(pGraph,flags) bind(c, name="cudaGraphCreate")
-#else
     function hipGraphCreate_(pGraph,flags) bind(c, name="hipGraphCreate")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9455,11 +8307,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphDestroy
-#ifdef USE_CUDA_NAMES
-    function hipGraphDestroy_(graph) bind(c, name="cudaGraphDestroy")
-#else
     function hipGraphDestroy_(graph) bind(c, name="hipGraphDestroy")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9476,13 +8324,8 @@ module hipfort
   !>  @param [in] numDependencies - Number of dependencies to add.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphAddDependencies
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddDependencies_(graph,from,to,numDependencies) &
-        bind(c, name="cudaGraphAddDependencies")
-#else
     function hipGraphAddDependencies_(graph,from,to,numDependencies) &
         bind(c, name="hipGraphAddDependencies")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9502,13 +8345,8 @@ module hipfort
   !>  @param [in] numDependencies - Number of dependencies to remove.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphRemoveDependencies
-#ifdef USE_CUDA_NAMES
-    function hipGraphRemoveDependencies_(graph,from,to,numDependencies) &
-        bind(c, name="cudaGraphRemoveDependencies")
-#else
     function hipGraphRemoveDependencies_(graph,from,to,numDependencies) &
         bind(c, name="hipGraphRemoveDependencies")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9533,11 +8371,7 @@ module hipfort
   !>  number of edges, the remaining entries in from and to will be set to NULL, and the number of
   !>  edges actually returned will be written to numEdges.
   interface hipGraphGetEdges
-#ifdef USE_CUDA_NAMES
-    function hipGraphGetEdges_(graph,from,to,numEdges) bind(c, name="cudaGraphGetEdges")
-#else
     function hipGraphGetEdges_(graph,from,to,numEdges) bind(c, name="hipGraphGetEdges")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9561,11 +8395,7 @@ module hipfort
   !>  nodes, the remaining entries in nodes will be set to NULL, and the number of nodes actually
   !>  obtained will be returned in numNodes.
   interface hipGraphGetNodes
-#ifdef USE_CUDA_NAMES
-    function hipGraphGetNodes_(graph,nodes,numNodes) bind(c, name="cudaGraphGetNodes")
-#else
     function hipGraphGetNodes_(graph,nodes,numNodes) bind(c, name="hipGraphGetNodes")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9588,13 +8418,8 @@ module hipfort
   !>  than the actual number of root nodes, the remaining entries in pRootNodes will be set to NULL,
   !>  and the number of nodes actually obtained will be returned in pNumRootNodes.
   interface hipGraphGetRootNodes
-#ifdef USE_CUDA_NAMES
-    function hipGraphGetRootNodes_(graph,pRootNodes,pNumRootNodes) &
-        bind(c, name="cudaGraphGetRootNodes")
-#else
     function hipGraphGetRootNodes_(graph,pRootNodes,pNumRootNodes) &
         bind(c, name="hipGraphGetRootNodes")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9620,13 +8445,8 @@ module hipfort
   !>  set
   !>  to NULL, and the number of nodes actually obtained will be returned in pNumDependencies.
   interface hipGraphNodeGetDependencies
-#ifdef USE_CUDA_NAMES
-    function hipGraphNodeGetDependencies_(node,pDependencies,pNumDependencies) &
-        bind(c, name="cudaGraphNodeGetDependencies")
-#else
     function hipGraphNodeGetDependencies_(node,pDependencies,pNumDependencies) &
         bind(c, name="hipGraphNodeGetDependencies")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9652,13 +8472,8 @@ module hipfort
   !>  returned
   !>  in pNumDependentNodes.
   interface hipGraphNodeGetDependentNodes
-#ifdef USE_CUDA_NAMES
-    function hipGraphNodeGetDependentNodes_(node,pDependentNodes,pNumDependentNodes) &
-        bind(c, name="cudaGraphNodeGetDependentNodes")
-#else
     function hipGraphNodeGetDependentNodes_(node,pDependentNodes,pNumDependentNodes) &
         bind(c, name="hipGraphNodeGetDependentNodes")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9675,11 +8490,7 @@ module hipfort
   !>  @param [out] pType - Returns the node's type.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphNodeGetType
-#ifdef USE_CUDA_NAMES
-    function hipGraphNodeGetType_(node,pType) bind(c, name="cudaGraphNodeGetType")
-#else
     function hipGraphNodeGetType_(node,pType) bind(c, name="hipGraphNodeGetType")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9694,11 +8505,7 @@ module hipfort
   !>  @param [in] node - graph node to remove
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphDestroyNode
-#ifdef USE_CUDA_NAMES
-    function hipGraphDestroyNode_(node) bind(c, name="cudaGraphDestroyNode")
-#else
     function hipGraphDestroyNode_(node) bind(c, name="hipGraphDestroyNode")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9713,11 +8520,7 @@ module hipfort
   !>  @param [in] originalGraph - original graph to clone from.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorMemoryAllocation`
   interface hipGraphClone
-#ifdef USE_CUDA_NAMES
-    function hipGraphClone_(pGraphClone,originalGraph) bind(c, name="cudaGraphClone")
-#else
     function hipGraphClone_(pGraphClone,originalGraph) bind(c, name="hipGraphClone")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9734,13 +8537,8 @@ module hipfort
   !>  @param [in] clonedGraph - Cloned graph to query.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphNodeFindInClone
-#ifdef USE_CUDA_NAMES
-    function hipGraphNodeFindInClone_(pNode,originalNode,clonedGraph) &
-        bind(c, name="cudaGraphNodeFindInClone")
-#else
     function hipGraphNodeFindInClone_(pNode,originalNode,clonedGraph) &
         bind(c, name="hipGraphNodeFindInClone")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9762,13 +8560,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorOutOfMemory`
   interface hipGraphInstantiate
-#ifdef USE_CUDA_NAMES
-    function hipGraphInstantiate_(pGraphExec,graph,pErrorNode,pLogBuffer,bufferSize) &
-        bind(c, name="cudaGraphInstantiate")
-#else
     function hipGraphInstantiate_(pGraphExec,graph,pErrorNode,pLogBuffer,bufferSize) &
         bind(c, name="hipGraphInstantiate")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9790,13 +8583,8 @@ module hipfort
   !>
   !>  @warning This API does not support any of flag and is behaving as hipGraphInstantiate.
   interface hipGraphInstantiateWithFlags
-#ifdef USE_CUDA_NAMES
-    function hipGraphInstantiateWithFlags_(pGraphExec,graph,flags) &
-        bind(c, name="cudaGraphInstantiateWithFlags")
-#else
     function hipGraphInstantiateWithFlags_(pGraphExec,graph,flags) &
         bind(c, name="hipGraphInstantiateWithFlags")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9814,13 +8602,8 @@ module hipfort
   !>  @param [in] instantiateParams - Graph instantiation Params
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphInstantiateWithParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphInstantiateWithParams_(pGraphExec,graph,instantiateParams) &
-        bind(c, name="cudaGraphInstantiateWithParams")
-#else
     function hipGraphInstantiateWithParams_(pGraphExec,graph,instantiateParams) &
         bind(c, name="hipGraphInstantiateWithParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -9838,11 +8621,7 @@ module hipfort
   !>  @param [in] stream - Instance of stream in which to launch executable graph.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphLaunch
-#ifdef USE_CUDA_NAMES
-    function hipGraphLaunch_(graphExec,stream) bind(c, name="cudaGraphLaunch")
-#else
     function hipGraphLaunch_(graphExec,stream) bind(c, name="hipGraphLaunch")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9858,11 +8637,7 @@ module hipfort
   !>  @param [in] stream - Instance of stream to which the executable graph is uploaded to.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphUpload
-#ifdef USE_CUDA_NAMES
-    function hipGraphUpload_(graphExec,stream) bind(c, name="cudaGraphUpload")
-#else
     function hipGraphUpload_(graphExec,stream) bind(c, name="hipGraphUpload")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9881,13 +8656,8 @@ module hipfort
   !>  @param [in] nodeParams - Pointer to the node parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`.
   interface hipGraphAddNode
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddNode_(pGraphNode,graph,pDependencies,numDependencies,nodeParams) &
-        bind(c, name="cudaGraphAddNode")
-#else
     function hipGraphAddNode_(pGraphNode,graph,pDependencies,numDependencies,nodeParams) &
         bind(c, name="hipGraphAddNode")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -9907,11 +8677,7 @@ module hipfort
   !>  @param [out] flags - Flags used to instantiate this executable graph.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`.
   interface hipGraphExecGetFlags
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecGetFlags_(graphExec,flags) bind(c, name="cudaGraphExecGetFlags")
-#else
     function hipGraphExecGetFlags_(graphExec,flags) bind(c, name="hipGraphExecGetFlags")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9928,11 +8694,7 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorInvalidDeviceFunction`,
   !>  `hipErrorNotSupported`.
   interface hipGraphNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphNodeSetParams_(node,nodeParams) bind(c, name="cudaGraphNodeSetParams")
-#else
     function hipGraphNodeSetParams_(node,nodeParams) bind(c, name="hipGraphNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -9951,13 +8713,8 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorInvalidDeviceFunction`,
   !>  `hipErrorNotSupported`.
   interface hipGraphExecNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecNodeSetParams_(graphExec,node,nodeParams) &
-        bind(c, name="cudaGraphExecNodeSetParams")
-#else
     function hipGraphExecNodeSetParams_(graphExec,node,nodeParams) &
         bind(c, name="hipGraphExecNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -9975,11 +8732,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`.
   interface hipGraphExecDestroy
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecDestroy_(graphExec) bind(c, name="cudaGraphExecDestroy")
-#else
     function hipGraphExecDestroy_(graphExec) bind(c, name="hipGraphExecDestroy")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -9998,13 +8751,8 @@ module hipfort
   !>  @param [in] updateResult_out - Return code whether the graph update was performed.
   !>  @returns `hipSuccess`, `hipErrorGraphExecUpdateFailure`
   interface hipGraphExecUpdate
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecUpdate_(hGraphExec,hGraph,hErrorNode_out,updateResult_out) &
-        bind(c, name="cudaGraphExecUpdate")
-#else
     function hipGraphExecUpdate_(hGraphExec,hGraph,hErrorNode_out,updateResult_out) &
         bind(c, name="hipGraphExecUpdate")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10025,13 +8773,8 @@ module hipfort
   !>  @param [in] pNodeParams - Pointer to the parameters of the kernel execution node.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorInvalidDeviceFunction`
   interface hipGraphAddKernelNode
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddKernelNode_(pGraphNode,graph,pDependencies,numDependencies,pNodeParams) &
-        bind(c, name="cudaGraphAddKernelNode")
-#else
     function hipGraphAddKernelNode_(pGraphNode,graph,pDependencies,numDependencies,pNodeParams) &
         bind(c, name="hipGraphAddKernelNode")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -10051,13 +8794,8 @@ module hipfort
   !>  @param [out] pNodeParams - pointer to the parameters
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphKernelNodeGetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphKernelNodeGetParams_(node,pNodeParams) &
-        bind(c, name="cudaGraphKernelNodeGetParams")
-#else
     function hipGraphKernelNodeGetParams_(node,pNodeParams) &
         bind(c, name="hipGraphKernelNodeGetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -10074,13 +8812,8 @@ module hipfort
   !>  @param [in] pNodeParams - const pointer to the parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphKernelNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphKernelNodeSetParams_(node,pNodeParams) &
-        bind(c, name="cudaGraphKernelNodeSetParams")
-#else
     function hipGraphKernelNodeSetParams_(node,pNodeParams) &
         bind(c, name="hipGraphKernelNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -10098,13 +8831,8 @@ module hipfort
   !>  @param [in] pNodeParams - const pointer to the kernel node parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphExecKernelNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecKernelNodeSetParams_(hGraphExec,node,pNodeParams) &
-        bind(c, name="cudaGraphExecKernelNodeSetParams")
-#else
     function hipGraphExecKernelNodeSetParams_(hGraphExec,node,pNodeParams) &
         bind(c, name="hipGraphExecKernelNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -10125,7 +8853,6 @@ module hipfort
   !>  @param [in] copyParams - const pointer to the parameters for the memory copy.
   !>  @param [in] ctx - context related to current device.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipDrvGraphAddMemcpyNode
     function hipDrvGraphAddMemcpyNode_(phGraphNode,hGraph,dependencies,numDependencies,copyParams, &
         ctx) &
@@ -10143,7 +8870,6 @@ module hipfort
       type(c_ptr),value :: ctx
     end function
   end interface
-#endif
 
   !>  @brief Creates a memcpy node and adds it to a graph.
   !>
@@ -10154,13 +8880,8 @@ module hipfort
   !>  @param [in] pCopyParams - const pointer to the parameters for the memory copy.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphAddMemcpyNode
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddMemcpyNode_(pGraphNode,graph,pDependencies,numDependencies,pCopyParams) &
-        bind(c, name="cudaGraphAddMemcpyNode")
-#else
     function hipGraphAddMemcpyNode_(pGraphNode,graph,pDependencies,numDependencies,pCopyParams) &
         bind(c, name="hipGraphAddMemcpyNode")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -10180,13 +8901,8 @@ module hipfort
   !>  @param [out] pNodeParams - pointer to the parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphMemcpyNodeGetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphMemcpyNodeGetParams_(node,pNodeParams) &
-        bind(c, name="cudaGraphMemcpyNodeGetParams")
-#else
     function hipGraphMemcpyNodeGetParams_(node,pNodeParams) &
         bind(c, name="hipGraphMemcpyNodeGetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -10203,13 +8919,8 @@ module hipfort
   !>  @param [in] pNodeParams - const pointer to the parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphMemcpyNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphMemcpyNodeSetParams_(node,pNodeParams) &
-        bind(c, name="cudaGraphMemcpyNodeSetParams")
-#else
     function hipGraphMemcpyNodeSetParams_(node,pNodeParams) &
         bind(c, name="hipGraphMemcpyNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -10227,13 +8938,8 @@ module hipfort
   !>  @param [in] value - const pointer to the parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphKernelNodeSetAttribute
-#ifdef USE_CUDA_NAMES
-    function hipGraphKernelNodeSetAttribute_(hNode,attr,myValue) &
-        bind(c, name="cudaGraphKernelNodeSetAttribute")
-#else
     function hipGraphKernelNodeSetAttribute_(hNode,attr,myValue) &
         bind(c, name="hipGraphKernelNodeSetAttribute")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10251,13 +8957,8 @@ module hipfort
   !>  @param [in] value - const pointer to the parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphKernelNodeGetAttribute
-#ifdef USE_CUDA_NAMES
-    function hipGraphKernelNodeGetAttribute_(hNode,attr,myValue) &
-        bind(c, name="cudaGraphKernelNodeGetAttribute")
-#else
     function hipGraphKernelNodeGetAttribute_(hNode,attr,myValue) &
         bind(c, name="hipGraphKernelNodeGetAttribute")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10275,13 +8976,8 @@ module hipfort
   !>  @param [in] pNodeParams - const pointer to the kernel node parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphExecMemcpyNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecMemcpyNodeSetParams_(hGraphExec,node,pNodeParams) &
-        bind(c, name="cudaGraphExecMemcpyNodeSetParams")
-#else
     function hipGraphExecMemcpyNodeSetParams_(hGraphExec,node,pNodeParams) &
         bind(c, name="hipGraphExecMemcpyNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -10305,15 +9001,9 @@ module hipfort
   !>  @param [in] kind - Type of memory copy.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphAddMemcpyNode1D
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddMemcpyNode1D_(pGraphNode,graph,pDependencies,numDependencies,dst,src, &
-        count,myKind) &
-        bind(c, name="cudaGraphAddMemcpyNode1D")
-#else
     function hipGraphAddMemcpyNode1D_(pGraphNode,graph,pDependencies,numDependencies,dst,src, &
         count,myKind) &
         bind(c, name="hipGraphAddMemcpyNode1D")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10338,13 +9028,8 @@ module hipfort
   !>  @param [in] kind - Type of memory copy.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphMemcpyNodeSetParams1D
-#ifdef USE_CUDA_NAMES
-    function hipGraphMemcpyNodeSetParams1D_(node,dst,src,count,myKind) &
-        bind(c, name="cudaGraphMemcpyNodeSetParams1D")
-#else
     function hipGraphMemcpyNodeSetParams1D_(node,dst,src,count,myKind) &
         bind(c, name="hipGraphMemcpyNodeSetParams1D")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10368,13 +9053,8 @@ module hipfort
   !>  @param [in] kind - Type of memory copy.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphExecMemcpyNodeSetParams1D
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecMemcpyNodeSetParams1D_(hGraphExec,node,dst,src,count,myKind) &
-        bind(c, name="cudaGraphExecMemcpyNodeSetParams1D")
-#else
     function hipGraphExecMemcpyNodeSetParams1D_(hGraphExec,node,dst,src,count,myKind) &
         bind(c, name="hipGraphExecMemcpyNodeSetParams1D")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10401,15 +9081,9 @@ module hipfort
   !>  @param [in] kind - Type of memory copy.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphAddMemcpyNodeFromSymbol
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddMemcpyNodeFromSymbol_(pGraphNode,graph,pDependencies,numDependencies,dst, &
-        symbol,count,offset,myKind) &
-        bind(c, name="cudaGraphAddMemcpyNodeFromSymbol")
-#else
     function hipGraphAddMemcpyNodeFromSymbol_(pGraphNode,graph,pDependencies,numDependencies,dst, &
         symbol,count,offset,myKind) &
         bind(c, name="hipGraphAddMemcpyNodeFromSymbol")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10436,13 +9110,8 @@ module hipfort
   !>  @param [in] kind - Type of memory copy.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphMemcpyNodeSetParamsFromSymbol
-#ifdef USE_CUDA_NAMES
-    function hipGraphMemcpyNodeSetParamsFromSymbol_(node,dst,symbol,count,offset,myKind) &
-        bind(c, name="cudaGraphMemcpyNodeSetParamsFromSymbol")
-#else
     function hipGraphMemcpyNodeSetParamsFromSymbol_(node,dst,symbol,count,offset,myKind) &
         bind(c, name="hipGraphMemcpyNodeSetParamsFromSymbol")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10469,15 +9138,9 @@ module hipfort
   !>  @param [in] kind - Type of memory copy.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphExecMemcpyNodeSetParamsFromSymbol
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecMemcpyNodeSetParamsFromSymbol_(hGraphExec,node,dst,symbol,count,offset, &
-        myKind) &
-        bind(c, name="cudaGraphExecMemcpyNodeSetParamsFromSymbol")
-#else
     function hipGraphExecMemcpyNodeSetParamsFromSymbol_(hGraphExec,node,dst,symbol,count,offset, &
         myKind) &
         bind(c, name="hipGraphExecMemcpyNodeSetParamsFromSymbol")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10505,15 +9168,9 @@ module hipfort
   !>  @param [in] kind - Type of memory copy.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphAddMemcpyNodeToSymbol
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddMemcpyNodeToSymbol_(pGraphNode,graph,pDependencies,numDependencies,symbol, &
-        src,count,offset,myKind) &
-        bind(c, name="cudaGraphAddMemcpyNodeToSymbol")
-#else
     function hipGraphAddMemcpyNodeToSymbol_(pGraphNode,graph,pDependencies,numDependencies,symbol, &
         src,count,offset,myKind) &
         bind(c, name="hipGraphAddMemcpyNodeToSymbol")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10540,13 +9197,8 @@ module hipfort
   !>  @param [in] kind - Type of memory copy.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphMemcpyNodeSetParamsToSymbol
-#ifdef USE_CUDA_NAMES
-    function hipGraphMemcpyNodeSetParamsToSymbol_(node,symbol,src,count,offset,myKind) &
-        bind(c, name="cudaGraphMemcpyNodeSetParamsToSymbol")
-#else
     function hipGraphMemcpyNodeSetParamsToSymbol_(node,symbol,src,count,offset,myKind) &
         bind(c, name="hipGraphMemcpyNodeSetParamsToSymbol")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10571,15 +9223,9 @@ module hipfort
   !>  @param [in] kind - Type of memory copy.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphExecMemcpyNodeSetParamsToSymbol
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecMemcpyNodeSetParamsToSymbol_(hGraphExec,node,symbol,src,count,offset, &
-        myKind) &
-        bind(c, name="cudaGraphExecMemcpyNodeSetParamsToSymbol")
-#else
     function hipGraphExecMemcpyNodeSetParamsToSymbol_(hGraphExec,node,symbol,src,count,offset, &
         myKind) &
         bind(c, name="hipGraphExecMemcpyNodeSetParamsToSymbol")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10603,13 +9249,8 @@ module hipfort
   !>  @param [in] pMemsetParams - const pointer to the parameters for the memory set.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphAddMemsetNode
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddMemsetNode_(pGraphNode,graph,pDependencies,numDependencies,pMemsetParams) &
-        bind(c, name="cudaGraphAddMemsetNode")
-#else
     function hipGraphAddMemsetNode_(pGraphNode,graph,pDependencies,numDependencies,pMemsetParams) &
         bind(c, name="hipGraphAddMemsetNode")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -10629,13 +9270,8 @@ module hipfort
   !>  @param [out] pNodeParams - Pointer to the parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphMemsetNodeGetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphMemsetNodeGetParams_(node,pNodeParams) &
-        bind(c, name="cudaGraphMemsetNodeGetParams")
-#else
     function hipGraphMemsetNodeGetParams_(node,pNodeParams) &
         bind(c, name="hipGraphMemsetNodeGetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -10652,13 +9288,8 @@ module hipfort
   !>  @param [in] pNodeParams - Pointer to the parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphMemsetNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphMemsetNodeSetParams_(node,pNodeParams) &
-        bind(c, name="cudaGraphMemsetNodeSetParams")
-#else
     function hipGraphMemsetNodeSetParams_(node,pNodeParams) &
         bind(c, name="hipGraphMemsetNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -10676,13 +9307,8 @@ module hipfort
   !>  @param [in] pNodeParams - Pointer to the parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphExecMemsetNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecMemsetNodeSetParams_(hGraphExec,node,pNodeParams) &
-        bind(c, name="cudaGraphExecMemsetNodeSetParams")
-#else
     function hipGraphExecMemsetNodeSetParams_(hGraphExec,node,pNodeParams) &
         bind(c, name="hipGraphExecMemsetNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -10703,13 +9329,8 @@ module hipfort
   !>  @param [in] pNodeParams - Pointer to the parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphAddHostNode
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddHostNode_(pGraphNode,graph,pDependencies,numDependencies,pNodeParams) &
-        bind(c, name="cudaGraphAddHostNode")
-#else
     function hipGraphAddHostNode_(pGraphNode,graph,pDependencies,numDependencies,pNodeParams) &
         bind(c, name="hipGraphAddHostNode")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -10729,11 +9350,7 @@ module hipfort
   !>  @param [out] pNodeParams - Pointer to the parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphHostNodeGetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphHostNodeGetParams_(node,pNodeParams) bind(c, name="cudaGraphHostNodeGetParams")
-#else
     function hipGraphHostNodeGetParams_(node,pNodeParams) bind(c, name="hipGraphHostNodeGetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -10750,11 +9367,7 @@ module hipfort
   !>  @param [in] pNodeParams - Pointer to the parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphHostNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphHostNodeSetParams_(node,pNodeParams) bind(c, name="cudaGraphHostNodeSetParams")
-#else
     function hipGraphHostNodeSetParams_(node,pNodeParams) bind(c, name="hipGraphHostNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -10772,13 +9385,8 @@ module hipfort
   !>  @param [in] pNodeParams - Pointer to the parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphExecHostNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecHostNodeSetParams_(hGraphExec,node,pNodeParams) &
-        bind(c, name="cudaGraphExecHostNodeSetParams")
-#else
     function hipGraphExecHostNodeSetParams_(hGraphExec,node,pNodeParams) &
         bind(c, name="hipGraphExecHostNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -10799,13 +9407,8 @@ module hipfort
   !>  @param [in] childGraph - Graph to clone into this node
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphAddChildGraphNode
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddChildGraphNode_(pGraphNode,graph,pDependencies,numDependencies,childGraph) &
-        bind(c, name="cudaGraphAddChildGraphNode")
-#else
     function hipGraphAddChildGraphNode_(pGraphNode,graph,pDependencies,numDependencies,childGraph) &
         bind(c, name="hipGraphAddChildGraphNode")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10824,13 +9427,8 @@ module hipfort
   !>  @param [out] pGraph - Pointer to get the graph.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphChildGraphNodeGetGraph
-#ifdef USE_CUDA_NAMES
-    function hipGraphChildGraphNodeGetGraph_(node,pGraph) &
-        bind(c, name="cudaGraphChildGraphNodeGetGraph")
-#else
     function hipGraphChildGraphNodeGetGraph_(node,pGraph) &
         bind(c, name="hipGraphChildGraphNodeGetGraph")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10847,13 +9445,8 @@ module hipfort
   !>  @param [in] childGraph - child graph with updated parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphExecChildGraphNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecChildGraphNodeSetParams_(hGraphExec,node,childGraph) &
-        bind(c, name="cudaGraphExecChildGraphNodeSetParams")
-#else
     function hipGraphExecChildGraphNodeSetParams_(hGraphExec,node,childGraph) &
         bind(c, name="hipGraphExecChildGraphNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10872,13 +9465,8 @@ module hipfort
   !>  @param [in] numDependencies - Number of dependencies.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphAddEmptyNode
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddEmptyNode_(pGraphNode,graph,pDependencies,numDependencies) &
-        bind(c, name="cudaGraphAddEmptyNode")
-#else
     function hipGraphAddEmptyNode_(pGraphNode,graph,pDependencies,numDependencies) &
         bind(c, name="hipGraphAddEmptyNode")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10899,13 +9487,8 @@ module hipfort
   !>  @param [in] event - Event of the node.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphAddEventRecordNode
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddEventRecordNode_(pGraphNode,graph,pDependencies,numDependencies,event) &
-        bind(c, name="cudaGraphAddEventRecordNode")
-#else
     function hipGraphAddEventRecordNode_(pGraphNode,graph,pDependencies,numDependencies,event) &
         bind(c, name="hipGraphAddEventRecordNode")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10924,13 +9507,8 @@ module hipfort
   !>  @param [out] event_out - Pointer to return the event.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphEventRecordNodeGetEvent
-#ifdef USE_CUDA_NAMES
-    function hipGraphEventRecordNodeGetEvent_(node,event_out) &
-        bind(c, name="cudaGraphEventRecordNodeGetEvent")
-#else
     function hipGraphEventRecordNodeGetEvent_(node,event_out) &
         bind(c, name="hipGraphEventRecordNodeGetEvent")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10946,13 +9524,8 @@ module hipfort
   !>  @param [in] event - Pointer to the event.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphEventRecordNodeSetEvent
-#ifdef USE_CUDA_NAMES
-    function hipGraphEventRecordNodeSetEvent_(node,event) &
-        bind(c, name="cudaGraphEventRecordNodeSetEvent")
-#else
     function hipGraphEventRecordNodeSetEvent_(node,event) &
         bind(c, name="hipGraphEventRecordNodeSetEvent")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10969,13 +9542,8 @@ module hipfort
   !>  @param [in] event - pointer to the event.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphExecEventRecordNodeSetEvent
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecEventRecordNodeSetEvent_(hGraphExec,hNode,event) &
-        bind(c, name="cudaGraphExecEventRecordNodeSetEvent")
-#else
     function hipGraphExecEventRecordNodeSetEvent_(hGraphExec,hNode,event) &
         bind(c, name="hipGraphExecEventRecordNodeSetEvent")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -10995,13 +9563,8 @@ module hipfort
   !>  @param [in] event - Event for the node.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphAddEventWaitNode
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddEventWaitNode_(pGraphNode,graph,pDependencies,numDependencies,event) &
-        bind(c, name="cudaGraphAddEventWaitNode")
-#else
     function hipGraphAddEventWaitNode_(pGraphNode,graph,pDependencies,numDependencies,event) &
         bind(c, name="hipGraphAddEventWaitNode")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11020,13 +9583,8 @@ module hipfort
   !>  @param [out] event_out - Pointer to return the event.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphEventWaitNodeGetEvent
-#ifdef USE_CUDA_NAMES
-    function hipGraphEventWaitNodeGetEvent_(node,event_out) &
-        bind(c, name="cudaGraphEventWaitNodeGetEvent")
-#else
     function hipGraphEventWaitNodeGetEvent_(node,event_out) &
         bind(c, name="hipGraphEventWaitNodeGetEvent")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11042,13 +9600,8 @@ module hipfort
   !>  @param [in] event - Pointer to the event.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphEventWaitNodeSetEvent
-#ifdef USE_CUDA_NAMES
-    function hipGraphEventWaitNodeSetEvent_(node,event) &
-        bind(c, name="cudaGraphEventWaitNodeSetEvent")
-#else
     function hipGraphEventWaitNodeSetEvent_(node,event) &
         bind(c, name="hipGraphEventWaitNodeSetEvent")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11065,13 +9618,8 @@ module hipfort
   !>  @param [in] event - pointer to the event.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphExecEventWaitNodeSetEvent
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecEventWaitNodeSetEvent_(hGraphExec,hNode,event) &
-        bind(c, name="cudaGraphExecEventWaitNodeSetEvent")
-#else
     function hipGraphExecEventWaitNodeSetEvent_(hGraphExec,hNode,event) &
         bind(c, name="hipGraphExecEventWaitNodeSetEvent")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11092,13 +9640,8 @@ module hipfort
   !>  allocated memory.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphAddMemAllocNode
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddMemAllocNode_(pGraphNode,graph,pDependencies,numDependencies,pNodeParams) &
-        bind(c, name="cudaGraphAddMemAllocNode")
-#else
     function hipGraphAddMemAllocNode_(pGraphNode,graph,pDependencies,numDependencies,pNodeParams) &
         bind(c, name="hipGraphAddMemAllocNode")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -11118,13 +9661,8 @@ module hipfort
   !>  @param [out] pNodeParams - Parameters for the specified memory allocation node
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphMemAllocNodeGetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphMemAllocNodeGetParams_(node,pNodeParams) &
-        bind(c, name="cudaGraphMemAllocNodeGetParams")
-#else
     function hipGraphMemAllocNodeGetParams_(node,pNodeParams) &
         bind(c, name="hipGraphMemAllocNodeGetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -11144,13 +9682,8 @@ module hipfort
   !>  @param [in] dev_ptr          - Pointer to the memory to be freed
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphAddMemFreeNode
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddMemFreeNode_(pGraphNode,graph,pDependencies,numDependencies,dev_ptr) &
-        bind(c, name="cudaGraphAddMemFreeNode")
-#else
     function hipGraphAddMemFreeNode_(pGraphNode,graph,pDependencies,numDependencies,dev_ptr) &
         bind(c, name="hipGraphAddMemFreeNode")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11169,13 +9702,8 @@ module hipfort
   !>  @param [out] dev_ptr - Device pointer of the specified memory free node
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphMemFreeNodeGetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphMemFreeNodeGetParams_(node,dev_ptr) &
-        bind(c, name="cudaGraphMemFreeNodeGetParams")
-#else
     function hipGraphMemFreeNodeGetParams_(node,dev_ptr) &
         bind(c, name="hipGraphMemFreeNodeGetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11192,13 +9720,8 @@ module hipfort
   !>  @param [out] value - Value of the queried attribute
   !>  @returns `hipSuccess`, `hipErrorInvalidDevice`
   interface hipDeviceGetGraphMemAttribute
-#ifdef USE_CUDA_NAMES
-    function hipDeviceGetGraphMemAttribute_(device,attr,myValue) &
-        bind(c, name="cudaDeviceGetGraphMemAttribute")
-#else
     function hipDeviceGetGraphMemAttribute_(device,attr,myValue) &
         bind(c, name="hipDeviceGetGraphMemAttribute")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11216,13 +9739,8 @@ module hipfort
   !>  @param [in] value - Value of the attribute.
   !>  @returns `hipSuccess`, `hipErrorInvalidDevice`
   interface hipDeviceSetGraphMemAttribute
-#ifdef USE_CUDA_NAMES
-    function hipDeviceSetGraphMemAttribute_(device,attr,myValue) &
-        bind(c, name="cudaDeviceSetGraphMemAttribute")
-#else
     function hipDeviceSetGraphMemAttribute_(device,attr,myValue) &
         bind(c, name="hipDeviceSetGraphMemAttribute")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11239,11 +9757,7 @@ module hipfort
   !>  @param [in] device - Device for which memory should be trimmed
   !>  @returns `hipSuccess`, `hipErrorInvalidDevice`
   interface hipDeviceGraphMemTrim
-#ifdef USE_CUDA_NAMES
-    function hipDeviceGraphMemTrim_(device) bind(c, name="cudaDeviceGraphMemTrim")
-#else
     function hipDeviceGraphMemTrim_(device) bind(c, name="hipDeviceGraphMemTrim")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11261,13 +9775,8 @@ module hipfort
   !>  @param [in] flags - flags passed to API.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipUserObjectCreate
-#ifdef USE_CUDA_NAMES
-    function hipUserObjectCreate_(object_out,ptr,destroy,initialRefcount,flags) &
-        bind(c, name="cudaUserObjectCreate")
-#else
     function hipUserObjectCreate_(object_out,ptr,destroy,initialRefcount,flags) &
         bind(c, name="hipUserObjectCreate")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11286,11 +9795,7 @@ module hipfort
   !>  @param [in] count - reference to resource to be retained.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipUserObjectRelease
-#ifdef USE_CUDA_NAMES
-    function hipUserObjectRelease_(object,count) bind(c, name="cudaUserObjectRelease")
-#else
     function hipUserObjectRelease_(object,count) bind(c, name="hipUserObjectRelease")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11306,11 +9811,7 @@ module hipfort
   !>  @param [in] count - reference to resource to be retained.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipUserObjectRetain
-#ifdef USE_CUDA_NAMES
-    function hipUserObjectRetain_(object,count) bind(c, name="cudaUserObjectRetain")
-#else
     function hipUserObjectRetain_(object,count) bind(c, name="hipUserObjectRetain")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11328,13 +9829,8 @@ module hipfort
   !>  @param [in] flags - flags passed to API.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphRetainUserObject
-#ifdef USE_CUDA_NAMES
-    function hipGraphRetainUserObject_(graph,object,count,flags) &
-        bind(c, name="cudaGraphRetainUserObject")
-#else
     function hipGraphRetainUserObject_(graph,object,count,flags) &
         bind(c, name="hipGraphRetainUserObject")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11353,13 +9849,8 @@ module hipfort
   !>  @param [in] count - reference to resource to be retained.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphReleaseUserObject
-#ifdef USE_CUDA_NAMES
-    function hipGraphReleaseUserObject_(graph,object,count) &
-        bind(c, name="cudaGraphReleaseUserObject")
-#else
     function hipGraphReleaseUserObject_(graph,object,count) &
         bind(c, name="hipGraphReleaseUserObject")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11377,11 +9868,7 @@ module hipfort
   !>  @param [in] flags - Flags from hipGraphDebugDotFlags to get additional node information.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorOperatingSystem`
   interface hipGraphDebugDotPrint
-#ifdef USE_CUDA_NAMES
-    function hipGraphDebugDotPrint_(graph,path,flags) bind(c, name="cudaGraphDebugDotPrint")
-#else
     function hipGraphDebugDotPrint_(graph,path,flags) bind(c, name="hipGraphDebugDotPrint")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11403,13 +9890,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidContext`
   interface hipGraphKernelNodeCopyAttributes
-#ifdef USE_CUDA_NAMES
-    function hipGraphKernelNodeCopyAttributes_(hSrc,hDst) &
-        bind(c, name="cudaGraphKernelNodeCopyAttributes")
-#else
     function hipGraphKernelNodeCopyAttributes_(hSrc,hDst) &
         bind(c, name="hipGraphKernelNodeCopyAttributes")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11438,13 +9920,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`,
   interface hipGraphNodeSetEnabled
-#ifdef USE_CUDA_NAMES
-    function hipGraphNodeSetEnabled_(hGraphExec,hNode,isEnabled) &
-        bind(c, name="cudaGraphNodeSetEnabled")
-#else
     function hipGraphNodeSetEnabled_(hGraphExec,hNode,isEnabled) &
         bind(c, name="hipGraphNodeSetEnabled")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11472,13 +9949,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphNodeGetEnabled
-#ifdef USE_CUDA_NAMES
-    function hipGraphNodeGetEnabled_(hGraphExec,hNode,isEnabled) &
-        bind(c, name="cudaGraphNodeGetEnabled")
-#else
     function hipGraphNodeGetEnabled_(hGraphExec,hNode,isEnabled) &
         bind(c, name="hipGraphNodeGetEnabled")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11498,15 +9970,9 @@ module hipfort
   !>  @param [in] nodeParams -pointer to the parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphAddExternalSemaphoresWaitNode
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddExternalSemaphoresWaitNode_(pGraphNode,graph,pDependencies, &
-        numDependencies,nodeParams) &
-        bind(c, name="cudaGraphAddExternalSemaphoresWaitNode")
-#else
     function hipGraphAddExternalSemaphoresWaitNode_(pGraphNode,graph,pDependencies, &
         numDependencies,nodeParams) &
         bind(c, name="hipGraphAddExternalSemaphoresWaitNode")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -11529,15 +9995,9 @@ module hipfort
   !>  @param [in] nodeParams -pointer to the parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphAddExternalSemaphoresSignalNode
-#ifdef USE_CUDA_NAMES
-    function hipGraphAddExternalSemaphoresSignalNode_(pGraphNode,graph,pDependencies, &
-        numDependencies,nodeParams) &
-        bind(c, name="cudaGraphAddExternalSemaphoresSignalNode")
-#else
     function hipGraphAddExternalSemaphoresSignalNode_(pGraphNode,graph,pDependencies, &
         numDependencies,nodeParams) &
         bind(c, name="hipGraphAddExternalSemaphoresSignalNode")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -11557,13 +10017,8 @@ module hipfort
   !>  @param [in]  nodeParams  - Pointer to the params to be set.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphExternalSemaphoresSignalNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphExternalSemaphoresSignalNodeSetParams_(hNode,nodeParams) &
-        bind(c, name="cudaGraphExternalSemaphoresSignalNodeSetParams")
-#else
     function hipGraphExternalSemaphoresSignalNodeSetParams_(hNode,nodeParams) &
         bind(c, name="hipGraphExternalSemaphoresSignalNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -11580,13 +10035,8 @@ module hipfort
   !>  @param [in]  nodeParams  - Pointer to the params to be set.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphExternalSemaphoresWaitNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphExternalSemaphoresWaitNodeSetParams_(hNode,nodeParams) &
-        bind(c, name="cudaGraphExternalSemaphoresWaitNodeSetParams")
-#else
     function hipGraphExternalSemaphoresWaitNodeSetParams_(hNode,nodeParams) &
         bind(c, name="hipGraphExternalSemaphoresWaitNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -11603,13 +10053,8 @@ module hipfort
   !>  @param [out]  params_out  - Pointer to params.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphExternalSemaphoresSignalNodeGetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphExternalSemaphoresSignalNodeGetParams_(hNode,params_out) &
-        bind(c, name="cudaGraphExternalSemaphoresSignalNodeGetParams")
-#else
     function hipGraphExternalSemaphoresSignalNodeGetParams_(hNode,params_out) &
         bind(c, name="hipGraphExternalSemaphoresSignalNodeGetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -11626,13 +10071,8 @@ module hipfort
   !>  @param [out]  params_out  - Pointer to params.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphExternalSemaphoresWaitNodeGetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphExternalSemaphoresWaitNodeGetParams_(hNode,params_out) &
-        bind(c, name="cudaGraphExternalSemaphoresWaitNodeGetParams")
-#else
     function hipGraphExternalSemaphoresWaitNodeGetParams_(hNode,params_out) &
         bind(c, name="hipGraphExternalSemaphoresWaitNodeGetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -11650,13 +10090,8 @@ module hipfort
   !>  @param [in]  nodeParams  - Pointer to the params to be set.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphExecExternalSemaphoresSignalNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecExternalSemaphoresSignalNodeSetParams_(hGraphExec,hNode,nodeParams) &
-        bind(c, name="cudaGraphExecExternalSemaphoresSignalNodeSetParams")
-#else
     function hipGraphExecExternalSemaphoresSignalNodeSetParams_(hGraphExec,hNode,nodeParams) &
         bind(c, name="hipGraphExecExternalSemaphoresSignalNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -11675,13 +10110,8 @@ module hipfort
   !>  @param [in]  nodeParams  - Pointer to the params to be set.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphExecExternalSemaphoresWaitNodeSetParams
-#ifdef USE_CUDA_NAMES
-    function hipGraphExecExternalSemaphoresWaitNodeSetParams_(hGraphExec,hNode,nodeParams) &
-        bind(c, name="cudaGraphExecExternalSemaphoresWaitNodeSetParams")
-#else
     function hipGraphExecExternalSemaphoresWaitNodeSetParams_(hGraphExec,hNode,nodeParams) &
         bind(c, name="hipGraphExecExternalSemaphoresWaitNodeSetParams")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -11698,7 +10128,6 @@ module hipfort
   !>  @param [in] hNode - instance of the node to get parameters from.
   !>  @param [out] nodeParams - pointer to the parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipDrvGraphMemcpyNodeGetParams
     function hipDrvGraphMemcpyNodeGetParams_(hNode,nodeParams) &
         bind(c, name="hipDrvGraphMemcpyNodeGetParams")
@@ -11711,14 +10140,12 @@ module hipfort
       type(HIP_MEMCPY3D) :: nodeParams
     end function
   end interface
-#endif
 
   !>  @brief Sets a memcpy node's parameters.
   !>
   !>  @param [in] hNode - instance of the node to Set parameters for.
   !>  @param [out] nodeParams - pointer to the parameters.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipDrvGraphMemcpyNodeSetParams
     function hipDrvGraphMemcpyNodeSetParams_(hNode,nodeParams) &
         bind(c, name="hipDrvGraphMemcpyNodeSetParams")
@@ -11731,7 +10158,6 @@ module hipfort
       type(HIP_MEMCPY3D) :: nodeParams
     end function
   end interface
-#endif
 
   !>  @brief Creates a memset node and adds it to a graph.
   !>
@@ -11742,7 +10168,6 @@ module hipfort
   !>  @param [in] memsetParams - const pointer to the parameters for the memory set.
   !>  @param [in] ctx - cotext related to current device.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipDrvGraphAddMemsetNode
     function hipDrvGraphAddMemsetNode_(phGraphNode,hGraph,dependencies,numDependencies, &
         memsetParams,ctx) &
@@ -11760,7 +10185,6 @@ module hipfort
       type(c_ptr),value :: ctx
     end function
   end interface
-#endif
 
   !>  @brief Creates a memory free node and adds it to a graph
   !>
@@ -11770,7 +10194,6 @@ module hipfort
   !>  @param [in]  numDependencies - The number of dependencies
   !>  @param [in]  dptr - Pointer to the memory to be freed
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipDrvGraphAddMemFreeNode
     function hipDrvGraphAddMemFreeNode_(phGraphNode,hGraph,dependencies,numDependencies,dptr) &
         bind(c, name="hipDrvGraphAddMemFreeNode")
@@ -11785,7 +10208,6 @@ module hipfort
       type(c_ptr),value :: dptr
     end function
   end interface
-#endif
 
   !>  @brief Sets the parameters for a memcpy node in the given graphExec.
   !>
@@ -11794,7 +10216,6 @@ module hipfort
   !>  @param [in] copyParams - const pointer to the memcpy node params.
   !>  @param [in] ctx - cotext related to current device.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipDrvGraphExecMemcpyNodeSetParams
     function hipDrvGraphExecMemcpyNodeSetParams_(hGraphExec,hNode,copyParams,ctx) &
         bind(c, name="hipDrvGraphExecMemcpyNodeSetParams")
@@ -11809,7 +10230,6 @@ module hipfort
       type(c_ptr),value :: ctx
     end function
   end interface
-#endif
 
   !>  @brief Sets the parameters for a memset node in the given graphExec.
   !>
@@ -11818,7 +10238,6 @@ module hipfort
   !>  @param [in] memsetParams - pointer to the parameters.
   !>  @param [in] ctx - cotext related to current device.
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
-#ifndef USE_CUDA_NAMES
   interface hipDrvGraphExecMemsetNodeSetParams
     function hipDrvGraphExecMemsetNodeSetParams_(hGraphExec,hNode,memsetParams,ctx) &
         bind(c, name="hipDrvGraphExecMemsetNodeSetParams")
@@ -11833,7 +10252,6 @@ module hipfort
       type(c_ptr),value :: ctx
     end function
   end interface
-#endif
 
   !>  @brief Frees an address range reservation made via hipMemAddressReserve
   !>
@@ -11845,11 +10263,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemAddressFree
-#ifdef USE_CUDA_NAMES
-    function hipMemAddressFree_(devPtr,mySize) bind(c, name="cuMemAddressFree")
-#else
     function hipMemAddressFree_(devPtr,mySize) bind(c, name="hipMemAddressFree")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11872,13 +10286,8 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemAddressReserve
-#ifdef USE_CUDA_NAMES
-    function hipMemAddressReserve_(ptr,mySize,alignment,addr,flags) &
-        bind(c, name="cuMemAddressReserve")
-#else
     function hipMemAddressReserve_(ptr,mySize,alignment,addr,flags) &
         bind(c, name="hipMemAddressReserve")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11903,11 +10312,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemCreate
-#ifdef USE_CUDA_NAMES
-    function hipMemCreate_(handle,mySize,prop,flags) bind(c, name="cuMemCreate")
-#else
     function hipMemCreate_(handle,mySize,prop,flags) bind(c, name="hipMemCreate")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -11932,13 +10337,8 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemExportToShareableHandle
-#ifdef USE_CUDA_NAMES
-    function hipMemExportToShareableHandle_(shareableHandle,handle,handleType,flags) &
-        bind(c, name="cuMemExportToShareableHandle")
-#else
     function hipMemExportToShareableHandle_(shareableHandle,handle,handleType,flags) &
         bind(c, name="hipMemExportToShareableHandle")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -11961,11 +10361,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemGetAccess
-#ifdef USE_CUDA_NAMES
-    function hipMemGetAccess_(flags,location,ptr) bind(c, name="cuMemGetAccess")
-#else
     function hipMemGetAccess_(flags,location,ptr) bind(c, name="hipMemGetAccess")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -11988,13 +10384,8 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemGetAllocationGranularity
-#ifdef USE_CUDA_NAMES
-    function hipMemGetAllocationGranularity_(granularity,prop,option) &
-        bind(c, name="cuMemGetAllocationGranularity")
-#else
     function hipMemGetAllocationGranularity_(granularity,prop,option) &
         bind(c, name="hipMemGetAllocationGranularity")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -12016,13 +10407,8 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemGetAllocationPropertiesFromHandle
-#ifdef USE_CUDA_NAMES
-    function hipMemGetAllocationPropertiesFromHandle_(prop,handle) &
-        bind(c, name="cuMemGetAllocationPropertiesFromHandle")
-#else
     function hipMemGetAllocationPropertiesFromHandle_(prop,handle) &
         bind(c, name="hipMemGetAllocationPropertiesFromHandle")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -12044,13 +10430,8 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemImportFromShareableHandle
-#ifdef USE_CUDA_NAMES
-    function hipMemImportFromShareableHandle_(handle,osHandle,shHandleType) &
-        bind(c, name="cuMemImportFromShareableHandle")
-#else
     function hipMemImportFromShareableHandle_(handle,osHandle,shHandleType) &
         bind(c, name="hipMemImportFromShareableHandle")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12074,11 +10455,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemMap
-#ifdef USE_CUDA_NAMES
-    function hipMemMap_(ptr,mySize,offset,handle,flags) bind(c, name="cuMemMap")
-#else
     function hipMemMap_(ptr,mySize,offset,handle,flags) bind(c, name="hipMemMap")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12100,11 +10477,7 @@ module hipfort
   !>  @warning This API is under development. Currently it is not supported on AMD
   !>           GPUs and returns `hipErrorNotSupported`.
   interface hipMemMapArrayAsync
-#ifdef USE_CUDA_NAMES
-    function hipMemMapArrayAsync_(mapInfoList,count,stream) bind(c, name="cuMemMapArrayAsync")
-#else
     function hipMemMapArrayAsync_(mapInfoList,count,stream) bind(c, name="hipMemMapArrayAsync")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -12126,11 +10499,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemRelease
-#ifdef USE_CUDA_NAMES
-    function hipMemRelease_(handle) bind(c, name="cuMemRelease")
-#else
     function hipMemRelease_(handle) bind(c, name="hipMemRelease")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12149,11 +10518,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemRetainAllocationHandle
-#ifdef USE_CUDA_NAMES
-    function hipMemRetainAllocationHandle_(handle,addr) bind(c, name="cuMemRetainAllocationHandle")
-#else
     function hipMemRetainAllocationHandle_(handle,addr) bind(c, name="hipMemRetainAllocationHandle")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12176,11 +10541,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemSetAccess
-#ifdef USE_CUDA_NAMES
-    function hipMemSetAccess_(ptr,mySize,desc,count) bind(c, name="cuMemSetAccess")
-#else
     function hipMemSetAccess_(ptr,mySize,desc,count) bind(c, name="hipMemSetAccess")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -12203,11 +10564,7 @@ module hipfort
   !>
   !>  @note  This API is implemented on Linux and is under development on Microsoft Windows.
   interface hipMemUnmap
-#ifdef USE_CUDA_NAMES
-    function hipMemUnmap_(ptr,mySize) bind(c, name="cuMemUnmap")
-#else
     function hipMemUnmap_(ptr,mySize) bind(c, name="hipMemUnmap")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12226,13 +10583,8 @@ module hipfort
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorUnknown`,
   !>  `hipErrorInvalidResourceHandle`
   interface hipGraphicsMapResources
-#ifdef USE_CUDA_NAMES
-    function hipGraphicsMapResources_(count,resources,stream) &
-        bind(c, name="cudaGraphicsMapResources")
-#else
     function hipGraphicsMapResources_(count,resources,stream) &
         bind(c, name="hipGraphicsMapResources")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12254,13 +10606,8 @@ module hipfort
   !>
   !>  @note  In this API, the value of arrayIndex higher than zero is currently not supported.
   interface hipGraphicsSubResourceGetMappedArray
-#ifdef USE_CUDA_NAMES
-    function hipGraphicsSubResourceGetMappedArray_(array,resource,arrayIndex,mipLevel) &
-        bind(c, name="cudaGraphicsSubResourceGetMappedArray")
-#else
     function hipGraphicsSubResourceGetMappedArray_(array,resource,arrayIndex,mipLevel) &
         bind(c, name="hipGraphicsSubResourceGetMappedArray")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12280,13 +10627,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipGraphicsResourceGetMappedPointer
-#ifdef USE_CUDA_NAMES
-    function hipGraphicsResourceGetMappedPointer_(devPtr,mySize,resource) &
-        bind(c, name="cudaGraphicsResourceGetMappedPointer")
-#else
     function hipGraphicsResourceGetMappedPointer_(devPtr,mySize,resource) &
         bind(c, name="hipGraphicsResourceGetMappedPointer")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12305,13 +10647,8 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`, `hipErrorUnknown`, `hipErrorContextIsDestroyed`
   interface hipGraphicsUnmapResources
-#ifdef USE_CUDA_NAMES
-    function hipGraphicsUnmapResources_(count,resources,stream) &
-        bind(c, name="cudaGraphicsUnmapResources")
-#else
     function hipGraphicsUnmapResources_(count,resources,stream) &
         bind(c, name="hipGraphicsUnmapResources")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12328,11 +10665,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`
   interface hipGraphicsUnregisterResource
-#ifdef USE_CUDA_NAMES
-    function hipGraphicsUnregisterResource_(resource) bind(c, name="cudaGraphicsUnregisterResource")
-#else
     function hipGraphicsUnregisterResource_(resource) bind(c, name="hipGraphicsUnregisterResource")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12348,11 +10681,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipCreateSurfaceObject
-#ifdef USE_CUDA_NAMES
-    function hipCreateSurfaceObject_(pSurfObject,pResDesc) bind(c, name="cudaCreateSurfaceObject")
-#else
     function hipCreateSurfaceObject_(pSurfObject,pResDesc) bind(c, name="hipCreateSurfaceObject")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -12369,11 +10698,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipDestroySurfaceObject
-#ifdef USE_CUDA_NAMES
-    function hipDestroySurfaceObject_(surfaceObject) bind(c, name="cudaDestroySurfaceObject")
-#else
     function hipDestroySurfaceObject_(surfaceObject) bind(c, name="hipDestroySurfaceObject")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12383,11 +10708,7 @@ module hipfort
   end interface
 
   interface hipMemcpy_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy_spt_(dst,src,sizeBytes,myKind) bind(c, name="cudaMemcpy_ptds")
-#else
     function hipMemcpy_spt_(dst,src,sizeBytes,myKind) bind(c, name="hipMemcpy_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12400,13 +10721,8 @@ module hipfort
   end interface
 
   interface hipMemcpyToSymbol_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyToSymbol_spt_(symbol,src,sizeBytes,offset,myKind) &
-        bind(c, name="cudaMemcpyToSymbol_ptds")
-#else
     function hipMemcpyToSymbol_spt_(symbol,src,sizeBytes,offset,myKind) &
         bind(c, name="hipMemcpyToSymbol_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12420,13 +10736,8 @@ module hipfort
   end interface
 
   interface hipMemcpyFromSymbol_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyFromSymbol_spt_(dst,symbol,sizeBytes,offset,myKind) &
-        bind(c, name="cudaMemcpyFromSymbol_ptds")
-#else
     function hipMemcpyFromSymbol_spt_(dst,symbol,sizeBytes,offset,myKind) &
         bind(c, name="hipMemcpyFromSymbol_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12440,13 +10751,8 @@ module hipfort
   end interface
 
   interface hipMemcpy2D_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy2D_spt_(dst,dpitch,src,spitch,width,height,myKind) &
-        bind(c, name="cudaMemcpy2D_ptds")
-#else
     function hipMemcpy2D_spt_(dst,dpitch,src,spitch,width,height,myKind) &
         bind(c, name="hipMemcpy2D_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12462,13 +10768,8 @@ module hipfort
   end interface
 
   interface hipMemcpy2DFromArray_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy2DFromArray_spt_(dst,dpitch,src,wOffset,hOffset,width,height,myKind) &
-        bind(c, name="cudaMemcpy2DFromArray_ptds")
-#else
     function hipMemcpy2DFromArray_spt_(dst,dpitch,src,wOffset,hOffset,width,height,myKind) &
         bind(c, name="hipMemcpy2DFromArray_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12485,11 +10786,7 @@ module hipfort
   end interface
 
   interface hipMemcpy3D_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy3D_spt_(p) bind(c, name="cudaMemcpy3D_ptds")
-#else
     function hipMemcpy3D_spt_(p) bind(c, name="hipMemcpy3D_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -12500,11 +10797,7 @@ module hipfort
   end interface
 
   interface hipMemset_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemset_spt_(dst,myValue,sizeBytes) bind(c, name="cudaMemset_ptds")
-#else
     function hipMemset_spt_(dst,myValue,sizeBytes) bind(c, name="hipMemset_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12516,11 +10809,7 @@ module hipfort
   end interface
 
   interface hipMemsetAsync_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemsetAsync_spt_(dst,myValue,sizeBytes,stream) bind(c, name="cudaMemsetAsync_ptsz")
-#else
     function hipMemsetAsync_spt_(dst,myValue,sizeBytes,stream) bind(c, name="hipMemsetAsync_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12533,11 +10822,7 @@ module hipfort
   end interface
 
   interface hipMemset2D_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemset2D_spt_(dst,pitch,myValue,width,height) bind(c, name="cudaMemset2D_ptds")
-#else
     function hipMemset2D_spt_(dst,pitch,myValue,width,height) bind(c, name="hipMemset2D_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12551,13 +10836,8 @@ module hipfort
   end interface
 
   interface hipMemset2DAsync_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemset2DAsync_spt_(dst,pitch,myValue,width,height,stream) &
-        bind(c, name="cudaMemset2DAsync_ptsz")
-#else
     function hipMemset2DAsync_spt_(dst,pitch,myValue,width,height,stream) &
         bind(c, name="hipMemset2DAsync_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12572,13 +10852,8 @@ module hipfort
   end interface
 
   interface hipMemset3DAsync_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemset3DAsync_spt_(pitchedDevPtr,myValue,extent,stream) &
-        bind(c, name="cudaMemset3DAsync_ptsz")
-#else
     function hipMemset3DAsync_spt_(pitchedDevPtr,myValue,extent,stream) &
         bind(c, name="hipMemset3DAsync_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12591,11 +10866,7 @@ module hipfort
   end interface
 
   interface hipMemset3D_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemset3D_spt_(pitchedDevPtr,myValue,extent) bind(c, name="cudaMemset3D_ptds")
-#else
     function hipMemset3D_spt_(pitchedDevPtr,myValue,extent) bind(c, name="hipMemset3D_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12607,12 +10878,7 @@ module hipfort
   end interface
 
   interface hipMemcpyAsync_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyAsync_spt_(dst,src,sizeBytes,myKind,stream) &
-        bind(c, name="cudaMemcpyAsync_ptsz")
-#else
     function hipMemcpyAsync_spt_(dst,src,sizeBytes,myKind,stream) bind(c, name="hipMemcpyAsync_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12626,11 +10892,7 @@ module hipfort
   end interface
 
   interface hipMemcpy3DAsync_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy3DAsync_spt_(p,stream) bind(c, name="cudaMemcpy3DAsync_ptsz")
-#else
     function hipMemcpy3DAsync_spt_(p,stream) bind(c, name="hipMemcpy3DAsync_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types
@@ -12642,13 +10904,8 @@ module hipfort
   end interface
 
   interface hipMemcpy2DAsync_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy2DAsync_spt_(dst,dpitch,src,spitch,width,height,myKind,stream) &
-        bind(c, name="cudaMemcpy2DAsync_ptsz")
-#else
     function hipMemcpy2DAsync_spt_(dst,dpitch,src,spitch,width,height,myKind,stream) &
         bind(c, name="hipMemcpy2DAsync_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12665,13 +10922,8 @@ module hipfort
   end interface
 
   interface hipMemcpyFromSymbolAsync_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyFromSymbolAsync_spt_(dst,symbol,sizeBytes,offset,myKind,stream) &
-        bind(c, name="cudaMemcpyFromSymbolAsync_ptsz")
-#else
     function hipMemcpyFromSymbolAsync_spt_(dst,symbol,sizeBytes,offset,myKind,stream) &
         bind(c, name="hipMemcpyFromSymbolAsync_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12686,13 +10938,8 @@ module hipfort
   end interface
 
   interface hipMemcpyToSymbolAsync_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyToSymbolAsync_spt_(symbol,src,sizeBytes,offset,myKind,stream) &
-        bind(c, name="cudaMemcpyToSymbolAsync_ptsz")
-#else
     function hipMemcpyToSymbolAsync_spt_(symbol,src,sizeBytes,offset,myKind,stream) &
         bind(c, name="hipMemcpyToSymbolAsync_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12707,13 +10954,8 @@ module hipfort
   end interface
 
   interface hipMemcpyFromArray_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemcpyFromArray_spt_(dst,src,wOffsetSrc,hOffset,count,myKind) &
-        bind(c, name="cudaMemcpyFromArray_ptds")
-#else
     function hipMemcpyFromArray_spt_(dst,src,wOffsetSrc,hOffset,count,myKind) &
         bind(c, name="hipMemcpyFromArray_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12728,13 +10970,8 @@ module hipfort
   end interface
 
   interface hipMemcpy2DToArray_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy2DToArray_spt_(dst,wOffset,hOffset,src,spitch,width,height,myKind) &
-        bind(c, name="cudaMemcpy2DToArray_ptds")
-#else
     function hipMemcpy2DToArray_spt_(dst,wOffset,hOffset,src,spitch,width,height,myKind) &
         bind(c, name="hipMemcpy2DToArray_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12751,15 +10988,9 @@ module hipfort
   end interface
 
   interface hipMemcpy2DFromArrayAsync_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy2DFromArrayAsync_spt_(dst,dpitch,src,wOffsetSrc,hOffsetSrc,width,height, &
-        myKind,stream) &
-        bind(c, name="cudaMemcpy2DFromArrayAsync_ptsz")
-#else
     function hipMemcpy2DFromArrayAsync_spt_(dst,dpitch,src,wOffsetSrc,hOffsetSrc,width,height, &
         myKind,stream) &
         bind(c, name="hipMemcpy2DFromArrayAsync_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12777,15 +11008,9 @@ module hipfort
   end interface
 
   interface hipMemcpy2DToArrayAsync_spt
-#ifdef USE_CUDA_NAMES
-    function hipMemcpy2DToArrayAsync_spt_(dst,wOffset,hOffset,src,spitch,width,height,myKind, &
-        stream) &
-        bind(c, name="cudaMemcpy2DToArrayAsync_ptsz")
-#else
     function hipMemcpy2DToArrayAsync_spt_(dst,wOffset,hOffset,src,spitch,width,height,myKind, &
         stream) &
         bind(c, name="hipMemcpy2DToArrayAsync_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12803,11 +11028,7 @@ module hipfort
   end interface
 
   interface hipStreamQuery_spt
-#ifdef USE_CUDA_NAMES
-    function hipStreamQuery_spt_(stream) bind(c, name="cudaStreamQuery_ptsz")
-#else
     function hipStreamQuery_spt_(stream) bind(c, name="hipStreamQuery_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12817,11 +11038,7 @@ module hipfort
   end interface
 
   interface hipStreamSynchronize_spt
-#ifdef USE_CUDA_NAMES
-    function hipStreamSynchronize_spt_(stream) bind(c, name="cudaStreamSynchronize_ptsz")
-#else
     function hipStreamSynchronize_spt_(stream) bind(c, name="hipStreamSynchronize_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12831,11 +11048,7 @@ module hipfort
   end interface
 
   interface hipStreamGetPriority_spt
-#ifdef USE_CUDA_NAMES
-    function hipStreamGetPriority_spt_(stream,priority) bind(c, name="cudaStreamGetPriority_ptsz")
-#else
     function hipStreamGetPriority_spt_(stream,priority) bind(c, name="hipStreamGetPriority_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12846,11 +11059,7 @@ module hipfort
   end interface
 
   interface hipStreamWaitEvent_spt
-#ifdef USE_CUDA_NAMES
-    function hipStreamWaitEvent_spt_(stream,event,flags) bind(c, name="cudaStreamWaitEvent_ptsz")
-#else
     function hipStreamWaitEvent_spt_(stream,event,flags) bind(c, name="hipStreamWaitEvent_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12862,11 +11071,7 @@ module hipfort
   end interface
 
   interface hipStreamGetFlags_spt
-#ifdef USE_CUDA_NAMES
-    function hipStreamGetFlags_spt_(stream,flags) bind(c, name="cudaStreamGetFlags_ptsz")
-#else
     function hipStreamGetFlags_spt_(stream,flags) bind(c, name="hipStreamGetFlags_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12877,13 +11082,8 @@ module hipfort
   end interface
 
   interface hipStreamAddCallback_spt
-#ifdef USE_CUDA_NAMES
-    function hipStreamAddCallback_spt_(stream,callback,userData,flags) &
-        bind(c, name="cudaStreamAddCallback_ptsz")
-#else
     function hipStreamAddCallback_spt_(stream,callback,userData,flags) &
         bind(c, name="hipStreamAddCallback_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12896,11 +11096,7 @@ module hipfort
   end interface
 
   interface hipEventRecord_spt
-#ifdef USE_CUDA_NAMES
-    function hipEventRecord_spt_(event,stream) bind(c, name="cudaEventRecord_ptsz")
-#else
     function hipEventRecord_spt_(event,stream) bind(c, name="hipEventRecord_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12911,15 +11107,9 @@ module hipfort
   end interface
 
   interface hipLaunchCooperativeKernel_spt
-#ifdef USE_CUDA_NAMES
-    function hipLaunchCooperativeKernel_spt_(f,gridDim,blockDim,kernelParams,sharedMemBytes, &
-        hStream) &
-        bind(c, name="cudaLaunchCooperativeKernel_ptsz")
-#else
     function hipLaunchCooperativeKernel_spt_(f,gridDim,blockDim,kernelParams,sharedMemBytes, &
         hStream) &
         bind(c, name="hipLaunchCooperativeKernel_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12934,13 +11124,8 @@ module hipfort
   end interface
 
   interface hipLaunchKernel_spt
-#ifdef USE_CUDA_NAMES
-    function hipLaunchKernel_spt_(function_address,numBlocks,dimBlocks,args,sharedMemBytes,stream) &
-        bind(c, name="cudaLaunchKernel_ptsz")
-#else
     function hipLaunchKernel_spt_(function_address,numBlocks,dimBlocks,args,sharedMemBytes,stream) &
         bind(c, name="hipLaunchKernel_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12955,11 +11140,7 @@ module hipfort
   end interface
 
   interface hipGraphLaunch_spt
-#ifdef USE_CUDA_NAMES
-    function hipGraphLaunch_spt_(graphExec,stream) bind(c, name="cudaGraphLaunch_ptsz")
-#else
     function hipGraphLaunch_spt_(graphExec,stream) bind(c, name="hipGraphLaunch_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12970,11 +11151,7 @@ module hipfort
   end interface
 
   interface hipStreamBeginCapture_spt
-#ifdef USE_CUDA_NAMES
-    function hipStreamBeginCapture_spt_(stream,mode) bind(c, name="cudaStreamBeginCapture_ptsz")
-#else
     function hipStreamBeginCapture_spt_(stream,mode) bind(c, name="hipStreamBeginCapture_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -12985,11 +11162,7 @@ module hipfort
   end interface
 
   interface hipStreamEndCapture_spt
-#ifdef USE_CUDA_NAMES
-    function hipStreamEndCapture_spt_(stream,pGraph) bind(c, name="cudaStreamEndCapture_ptsz")
-#else
     function hipStreamEndCapture_spt_(stream,pGraph) bind(c, name="hipStreamEndCapture_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -13000,13 +11173,8 @@ module hipfort
   end interface
 
   interface hipStreamIsCapturing_spt
-#ifdef USE_CUDA_NAMES
-    function hipStreamIsCapturing_spt_(stream,pCaptureStatus) &
-        bind(c, name="cudaStreamIsCapturing_ptsz")
-#else
     function hipStreamIsCapturing_spt_(stream,pCaptureStatus) &
         bind(c, name="hipStreamIsCapturing_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -13017,13 +11185,8 @@ module hipfort
   end interface
 
   interface hipStreamGetCaptureInfo_spt
-#ifdef USE_CUDA_NAMES
-    function hipStreamGetCaptureInfo_spt_(stream,pCaptureStatus,pId) &
-        bind(c, name="cudaStreamGetCaptureInfo_ptsz")
-#else
     function hipStreamGetCaptureInfo_spt_(stream,pCaptureStatus,pId) &
         bind(c, name="hipStreamGetCaptureInfo_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -13035,15 +11198,9 @@ module hipfort
   end interface
 
   interface hipStreamGetCaptureInfo_v2_spt
-#ifdef USE_CUDA_NAMES
-    function hipStreamGetCaptureInfo_v2_spt_(stream,captureStatus_out,id_out,graph_out, &
-        dependencies_out,numDependencies_out) &
-        bind(c, name="cuStreamGetCaptureInfo_v2_ptsz")
-#else
     function hipStreamGetCaptureInfo_v2_spt_(stream,captureStatus_out,id_out,graph_out, &
         dependencies_out,numDependencies_out) &
         bind(c, name="hipStreamGetCaptureInfo_v2_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -13058,11 +11215,7 @@ module hipfort
   end interface
 
   interface hipLaunchHostFunc_spt
-#ifdef USE_CUDA_NAMES
-    function hipLaunchHostFunc_spt_(stream,fn,userData) bind(c, name="cudaLaunchHostFunc_ptsz")
-#else
     function hipLaunchHostFunc_spt_(stream,fn,userData) bind(c, name="hipLaunchHostFunc_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -13074,13 +11227,8 @@ module hipfort
   end interface
 
   interface hipGetDriverEntryPoint_spt
-#ifdef USE_CUDA_NAMES
-    function hipGetDriverEntryPoint_spt_(symbol,funcPtr,flags,status) &
-        bind(c, name="cudaGetDriverEntryPoint_ptsz")
-#else
     function hipGetDriverEntryPoint_spt_(symbol,funcPtr,flags,status) &
         bind(c, name="hipGetDriverEntryPoint_spt")
-#endif
       use iso_c_binding
       use hipfort_enums
       implicit none
@@ -13099,11 +11247,7 @@ module hipfort
   !>
   !>  @returns `hipSuccess`, `hipErrorInvalidValue`
   interface hipChooseDevice
-#ifdef USE_CUDA_NAMES
-    function hipChooseDevice_(device,prop) bind(c, name="cudaChooseDevice")
-#else
     function hipChooseDevice_(device,prop) bind(c, name="hipChooseDeviceR0600")
-#endif
       use iso_c_binding
       use hipfort_enums
       use hipfort_types

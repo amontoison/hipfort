@@ -30,11 +30,7 @@ module hipfort_hipblas
 
   !>  \brief Create the hipBLAS handle.
   interface hipblasCreate
-#ifdef USE_CUDA_NAMES
-    function hipblasCreate_(handle) bind(c, name="cublasCreate_v2")
-#else
     function hipblasCreate_(handle) bind(c, name="hipblasCreate")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -45,11 +41,7 @@ module hipfort_hipblas
 
   !>  \brief Destroys the library context created using hipblasCreate().
   interface hipblasDestroy
-#ifdef USE_CUDA_NAMES
-    function hipblasDestroy_(handle) bind(c, name="cublasDestroy_v2")
-#else
     function hipblasDestroy_(handle) bind(c, name="hipblasDestroy")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -70,11 +62,7 @@ module hipfort_hipblas
   !>
   !>     @return HIPBLAS_STATUS_SUCCESS or HIPBLAS_STATUS_INVALID_VALUE if version is NULL
   interface hipblasGetVersion
-#ifdef USE_CUDA_NAMES
-    function hipblasGetVersion_(handle,version) bind(c, name="cublasGetVersion")
-#else
     function hipblasGetVersion_(handle,version) bind(c, name="hipblasGetVersion")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -94,11 +82,7 @@ module hipfort_hipblas
   !>
   !>     @return HIPBLAS_STATUS_SUCCESS or HIPBLAS_STATUS_INVALID_VALUE
   interface hipblasGetProperty
-#ifdef USE_CUDA_NAMES
-    function hipblasGetProperty_(myType,myValue) bind(c, name="cublasGetProperty")
-#else
     function hipblasGetProperty_(myType,myValue) bind(c, name="hipblasGetProperty")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -110,11 +94,7 @@ module hipfort_hipblas
 
   !>  \brief Sets the stream for the handle
   interface hipblasSetStream
-#ifdef USE_CUDA_NAMES
-    function hipblasSetStream_(handle,streamId) bind(c, name="cublasSetStream_v2")
-#else
     function hipblasSetStream_(handle,streamId) bind(c, name="hipblasSetStream")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -126,11 +106,7 @@ module hipfort_hipblas
 
   !>  \brief Gets stream[0] for the handle
   interface hipblasGetStream
-#ifdef USE_CUDA_NAMES
-    function hipblasGetStream_(handle,streamId) bind(c, name="cublasGetStream_v2")
-#else
     function hipblasGetStream_(handle,streamId) bind(c, name="hipblasGetStream")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -142,11 +118,7 @@ module hipfort_hipblas
 
   !>  \brief Sets hipBLAS pointer mode
   interface hipblasSetPointerMode
-#ifdef USE_CUDA_NAMES
-    function hipblasSetPointerMode_(handle,mode) bind(c, name="cublasSetPointerMode_v2")
-#else
     function hipblasSetPointerMode_(handle,mode) bind(c, name="hipblasSetPointerMode")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -158,11 +130,7 @@ module hipfort_hipblas
 
   !>  \brief Gets hipBLAS pointer mode
   interface hipblasGetPointerMode
-#ifdef USE_CUDA_NAMES
-    function hipblasGetPointerMode_(handle,mode) bind(c, name="cublasGetPointerMode_v2")
-#else
     function hipblasGetPointerMode_(handle,mode) bind(c, name="hipblasGetPointerMode")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -174,11 +142,7 @@ module hipfort_hipblas
 
   !>  \brief Set hipblas math mode
   interface hipblasSetMathMode
-#ifdef USE_CUDA_NAMES
-    function hipblasSetMathMode_(handle,mode) bind(c, name="cublasSetMathMode")
-#else
     function hipblasSetMathMode_(handle,mode) bind(c, name="hipblasSetMathMode")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -190,11 +154,7 @@ module hipfort_hipblas
 
   !>  \brief Get hipblas math mode
   interface hipblasGetMathMode
-#ifdef USE_CUDA_NAMES
-    function hipblasGetMathMode_(handle,mode) bind(c, name="cublasGetMathMode")
-#else
     function hipblasGetMathMode_(handle,mode) bind(c, name="hipblasGetMathMode")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -206,13 +166,8 @@ module hipfort_hipblas
 
   !>  \brief Set hipblas workspace to user-owned device buffer
   interface hipblasSetWorkspace
-#ifdef USE_CUDA_NAMES
-    function hipblasSetWorkspace_(handle,workspace,workspaceSizeInBytes) &
-        bind(c, name="cublasSetWorkspace_v2")
-#else
     function hipblasSetWorkspace_(handle,workspace,workspaceSizeInBytes) &
         bind(c, name="hipblasSetWorkspace")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -225,11 +180,7 @@ module hipfort_hipblas
 
   !>  \brief Sets hipblasSetAtomicsMode
   interface hipblasSetAtomicsMode
-#ifdef USE_CUDA_NAMES
-    function hipblasSetAtomicsMode_(handle,atomics_mode) bind(c, name="cublasSetAtomicsMode")
-#else
     function hipblasSetAtomicsMode_(handle,atomics_mode) bind(c, name="hipblasSetAtomicsMode")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -241,11 +192,7 @@ module hipfort_hipblas
 
   !>  \brief Gets hipblasSetAtomicsMode
   interface hipblasGetAtomicsMode
-#ifdef USE_CUDA_NAMES
-    function hipblasGetAtomicsMode_(handle,atomics_mode) bind(c, name="cublasGetAtomicsMode")
-#else
     function hipblasGetAtomicsMode_(handle,atomics_mode) bind(c, name="hipblasGetAtomicsMode")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -265,7 +212,6 @@ module hipfort_hipblas
   !>     Warning this is a modal like state in the handle. Restore to value 0 if no longer
   !>     applicable to later function calls.
   !>     - Supported in rocBLAS backend only.
-#ifndef USE_CUDA_NAMES
   interface hipblasSetBatchAlphaStride
     function hipblasSetBatchAlphaStride_(handle,alpha_stride) &
         bind(c, name="hipblasSetBatchAlphaStride")
@@ -277,10 +223,8 @@ module hipfort_hipblas
       integer(c_int64_t),value :: alpha_stride
     end function
   end interface
-#endif
 
   !>  \brief Get batch alpha stride from the handle.
-#ifndef USE_CUDA_NAMES
   interface hipblasGetBatchAlphaStride
     function hipblasGetBatchAlphaStride_(handle,alpha_stride) &
         bind(c, name="hipblasGetBatchAlphaStride")
@@ -292,7 +236,6 @@ module hipfort_hipblas
       type(c_ptr),value :: alpha_stride
     end function
   end interface
-#endif
 
   !>  \brief Set beta stride for a limited set of batched and strided_batched functions to specify
   !>  the stride for beta between successive batch elements.
@@ -304,7 +247,6 @@ module hipfort_hipblas
   !>     Warning this is a modal like state in the handle. Restore to value 0 if no longer
   !>     applicable to later function calls.
   !>     - Supported in rocBLAS backend only.
-#ifndef USE_CUDA_NAMES
   interface hipblasSetBatchBetaStride
     function hipblasSetBatchBetaStride_(handle,beta_stride) &
         bind(c, name="hipblasSetBatchBetaStride")
@@ -316,10 +258,8 @@ module hipfort_hipblas
       integer(c_int64_t),value :: beta_stride
     end function
   end interface
-#endif
 
   !>  \brief Get batch beta stride from the handle.
-#ifndef USE_CUDA_NAMES
   interface hipblasGetBatchBetaStride
     function hipblasGetBatchBetaStride_(handle,beta_stride) &
         bind(c, name="hipblasGetBatchBetaStride")
@@ -331,7 +271,6 @@ module hipfort_hipblas
       type(c_ptr),value :: beta_stride
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -353,11 +292,7 @@ module hipfort_hipblas
   !>               device pointer or host pointer to store the amax index.
   !>               Return value is 0.0 if n, incx<=0.
   interface hipblasIsamax
-#ifdef USE_CUDA_NAMES
-    function hipblasIsamax_(handle,n,x,incx,myResult) bind(c, name="cublasIsamax_v2")
-#else
     function hipblasIsamax_(handle,n,x,incx,myResult) bind(c, name="hipblasIsamax")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -381,11 +316,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasIdamax
-#ifdef USE_CUDA_NAMES
-    function hipblasIdamax_(handle,n,x,incx,myResult) bind(c, name="cublasIdamax_v2")
-#else
     function hipblasIdamax_(handle,n,x,incx,myResult) bind(c, name="hipblasIdamax")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -409,11 +340,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasIcamax
-#ifdef USE_CUDA_NAMES
-    function hipblasIcamax_(handle,n,x,incx,myResult) bind(c, name="cublasIcamax_v2")
-#else
     function hipblasIcamax_(handle,n,x,incx,myResult) bind(c, name="hipblasIcamax")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -437,11 +364,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasIzamax
-#ifdef USE_CUDA_NAMES
-    function hipblasIzamax_(handle,n,x,incx,myResult) bind(c, name="cublasIzamax_v2")
-#else
     function hipblasIzamax_(handle,n,x,incx,myResult) bind(c, name="hipblasIzamax")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -465,11 +388,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasIsamax_64
-#ifdef USE_CUDA_NAMES
-    function hipblasIsamax_64_(handle,n,x,incx,myResult) bind(c, name="cublasIsamax_v2_64")
-#else
     function hipblasIsamax_64_(handle,n,x,incx,myResult) bind(c, name="hipblasIsamax_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -483,11 +402,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasIdamax_64
-#ifdef USE_CUDA_NAMES
-    function hipblasIdamax_64_(handle,n,x,incx,myResult) bind(c, name="cublasIdamax_v2_64")
-#else
     function hipblasIdamax_64_(handle,n,x,incx,myResult) bind(c, name="hipblasIdamax_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -501,11 +416,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasIcamax_64
-#ifdef USE_CUDA_NAMES
-    function hipblasIcamax_64_(handle,n,x,incx,myResult) bind(c, name="cublasIcamax_v2_64")
-#else
     function hipblasIcamax_64_(handle,n,x,incx,myResult) bind(c, name="hipblasIcamax_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -519,11 +430,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasIzamax_64
-#ifdef USE_CUDA_NAMES
-    function hipblasIzamax_64_(handle,n,x,incx,myResult) bind(c, name="cublasIzamax_v2_64")
-#else
     function hipblasIzamax_64_(handle,n,x,incx,myResult) bind(c, name="hipblasIzamax_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -557,7 +464,6 @@ module hipfort_hipblas
   !>     @param[out] myResult
   !>               device or host array of pointers of batchCount size for results.
   !>               Return value is 0 if n, incx<=0.
-#ifndef USE_CUDA_NAMES
   interface hipblasIsamaxBatched
     function hipblasIsamaxBatched_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasIsamaxBatched")
@@ -573,9 +479,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIdamaxBatched
     function hipblasIdamaxBatched_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasIdamaxBatched")
@@ -591,9 +495,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIcamaxBatched
     function hipblasIcamaxBatched_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasIcamaxBatched")
@@ -609,9 +511,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIzamaxBatched
     function hipblasIzamaxBatched_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasIzamaxBatched")
@@ -627,9 +527,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIsamaxBatched_64
     function hipblasIsamaxBatched_64_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasIsamaxBatched_64")
@@ -645,9 +543,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIdamaxBatched_64
     function hipblasIdamaxBatched_64_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasIdamaxBatched_64")
@@ -663,9 +559,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIcamaxBatched_64
     function hipblasIcamaxBatched_64_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasIcamaxBatched_64")
@@ -681,9 +575,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIzamaxBatched_64
     function hipblasIzamaxBatched_64_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasIzamaxBatched_64")
@@ -699,7 +591,6 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -724,7 +615,6 @@ module hipfort_hipblas
   !>     @param[out] myResult
   !>               device or host pointer for storing contiguous batchCount results.
   !>               Return value is 0 if n <= 0, incx<=0.
-#ifndef USE_CUDA_NAMES
   interface hipblasIsamaxStridedBatched
     function hipblasIsamaxStridedBatched_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasIsamaxStridedBatched")
@@ -751,9 +641,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIdamaxStridedBatched
     function hipblasIdamaxStridedBatched_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasIdamaxStridedBatched")
@@ -780,9 +668,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIcamaxStridedBatched
     function hipblasIcamaxStridedBatched_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasIcamaxStridedBatched")
@@ -809,9 +695,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIzamaxStridedBatched
     function hipblasIzamaxStridedBatched_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasIzamaxStridedBatched")
@@ -838,9 +722,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIsamaxStridedBatched_64
     function hipblasIsamaxStridedBatched_64_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasIsamaxStridedBatched_64")
@@ -857,9 +739,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIdamaxStridedBatched_64
     function hipblasIdamaxStridedBatched_64_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasIdamaxStridedBatched_64")
@@ -876,9 +756,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIcamaxStridedBatched_64
     function hipblasIcamaxStridedBatched_64_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasIcamaxStridedBatched_64")
@@ -895,9 +773,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIzamaxStridedBatched_64
     function hipblasIzamaxStridedBatched_64_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasIzamaxStridedBatched_64")
@@ -914,7 +790,6 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -936,11 +811,7 @@ module hipfort_hipblas
   !>               device pointer or host pointer to store the amin index.
   !>               Return value is 0.0 if n, incx<=0.
   interface hipblasIsamin
-#ifdef USE_CUDA_NAMES
-    function hipblasIsamin_(handle,n,x,incx,myResult) bind(c, name="cublasIsamin_v2")
-#else
     function hipblasIsamin_(handle,n,x,incx,myResult) bind(c, name="hipblasIsamin")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -964,11 +835,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasIdamin
-#ifdef USE_CUDA_NAMES
-    function hipblasIdamin_(handle,n,x,incx,myResult) bind(c, name="cublasIdamin_v2")
-#else
     function hipblasIdamin_(handle,n,x,incx,myResult) bind(c, name="hipblasIdamin")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -992,11 +859,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasIcamin
-#ifdef USE_CUDA_NAMES
-    function hipblasIcamin_(handle,n,x,incx,myResult) bind(c, name="cublasIcamin_v2")
-#else
     function hipblasIcamin_(handle,n,x,incx,myResult) bind(c, name="hipblasIcamin")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -1020,11 +883,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasIzamin
-#ifdef USE_CUDA_NAMES
-    function hipblasIzamin_(handle,n,x,incx,myResult) bind(c, name="cublasIzamin_v2")
-#else
     function hipblasIzamin_(handle,n,x,incx,myResult) bind(c, name="hipblasIzamin")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -1048,11 +907,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasIsamin_64
-#ifdef USE_CUDA_NAMES
-    function hipblasIsamin_64_(handle,n,x,incx,myResult) bind(c, name="cublasIsamin_v2_64")
-#else
     function hipblasIsamin_64_(handle,n,x,incx,myResult) bind(c, name="hipblasIsamin_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -1066,11 +921,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasIdamin_64
-#ifdef USE_CUDA_NAMES
-    function hipblasIdamin_64_(handle,n,x,incx,myResult) bind(c, name="cublasIdamin_v2_64")
-#else
     function hipblasIdamin_64_(handle,n,x,incx,myResult) bind(c, name="hipblasIdamin_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -1084,11 +935,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasIcamin_64
-#ifdef USE_CUDA_NAMES
-    function hipblasIcamin_64_(handle,n,x,incx,myResult) bind(c, name="cublasIcamin_v2_64")
-#else
     function hipblasIcamin_64_(handle,n,x,incx,myResult) bind(c, name="hipblasIcamin_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -1102,11 +949,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasIzamin_64
-#ifdef USE_CUDA_NAMES
-    function hipblasIzamin_64_(handle,n,x,incx,myResult) bind(c, name="cublasIzamin_v2_64")
-#else
     function hipblasIzamin_64_(handle,n,x,incx,myResult) bind(c, name="hipblasIzamin_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -1140,7 +983,6 @@ module hipfort_hipblas
   !>     @param[out] myResult
   !>               device or host pointers to array of batchCount size for results.
   !>               Return value is 0 if n, incx<=0.
-#ifndef USE_CUDA_NAMES
   interface hipblasIsaminBatched
     function hipblasIsaminBatched_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasIsaminBatched")
@@ -1156,9 +998,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIdaminBatched
     function hipblasIdaminBatched_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasIdaminBatched")
@@ -1174,9 +1014,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIcaminBatched
     function hipblasIcaminBatched_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasIcaminBatched")
@@ -1192,9 +1030,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIzaminBatched
     function hipblasIzaminBatched_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasIzaminBatched")
@@ -1210,9 +1046,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIsaminBatched_64
     function hipblasIsaminBatched_64_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasIsaminBatched_64")
@@ -1228,9 +1062,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIdaminBatched_64
     function hipblasIdaminBatched_64_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasIdaminBatched_64")
@@ -1246,9 +1078,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIcaminBatched_64
     function hipblasIcaminBatched_64_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasIcaminBatched_64")
@@ -1264,9 +1094,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIzaminBatched_64
     function hipblasIzaminBatched_64_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasIzaminBatched_64")
@@ -1282,7 +1110,6 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -1307,7 +1134,6 @@ module hipfort_hipblas
   !>     @param[out] myResult
   !>               device or host pointer to array for storing contiguous batchCount results.
   !>               Return value is 0 if n <= 0, incx<=0.
-#ifndef USE_CUDA_NAMES
   interface hipblasIsaminStridedBatched
     function hipblasIsaminStridedBatched_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasIsaminStridedBatched")
@@ -1334,9 +1160,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIdaminStridedBatched
     function hipblasIdaminStridedBatched_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasIdaminStridedBatched")
@@ -1363,9 +1187,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIcaminStridedBatched
     function hipblasIcaminStridedBatched_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasIcaminStridedBatched")
@@ -1392,9 +1214,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIzaminStridedBatched
     function hipblasIzaminStridedBatched_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasIzaminStridedBatched")
@@ -1421,9 +1241,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIsaminStridedBatched_64
     function hipblasIsaminStridedBatched_64_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasIsaminStridedBatched_64")
@@ -1440,9 +1258,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIdaminStridedBatched_64
     function hipblasIdaminStridedBatched_64_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasIdaminStridedBatched_64")
@@ -1459,9 +1275,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIcaminStridedBatched_64
     function hipblasIcaminStridedBatched_64_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasIcaminStridedBatched_64")
@@ -1478,9 +1292,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasIzaminStridedBatched_64
     function hipblasIzaminStridedBatched_64_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasIzaminStridedBatched_64")
@@ -1497,7 +1309,6 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -1520,11 +1331,7 @@ module hipfort_hipblas
   !>               device pointer or host pointer to store the asum product.
   !>               Return value is 0.0 if n <= 0.
   interface hipblasSasum
-#ifdef USE_CUDA_NAMES
-    function hipblasSasum_(handle,n,x,incx,myResult) bind(c, name="cublasSasum_v2")
-#else
     function hipblasSasum_(handle,n,x,incx,myResult) bind(c, name="hipblasSasum")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -1548,11 +1355,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDasum
-#ifdef USE_CUDA_NAMES
-    function hipblasDasum_(handle,n,x,incx,myResult) bind(c, name="cublasDasum_v2")
-#else
     function hipblasDasum_(handle,n,x,incx,myResult) bind(c, name="hipblasDasum")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -1576,11 +1379,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasScasum
-#ifdef USE_CUDA_NAMES
-    function hipblasScasum_(handle,n,x,incx,myResult) bind(c, name="cublasScasum_v2")
-#else
     function hipblasScasum_(handle,n,x,incx,myResult) bind(c, name="hipblasScasum")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -1604,11 +1403,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDzasum
-#ifdef USE_CUDA_NAMES
-    function hipblasDzasum_(handle,n,x,incx,myResult) bind(c, name="cublasDzasum_v2")
-#else
     function hipblasDzasum_(handle,n,x,incx,myResult) bind(c, name="hipblasDzasum")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -1632,11 +1427,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSasum_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSasum_64_(handle,n,x,incx,myResult) bind(c, name="cublasSasum_v2_64")
-#else
     function hipblasSasum_64_(handle,n,x,incx,myResult) bind(c, name="hipblasSasum_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -1650,11 +1441,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDasum_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDasum_64_(handle,n,x,incx,myResult) bind(c, name="cublasDasum_v2_64")
-#else
     function hipblasDasum_64_(handle,n,x,incx,myResult) bind(c, name="hipblasDasum_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -1668,11 +1455,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasScasum_64
-#ifdef USE_CUDA_NAMES
-    function hipblasScasum_64_(handle,n,x,incx,myResult) bind(c, name="cublasScasum_v2_64")
-#else
     function hipblasScasum_64_(handle,n,x,incx,myResult) bind(c, name="hipblasScasum_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -1686,11 +1469,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDzasum_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDzasum_64_(handle,n,x,incx,myResult) bind(c, name="cublasDzasum_v2_64")
-#else
     function hipblasDzasum_64_(handle,n,x,incx,myResult) bind(c, name="hipblasDzasum_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -1727,7 +1506,6 @@ module hipfort_hipblas
   !>     @param[out] myResult
   !>               device array or host array of batchCount size for results.
   !>               Return value is 0.0 if n, incx<=0.
-#ifndef USE_CUDA_NAMES
   interface hipblasSasumBatched
     function hipblasSasumBatched_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasSasumBatched")
@@ -1743,9 +1521,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDasumBatched
     function hipblasDasumBatched_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasDasumBatched")
@@ -1761,9 +1537,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasScasumBatched
     function hipblasScasumBatched_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasScasumBatched")
@@ -1779,9 +1553,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDzasumBatched
     function hipblasDzasumBatched_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasDzasumBatched")
@@ -1797,9 +1569,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSasumBatched_64
     function hipblasSasumBatched_64_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasSasumBatched_64")
@@ -1815,9 +1585,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDasumBatched_64
     function hipblasDasumBatched_64_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasDasumBatched_64")
@@ -1833,9 +1601,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasScasumBatched_64
     function hipblasScasumBatched_64_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasScasumBatched_64")
@@ -1851,9 +1617,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDzasumBatched_64
     function hipblasDzasumBatched_64_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasDzasumBatched_64")
@@ -1869,7 +1633,6 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -1901,7 +1664,6 @@ module hipfort_hipblas
   !>               device pointer or host pointer to array for storing contiguous batchCount
   !>               results.
   !>               Return value is 0.0 if n, incx<=0.
-#ifndef USE_CUDA_NAMES
   interface hipblasSasumStridedBatched
     function hipblasSasumStridedBatched_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasSasumStridedBatched")
@@ -1928,9 +1690,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDasumStridedBatched
     function hipblasDasumStridedBatched_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasDasumStridedBatched")
@@ -1957,9 +1717,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasScasumStridedBatched
     function hipblasScasumStridedBatched_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasScasumStridedBatched")
@@ -1986,9 +1744,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDzasumStridedBatched
     function hipblasDzasumStridedBatched_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasDzasumStridedBatched")
@@ -2015,9 +1771,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSasumStridedBatched_64
     function hipblasSasumStridedBatched_64_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasSasumStridedBatched_64")
@@ -2034,9 +1788,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDasumStridedBatched_64
     function hipblasDasumStridedBatched_64_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasDasumStridedBatched_64")
@@ -2053,9 +1805,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasScasumStridedBatched_64
     function hipblasScasumStridedBatched_64_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasScasumStridedBatched_64")
@@ -2072,9 +1822,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDzasumStridedBatched_64
     function hipblasDzasumStridedBatched_64_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasDzasumStridedBatched_64")
@@ -2091,7 +1839,6 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -2115,7 +1862,6 @@ module hipfort_hipblas
   !>     @param[out] y - device pointer storing vector y.
   !>     @param[inout] incy - [int]
   !>               specifies the increment for the elements of y.
-#ifndef USE_CUDA_NAMES
   interface hipblasHaxpy
     function hipblasHaxpy_(handle,n,alpha,x,incx,y,incy) bind(c, name="hipblasHaxpy")
       use iso_c_binding
@@ -2131,14 +1877,9 @@ module hipfort_hipblas
       integer(c_int),value :: incy
     end function
   end interface
-#endif
 
   interface hipblasSaxpy
-#ifdef USE_CUDA_NAMES
-    function hipblasSaxpy_(handle,n,alpha,x,incx,y,incy) bind(c, name="cublasSaxpy_v2")
-#else
     function hipblasSaxpy_(handle,n,alpha,x,incx,y,incy) bind(c, name="hipblasSaxpy")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -2164,11 +1905,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDaxpy
-#ifdef USE_CUDA_NAMES
-    function hipblasDaxpy_(handle,n,alpha,x,incx,y,incy) bind(c, name="cublasDaxpy_v2")
-#else
     function hipblasDaxpy_(handle,n,alpha,x,incx,y,incy) bind(c, name="hipblasDaxpy")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -2194,11 +1931,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCaxpy
-#ifdef USE_CUDA_NAMES
-    function hipblasCaxpy_(handle,n,alpha,x,incx,y,incy) bind(c, name="cublasCaxpy_v2")
-#else
     function hipblasCaxpy_(handle,n,alpha,x,incx,y,incy) bind(c, name="hipblasCaxpy")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -2224,11 +1957,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZaxpy
-#ifdef USE_CUDA_NAMES
-    function hipblasZaxpy_(handle,n,alpha,x,incx,y,incy) bind(c, name="cublasZaxpy_v2")
-#else
     function hipblasZaxpy_(handle,n,alpha,x,incx,y,incy) bind(c, name="hipblasZaxpy")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -2253,7 +1982,6 @@ module hipfort_hipblas
 #endif
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipblasHaxpy_64
     function hipblasHaxpy_64_(handle,n,alpha,x,incx,y,incy) bind(c, name="hipblasHaxpy_64")
       use iso_c_binding
@@ -2269,14 +1997,9 @@ module hipfort_hipblas
       integer(c_int64_t),value :: incy
     end function
   end interface
-#endif
 
   interface hipblasSaxpy_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSaxpy_64_(handle,n,alpha,x,incx,y,incy) bind(c, name="cublasSaxpy_v2_64")
-#else
     function hipblasSaxpy_64_(handle,n,alpha,x,incx,y,incy) bind(c, name="hipblasSaxpy_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -2292,11 +2015,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDaxpy_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDaxpy_64_(handle,n,alpha,x,incx,y,incy) bind(c, name="cublasDaxpy_v2_64")
-#else
     function hipblasDaxpy_64_(handle,n,alpha,x,incx,y,incy) bind(c, name="hipblasDaxpy_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -2312,11 +2031,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCaxpy_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCaxpy_64_(handle,n,alpha,x,incx,y,incy) bind(c, name="cublasCaxpy_v2_64")
-#else
     function hipblasCaxpy_64_(handle,n,alpha,x,incx,y,incy) bind(c, name="hipblasCaxpy_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -2332,11 +2047,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZaxpy_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZaxpy_64_(handle,n,alpha,x,incx,y,incy) bind(c, name="cublasZaxpy_v2_64")
-#else
     function hipblasZaxpy_64_(handle,n,alpha,x,incx,y,incy) bind(c, name="hipblasZaxpy_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -2373,7 +2084,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>               number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasHaxpyBatched
     function hipblasHaxpyBatched_(handle,n,alpha,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasHaxpyBatched")
@@ -2391,9 +2101,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSaxpyBatched
     function hipblasSaxpyBatched_(handle,n,alpha,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasSaxpyBatched")
@@ -2411,9 +2119,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDaxpyBatched
     function hipblasDaxpyBatched_(handle,n,alpha,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasDaxpyBatched")
@@ -2431,9 +2137,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCaxpyBatched
     function hipblasCaxpyBatched_(handle,n,alpha,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasCaxpyBatched")
@@ -2451,9 +2155,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZaxpyBatched
     function hipblasZaxpyBatched_(handle,n,alpha,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasZaxpyBatched")
@@ -2471,9 +2173,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasHaxpyBatched_64
     function hipblasHaxpyBatched_64_(handle,n,alpha,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasHaxpyBatched_64")
@@ -2491,9 +2191,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSaxpyBatched_64
     function hipblasSaxpyBatched_64_(handle,n,alpha,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasSaxpyBatched_64")
@@ -2511,9 +2209,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDaxpyBatched_64
     function hipblasDaxpyBatched_64_(handle,n,alpha,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasDaxpyBatched_64")
@@ -2531,9 +2227,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCaxpyBatched_64
     function hipblasCaxpyBatched_64_(handle,n,alpha,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasCaxpyBatched_64")
@@ -2551,9 +2245,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZaxpyBatched_64
     function hipblasZaxpyBatched_64_(handle,n,alpha,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasZaxpyBatched_64")
@@ -2571,7 +2263,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -2599,7 +2290,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>               number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasHaxpyStridedBatched
     function hipblasHaxpyStridedBatched_(handle,n,alpha,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasHaxpyStridedBatched")
@@ -2619,9 +2309,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSaxpyStridedBatched
     function hipblasSaxpyStridedBatched_(handle,n,alpha,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasSaxpyStridedBatched")
@@ -2651,9 +2339,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDaxpyStridedBatched
     function hipblasDaxpyStridedBatched_(handle,n,alpha,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasDaxpyStridedBatched")
@@ -2683,9 +2369,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCaxpyStridedBatched
     function hipblasCaxpyStridedBatched_(handle,n,alpha,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasCaxpyStridedBatched")
@@ -2715,9 +2399,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZaxpyStridedBatched
     function hipblasZaxpyStridedBatched_(handle,n,alpha,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasZaxpyStridedBatched")
@@ -2747,9 +2429,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasHaxpyStridedBatched_64
     function hipblasHaxpyStridedBatched_64_(handle,n,alpha,x,incx,stridex,y,incy,stridey, &
         batchCount) &
@@ -2770,9 +2450,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSaxpyStridedBatched_64
     function hipblasSaxpyStridedBatched_64_(handle,n,alpha,x,incx,stridex,y,incy,stridey, &
         batchCount) &
@@ -2793,9 +2471,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDaxpyStridedBatched_64
     function hipblasDaxpyStridedBatched_64_(handle,n,alpha,x,incx,stridex,y,incy,stridey, &
         batchCount) &
@@ -2816,9 +2492,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCaxpyStridedBatched_64
     function hipblasCaxpyStridedBatched_64_(handle,n,alpha,x,incx,stridex,y,incy,stridey, &
         batchCount) &
@@ -2839,9 +2513,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZaxpyStridedBatched_64
     function hipblasZaxpyStridedBatched_64_(handle,n,alpha,x,incx,stridex,y,incy,stridey, &
         batchCount) &
@@ -2862,7 +2534,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -2885,11 +2556,7 @@ module hipfort_hipblas
   !>     @param[in] incy - [int]
   !>               specifies the increment for the elements of y.
   interface hipblasScopy
-#ifdef USE_CUDA_NAMES
-    function hipblasScopy_(handle,n,x,incx,y,incy) bind(c, name="cublasScopy_v2")
-#else
     function hipblasScopy_(handle,n,x,incx,y,incy) bind(c, name="hipblasScopy")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -2914,11 +2581,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDcopy
-#ifdef USE_CUDA_NAMES
-    function hipblasDcopy_(handle,n,x,incx,y,incy) bind(c, name="cublasDcopy_v2")
-#else
     function hipblasDcopy_(handle,n,x,incx,y,incy) bind(c, name="hipblasDcopy")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -2943,11 +2606,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCcopy
-#ifdef USE_CUDA_NAMES
-    function hipblasCcopy_(handle,n,x,incx,y,incy) bind(c, name="cublasCcopy_v2")
-#else
     function hipblasCcopy_(handle,n,x,incx,y,incy) bind(c, name="hipblasCcopy")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -2972,11 +2631,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZcopy
-#ifdef USE_CUDA_NAMES
-    function hipblasZcopy_(handle,n,x,incx,y,incy) bind(c, name="cublasZcopy_v2")
-#else
     function hipblasZcopy_(handle,n,x,incx,y,incy) bind(c, name="hipblasZcopy")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3001,11 +2656,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasScopy_64
-#ifdef USE_CUDA_NAMES
-    function hipblasScopy_64_(handle,n,x,incx,y,incy) bind(c, name="cublasScopy_v2_64")
-#else
     function hipblasScopy_64_(handle,n,x,incx,y,incy) bind(c, name="hipblasScopy_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3020,11 +2671,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDcopy_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDcopy_64_(handle,n,x,incx,y,incy) bind(c, name="cublasDcopy_v2_64")
-#else
     function hipblasDcopy_64_(handle,n,x,incx,y,incy) bind(c, name="hipblasDcopy_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3039,11 +2686,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCcopy_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCcopy_64_(handle,n,x,incx,y,incy) bind(c, name="cublasCcopy_v2_64")
-#else
     function hipblasCcopy_64_(handle,n,x,incx,y,incy) bind(c, name="hipblasCcopy_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3058,11 +2701,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZcopy_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZcopy_64_(handle,n,x,incx,y,incy) bind(c, name="cublasZcopy_v2_64")
-#else
     function hipblasZcopy_64_(handle,n,x,incx,y,incy) bind(c, name="hipblasZcopy_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3102,7 +2741,6 @@ module hipfort_hipblas
   !>               specifies the increment for the elements of each vector y_i.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasScopyBatched
     function hipblasScopyBatched_(handle,n,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasScopyBatched")
@@ -3119,9 +2757,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDcopyBatched
     function hipblasDcopyBatched_(handle,n,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasDcopyBatched")
@@ -3138,9 +2774,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCcopyBatched
     function hipblasCcopyBatched_(handle,n,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasCcopyBatched")
@@ -3157,9 +2791,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZcopyBatched
     function hipblasZcopyBatched_(handle,n,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasZcopyBatched")
@@ -3176,9 +2808,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasScopyBatched_64
     function hipblasScopyBatched_64_(handle,n,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasScopyBatched_64")
@@ -3195,9 +2825,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDcopyBatched_64
     function hipblasDcopyBatched_64_(handle,n,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasDcopyBatched_64")
@@ -3214,9 +2842,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCcopyBatched_64
     function hipblasCcopyBatched_64_(handle,n,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasCcopyBatched_64")
@@ -3233,9 +2859,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZcopyBatched_64
     function hipblasZcopyBatched_64_(handle,n,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasZcopyBatched_64")
@@ -3252,7 +2876,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief   BLAS Level 1 API
   !>
@@ -3290,7 +2913,6 @@ module hipfort_hipblas
   !>                 case this means stridey >= n * incy. stridey should be non zero.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasScopyStridedBatched
     function hipblasScopyStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasScopyStridedBatched")
@@ -3319,9 +2941,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDcopyStridedBatched
     function hipblasDcopyStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasDcopyStridedBatched")
@@ -3350,9 +2970,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCcopyStridedBatched
     function hipblasCcopyStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasCcopyStridedBatched")
@@ -3381,9 +2999,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZcopyStridedBatched
     function hipblasZcopyStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasZcopyStridedBatched")
@@ -3412,9 +3028,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasScopyStridedBatched_64
     function hipblasScopyStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasScopyStridedBatched_64")
@@ -3433,9 +3047,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDcopyStridedBatched_64
     function hipblasDcopyStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasDcopyStridedBatched_64")
@@ -3454,9 +3066,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCcopyStridedBatched_64
     function hipblasCcopyStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasCcopyStridedBatched_64")
@@ -3475,9 +3085,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZcopyStridedBatched_64
     function hipblasZcopyStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasZcopyStridedBatched_64")
@@ -3496,7 +3104,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -3526,7 +3133,6 @@ module hipfort_hipblas
   !>     @param[inout] myResult
   !>               device pointer or host pointer to store the dot product.
   !>               Return value is 0.0 if n <= 0.
-#ifndef USE_CUDA_NAMES
   interface hipblasHdot
     function hipblasHdot_(handle,n,x,incx,y,incy,myResult) bind(c, name="hipblasHdot")
       use iso_c_binding
@@ -3542,9 +3148,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasBfdot
     function hipblasBfdot_(handle,n,x,incx,y,incy,myResult) bind(c, name="hipblasBfdot")
       use iso_c_binding
@@ -3560,14 +3164,9 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
   interface hipblasSdot
-#ifdef USE_CUDA_NAMES
-    function hipblasSdot_(handle,n,x,incx,y,incy,myResult) bind(c, name="cublasSdot_v2")
-#else
     function hipblasSdot_(handle,n,x,incx,y,incy,myResult) bind(c, name="hipblasSdot")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3593,11 +3192,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDdot
-#ifdef USE_CUDA_NAMES
-    function hipblasDdot_(handle,n,x,incx,y,incy,myResult) bind(c, name="cublasDdot_v2")
-#else
     function hipblasDdot_(handle,n,x,incx,y,incy,myResult) bind(c, name="hipblasDdot")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3623,11 +3218,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCdotc
-#ifdef USE_CUDA_NAMES
-    function hipblasCdotc_(handle,n,x,incx,y,incy,myResult) bind(c, name="cublasCdotc_v2")
-#else
     function hipblasCdotc_(handle,n,x,incx,y,incy,myResult) bind(c, name="hipblasCdotc")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3653,11 +3244,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCdotu
-#ifdef USE_CUDA_NAMES
-    function hipblasCdotu_(handle,n,x,incx,y,incy,myResult) bind(c, name="cublasCdotu_v2")
-#else
     function hipblasCdotu_(handle,n,x,incx,y,incy,myResult) bind(c, name="hipblasCdotu")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3683,11 +3270,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZdotc
-#ifdef USE_CUDA_NAMES
-    function hipblasZdotc_(handle,n,x,incx,y,incy,myResult) bind(c, name="cublasZdotc_v2")
-#else
     function hipblasZdotc_(handle,n,x,incx,y,incy,myResult) bind(c, name="hipblasZdotc")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3713,11 +3296,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZdotu
-#ifdef USE_CUDA_NAMES
-    function hipblasZdotu_(handle,n,x,incx,y,incy,myResult) bind(c, name="cublasZdotu_v2")
-#else
     function hipblasZdotu_(handle,n,x,incx,y,incy,myResult) bind(c, name="hipblasZdotu")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3742,7 +3321,6 @@ module hipfort_hipblas
 #endif
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipblasHdot_64
     function hipblasHdot_64_(handle,n,x,incx,y,incy,myResult) bind(c, name="hipblasHdot_64")
       use iso_c_binding
@@ -3758,9 +3336,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasBfdot_64
     function hipblasBfdot_64_(handle,n,x,incx,y,incy,myResult) bind(c, name="hipblasBfdot_64")
       use iso_c_binding
@@ -3776,14 +3352,9 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
   interface hipblasSdot_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSdot_64_(handle,n,x,incx,y,incy,myResult) bind(c, name="cublasSdot_v2_64")
-#else
     function hipblasSdot_64_(handle,n,x,incx,y,incy,myResult) bind(c, name="hipblasSdot_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3799,11 +3370,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDdot_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDdot_64_(handle,n,x,incx,y,incy,myResult) bind(c, name="cublasDdot_v2_64")
-#else
     function hipblasDdot_64_(handle,n,x,incx,y,incy,myResult) bind(c, name="hipblasDdot_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3819,11 +3386,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCdotc_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCdotc_64_(handle,n,x,incx,y,incy,myResult) bind(c, name="cublasCdotc_v2_64")
-#else
     function hipblasCdotc_64_(handle,n,x,incx,y,incy,myResult) bind(c, name="hipblasCdotc_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3839,11 +3402,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCdotu_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCdotu_64_(handle,n,x,incx,y,incy,myResult) bind(c, name="cublasCdotu_v2_64")
-#else
     function hipblasCdotu_64_(handle,n,x,incx,y,incy,myResult) bind(c, name="hipblasCdotu_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3859,11 +3418,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZdotc_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZdotc_64_(handle,n,x,incx,y,incy,myResult) bind(c, name="cublasZdotc_v2_64")
-#else
     function hipblasZdotc_64_(handle,n,x,incx,y,incy,myResult) bind(c, name="hipblasZdotc_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3879,11 +3434,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZdotu_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZdotu_64_(handle,n,x,incx,y,incy,myResult) bind(c, name="cublasZdotu_v2_64")
-#else
     function hipblasZdotu_64_(handle,n,x,incx,y,incy,myResult) bind(c, name="hipblasZdotu_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -3932,7 +3483,6 @@ module hipfort_hipblas
   !>               device array or host array of batchCount size to store the dot products of each
   !>               batch.
   !>               Returns 0.0 for each element if n <= 0.
-#ifndef USE_CUDA_NAMES
   interface hipblasHdotBatched
     function hipblasHdotBatched_(handle,n,x,incx,y,incy,batchCount,myResult) &
         bind(c, name="hipblasHdotBatched")
@@ -3950,9 +3500,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasBfdotBatched
     function hipblasBfdotBatched_(handle,n,x,incx,y,incy,batchCount,myResult) &
         bind(c, name="hipblasBfdotBatched")
@@ -3970,9 +3518,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSdotBatched
     function hipblasSdotBatched_(handle,n,x,incx,y,incy,batchCount,myResult) &
         bind(c, name="hipblasSdotBatched")
@@ -3990,9 +3536,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDdotBatched
     function hipblasDdotBatched_(handle,n,x,incx,y,incy,batchCount,myResult) &
         bind(c, name="hipblasDdotBatched")
@@ -4010,9 +3554,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCdotcBatched
     function hipblasCdotcBatched_(handle,n,x,incx,y,incy,batchCount,myResult) &
         bind(c, name="hipblasCdotcBatched")
@@ -4030,9 +3572,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCdotuBatched
     function hipblasCdotuBatched_(handle,n,x,incx,y,incy,batchCount,myResult) &
         bind(c, name="hipblasCdotuBatched")
@@ -4050,9 +3590,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdotcBatched
     function hipblasZdotcBatched_(handle,n,x,incx,y,incy,batchCount,myResult) &
         bind(c, name="hipblasZdotcBatched")
@@ -4070,9 +3608,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdotuBatched
     function hipblasZdotuBatched_(handle,n,x,incx,y,incy,batchCount,myResult) &
         bind(c, name="hipblasZdotuBatched")
@@ -4090,9 +3626,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasHdotBatched_64
     function hipblasHdotBatched_64_(handle,n,x,incx,y,incy,batchCount,myResult) &
         bind(c, name="hipblasHdotBatched_64")
@@ -4110,9 +3644,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasBfdotBatched_64
     function hipblasBfdotBatched_64_(handle,n,x,incx,y,incy,batchCount,myResult) &
         bind(c, name="hipblasBfdotBatched_64")
@@ -4130,9 +3662,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSdotBatched_64
     function hipblasSdotBatched_64_(handle,n,x,incx,y,incy,batchCount,myResult) &
         bind(c, name="hipblasSdotBatched_64")
@@ -4150,9 +3680,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDdotBatched_64
     function hipblasDdotBatched_64_(handle,n,x,incx,y,incy,batchCount,myResult) &
         bind(c, name="hipblasDdotBatched_64")
@@ -4170,9 +3698,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCdotcBatched_64
     function hipblasCdotcBatched_64_(handle,n,x,incx,y,incy,batchCount,myResult) &
         bind(c, name="hipblasCdotcBatched_64")
@@ -4190,9 +3716,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCdotuBatched_64
     function hipblasCdotuBatched_64_(handle,n,x,incx,y,incy,batchCount,myResult) &
         bind(c, name="hipblasCdotuBatched_64")
@@ -4210,9 +3734,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdotcBatched_64
     function hipblasZdotcBatched_64_(handle,n,x,incx,y,incy,batchCount,myResult) &
         bind(c, name="hipblasZdotcBatched_64")
@@ -4230,9 +3752,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdotuBatched_64
     function hipblasZdotuBatched_64_(handle,n,x,incx,y,incy,batchCount,myResult) &
         bind(c, name="hipblasZdotuBatched_64")
@@ -4250,7 +3770,6 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -4291,7 +3810,6 @@ module hipfort_hipblas
   !>               device array or host array of batchCount size to store the dot products of each
   !>               batch.
   !>               Returns 0.0 for each element if n <= 0.
-#ifndef USE_CUDA_NAMES
   interface hipblasHdotStridedBatched
     function hipblasHdotStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,batchCount, &
         myResult) &
@@ -4312,9 +3830,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasBfdotStridedBatched
     function hipblasBfdotStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,batchCount, &
         myResult) &
@@ -4335,9 +3851,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSdotStridedBatched
     function hipblasSdotStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,batchCount, &
         myResult) &
@@ -4368,9 +3882,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDdotStridedBatched
     function hipblasDdotStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,batchCount, &
         myResult) &
@@ -4401,9 +3913,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCdotcStridedBatched
     function hipblasCdotcStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,batchCount, &
         myResult) &
@@ -4434,9 +3944,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCdotuStridedBatched
     function hipblasCdotuStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,batchCount, &
         myResult) &
@@ -4467,9 +3975,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdotcStridedBatched
     function hipblasZdotcStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,batchCount, &
         myResult) &
@@ -4500,9 +4006,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdotuStridedBatched
     function hipblasZdotuStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,batchCount, &
         myResult) &
@@ -4533,9 +4037,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasHdotStridedBatched_64
     function hipblasHdotStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,batchCount, &
         myResult) &
@@ -4556,9 +4058,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasBfdotStridedBatched_64
     function hipblasBfdotStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,batchCount, &
         myResult) &
@@ -4579,9 +4079,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSdotStridedBatched_64
     function hipblasSdotStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,batchCount, &
         myResult) &
@@ -4602,9 +4100,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDdotStridedBatched_64
     function hipblasDdotStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,batchCount, &
         myResult) &
@@ -4625,9 +4121,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCdotcStridedBatched_64
     function hipblasCdotcStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,batchCount, &
         myResult) &
@@ -4648,9 +4142,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCdotuStridedBatched_64
     function hipblasCdotuStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,batchCount, &
         myResult) &
@@ -4671,9 +4163,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdotcStridedBatched_64
     function hipblasZdotcStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,batchCount, &
         myResult) &
@@ -4694,9 +4184,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdotuStridedBatched_64
     function hipblasZdotuStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,batchCount, &
         myResult) &
@@ -4717,7 +4205,6 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -4741,11 +4228,7 @@ module hipfort_hipblas
   !>               device pointer or host pointer to store the nrm2 product.
   !>               Return value is 0.0 if n, incx<=0.
   interface hipblasSnrm2
-#ifdef USE_CUDA_NAMES
-    function hipblasSnrm2_(handle,n,x,incx,myResult) bind(c, name="cublasSnrm2_v2")
-#else
     function hipblasSnrm2_(handle,n,x,incx,myResult) bind(c, name="hipblasSnrm2")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -4769,11 +4252,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDnrm2
-#ifdef USE_CUDA_NAMES
-    function hipblasDnrm2_(handle,n,x,incx,myResult) bind(c, name="cublasDnrm2_v2")
-#else
     function hipblasDnrm2_(handle,n,x,incx,myResult) bind(c, name="hipblasDnrm2")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -4797,11 +4276,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasScnrm2
-#ifdef USE_CUDA_NAMES
-    function hipblasScnrm2_(handle,n,x,incx,myResult) bind(c, name="cublasScnrm2_v2")
-#else
     function hipblasScnrm2_(handle,n,x,incx,myResult) bind(c, name="hipblasScnrm2")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -4825,11 +4300,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDznrm2
-#ifdef USE_CUDA_NAMES
-    function hipblasDznrm2_(handle,n,x,incx,myResult) bind(c, name="cublasDznrm2_v2")
-#else
     function hipblasDznrm2_(handle,n,x,incx,myResult) bind(c, name="hipblasDznrm2")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -4853,11 +4324,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSnrm2_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSnrm2_64_(handle,n,x,incx,myResult) bind(c, name="cublasSnrm2_v2_64")
-#else
     function hipblasSnrm2_64_(handle,n,x,incx,myResult) bind(c, name="hipblasSnrm2_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -4871,11 +4338,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDnrm2_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDnrm2_64_(handle,n,x,incx,myResult) bind(c, name="cublasDnrm2_v2_64")
-#else
     function hipblasDnrm2_64_(handle,n,x,incx,myResult) bind(c, name="hipblasDnrm2_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -4889,11 +4352,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasScnrm2_64
-#ifdef USE_CUDA_NAMES
-    function hipblasScnrm2_64_(handle,n,x,incx,myResult) bind(c, name="cublasScnrm2_v2_64")
-#else
     function hipblasScnrm2_64_(handle,n,x,incx,myResult) bind(c, name="hipblasScnrm2_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -4907,11 +4366,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDznrm2_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDznrm2_64_(handle,n,x,incx,myResult) bind(c, name="cublasDznrm2_v2_64")
-#else
     function hipblasDznrm2_64_(handle,n,x,incx,myResult) bind(c, name="hipblasDznrm2_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -4948,7 +4403,6 @@ module hipfort_hipblas
   !>     @param[out] myResult
   !>               device pointer or host pointer to array of batchCount size for nrm2 results.
   !>               Return value is 0.0 for each element if n <= 0, incx<=0.
-#ifndef USE_CUDA_NAMES
   interface hipblasSnrm2Batched
     function hipblasSnrm2Batched_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasSnrm2Batched")
@@ -4964,9 +4418,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDnrm2Batched
     function hipblasDnrm2Batched_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasDnrm2Batched")
@@ -4982,9 +4434,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasScnrm2Batched
     function hipblasScnrm2Batched_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasScnrm2Batched")
@@ -5000,9 +4450,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDznrm2Batched
     function hipblasDznrm2Batched_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasDznrm2Batched")
@@ -5018,9 +4466,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSnrm2Batched_64
     function hipblasSnrm2Batched_64_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasSnrm2Batched_64")
@@ -5036,9 +4482,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDnrm2Batched_64
     function hipblasDnrm2Batched_64_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasDnrm2Batched_64")
@@ -5054,9 +4498,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasScnrm2Batched_64
     function hipblasScnrm2Batched_64_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasScnrm2Batched_64")
@@ -5072,9 +4514,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDznrm2Batched_64
     function hipblasDznrm2Batched_64_(handle,n,x,incx,batchCount,myResult) &
         bind(c, name="hipblasDznrm2Batched_64")
@@ -5090,7 +4530,6 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -5122,7 +4561,6 @@ module hipfort_hipblas
   !>               device pointer or host pointer to array for storing contiguous batchCount
   !>               results.
   !>               Return value is 0.0 for each element if n <= 0, incx<=0.
-#ifndef USE_CUDA_NAMES
   interface hipblasSnrm2StridedBatched
     function hipblasSnrm2StridedBatched_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasSnrm2StridedBatched")
@@ -5149,9 +4587,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDnrm2StridedBatched
     function hipblasDnrm2StridedBatched_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasDnrm2StridedBatched")
@@ -5178,9 +4614,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasScnrm2StridedBatched
     function hipblasScnrm2StridedBatched_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasScnrm2StridedBatched")
@@ -5207,9 +4641,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDznrm2StridedBatched
     function hipblasDznrm2StridedBatched_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasDznrm2StridedBatched")
@@ -5236,9 +4668,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSnrm2StridedBatched_64
     function hipblasSnrm2StridedBatched_64_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasSnrm2StridedBatched_64")
@@ -5255,9 +4685,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDnrm2StridedBatched_64
     function hipblasDnrm2StridedBatched_64_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasDnrm2StridedBatched_64")
@@ -5274,9 +4702,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasScnrm2StridedBatched_64
     function hipblasScnrm2StridedBatched_64_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasScnrm2StridedBatched_64")
@@ -5293,9 +4719,7 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDznrm2StridedBatched_64
     function hipblasDznrm2StridedBatched_64_(handle,n,x,incx,stridex,batchCount,myResult) &
         bind(c, name="hipblasDznrm2StridedBatched_64")
@@ -5312,7 +4736,6 @@ module hipfort_hipblas
       type(c_ptr),value :: myResult
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -5340,11 +4763,7 @@ module hipfort_hipblas
   !>     @param[in] s - device pointer or host pointer storing the scalar sine component of the
   !>     rotation matrix.
   interface hipblasSrot
-#ifdef USE_CUDA_NAMES
-    function hipblasSrot_(handle,n,x,incx,y,incy,c,s) bind(c, name="cublasSrot_v2")
-#else
     function hipblasSrot_(handle,n,x,incx,y,incy,c,s) bind(c, name="hipblasSrot")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -5371,11 +4790,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDrot
-#ifdef USE_CUDA_NAMES
-    function hipblasDrot_(handle,n,x,incx,y,incy,c,s) bind(c, name="cublasDrot_v2")
-#else
     function hipblasDrot_(handle,n,x,incx,y,incy,c,s) bind(c, name="hipblasDrot")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -5402,11 +4817,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCrot
-#ifdef USE_CUDA_NAMES
-    function hipblasCrot_(handle,n,x,incx,y,incy,c,s) bind(c, name="cublasCrot_v2")
-#else
     function hipblasCrot_(handle,n,x,incx,y,incy,c,s) bind(c, name="hipblasCrot")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -5433,11 +4844,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsrot
-#ifdef USE_CUDA_NAMES
-    function hipblasCsrot_(handle,n,x,incx,y,incy,c,s) bind(c, name="cublasCsrot_v2")
-#else
     function hipblasCsrot_(handle,n,x,incx,y,incy,c,s) bind(c, name="hipblasCsrot")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -5464,11 +4871,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZrot
-#ifdef USE_CUDA_NAMES
-    function hipblasZrot_(handle,n,x,incx,y,incy,c,s) bind(c, name="cublasZrot_v2")
-#else
     function hipblasZrot_(handle,n,x,incx,y,incy,c,s) bind(c, name="hipblasZrot")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -5495,11 +4898,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZdrot
-#ifdef USE_CUDA_NAMES
-    function hipblasZdrot_(handle,n,x,incx,y,incy,c,s) bind(c, name="cublasZdrot_v2")
-#else
     function hipblasZdrot_(handle,n,x,incx,y,incy,c,s) bind(c, name="hipblasZdrot")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -5526,11 +4925,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSrot_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSrot_64_(handle,n,x,incx,y,incy,c,s) bind(c, name="cublasSrot_v2_64")
-#else
     function hipblasSrot_64_(handle,n,x,incx,y,incy,c,s) bind(c, name="hipblasSrot_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -5547,11 +4942,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDrot_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDrot_64_(handle,n,x,incx,y,incy,c,s) bind(c, name="cublasDrot_v2_64")
-#else
     function hipblasDrot_64_(handle,n,x,incx,y,incy,c,s) bind(c, name="hipblasDrot_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -5568,11 +4959,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCrot_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCrot_64_(handle,n,x,incx,y,incy,c,s) bind(c, name="cublasCrot_v2_64")
-#else
     function hipblasCrot_64_(handle,n,x,incx,y,incy,c,s) bind(c, name="hipblasCrot_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -5589,11 +4976,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsrot_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCsrot_64_(handle,n,x,incx,y,incy,c,s) bind(c, name="cublasCsrot_v2_64")
-#else
     function hipblasCsrot_64_(handle,n,x,incx,y,incy,c,s) bind(c, name="hipblasCsrot_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -5610,11 +4993,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZrot_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZrot_64_(handle,n,x,incx,y,incy,c,s) bind(c, name="cublasZrot_v2_64")
-#else
     function hipblasZrot_64_(handle,n,x,incx,y,incy,c,s) bind(c, name="hipblasZrot_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -5631,11 +5010,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZdrot_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZdrot_64_(handle,n,x,incx,y,incy,c,s) bind(c, name="cublasZdrot_v2_64")
-#else
     function hipblasZdrot_64_(handle,n,x,incx,y,incy,c,s) bind(c, name="hipblasZdrot_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -5679,7 +5054,6 @@ module hipfort_hipblas
   !>     matrix.
   !>     @param[in] batchCount - [int]
   !>                 the number of x and y arrays, that is, the number of batches.
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotBatched
     function hipblasSrotBatched_(handle,n,x,incx,y,incy,c,s,batchCount) &
         bind(c, name="hipblasSrotBatched")
@@ -5698,9 +5072,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotBatched
     function hipblasDrotBatched_(handle,n,x,incx,y,incy,c,s,batchCount) &
         bind(c, name="hipblasDrotBatched")
@@ -5719,9 +5091,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCrotBatched
     function hipblasCrotBatched_(handle,n,x,incx,y,incy,c,s,batchCount) &
         bind(c, name="hipblasCrotBatched")
@@ -5740,9 +5110,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsrotBatched
     function hipblasCsrotBatched_(handle,n,x,incx,y,incy,c,s,batchCount) &
         bind(c, name="hipblasCsrotBatched")
@@ -5761,9 +5129,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZrotBatched
     function hipblasZrotBatched_(handle,n,x,incx,y,incy,c,s,batchCount) &
         bind(c, name="hipblasZrotBatched")
@@ -5782,9 +5148,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdrotBatched
     function hipblasZdrotBatched_(handle,n,x,incx,y,incy,c,s,batchCount) &
         bind(c, name="hipblasZdrotBatched")
@@ -5803,9 +5167,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotBatched_64
     function hipblasSrotBatched_64_(handle,n,x,incx,y,incy,c,s,batchCount) &
         bind(c, name="hipblasSrotBatched_64")
@@ -5824,9 +5186,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotBatched_64
     function hipblasDrotBatched_64_(handle,n,x,incx,y,incy,c,s,batchCount) &
         bind(c, name="hipblasDrotBatched_64")
@@ -5845,9 +5205,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCrotBatched_64
     function hipblasCrotBatched_64_(handle,n,x,incx,y,incy,c,s,batchCount) &
         bind(c, name="hipblasCrotBatched_64")
@@ -5866,9 +5224,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsrotBatched_64
     function hipblasCsrotBatched_64_(handle,n,x,incx,y,incy,c,s,batchCount) &
         bind(c, name="hipblasCsrotBatched_64")
@@ -5887,9 +5243,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZrotBatched_64
     function hipblasZrotBatched_64_(handle,n,x,incx,y,incy,c,s,batchCount) &
         bind(c, name="hipblasZrotBatched_64")
@@ -5908,9 +5262,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdrotBatched_64
     function hipblasZdrotBatched_64_(handle,n,x,incx,y,incy,c,s,batchCount) &
         bind(c, name="hipblasZdrotBatched_64")
@@ -5929,7 +5281,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -5963,7 +5314,6 @@ module hipfort_hipblas
   !>     matrix.
   !>     @param[in] batchCount - [int]
   !>             the number of x and y arrays, that is, the number of batches.
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotStridedBatched
     function hipblasSrotStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,c,s,batchCount) &
         bind(c, name="hipblasSrotStridedBatched")
@@ -5994,9 +5344,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotStridedBatched
     function hipblasDrotStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,c,s,batchCount) &
         bind(c, name="hipblasDrotStridedBatched")
@@ -6027,9 +5375,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCrotStridedBatched
     function hipblasCrotStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,c,s,batchCount) &
         bind(c, name="hipblasCrotStridedBatched")
@@ -6060,9 +5406,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsrotStridedBatched
     function hipblasCsrotStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,c,s,batchCount) &
         bind(c, name="hipblasCsrotStridedBatched")
@@ -6093,9 +5437,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZrotStridedBatched
     function hipblasZrotStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,c,s,batchCount) &
         bind(c, name="hipblasZrotStridedBatched")
@@ -6126,9 +5468,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdrotStridedBatched
     function hipblasZdrotStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,c,s,batchCount) &
         bind(c, name="hipblasZdrotStridedBatched")
@@ -6159,9 +5499,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotStridedBatched_64
     function hipblasSrotStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,c,s,batchCount) &
         bind(c, name="hipblasSrotStridedBatched_64")
@@ -6182,9 +5520,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotStridedBatched_64
     function hipblasDrotStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,c,s,batchCount) &
         bind(c, name="hipblasDrotStridedBatched_64")
@@ -6205,9 +5541,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCrotStridedBatched_64
     function hipblasCrotStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,c,s,batchCount) &
         bind(c, name="hipblasCrotStridedBatched_64")
@@ -6228,9 +5562,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsrotStridedBatched_64
     function hipblasCsrotStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,c,s,batchCount) &
         bind(c, name="hipblasCsrotStridedBatched_64")
@@ -6251,9 +5583,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZrotStridedBatched_64
     function hipblasZrotStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,c,s,batchCount) &
         bind(c, name="hipblasZrotStridedBatched_64")
@@ -6274,9 +5604,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdrotStridedBatched_64
     function hipblasZdrotStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,c,s,batchCount) &
         bind(c, name="hipblasZdrotStridedBatched_64")
@@ -6297,7 +5625,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -6324,11 +5651,7 @@ module hipfort_hipblas
   !>     @param[inout] s - device pointer or host pointer to the sine element of the Givens
   !>     rotation.
   interface hipblasSrotg
-#ifdef USE_CUDA_NAMES
-    function hipblasSrotg_(handle,a,b,c,s) bind(c, name="cublasSrotg_v2")
-#else
     function hipblasSrotg_(handle,a,b,c,s) bind(c, name="hipblasSrotg")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -6342,11 +5665,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDrotg
-#ifdef USE_CUDA_NAMES
-    function hipblasDrotg_(handle,a,b,c,s) bind(c, name="cublasDrotg_v2")
-#else
     function hipblasDrotg_(handle,a,b,c,s) bind(c, name="hipblasDrotg")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -6360,11 +5679,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCrotg
-#ifdef USE_CUDA_NAMES
-    function hipblasCrotg_(handle,a,b,c,s) bind(c, name="cublasCrotg_v2")
-#else
     function hipblasCrotg_(handle,a,b,c,s) bind(c, name="hipblasCrotg")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -6378,11 +5693,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZrotg
-#ifdef USE_CUDA_NAMES
-    function hipblasZrotg_(handle,a,b,c,s) bind(c, name="cublasZrotg_v2")
-#else
     function hipblasZrotg_(handle,a,b,c,s) bind(c, name="hipblasZrotg")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -6395,7 +5706,6 @@ module hipfort_hipblas
     end function
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotg_64
     function hipblasSrotg_64_(handle,a,b,c,s) bind(c, name="hipblasSrotg_64")
       use iso_c_binding
@@ -6409,9 +5719,7 @@ module hipfort_hipblas
       type(c_ptr),value :: s
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotg_64
     function hipblasDrotg_64_(handle,a,b,c,s) bind(c, name="hipblasDrotg_64")
       use iso_c_binding
@@ -6425,9 +5733,7 @@ module hipfort_hipblas
       type(c_ptr),value :: s
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCrotg_64
     function hipblasCrotg_64_(handle,a,b,c,s) bind(c, name="hipblasCrotg_64")
       use iso_c_binding
@@ -6441,9 +5747,7 @@ module hipfort_hipblas
       type(c_ptr),value :: s
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZrotg_64
     function hipblasZrotg_64_(handle,a,b,c,s) bind(c, name="hipblasZrotg_64")
       use iso_c_binding
@@ -6457,7 +5761,6 @@ module hipfort_hipblas
       type(c_ptr),value :: s
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -6486,7 +5789,6 @@ module hipfort_hipblas
   !>     rotation for the batch.
   !>     @param[in] batchCount - [int]
   !>                 number of batches (length of arrays a, b, c, and s).
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotgBatched
     function hipblasSrotgBatched_(handle,a,b,c,s,batchCount) bind(c, name="hipblasSrotgBatched")
       use iso_c_binding
@@ -6501,9 +5803,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotgBatched
     function hipblasDrotgBatched_(handle,a,b,c,s,batchCount) bind(c, name="hipblasDrotgBatched")
       use iso_c_binding
@@ -6518,9 +5818,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCrotgBatched
     function hipblasCrotgBatched_(handle,a,b,c,s,batchCount) bind(c, name="hipblasCrotgBatched")
       use iso_c_binding
@@ -6535,9 +5833,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZrotgBatched
     function hipblasZrotgBatched_(handle,a,b,c,s,batchCount) bind(c, name="hipblasZrotgBatched")
       use iso_c_binding
@@ -6552,9 +5848,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotgBatched_64
     function hipblasSrotgBatched_64_(handle,a,b,c,s,batchCount) &
         bind(c, name="hipblasSrotgBatched_64")
@@ -6570,9 +5864,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotgBatched_64
     function hipblasDrotgBatched_64_(handle,a,b,c,s,batchCount) &
         bind(c, name="hipblasDrotgBatched_64")
@@ -6588,9 +5880,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCrotgBatched_64
     function hipblasCrotgBatched_64_(handle,a,b,c,s,batchCount) &
         bind(c, name="hipblasCrotgBatched_64")
@@ -6606,9 +5896,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZrotgBatched_64
     function hipblasZrotgBatched_64_(handle,a,b,c,s,batchCount) &
         bind(c, name="hipblasZrotgBatched_64")
@@ -6624,7 +5912,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -6661,7 +5948,6 @@ module hipfort_hipblas
   !>              distance between elements of s in batch (distance between s_i and s_(i + 1)).
   !>     @param[in] batchCount - [int]
   !>                 number of batches (length of arrays a, b, c, and s).
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotgStridedBatched
     function hipblasSrotgStridedBatched_(handle,a,stridea,b,strideb,c,stridec,s,strides, &
         batchCount) &
@@ -6682,9 +5968,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotgStridedBatched
     function hipblasDrotgStridedBatched_(handle,a,stridea,b,strideb,c,stridec,s,strides, &
         batchCount) &
@@ -6705,9 +5989,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCrotgStridedBatched
     function hipblasCrotgStridedBatched_(handle,a,stridea,b,strideb,c,stridec,s,strides, &
         batchCount) &
@@ -6728,9 +6010,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZrotgStridedBatched
     function hipblasZrotgStridedBatched_(handle,a,stridea,b,strideb,c,stridec,s,strides, &
         batchCount) &
@@ -6751,9 +6031,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotgStridedBatched_64
     function hipblasSrotgStridedBatched_64_(handle,a,stridea,b,strideb,c,stridec,s,strides, &
         batchCount) &
@@ -6774,9 +6052,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotgStridedBatched_64
     function hipblasDrotgStridedBatched_64_(handle,a,stridea,b,strideb,c,stridec,s,strides, &
         batchCount) &
@@ -6797,9 +6073,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCrotgStridedBatched_64
     function hipblasCrotgStridedBatched_64_(handle,a,stridea,b,strideb,c,stridec,s,strides, &
         batchCount) &
@@ -6820,9 +6094,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZrotgStridedBatched_64
     function hipblasZrotgStridedBatched_64_(handle,a,stridea,b,strideb,c,stridec,s,strides, &
         batchCount) &
@@ -6843,7 +6115,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -6878,11 +6149,7 @@ module hipfort_hipblas
   !>             - flag =  1 => H = ( H11 1.0 -1.0 H22 )
   !>             - flag = -2 => H = ( 1.0 0.0 0.0 1.0 )
   interface hipblasSrotm
-#ifdef USE_CUDA_NAMES
-    function hipblasSrotm_(handle,n,x,incx,y,incy,param) bind(c, name="cublasSrotm_v2")
-#else
     function hipblasSrotm_(handle,n,x,incx,y,incy,param) bind(c, name="hipblasSrotm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -6908,11 +6175,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDrotm
-#ifdef USE_CUDA_NAMES
-    function hipblasDrotm_(handle,n,x,incx,y,incy,param) bind(c, name="cublasDrotm_v2")
-#else
     function hipblasDrotm_(handle,n,x,incx,y,incy,param) bind(c, name="hipblasDrotm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -6938,11 +6201,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSrotm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSrotm_64_(handle,n,x,incx,y,incy,param) bind(c, name="cublasSrotm_v2_64")
-#else
     function hipblasSrotm_64_(handle,n,x,incx,y,incy,param) bind(c, name="hipblasSrotm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -6958,11 +6217,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDrotm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDrotm_64_(handle,n,x,incx,y,incy,param) bind(c, name="cublasDrotm_v2_64")
-#else
     function hipblasDrotm_64_(handle,n,x,incx,y,incy,param) bind(c, name="hipblasDrotm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -7010,7 +6265,6 @@ module hipfort_hipblas
   !>             - flag = -2 => H = ( 1.0 0.0 0.0 1.0 )
   !>     @param[in] batchCount - [int]
   !>                 the number of x and y arrays, that is, the number of batches.
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotmBatched
     function hipblasSrotmBatched_(handle,n,x,incx,y,incy,param,batchCount) &
         bind(c, name="hipblasSrotmBatched")
@@ -7028,9 +6282,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotmBatched
     function hipblasDrotmBatched_(handle,n,x,incx,y,incy,param,batchCount) &
         bind(c, name="hipblasDrotmBatched")
@@ -7048,9 +6300,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotmBatched_64
     function hipblasSrotmBatched_64_(handle,n,x,incx,y,incy,param,batchCount) &
         bind(c, name="hipblasSrotmBatched_64")
@@ -7068,9 +6318,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotmBatched_64
     function hipblasDrotmBatched_64_(handle,n,x,incx,y,incy,param,batchCount) &
         bind(c, name="hipblasDrotmBatched_64")
@@ -7088,7 +6336,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -7132,7 +6379,6 @@ module hipfort_hipblas
   !>                  specifies the increment between the beginning of param_i and param_(i + 1).
   !>     @param[in] batchCount - [int]
   !>                 the number of x and y arrays, that is, the number of batches.
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotmStridedBatched
     function hipblasSrotmStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,param,strideParam, &
         batchCount) &
@@ -7164,9 +6410,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotmStridedBatched
     function hipblasDrotmStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,param,strideParam, &
         batchCount) &
@@ -7198,9 +6442,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotmStridedBatched_64
     function hipblasSrotmStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,param, &
         strideParam,batchCount) &
@@ -7222,9 +6464,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotmStridedBatched_64
     function hipblasDrotmStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,param, &
         strideParam,batchCount) &
@@ -7246,7 +6486,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -7283,11 +6522,7 @@ module hipfort_hipblas
   !>             - flag =  1 => H = ( H11 1.0 -1.0 H22 )
   !>             - flag = -2 => H = ( 1.0 0.0 0.0 1.0 )
   interface hipblasSrotmg
-#ifdef USE_CUDA_NAMES
-    function hipblasSrotmg_(handle,d1,d2,x1,y1,param) bind(c, name="cublasSrotmg_v2")
-#else
     function hipblasSrotmg_(handle,d1,d2,x1,y1,param) bind(c, name="hipblasSrotmg")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -7302,11 +6537,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDrotmg
-#ifdef USE_CUDA_NAMES
-    function hipblasDrotmg_(handle,d1,d2,x1,y1,param) bind(c, name="cublasDrotmg_v2")
-#else
     function hipblasDrotmg_(handle,d1,d2,x1,y1,param) bind(c, name="hipblasDrotmg")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -7320,7 +6551,6 @@ module hipfort_hipblas
     end function
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotmg_64
     function hipblasSrotmg_64_(handle,d1,d2,x1,y1,param) bind(c, name="hipblasSrotmg_64")
       use iso_c_binding
@@ -7335,9 +6565,7 @@ module hipfort_hipblas
       type(c_ptr),value :: param
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotmg_64
     function hipblasDrotmg_64_(handle,d1,d2,x1,y1,param) bind(c, name="hipblasDrotmg_64")
       use iso_c_binding
@@ -7352,7 +6580,6 @@ module hipfort_hipblas
       type(c_ptr),value :: param
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -7394,7 +6621,6 @@ module hipfort_hipblas
   !>             - flag = -2 => H = ( 1.0 0.0 0.0 1.0 )
   !>     @param[in] batchCount - [int]
   !>                 the number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotmgBatched
     function hipblasSrotmgBatched_(handle,d1,d2,x1,y1,param,batchCount) &
         bind(c, name="hipblasSrotmgBatched")
@@ -7411,9 +6637,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotmgBatched
     function hipblasDrotmgBatched_(handle,d1,d2,x1,y1,param,batchCount) &
         bind(c, name="hipblasDrotmgBatched")
@@ -7430,9 +6654,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotmgBatched_64
     function hipblasSrotmgBatched_64_(handle,d1,d2,x1,y1,param,batchCount) &
         bind(c, name="hipblasSrotmgBatched_64")
@@ -7449,9 +6671,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotmgBatched_64
     function hipblasDrotmgBatched_64_(handle,d1,d2,x1,y1,param,batchCount) &
         bind(c, name="hipblasDrotmgBatched_64")
@@ -7468,7 +6688,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -7521,7 +6740,6 @@ module hipfort_hipblas
   !>                  specifies the increment between the beginning of param_i and param_(i + 1).
   !>     @param[in] batchCount - [int]
   !>                 the number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotmgStridedBatched
     function hipblasSrotmgStridedBatched_(handle,d1,strided1,d2,strided2,x1,stridex1,y1,stridey1, &
         param,strideParam,batchCount) &
@@ -7544,9 +6762,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotmgStridedBatched
     function hipblasDrotmgStridedBatched_(handle,d1,strided1,d2,strided2,x1,stridex1,y1,stridey1, &
         param,strideParam,batchCount) &
@@ -7569,9 +6785,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSrotmgStridedBatched_64
     function hipblasSrotmgStridedBatched_64_(handle,d1,strided1,d2,strided2,x1,stridex1,y1, &
         stridey1,param,strideParam,batchCount) &
@@ -7594,9 +6808,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDrotmgStridedBatched_64
     function hipblasDrotmgStridedBatched_64_(handle,d1,strided1,d2,strided2,x1,stridex1,y1, &
         stridey1,param,strideParam,batchCount) &
@@ -7619,7 +6831,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief   BLAS Level 1 API
   !>
@@ -7640,11 +6851,7 @@ module hipfort_hipblas
   !>     @param[in] incx - [int]
   !>               specifies the increment for the elements of x.
   interface hipblasSscal
-#ifdef USE_CUDA_NAMES
-    function hipblasSscal_(handle,n,alpha,x,incx) bind(c, name="cublasSscal_v2")
-#else
     function hipblasSscal_(handle,n,alpha,x,incx) bind(c, name="hipblasSscal")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -7668,11 +6875,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDscal
-#ifdef USE_CUDA_NAMES
-    function hipblasDscal_(handle,n,alpha,x,incx) bind(c, name="cublasDscal_v2")
-#else
     function hipblasDscal_(handle,n,alpha,x,incx) bind(c, name="hipblasDscal")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -7696,11 +6899,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCscal
-#ifdef USE_CUDA_NAMES
-    function hipblasCscal_(handle,n,alpha,x,incx) bind(c, name="cublasCscal_v2")
-#else
     function hipblasCscal_(handle,n,alpha,x,incx) bind(c, name="hipblasCscal")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -7724,11 +6923,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsscal
-#ifdef USE_CUDA_NAMES
-    function hipblasCsscal_(handle,n,alpha,x,incx) bind(c, name="cublasCsscal_v2")
-#else
     function hipblasCsscal_(handle,n,alpha,x,incx) bind(c, name="hipblasCsscal")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -7752,11 +6947,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZscal
-#ifdef USE_CUDA_NAMES
-    function hipblasZscal_(handle,n,alpha,x,incx) bind(c, name="cublasZscal_v2")
-#else
     function hipblasZscal_(handle,n,alpha,x,incx) bind(c, name="hipblasZscal")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -7780,11 +6971,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZdscal
-#ifdef USE_CUDA_NAMES
-    function hipblasZdscal_(handle,n,alpha,x,incx) bind(c, name="cublasZdscal_v2")
-#else
     function hipblasZdscal_(handle,n,alpha,x,incx) bind(c, name="hipblasZdscal")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -7808,11 +6995,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSscal_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSscal_64_(handle,n,alpha,x,incx) bind(c, name="cublasSscal_v2_64")
-#else
     function hipblasSscal_64_(handle,n,alpha,x,incx) bind(c, name="hipblasSscal_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -7826,11 +7009,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDscal_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDscal_64_(handle,n,alpha,x,incx) bind(c, name="cublasDscal_v2_64")
-#else
     function hipblasDscal_64_(handle,n,alpha,x,incx) bind(c, name="hipblasDscal_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -7844,11 +7023,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCscal_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCscal_64_(handle,n,alpha,x,incx) bind(c, name="cublasCscal_v2_64")
-#else
     function hipblasCscal_64_(handle,n,alpha,x,incx) bind(c, name="hipblasCscal_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -7862,11 +7037,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsscal_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCsscal_64_(handle,n,alpha,x,incx) bind(c, name="cublasCsscal_v2_64")
-#else
     function hipblasCsscal_64_(handle,n,alpha,x,incx) bind(c, name="hipblasCsscal_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -7880,11 +7051,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZscal_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZscal_64_(handle,n,alpha,x,incx) bind(c, name="cublasZscal_v2_64")
-#else
     function hipblasZscal_64_(handle,n,alpha,x,incx) bind(c, name="hipblasZscal_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -7898,11 +7065,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZdscal_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZdscal_64_(handle,n,alpha,x,incx) bind(c, name="cublasZdscal_v2_64")
-#else
     function hipblasZdscal_64_(handle,n,alpha,x,incx) bind(c, name="hipblasZdscal_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -7937,7 +7100,6 @@ module hipfort_hipblas
   !>                 specifies the increment for the elements of each x_i.
   !>     @param[in] batchCount - [int]
   !>                 specifies the number of batches in x.
-#ifndef USE_CUDA_NAMES
   interface hipblasSscalBatched
     function hipblasSscalBatched_(handle,n,alpha,x,incx,batchCount) &
         bind(c, name="hipblasSscalBatched")
@@ -7953,9 +7115,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDscalBatched
     function hipblasDscalBatched_(handle,n,alpha,x,incx,batchCount) &
         bind(c, name="hipblasDscalBatched")
@@ -7971,9 +7131,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCscalBatched
     function hipblasCscalBatched_(handle,n,alpha,x,incx,batchCount) &
         bind(c, name="hipblasCscalBatched")
@@ -7989,9 +7147,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZscalBatched
     function hipblasZscalBatched_(handle,n,alpha,x,incx,batchCount) &
         bind(c, name="hipblasZscalBatched")
@@ -8007,9 +7163,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsscalBatched
     function hipblasCsscalBatched_(handle,n,alpha,x,incx,batchCount) &
         bind(c, name="hipblasCsscalBatched")
@@ -8025,9 +7179,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdscalBatched
     function hipblasZdscalBatched_(handle,n,alpha,x,incx,batchCount) &
         bind(c, name="hipblasZdscalBatched")
@@ -8043,9 +7195,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSscalBatched_64
     function hipblasSscalBatched_64_(handle,n,alpha,x,incx,batchCount) &
         bind(c, name="hipblasSscalBatched_64")
@@ -8061,9 +7211,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDscalBatched_64
     function hipblasDscalBatched_64_(handle,n,alpha,x,incx,batchCount) &
         bind(c, name="hipblasDscalBatched_64")
@@ -8079,9 +7227,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCscalBatched_64
     function hipblasCscalBatched_64_(handle,n,alpha,x,incx,batchCount) &
         bind(c, name="hipblasCscalBatched_64")
@@ -8097,9 +7243,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZscalBatched_64
     function hipblasZscalBatched_64_(handle,n,alpha,x,incx,batchCount) &
         bind(c, name="hipblasZscalBatched_64")
@@ -8115,9 +7259,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsscalBatched_64
     function hipblasCsscalBatched_64_(handle,n,alpha,x,incx,batchCount) &
         bind(c, name="hipblasCsscalBatched_64")
@@ -8133,9 +7275,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdscalBatched_64
     function hipblasZdscalBatched_64_(handle,n,alpha,x,incx,batchCount) &
         bind(c, name="hipblasZdscalBatched_64")
@@ -8151,7 +7291,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>     \details
@@ -8180,7 +7319,6 @@ module hipfort_hipblas
   !>                 case, this means stride_x >= n * incx.
   !>     @param[in] batchCount - [int]
   !>                 specifies the number of batches in x.
-#ifndef USE_CUDA_NAMES
   interface hipblasSscalStridedBatched
     function hipblasSscalStridedBatched_(handle,n,alpha,x,incx,stridex,batchCount) &
         bind(c, name="hipblasSscalStridedBatched")
@@ -8207,9 +7345,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDscalStridedBatched
     function hipblasDscalStridedBatched_(handle,n,alpha,x,incx,stridex,batchCount) &
         bind(c, name="hipblasDscalStridedBatched")
@@ -8236,9 +7372,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCscalStridedBatched
     function hipblasCscalStridedBatched_(handle,n,alpha,x,incx,stridex,batchCount) &
         bind(c, name="hipblasCscalStridedBatched")
@@ -8265,9 +7399,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZscalStridedBatched
     function hipblasZscalStridedBatched_(handle,n,alpha,x,incx,stridex,batchCount) &
         bind(c, name="hipblasZscalStridedBatched")
@@ -8294,9 +7426,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsscalStridedBatched
     function hipblasCsscalStridedBatched_(handle,n,alpha,x,incx,stridex,batchCount) &
         bind(c, name="hipblasCsscalStridedBatched")
@@ -8323,9 +7453,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdscalStridedBatched
     function hipblasZdscalStridedBatched_(handle,n,alpha,x,incx,stridex,batchCount) &
         bind(c, name="hipblasZdscalStridedBatched")
@@ -8352,9 +7480,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSscalStridedBatched_64
     function hipblasSscalStridedBatched_64_(handle,n,alpha,x,incx,stridex,batchCount) &
         bind(c, name="hipblasSscalStridedBatched_64")
@@ -8371,9 +7497,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDscalStridedBatched_64
     function hipblasDscalStridedBatched_64_(handle,n,alpha,x,incx,stridex,batchCount) &
         bind(c, name="hipblasDscalStridedBatched_64")
@@ -8390,9 +7514,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCscalStridedBatched_64
     function hipblasCscalStridedBatched_64_(handle,n,alpha,x,incx,stridex,batchCount) &
         bind(c, name="hipblasCscalStridedBatched_64")
@@ -8409,9 +7531,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZscalStridedBatched_64
     function hipblasZscalStridedBatched_64_(handle,n,alpha,x,incx,stridex,batchCount) &
         bind(c, name="hipblasZscalStridedBatched_64")
@@ -8428,9 +7548,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsscalStridedBatched_64
     function hipblasCsscalStridedBatched_64_(handle,n,alpha,x,incx,stridex,batchCount) &
         bind(c, name="hipblasCsscalStridedBatched_64")
@@ -8447,9 +7565,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdscalStridedBatched_64
     function hipblasZdscalStridedBatched_64_(handle,n,alpha,x,incx,stridex,batchCount) &
         bind(c, name="hipblasZdscalStridedBatched_64")
@@ -8466,7 +7582,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -8489,11 +7604,7 @@ module hipfort_hipblas
   !>     @param[in] incy - [int]
   !>               specifies the increment for the elements of y.
   interface hipblasSswap
-#ifdef USE_CUDA_NAMES
-    function hipblasSswap_(handle,n,x,incx,y,incy) bind(c, name="cublasSswap_v2")
-#else
     function hipblasSswap_(handle,n,x,incx,y,incy) bind(c, name="hipblasSswap")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -8518,11 +7629,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDswap
-#ifdef USE_CUDA_NAMES
-    function hipblasDswap_(handle,n,x,incx,y,incy) bind(c, name="cublasDswap_v2")
-#else
     function hipblasDswap_(handle,n,x,incx,y,incy) bind(c, name="hipblasDswap")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -8547,11 +7654,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCswap
-#ifdef USE_CUDA_NAMES
-    function hipblasCswap_(handle,n,x,incx,y,incy) bind(c, name="cublasCswap_v2")
-#else
     function hipblasCswap_(handle,n,x,incx,y,incy) bind(c, name="hipblasCswap")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -8576,11 +7679,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZswap
-#ifdef USE_CUDA_NAMES
-    function hipblasZswap_(handle,n,x,incx,y,incy) bind(c, name="cublasZswap_v2")
-#else
     function hipblasZswap_(handle,n,x,incx,y,incy) bind(c, name="hipblasZswap")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -8605,11 +7704,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSswap_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSswap_64_(handle,n,x,incx,y,incy) bind(c, name="cublasSswap_v2_64")
-#else
     function hipblasSswap_64_(handle,n,x,incx,y,incy) bind(c, name="hipblasSswap_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -8624,11 +7719,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDswap_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDswap_64_(handle,n,x,incx,y,incy) bind(c, name="cublasDswap_v2_64")
-#else
     function hipblasDswap_64_(handle,n,x,incx,y,incy) bind(c, name="hipblasDswap_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -8643,11 +7734,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCswap_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCswap_64_(handle,n,x,incx,y,incy) bind(c, name="cublasCswap_v2_64")
-#else
     function hipblasCswap_64_(handle,n,x,incx,y,incy) bind(c, name="hipblasCswap_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -8662,11 +7749,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZswap_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZswap_64_(handle,n,x,incx,y,incy) bind(c, name="cublasZswap_v2_64")
-#else
     function hipblasZswap_64_(handle,n,x,incx,y,incy) bind(c, name="hipblasZswap_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -8703,7 +7786,6 @@ module hipfort_hipblas
   !>               specifies the increment for the elements of each y_i.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSswapBatched
     function hipblasSswapBatched_(handle,n,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasSswapBatched")
@@ -8720,9 +7802,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDswapBatched
     function hipblasDswapBatched_(handle,n,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasDswapBatched")
@@ -8739,9 +7819,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCswapBatched
     function hipblasCswapBatched_(handle,n,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasCswapBatched")
@@ -8758,9 +7836,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZswapBatched
     function hipblasZswapBatched_(handle,n,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasZswapBatched")
@@ -8777,9 +7853,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSswapBatched_64
     function hipblasSswapBatched_64_(handle,n,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasSswapBatched_64")
@@ -8796,9 +7870,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDswapBatched_64
     function hipblasDswapBatched_64_(handle,n,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasDswapBatched_64")
@@ -8815,9 +7887,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCswapBatched_64
     function hipblasCswapBatched_64_(handle,n,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasCswapBatched_64")
@@ -8834,9 +7904,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZswapBatched_64
     function hipblasZswapBatched_64_(handle,n,x,incx,y,incy,batchCount) &
         bind(c, name="hipblasZswapBatched_64")
@@ -8853,7 +7921,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 1 API
   !>
@@ -8888,7 +7955,6 @@ module hipfort_hipblas
   !>               case, this means stridey >= n * incy. stridey should be non zero.
   !>      @param[in] batchCount - [int]
   !>                  number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSswapStridedBatched
     function hipblasSswapStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasSswapStridedBatched")
@@ -8917,9 +7983,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDswapStridedBatched
     function hipblasDswapStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasDswapStridedBatched")
@@ -8948,9 +8012,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCswapStridedBatched
     function hipblasCswapStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasCswapStridedBatched")
@@ -8979,9 +8041,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZswapStridedBatched
     function hipblasZswapStridedBatched_(handle,n,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasZswapStridedBatched")
@@ -9010,9 +8070,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSswapStridedBatched_64
     function hipblasSswapStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasSswapStridedBatched_64")
@@ -9031,9 +8089,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDswapStridedBatched_64
     function hipblasDswapStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasDswapStridedBatched_64")
@@ -9052,9 +8108,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCswapStridedBatched_64
     function hipblasCswapStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasCswapStridedBatched_64")
@@ -9073,9 +8127,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZswapStridedBatched_64
     function hipblasZswapStridedBatched_64_(handle,n,x,incx,stridex,y,incy,stridey,batchCount) &
         bind(c, name="hipblasZswapStridedBatched_64")
@@ -9094,7 +8146,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -9150,13 +8201,8 @@ module hipfort_hipblas
   !>     @param[in] incy - [int]
   !>               specifies the increment for the elements of y.
   interface hipblasSgbmv
-#ifdef USE_CUDA_NAMES
-    function hipblasSgbmv_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasSgbmv_v2")
-#else
     function hipblasSgbmv_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasSgbmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -9190,13 +8236,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgbmv
-#ifdef USE_CUDA_NAMES
-    function hipblasDgbmv_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasDgbmv_v2")
-#else
     function hipblasDgbmv_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasDgbmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -9230,13 +8271,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgbmv
-#ifdef USE_CUDA_NAMES
-    function hipblasCgbmv_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasCgbmv_v2")
-#else
     function hipblasCgbmv_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasCgbmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -9270,13 +8306,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgbmv
-#ifdef USE_CUDA_NAMES
-    function hipblasZgbmv_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasZgbmv_v2")
-#else
     function hipblasZgbmv_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasZgbmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -9310,13 +8341,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSgbmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSgbmv_64_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasSgbmv_v2_64")
-#else
     function hipblasSgbmv_64_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasSgbmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -9339,13 +8365,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgbmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDgbmv_64_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasDgbmv_v2_64")
-#else
     function hipblasDgbmv_64_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasDgbmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -9368,13 +8389,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgbmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCgbmv_64_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasCgbmv_v2_64")
-#else
     function hipblasCgbmv_64_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasCgbmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -9397,13 +8413,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgbmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZgbmv_64_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasZgbmv_v2_64")
-#else
     function hipblasZgbmv_64_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasZgbmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -9482,7 +8493,6 @@ module hipfort_hipblas
   !>               specifies the increment for the elements of each y_i.
   !>     @param[in] batchCount - [int]
   !>                 specifies the number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSgbmvBatched
     function hipblasSgbmvBatched_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy, &
         batchCount) &
@@ -9508,9 +8518,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgbmvBatched
     function hipblasDgbmvBatched_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy, &
         batchCount) &
@@ -9536,9 +8544,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgbmvBatched
     function hipblasCgbmvBatched_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy, &
         batchCount) &
@@ -9564,9 +8570,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgbmvBatched
     function hipblasZgbmvBatched_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy, &
         batchCount) &
@@ -9592,9 +8596,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSgbmvBatched_64
     function hipblasSgbmvBatched_64_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy, &
         batchCount) &
@@ -9620,9 +8622,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgbmvBatched_64
     function hipblasDgbmvBatched_64_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy, &
         batchCount) &
@@ -9648,9 +8648,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgbmvBatched_64
     function hipblasCgbmvBatched_64_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy, &
         batchCount) &
@@ -9676,9 +8674,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgbmvBatched_64
     function hipblasZgbmvBatched_64_(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy, &
         batchCount) &
@@ -9704,7 +8700,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -9769,7 +8764,6 @@ module hipfort_hipblas
   !>               stride from the start of one vector (y_i) to the next one (x_i+1).
   !>     @param[in] batchCount - [int]
   !>                 specifies the number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSgbmvStridedBatched
     function hipblasSgbmvStridedBatched_(handle,trans,m,n,kl,ku,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount) &
@@ -9809,9 +8803,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgbmvStridedBatched
     function hipblasDgbmvStridedBatched_(handle,trans,m,n,kl,ku,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount) &
@@ -9851,9 +8843,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgbmvStridedBatched
     function hipblasCgbmvStridedBatched_(handle,trans,m,n,kl,ku,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount) &
@@ -9893,9 +8883,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgbmvStridedBatched
     function hipblasZgbmvStridedBatched_(handle,trans,m,n,kl,ku,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount) &
@@ -9935,9 +8923,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSgbmvStridedBatched_64
     function hipblasSgbmvStridedBatched_64_(handle,trans,m,n,kl,ku,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount) &
@@ -9966,9 +8952,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgbmvStridedBatched_64
     function hipblasDgbmvStridedBatched_64_(handle,trans,m,n,kl,ku,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount) &
@@ -9997,9 +8981,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgbmvStridedBatched_64
     function hipblasCgbmvStridedBatched_64_(handle,trans,m,n,kl,ku,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount) &
@@ -10028,9 +9010,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgbmvStridedBatched_64
     function hipblasZgbmvStridedBatched_64_(handle,trans,m,n,kl,ku,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount) &
@@ -10059,7 +9039,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -10096,13 +9075,8 @@ module hipfort_hipblas
   !>     @param[in] incy - [int]
   !>               specifies the increment for the elements of y.
   interface hipblasSgemv
-#ifdef USE_CUDA_NAMES
-    function hipblasSgemv_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasSgemv_v2")
-#else
     function hipblasSgemv_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasSgemv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10134,13 +9108,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgemv
-#ifdef USE_CUDA_NAMES
-    function hipblasDgemv_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasDgemv_v2")
-#else
     function hipblasDgemv_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasDgemv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10172,13 +9141,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgemv
-#ifdef USE_CUDA_NAMES
-    function hipblasCgemv_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasCgemv_v2")
-#else
     function hipblasCgemv_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasCgemv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10210,13 +9174,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgemv
-#ifdef USE_CUDA_NAMES
-    function hipblasZgemv_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasZgemv_v2")
-#else
     function hipblasZgemv_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasZgemv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10248,13 +9207,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSgemv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSgemv_64_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasSgemv_v2_64")
-#else
     function hipblasSgemv_64_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasSgemv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10275,13 +9229,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgemv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDgemv_64_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasDgemv_v2_64")
-#else
     function hipblasDgemv_64_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasDgemv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10302,13 +9251,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgemv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCgemv_64_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasCgemv_v2_64")
-#else
     function hipblasCgemv_64_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasCgemv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10329,13 +9273,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgemv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZgemv_64_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasZgemv_v2_64")
-#else
     function hipblasZgemv_64_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasZgemv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10393,13 +9332,8 @@ module hipfort_hipblas
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
   interface hipblasSgemvBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasSgemvBatched_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
-        bind(c, name="cublasSgemvBatched")
-#else
     function hipblasSgemvBatched_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasSgemvBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10421,13 +9355,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgemvBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasDgemvBatched_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
-        bind(c, name="cublasDgemvBatched")
-#else
     function hipblasDgemvBatched_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasDgemvBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10449,13 +9378,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgemvBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasCgemvBatched_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
-        bind(c, name="cublasCgemvBatched")
-#else
     function hipblasCgemvBatched_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasCgemvBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10477,13 +9401,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgemvBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasZgemvBatched_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
-        bind(c, name="cublasZgemvBatched")
-#else
     function hipblasZgemvBatched_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasZgemvBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10505,13 +9424,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSgemvBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSgemvBatched_64_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
-        bind(c, name="cublasSgemvBatched_64")
-#else
     function hipblasSgemvBatched_64_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasSgemvBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10533,13 +9447,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgemvBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDgemvBatched_64_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
-        bind(c, name="cublasDgemvBatched_64")
-#else
     function hipblasDgemvBatched_64_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasDgemvBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10561,13 +9470,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgemvBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCgemvBatched_64_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
-        bind(c, name="cublasCgemvBatched_64")
-#else
     function hipblasCgemvBatched_64_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasCgemvBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10589,13 +9493,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgemvBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZgemvBatched_64_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
-        bind(c, name="cublasZgemvBatched_64")
-#else
     function hipblasZgemvBatched_64_(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasZgemvBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10667,15 +9566,9 @@ module hipfort_hipblas
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
   interface hipblasSgemvStridedBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasSgemvStridedBatched_(handle,transA,m,n,alpha,AP,lda,strideA,x,incx,stridex, &
-        beta,y,incy,stridey,batchCount) &
-        bind(c, name="cublasSgemvStridedBatched")
-#else
     function hipblasSgemvStridedBatched_(handle,transA,m,n,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
         bind(c, name="hipblasSgemvStridedBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10711,15 +9604,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgemvStridedBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasDgemvStridedBatched_(handle,transA,m,n,alpha,AP,lda,strideA,x,incx,stridex, &
-        beta,y,incy,stridey,batchCount) &
-        bind(c, name="cublasDgemvStridedBatched")
-#else
     function hipblasDgemvStridedBatched_(handle,transA,m,n,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
         bind(c, name="hipblasDgemvStridedBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10755,15 +9642,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgemvStridedBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasCgemvStridedBatched_(handle,transA,m,n,alpha,AP,lda,strideA,x,incx,stridex, &
-        beta,y,incy,stridey,batchCount) &
-        bind(c, name="cublasCgemvStridedBatched")
-#else
     function hipblasCgemvStridedBatched_(handle,transA,m,n,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
         bind(c, name="hipblasCgemvStridedBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10799,15 +9680,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgemvStridedBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasZgemvStridedBatched_(handle,transA,m,n,alpha,AP,lda,strideA,x,incx,stridex, &
-        beta,y,incy,stridey,batchCount) &
-        bind(c, name="cublasZgemvStridedBatched")
-#else
     function hipblasZgemvStridedBatched_(handle,transA,m,n,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
         bind(c, name="hipblasZgemvStridedBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10843,15 +9718,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSgemvStridedBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSgemvStridedBatched_64_(handle,transA,m,n,alpha,AP,lda,strideA,x,incx,stridex, &
-        beta,y,incy,stridey,batchCount) &
-        bind(c, name="cublasSgemvStridedBatched_64")
-#else
     function hipblasSgemvStridedBatched_64_(handle,transA,m,n,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
         bind(c, name="hipblasSgemvStridedBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10876,15 +9745,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgemvStridedBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDgemvStridedBatched_64_(handle,transA,m,n,alpha,AP,lda,strideA,x,incx,stridex, &
-        beta,y,incy,stridey,batchCount) &
-        bind(c, name="cublasDgemvStridedBatched_64")
-#else
     function hipblasDgemvStridedBatched_64_(handle,transA,m,n,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
         bind(c, name="hipblasDgemvStridedBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10909,15 +9772,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgemvStridedBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCgemvStridedBatched_64_(handle,transA,m,n,alpha,AP,lda,strideA,x,incx,stridex, &
-        beta,y,incy,stridey,batchCount) &
-        bind(c, name="cublasCgemvStridedBatched_64")
-#else
     function hipblasCgemvStridedBatched_64_(handle,transA,m,n,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
         bind(c, name="hipblasCgemvStridedBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -10942,15 +9799,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgemvStridedBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZgemvStridedBatched_64_(handle,transA,m,n,alpha,AP,lda,strideA,x,incx,stridex, &
-        beta,y,incy,stridey,batchCount) &
-        bind(c, name="cublasZgemvStridedBatched_64")
-#else
     function hipblasZgemvStridedBatched_64_(handle,transA,m,n,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
         bind(c, name="hipblasZgemvStridedBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -11006,11 +9857,7 @@ module hipfort_hipblas
   !>     @param[in] lda - [int]
   !>               specifies the leading dimension of A.
   interface hipblasSger
-#ifdef USE_CUDA_NAMES
-    function hipblasSger_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="cublasSger_v2")
-#else
     function hipblasSger_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasSger")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -11040,11 +9887,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDger
-#ifdef USE_CUDA_NAMES
-    function hipblasDger_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="cublasDger_v2")
-#else
     function hipblasDger_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasDger")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -11074,11 +9917,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgeru
-#ifdef USE_CUDA_NAMES
-    function hipblasCgeru_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="cublasCgeru_v2")
-#else
     function hipblasCgeru_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasCgeru")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -11108,11 +9947,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgerc
-#ifdef USE_CUDA_NAMES
-    function hipblasCgerc_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="cublasCgerc_v2")
-#else
     function hipblasCgerc_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasCgerc")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -11142,11 +9977,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgeru
-#ifdef USE_CUDA_NAMES
-    function hipblasZgeru_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="cublasZgeru_v2")
-#else
     function hipblasZgeru_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasZgeru")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -11176,11 +10007,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgerc
-#ifdef USE_CUDA_NAMES
-    function hipblasZgerc_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="cublasZgerc_v2")
-#else
     function hipblasZgerc_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasZgerc")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -11210,11 +10037,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSger_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSger_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="cublasSger_v2_64")
-#else
     function hipblasSger_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasSger_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -11233,11 +10056,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDger_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDger_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="cublasDger_v2_64")
-#else
     function hipblasDger_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasDger_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -11256,12 +10075,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgeru_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCgeru_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda) &
-        bind(c, name="cublasCgeru_v2_64")
-#else
     function hipblasCgeru_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasCgeru_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -11280,12 +10094,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgerc_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCgerc_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda) &
-        bind(c, name="cublasCgerc_v2_64")
-#else
     function hipblasCgerc_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasCgerc_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -11304,12 +10113,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgeru_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZgeru_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda) &
-        bind(c, name="cublasZgeru_v2_64")
-#else
     function hipblasZgeru_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasZgeru_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -11328,12 +10132,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgerc_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZgerc_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda) &
-        bind(c, name="cublasZgerc_v2_64")
-#else
     function hipblasZgerc_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasZgerc_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -11386,7 +10185,6 @@ module hipfort_hipblas
   !>               specifies the leading dimension of each A_i.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSgerBatched
     function hipblasSgerBatched_(handle,m,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasSgerBatched")
@@ -11407,9 +10205,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgerBatched
     function hipblasDgerBatched_(handle,m,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasDgerBatched")
@@ -11430,9 +10226,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgeruBatched
     function hipblasCgeruBatched_(handle,m,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasCgeruBatched")
@@ -11453,9 +10247,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgercBatched
     function hipblasCgercBatched_(handle,m,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasCgercBatched")
@@ -11476,9 +10268,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgeruBatched
     function hipblasZgeruBatched_(handle,m,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasZgeruBatched")
@@ -11499,9 +10289,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgercBatched
     function hipblasZgercBatched_(handle,m,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasZgercBatched")
@@ -11522,9 +10310,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSgerBatched_64
     function hipblasSgerBatched_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasSgerBatched_64")
@@ -11545,9 +10331,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgerBatched_64
     function hipblasDgerBatched_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasDgerBatched_64")
@@ -11568,9 +10352,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgeruBatched_64
     function hipblasCgeruBatched_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasCgeruBatched_64")
@@ -11591,9 +10373,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgercBatched_64
     function hipblasCgercBatched_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasCgercBatched_64")
@@ -11614,9 +10394,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgeruBatched_64
     function hipblasZgeruBatched_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasZgeruBatched_64")
@@ -11637,9 +10415,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgercBatched_64
     function hipblasZgercBatched_64_(handle,m,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasZgercBatched_64")
@@ -11660,7 +10436,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -11709,7 +10484,6 @@ module hipfort_hipblas
   !>                 stride from the start of one matrix (A_i) to the next one (A_i+1)
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSgerStridedBatched
     function hipblasSgerStridedBatched_(handle,m,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -11745,9 +10519,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgerStridedBatched
     function hipblasDgerStridedBatched_(handle,m,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -11783,9 +10555,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgeruStridedBatched
     function hipblasCgeruStridedBatched_(handle,m,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -11821,9 +10591,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgercStridedBatched
     function hipblasCgercStridedBatched_(handle,m,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -11859,9 +10627,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgeruStridedBatched
     function hipblasZgeruStridedBatched_(handle,m,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -11897,9 +10663,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgercStridedBatched
     function hipblasZgercStridedBatched_(handle,m,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -11935,9 +10699,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSgerStridedBatched_64
     function hipblasSgerStridedBatched_64_(handle,m,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -11962,9 +10724,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgerStridedBatched_64
     function hipblasDgerStridedBatched_64_(handle,m,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -11989,9 +10749,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgeruStridedBatched_64
     function hipblasCgeruStridedBatched_64_(handle,m,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -12016,9 +10774,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgercStridedBatched_64
     function hipblasCgercStridedBatched_64_(handle,m,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -12043,9 +10799,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgeruStridedBatched_64
     function hipblasZgeruStridedBatched_64_(handle,m,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -12070,9 +10824,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgercStridedBatched_64
     function hipblasZgercStridedBatched_64_(handle,m,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -12097,7 +10849,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -12160,13 +10911,8 @@ module hipfort_hipblas
   !>     @param[in] incy - [int]
   !>               specifies the increment for the elements of y.
   interface hipblasChbmv
-#ifdef USE_CUDA_NAMES
-    function hipblasChbmv_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasChbmv_v2")
-#else
     function hipblasChbmv_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasChbmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -12198,13 +10944,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZhbmv
-#ifdef USE_CUDA_NAMES
-    function hipblasZhbmv_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasZhbmv_v2")
-#else
     function hipblasZhbmv_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasZhbmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -12236,13 +10977,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasChbmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasChbmv_64_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasChbmv_v2_64")
-#else
     function hipblasChbmv_64_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasChbmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -12263,13 +10999,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZhbmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZhbmv_64_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasZhbmv_v2_64")
-#else
     function hipblasZhbmv_64_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasZhbmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -12355,7 +11086,6 @@ module hipfort_hipblas
   !>               specifies the increment for the elements of y.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasChbmvBatched
     function hipblasChbmvBatched_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasChbmvBatched")
@@ -12378,9 +11108,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhbmvBatched
     function hipblasZhbmvBatched_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasZhbmvBatched")
@@ -12403,9 +11131,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasChbmvBatched_64
     function hipblasChbmvBatched_64_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasChbmvBatched_64")
@@ -12428,9 +11154,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhbmvBatched_64
     function hipblasZhbmvBatched_64_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasZhbmvBatched_64")
@@ -12453,7 +11177,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -12527,7 +11250,6 @@ module hipfort_hipblas
   !>               stride from the start of one vector (y_i) to the next one (y_i+1).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasChbmvStridedBatched
     function hipblasChbmvStridedBatched_(handle,uplo,n,k,alpha,AP,lda,strideA,x,incx,stridex,beta, &
         y,incy,stridey,batchCount) &
@@ -12565,9 +11287,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhbmvStridedBatched
     function hipblasZhbmvStridedBatched_(handle,uplo,n,k,alpha,AP,lda,strideA,x,incx,stridex,beta, &
         y,incy,stridey,batchCount) &
@@ -12605,9 +11325,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasChbmvStridedBatched_64
     function hipblasChbmvStridedBatched_64_(handle,uplo,n,k,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
@@ -12634,9 +11352,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhbmvStridedBatched_64
     function hipblasZhbmvStridedBatched_64_(handle,uplo,n,k,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
@@ -12663,7 +11379,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -12710,13 +11425,8 @@ module hipfort_hipblas
   !>     @param[in] incy - [int]
   !>               specifies the increment for the elements of y.
   interface hipblasChemv
-#ifdef USE_CUDA_NAMES
-    function hipblasChemv_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasChemv_v2")
-#else
     function hipblasChemv_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasChemv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -12747,13 +11457,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZhemv
-#ifdef USE_CUDA_NAMES
-    function hipblasZhemv_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasZhemv_v2")
-#else
     function hipblasZhemv_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasZhemv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -12784,13 +11489,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasChemv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasChemv_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasChemv_v2_64")
-#else
     function hipblasChemv_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasChemv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -12810,13 +11510,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZhemv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZhemv_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasZhemv_v2_64")
-#else
     function hipblasZhemv_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasZhemv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -12882,7 +11577,6 @@ module hipfort_hipblas
   !>               specifies the increment for the elements of y.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasChemvBatched
     function hipblasChemvBatched_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasChemvBatched")
@@ -12904,9 +11598,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhemvBatched
     function hipblasZhemvBatched_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasZhemvBatched")
@@ -12928,9 +11620,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasChemvBatched_64
     function hipblasChemvBatched_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasChemvBatched_64")
@@ -12952,9 +11642,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhemvBatched_64
     function hipblasZhemvBatched_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasZhemvBatched_64")
@@ -12976,7 +11664,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -13032,7 +11719,6 @@ module hipfort_hipblas
   !>               stride from the start of one vector (y_i) to the next one (y_i+1).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasChemvStridedBatched
     function hipblasChemvStridedBatched_(handle,uplo,n,alpha,AP,lda,strideA,x,incx,stridex,beta,y, &
         incy,stridey,batchCount) &
@@ -13069,9 +11755,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhemvStridedBatched
     function hipblasZhemvStridedBatched_(handle,uplo,n,alpha,AP,lda,strideA,x,incx,stridex,beta,y, &
         incy,stridey,batchCount) &
@@ -13108,9 +11792,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasChemvStridedBatched_64
     function hipblasChemvStridedBatched_64_(handle,uplo,n,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
@@ -13136,9 +11818,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhemvStridedBatched_64
     function hipblasZhemvStridedBatched_64_(handle,uplo,n,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
@@ -13164,7 +11844,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -13207,11 +11886,7 @@ module hipfort_hipblas
   !>     @param[in] lda - [int]
   !>               specifies the leading dimension of A. Must be at least max(1, n).
   interface hipblasCher
-#ifdef USE_CUDA_NAMES
-    function hipblasCher_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="cublasCher_v2")
-#else
     function hipblasCher_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="hipblasCher")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -13239,11 +11914,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZher
-#ifdef USE_CUDA_NAMES
-    function hipblasZher_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="cublasZher_v2")
-#else
     function hipblasZher_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="hipblasZher")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -13271,11 +11942,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCher_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCher_64_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="cublasCher_v2_64")
-#else
     function hipblasCher_64_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="hipblasCher_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -13292,11 +11959,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZher_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZher_64_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="cublasZher_v2_64")
-#else
     function hipblasZher_64_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="hipblasZher_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -13360,7 +12023,6 @@ module hipfort_hipblas
   !>               specifies the leading dimension of each A_i. Must be at least max(1, n).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasCherBatched
     function hipblasCherBatched_(handle,uplo,n,alpha,x,incx,AP,lda,batchCount) &
         bind(c, name="hipblasCherBatched")
@@ -13379,9 +12041,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZherBatched
     function hipblasZherBatched_(handle,uplo,n,alpha,x,incx,AP,lda,batchCount) &
         bind(c, name="hipblasZherBatched")
@@ -13400,9 +12060,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCherBatched_64
     function hipblasCherBatched_64_(handle,uplo,n,alpha,x,incx,AP,lda,batchCount) &
         bind(c, name="hipblasCherBatched_64")
@@ -13421,9 +12079,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZherBatched_64
     function hipblasZherBatched_64_(handle,uplo,n,alpha,x,incx,AP,lda,batchCount) &
         bind(c, name="hipblasZherBatched_64")
@@ -13442,7 +12098,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -13495,7 +12150,6 @@ module hipfort_hipblas
   !>                 stride from the start of one (A_i) to the next (A_i+1).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasCherStridedBatched
     function hipblasCherStridedBatched_(handle,uplo,n,alpha,x,incx,stridex,AP,lda,strideA, &
         batchCount) &
@@ -13528,9 +12182,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZherStridedBatched
     function hipblasZherStridedBatched_(handle,uplo,n,alpha,x,incx,stridex,AP,lda,strideA, &
         batchCount) &
@@ -13563,9 +12215,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCherStridedBatched_64
     function hipblasCherStridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,AP,lda,strideA, &
         batchCount) &
@@ -13587,9 +12237,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZherStridedBatched_64
     function hipblasZherStridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,AP,lda,strideA, &
         batchCount) &
@@ -13611,7 +12259,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -13659,11 +12306,7 @@ module hipfort_hipblas
   !>     @param[in] lda - [int]
   !>               specifies the leading dimension of A. Must be at least max(lda, 1).
   interface hipblasCher2
-#ifdef USE_CUDA_NAMES
-    function hipblasCher2_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="cublasCher2_v2")
-#else
     function hipblasCher2_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasCher2")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -13693,11 +12336,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZher2
-#ifdef USE_CUDA_NAMES
-    function hipblasZher2_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="cublasZher2_v2")
-#else
     function hipblasZher2_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasZher2")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -13727,13 +12366,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCher2_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCher2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) &
-        bind(c, name="cublasCher2_v2_64")
-#else
     function hipblasCher2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) &
         bind(c, name="hipblasCher2_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -13752,13 +12386,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZher2_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZher2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) &
-        bind(c, name="cublasZher2_v2_64")
-#else
     function hipblasZher2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) &
         bind(c, name="hipblasZher2_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -13824,7 +12453,6 @@ module hipfort_hipblas
   !>               specifies the leading dimension of each A_i. Must be at least max(lda, 1).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasCher2Batched
     function hipblasCher2Batched_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasCher2Batched")
@@ -13845,9 +12473,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZher2Batched
     function hipblasZher2Batched_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasZher2Batched")
@@ -13868,9 +12494,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCher2Batched_64
     function hipblasCher2Batched_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasCher2Batched_64")
@@ -13891,9 +12515,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZher2Batched_64
     function hipblasZher2Batched_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasZher2Batched_64")
@@ -13914,7 +12536,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -13973,7 +12594,6 @@ module hipfort_hipblas
   !>               (A_i+1).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasCher2StridedBatched
     function hipblasCher2StridedBatched_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -14009,9 +12629,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZher2StridedBatched
     function hipblasZher2StridedBatched_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -14047,9 +12665,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCher2StridedBatched_64
     function hipblasCher2StridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP, &
         lda,strideA,batchCount) &
@@ -14074,9 +12690,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZher2StridedBatched_64
     function hipblasZher2StridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP, &
         lda,strideA,batchCount) &
@@ -14101,7 +12715,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -14165,11 +12778,7 @@ module hipfort_hipblas
   !>     @param[in] incy - [int]
   !>               specifies the increment for the elements of y.
   interface hipblasChpmv
-#ifdef USE_CUDA_NAMES
-    function hipblasChpmv_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy) bind(c, name="cublasChpmv_v2")
-#else
     function hipblasChpmv_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy) bind(c, name="hipblasChpmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -14198,11 +12807,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZhpmv
-#ifdef USE_CUDA_NAMES
-    function hipblasZhpmv_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy) bind(c, name="cublasZhpmv_v2")
-#else
     function hipblasZhpmv_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy) bind(c, name="hipblasZhpmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -14231,13 +12836,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasChpmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasChpmv_64_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy) &
-        bind(c, name="cublasChpmv_v2_64")
-#else
     function hipblasChpmv_64_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy) &
         bind(c, name="hipblasChpmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -14256,13 +12856,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZhpmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZhpmv_64_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy) &
-        bind(c, name="cublasZhpmv_v2_64")
-#else
     function hipblasZhpmv_64_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy) &
         bind(c, name="hipblasZhpmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -14345,7 +12940,6 @@ module hipfort_hipblas
   !>               specifies the increment for the elements of y.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasChpmvBatched
     function hipblasChpmvBatched_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasChpmvBatched")
@@ -14366,9 +12960,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhpmvBatched
     function hipblasZhpmvBatched_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasZhpmvBatched")
@@ -14389,9 +12981,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasChpmvBatched_64
     function hipblasChpmvBatched_64_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasChpmvBatched_64")
@@ -14412,9 +13002,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhpmvBatched_64
     function hipblasZhpmvBatched_64_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasZhpmvBatched_64")
@@ -14435,7 +13023,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -14508,7 +13095,6 @@ module hipfort_hipblas
   !>               stride from the start of one vector (y_i) to the next one (y_i+1).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasChpmvStridedBatched
     function hipblasChpmvStridedBatched_(handle,uplo,n,alpha,AP,strideA,x,incx,stridex,beta,y, &
         incy,stridey,batchCount) &
@@ -14543,9 +13129,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhpmvStridedBatched
     function hipblasZhpmvStridedBatched_(handle,uplo,n,alpha,AP,strideA,x,incx,stridex,beta,y, &
         incy,stridey,batchCount) &
@@ -14580,9 +13164,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasChpmvStridedBatched_64
     function hipblasChpmvStridedBatched_64_(handle,uplo,n,alpha,AP,strideA,x,incx,stridex,beta,y, &
         incy,stridey,batchCount) &
@@ -14607,9 +13189,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhpmvStridedBatched_64
     function hipblasZhpmvStridedBatched_64_(handle,uplo,n,alpha,AP,strideA,x,incx,stridex,beta,y, &
         incy,stridey,batchCount) &
@@ -14634,7 +13214,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -14694,11 +13273,7 @@ module hipfort_hipblas
   !>               assumed
   !>                 to be 0.
   interface hipblasChpr
-#ifdef USE_CUDA_NAMES
-    function hipblasChpr_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="cublasChpr_v2")
-#else
     function hipblasChpr_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="hipblasChpr")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -14724,11 +13299,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZhpr
-#ifdef USE_CUDA_NAMES
-    function hipblasZhpr_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="cublasZhpr_v2")
-#else
     function hipblasZhpr_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="hipblasZhpr")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -14754,11 +13325,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasChpr_64
-#ifdef USE_CUDA_NAMES
-    function hipblasChpr_64_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="cublasChpr_v2_64")
-#else
     function hipblasChpr_64_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="hipblasChpr_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -14774,11 +13341,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZhpr_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZhpr_64_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="cublasZhpr_v2_64")
-#else
     function hipblasZhpr_64_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="hipblasZhpr_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -14856,7 +13419,6 @@ module hipfort_hipblas
   !>               to be 0.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasChprBatched
     function hipblasChprBatched_(handle,uplo,n,alpha,x,incx,AP,batchCount) &
         bind(c, name="hipblasChprBatched")
@@ -14874,9 +13436,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhprBatched
     function hipblasZhprBatched_(handle,uplo,n,alpha,x,incx,AP,batchCount) &
         bind(c, name="hipblasZhprBatched")
@@ -14894,9 +13454,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasChprBatched_64
     function hipblasChprBatched_64_(handle,uplo,n,alpha,x,incx,AP,batchCount) &
         bind(c, name="hipblasChprBatched_64")
@@ -14914,9 +13472,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhprBatched_64
     function hipblasZhprBatched_64_(handle,uplo,n,alpha,x,incx,AP,batchCount) &
         bind(c, name="hipblasZhprBatched_64")
@@ -14934,7 +13490,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief   BLAS Level 2 API
   !>
@@ -15002,7 +13557,6 @@ module hipfort_hipblas
   !>                 stride from the start of one (A_i) to the next (A_i+1).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasChprStridedBatched
     function hipblasChprStridedBatched_(handle,uplo,n,alpha,x,incx,stridex,AP,strideA,batchCount) &
         bind(c, name="hipblasChprStridedBatched")
@@ -15032,9 +13586,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhprStridedBatched
     function hipblasZhprStridedBatched_(handle,uplo,n,alpha,x,incx,stridex,AP,strideA,batchCount) &
         bind(c, name="hipblasZhprStridedBatched")
@@ -15064,9 +13616,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasChprStridedBatched_64
     function hipblasChprStridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,AP,strideA, &
         batchCount) &
@@ -15087,9 +13637,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhprStridedBatched_64
     function hipblasZhprStridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,AP,strideA, &
         batchCount) &
@@ -15110,7 +13658,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -15173,11 +13720,7 @@ module hipfort_hipblas
   !>               assumed
   !>                 to be 0.
   interface hipblasChpr2
-#ifdef USE_CUDA_NAMES
-    function hipblasChpr2_(handle,uplo,n,alpha,x,incx,y,incy,AP) bind(c, name="cublasChpr2_v2")
-#else
     function hipblasChpr2_(handle,uplo,n,alpha,x,incx,y,incy,AP) bind(c, name="hipblasChpr2")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -15205,11 +13748,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZhpr2
-#ifdef USE_CUDA_NAMES
-    function hipblasZhpr2_(handle,uplo,n,alpha,x,incx,y,incy,AP) bind(c, name="cublasZhpr2_v2")
-#else
     function hipblasZhpr2_(handle,uplo,n,alpha,x,incx,y,incy,AP) bind(c, name="hipblasZhpr2")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -15237,12 +13776,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasChpr2_64
-#ifdef USE_CUDA_NAMES
-    function hipblasChpr2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP) &
-        bind(c, name="cublasChpr2_v2_64")
-#else
     function hipblasChpr2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP) bind(c, name="hipblasChpr2_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -15260,12 +13794,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZhpr2_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZhpr2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP) &
-        bind(c, name="cublasZhpr2_v2_64")
-#else
     function hipblasZhpr2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP) bind(c, name="hipblasZhpr2_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -15348,7 +13877,6 @@ module hipfort_hipblas
   !>                 to be 0.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasChpr2Batched
     function hipblasChpr2Batched_(handle,uplo,n,alpha,x,incx,y,incy,AP,batchCount) &
         bind(c, name="hipblasChpr2Batched")
@@ -15368,9 +13896,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhpr2Batched
     function hipblasZhpr2Batched_(handle,uplo,n,alpha,x,incx,y,incy,AP,batchCount) &
         bind(c, name="hipblasZhpr2Batched")
@@ -15390,9 +13916,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasChpr2Batched_64
     function hipblasChpr2Batched_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,batchCount) &
         bind(c, name="hipblasChpr2Batched_64")
@@ -15412,9 +13936,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhpr2Batched_64
     function hipblasZhpr2Batched_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,batchCount) &
         bind(c, name="hipblasZhpr2Batched_64")
@@ -15434,7 +13956,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -15507,7 +14028,6 @@ module hipfort_hipblas
   !>                 stride from the start of one (A_i) to the next (A_i+1).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasChpr2StridedBatched
     function hipblasChpr2StridedBatched_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP, &
         strideA,batchCount) &
@@ -15541,9 +14061,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhpr2StridedBatched
     function hipblasZhpr2StridedBatched_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP, &
         strideA,batchCount) &
@@ -15577,9 +14095,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasChpr2StridedBatched_64
     function hipblasChpr2StridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP, &
         strideA,batchCount) &
@@ -15603,9 +14119,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhpr2StridedBatched_64
     function hipblasZhpr2StridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP, &
         strideA,batchCount) &
@@ -15629,7 +14143,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -15667,13 +14180,8 @@ module hipfort_hipblas
   !>     @param[in] incy - [int]
   !>               specifies the increment for the elements of y.
   interface hipblasSsbmv
-#ifdef USE_CUDA_NAMES
-    function hipblasSsbmv_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasSsbmv_v2")
-#else
     function hipblasSsbmv_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasSsbmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -15705,13 +14213,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDsbmv
-#ifdef USE_CUDA_NAMES
-    function hipblasDsbmv_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasDsbmv_v2")
-#else
     function hipblasDsbmv_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasDsbmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -15743,13 +14246,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSsbmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSsbmv_64_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasSsbmv_v2_64")
-#else
     function hipblasSsbmv_64_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasSsbmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -15770,13 +14268,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDsbmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDsbmv_64_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasDsbmv_v2_64")
-#else
     function hipblasDsbmv_64_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasDsbmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -15836,7 +14329,6 @@ module hipfort_hipblas
   !>               specifies the increment for the elements of each vector y_i.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsbmvBatched
     function hipblasSsbmvBatched_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasSsbmvBatched")
@@ -15859,9 +14351,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsbmvBatched
     function hipblasDsbmvBatched_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasDsbmvBatched")
@@ -15884,9 +14374,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsbmvBatched_64
     function hipblasSsbmvBatched_64_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasSsbmvBatched_64")
@@ -15909,9 +14397,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsbmvBatched_64
     function hipblasDsbmvBatched_64_(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasDsbmvBatched_64")
@@ -15934,7 +14420,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -15988,7 +14473,6 @@ module hipfort_hipblas
   !>                 This typically means stridey >= n * incy. stridey should be non zero.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsbmvStridedBatched
     function hipblasSsbmvStridedBatched_(handle,uplo,n,k,alpha,AP,lda,strideA,x,incx,stridex,beta, &
         y,incy,stridey,batchCount) &
@@ -16026,9 +14510,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsbmvStridedBatched
     function hipblasDsbmvStridedBatched_(handle,uplo,n,k,alpha,AP,lda,strideA,x,incx,stridex,beta, &
         y,incy,stridey,batchCount) &
@@ -16066,9 +14548,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsbmvStridedBatched_64
     function hipblasSsbmvStridedBatched_64_(handle,uplo,n,k,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
@@ -16095,9 +14575,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsbmvStridedBatched_64
     function hipblasDsbmvStridedBatched_64_(handle,uplo,n,k,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
@@ -16124,7 +14602,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -16158,11 +14635,7 @@ module hipfort_hipblas
   !>     @param[in] incy - [int]
   !>               specifies the increment for the elements of y.
   interface hipblasSspmv
-#ifdef USE_CUDA_NAMES
-    function hipblasSspmv_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy) bind(c, name="cublasSspmv_v2")
-#else
     function hipblasSspmv_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy) bind(c, name="hipblasSspmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -16191,11 +14664,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDspmv
-#ifdef USE_CUDA_NAMES
-    function hipblasDspmv_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy) bind(c, name="cublasDspmv_v2")
-#else
     function hipblasDspmv_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy) bind(c, name="hipblasDspmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -16224,13 +14693,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSspmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSspmv_64_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy) &
-        bind(c, name="cublasSspmv_v2_64")
-#else
     function hipblasSspmv_64_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy) &
         bind(c, name="hipblasSspmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -16249,13 +14713,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDspmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDspmv_64_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy) &
-        bind(c, name="cublasDspmv_v2_64")
-#else
     function hipblasDspmv_64_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy) &
         bind(c, name="hipblasDspmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -16309,7 +14768,6 @@ module hipfort_hipblas
   !>               specifies the increment for the elements of each vector y_i.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSspmvBatched
     function hipblasSspmvBatched_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasSspmvBatched")
@@ -16330,9 +14788,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDspmvBatched
     function hipblasDspmvBatched_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasDspmvBatched")
@@ -16353,9 +14809,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSspmvBatched_64
     function hipblasSspmvBatched_64_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasSspmvBatched_64")
@@ -16376,9 +14830,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDspmvBatched_64
     function hipblasDspmvBatched_64_(handle,uplo,n,alpha,AP,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasDspmvBatched_64")
@@ -16399,7 +14851,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -16449,7 +14900,6 @@ module hipfort_hipblas
   !>                 This typically means stridey >= n * incy. stridey should be non zero.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSspmvStridedBatched
     function hipblasSspmvStridedBatched_(handle,uplo,n,alpha,AP,strideA,x,incx,stridex,beta,y, &
         incy,stridey,batchCount) &
@@ -16484,9 +14934,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDspmvStridedBatched
     function hipblasDspmvStridedBatched_(handle,uplo,n,alpha,AP,strideA,x,incx,stridex,beta,y, &
         incy,stridey,batchCount) &
@@ -16521,9 +14969,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSspmvStridedBatched_64
     function hipblasSspmvStridedBatched_64_(handle,uplo,n,alpha,AP,strideA,x,incx,stridex,beta,y, &
         incy,stridey,batchCount) &
@@ -16548,9 +14994,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDspmvStridedBatched_64
     function hipblasDspmvStridedBatched_64_(handle,uplo,n,alpha,AP,strideA,x,incx,stridex,beta,y, &
         incy,stridey,batchCount) &
@@ -16575,7 +15019,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief   BLAS Level 2 API
   !>
@@ -16634,11 +15077,7 @@ module hipfort_hipblas
   !>                         3 6 8 9
   !>                         4 7 9 0
   interface hipblasSspr
-#ifdef USE_CUDA_NAMES
-    function hipblasSspr_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="cublasSspr_v2")
-#else
     function hipblasSspr_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="hipblasSspr")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -16664,11 +15103,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDspr
-#ifdef USE_CUDA_NAMES
-    function hipblasDspr_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="cublasDspr_v2")
-#else
     function hipblasDspr_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="hipblasDspr")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -16693,7 +15128,6 @@ module hipfort_hipblas
 #endif
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCspr
     function hipblasCspr_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="hipblasCspr")
       use iso_c_binding
@@ -16719,9 +15153,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZspr
     function hipblasZspr_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="hipblasZspr")
       use iso_c_binding
@@ -16747,14 +15179,9 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
   interface hipblasSspr_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSspr_64_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="cublasSspr_v2_64")
-#else
     function hipblasSspr_64_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="hipblasSspr_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -16770,11 +15197,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDspr_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDspr_64_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="cublasDspr_v2_64")
-#else
     function hipblasDspr_64_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="hipblasDspr_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -16789,7 +15212,6 @@ module hipfort_hipblas
     end function
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCspr_64
     function hipblasCspr_64_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="hipblasCspr_64")
       use iso_c_binding
@@ -16805,9 +15227,7 @@ module hipfort_hipblas
       type(c_ptr),value :: AP
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZspr_64
     function hipblasZspr_64_(handle,uplo,n,alpha,x,incx,AP) bind(c, name="hipblasZspr_64")
       use iso_c_binding
@@ -16823,7 +15243,6 @@ module hipfort_hipblas
       type(c_ptr),value :: AP
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -16887,7 +15306,6 @@ module hipfort_hipblas
   !>                         4 7 9 0
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsprBatched
     function hipblasSsprBatched_(handle,uplo,n,alpha,x,incx,AP,batchCount) &
         bind(c, name="hipblasSsprBatched")
@@ -16905,9 +15323,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsprBatched
     function hipblasDsprBatched_(handle,uplo,n,alpha,x,incx,AP,batchCount) &
         bind(c, name="hipblasDsprBatched")
@@ -16925,9 +15341,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsprBatched
     function hipblasCsprBatched_(handle,uplo,n,alpha,x,incx,AP,batchCount) &
         bind(c, name="hipblasCsprBatched")
@@ -16945,9 +15359,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsprBatched
     function hipblasZsprBatched_(handle,uplo,n,alpha,x,incx,AP,batchCount) &
         bind(c, name="hipblasZsprBatched")
@@ -16965,9 +15377,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsprBatched_64
     function hipblasSsprBatched_64_(handle,uplo,n,alpha,x,incx,AP,batchCount) &
         bind(c, name="hipblasSsprBatched_64")
@@ -16985,9 +15395,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsprBatched_64
     function hipblasDsprBatched_64_(handle,uplo,n,alpha,x,incx,AP,batchCount) &
         bind(c, name="hipblasDsprBatched_64")
@@ -17005,9 +15413,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsprBatched_64
     function hipblasCsprBatched_64_(handle,uplo,n,alpha,x,incx,AP,batchCount) &
         bind(c, name="hipblasCsprBatched_64")
@@ -17025,9 +15431,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsprBatched_64
     function hipblasZsprBatched_64_(handle,uplo,n,alpha,x,incx,AP,batchCount) &
         bind(c, name="hipblasZsprBatched_64")
@@ -17045,7 +15449,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief   BLAS Level 2 API
   !>
@@ -17112,7 +15515,6 @@ module hipfort_hipblas
   !>                 stride from the start of one (A_i) to the next (A_i+1).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsprStridedBatched
     function hipblasSsprStridedBatched_(handle,uplo,n,alpha,x,incx,stridex,AP,strideA,batchCount) &
         bind(c, name="hipblasSsprStridedBatched")
@@ -17142,9 +15544,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsprStridedBatched
     function hipblasDsprStridedBatched_(handle,uplo,n,alpha,x,incx,stridex,AP,strideA,batchCount) &
         bind(c, name="hipblasDsprStridedBatched")
@@ -17174,9 +15574,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsprStridedBatched
     function hipblasCsprStridedBatched_(handle,uplo,n,alpha,x,incx,stridex,AP,strideA,batchCount) &
         bind(c, name="hipblasCsprStridedBatched")
@@ -17206,9 +15604,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsprStridedBatched
     function hipblasZsprStridedBatched_(handle,uplo,n,alpha,x,incx,stridex,AP,strideA,batchCount) &
         bind(c, name="hipblasZsprStridedBatched")
@@ -17238,9 +15634,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsprStridedBatched_64
     function hipblasSsprStridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,AP,strideA, &
         batchCount) &
@@ -17261,9 +15655,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsprStridedBatched_64
     function hipblasDsprStridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,AP,strideA, &
         batchCount) &
@@ -17284,9 +15676,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsprStridedBatched_64
     function hipblasCsprStridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,AP,strideA, &
         batchCount) &
@@ -17307,9 +15697,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsprStridedBatched_64
     function hipblasZsprStridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,AP,strideA, &
         batchCount) &
@@ -17330,7 +15718,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -17392,11 +15779,7 @@ module hipfort_hipblas
   !>                         3 6 8 9
   !>                         4 7 9 0
   interface hipblasSspr2
-#ifdef USE_CUDA_NAMES
-    function hipblasSspr2_(handle,uplo,n,alpha,x,incx,y,incy,AP) bind(c, name="cublasSspr2_v2")
-#else
     function hipblasSspr2_(handle,uplo,n,alpha,x,incx,y,incy,AP) bind(c, name="hipblasSspr2")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -17424,11 +15807,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDspr2
-#ifdef USE_CUDA_NAMES
-    function hipblasDspr2_(handle,uplo,n,alpha,x,incx,y,incy,AP) bind(c, name="cublasDspr2_v2")
-#else
     function hipblasDspr2_(handle,uplo,n,alpha,x,incx,y,incy,AP) bind(c, name="hipblasDspr2")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -17456,12 +15835,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSspr2_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSspr2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP) &
-        bind(c, name="cublasSspr2_v2_64")
-#else
     function hipblasSspr2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP) bind(c, name="hipblasSspr2_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -17479,12 +15853,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDspr2_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDspr2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP) &
-        bind(c, name="cublasDspr2_v2_64")
-#else
     function hipblasDspr2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP) bind(c, name="hipblasDspr2_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -17566,7 +15935,6 @@ module hipfort_hipblas
   !>                         4 7 9 0
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSspr2Batched
     function hipblasSspr2Batched_(handle,uplo,n,alpha,x,incx,y,incy,AP,batchCount) &
         bind(c, name="hipblasSspr2Batched")
@@ -17586,9 +15954,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDspr2Batched
     function hipblasDspr2Batched_(handle,uplo,n,alpha,x,incx,y,incy,AP,batchCount) &
         bind(c, name="hipblasDspr2Batched")
@@ -17608,9 +15974,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSspr2Batched_64
     function hipblasSspr2Batched_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,batchCount) &
         bind(c, name="hipblasSspr2Batched_64")
@@ -17630,9 +15994,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDspr2Batched_64
     function hipblasDspr2Batched_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,batchCount) &
         bind(c, name="hipblasDspr2Batched_64")
@@ -17652,7 +16014,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -17724,7 +16085,6 @@ module hipfort_hipblas
   !>                 stride from the start of one (A_i) to the next (A_i+1).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSspr2StridedBatched
     function hipblasSspr2StridedBatched_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP, &
         strideA,batchCount) &
@@ -17758,9 +16118,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDspr2StridedBatched
     function hipblasDspr2StridedBatched_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP, &
         strideA,batchCount) &
@@ -17794,9 +16152,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSspr2StridedBatched_64
     function hipblasSspr2StridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP, &
         strideA,batchCount) &
@@ -17820,9 +16176,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDspr2StridedBatched_64
     function hipblasDspr2StridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP, &
         strideA,batchCount) &
@@ -17846,7 +16200,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief   BLAS Level 2 API
   !>
@@ -17882,13 +16235,8 @@ module hipfort_hipblas
   !>     @param[in] incy - [int]
   !>               specifies the increment for the elements of y.
   interface hipblasSsymv
-#ifdef USE_CUDA_NAMES
-    function hipblasSsymv_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasSsymv_v2")
-#else
     function hipblasSsymv_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasSsymv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -17919,13 +16267,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDsymv
-#ifdef USE_CUDA_NAMES
-    function hipblasDsymv_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasDsymv_v2")
-#else
     function hipblasDsymv_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasDsymv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -17956,13 +16299,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsymv
-#ifdef USE_CUDA_NAMES
-    function hipblasCsymv_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasCsymv_v2")
-#else
     function hipblasCsymv_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasCsymv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -17993,13 +16331,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZsymv
-#ifdef USE_CUDA_NAMES
-    function hipblasZsymv_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasZsymv_v2")
-#else
     function hipblasZsymv_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasZsymv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -18030,13 +16363,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSsymv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSsymv_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasSsymv_v2_64")
-#else
     function hipblasSsymv_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasSsymv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -18056,13 +16384,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDsymv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDsymv_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasDsymv_v2_64")
-#else
     function hipblasDsymv_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasDsymv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -18082,13 +16405,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsymv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCsymv_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasCsymv_v2_64")
-#else
     function hipblasCsymv_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasCsymv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -18108,13 +16426,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZsymv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZsymv_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
-        bind(c, name="cublasZsymv_v2_64")
-#else
     function hipblasZsymv_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy) &
         bind(c, name="hipblasZsymv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -18172,7 +16485,6 @@ module hipfort_hipblas
   !>               specifies the increment for the elements of each vector y_i.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsymvBatched
     function hipblasSsymvBatched_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasSsymvBatched")
@@ -18194,9 +16506,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsymvBatched
     function hipblasDsymvBatched_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasDsymvBatched")
@@ -18218,9 +16528,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsymvBatched
     function hipblasCsymvBatched_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasCsymvBatched")
@@ -18242,9 +16550,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsymvBatched
     function hipblasZsymvBatched_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasZsymvBatched")
@@ -18266,9 +16572,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsymvBatched_64
     function hipblasSsymvBatched_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasSsymvBatched_64")
@@ -18290,9 +16594,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsymvBatched_64
     function hipblasDsymvBatched_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasDsymvBatched_64")
@@ -18314,9 +16616,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsymvBatched_64
     function hipblasCsymvBatched_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasCsymvBatched_64")
@@ -18338,9 +16638,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsymvBatched_64
     function hipblasZsymvBatched_64_(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy,batchCount) &
         bind(c, name="hipblasZsymvBatched_64")
@@ -18362,7 +16660,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -18415,7 +16712,6 @@ module hipfort_hipblas
   !>                 This typically means stridey >= n * incy. stridey should be non zero.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsymvStridedBatched
     function hipblasSsymvStridedBatched_(handle,uplo,n,alpha,AP,lda,strideA,x,incx,stridex,beta,y, &
         incy,stridey,batchCount) &
@@ -18452,9 +16748,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsymvStridedBatched
     function hipblasDsymvStridedBatched_(handle,uplo,n,alpha,AP,lda,strideA,x,incx,stridex,beta,y, &
         incy,stridey,batchCount) &
@@ -18491,9 +16785,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsymvStridedBatched
     function hipblasCsymvStridedBatched_(handle,uplo,n,alpha,AP,lda,strideA,x,incx,stridex,beta,y, &
         incy,stridey,batchCount) &
@@ -18530,9 +16822,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsymvStridedBatched
     function hipblasZsymvStridedBatched_(handle,uplo,n,alpha,AP,lda,strideA,x,incx,stridex,beta,y, &
         incy,stridey,batchCount) &
@@ -18569,9 +16859,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsymvStridedBatched_64
     function hipblasSsymvStridedBatched_64_(handle,uplo,n,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
@@ -18597,9 +16885,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsymvStridedBatched_64
     function hipblasDsymvStridedBatched_64_(handle,uplo,n,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
@@ -18625,9 +16911,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsymvStridedBatched_64
     function hipblasCsymvStridedBatched_64_(handle,uplo,n,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
@@ -18653,9 +16937,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsymvStridedBatched_64
     function hipblasZsymvStridedBatched_64_(handle,uplo,n,alpha,AP,lda,strideA,x,incx,stridex, &
         beta,y,incy,stridey,batchCount) &
@@ -18681,7 +16963,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -18715,11 +16996,7 @@ module hipfort_hipblas
   !>     @param[in] lda - [int]
   !>               specifies the leading dimension of A.
   interface hipblasSsyr
-#ifdef USE_CUDA_NAMES
-    function hipblasSsyr_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="cublasSsyr_v2")
-#else
     function hipblasSsyr_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="hipblasSsyr")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -18747,11 +17024,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDsyr
-#ifdef USE_CUDA_NAMES
-    function hipblasDsyr_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="cublasDsyr_v2")
-#else
     function hipblasDsyr_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="hipblasDsyr")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -18779,11 +17052,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsyr
-#ifdef USE_CUDA_NAMES
-    function hipblasCsyr_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="cublasCsyr_v2")
-#else
     function hipblasCsyr_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="hipblasCsyr")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -18811,11 +17080,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZsyr
-#ifdef USE_CUDA_NAMES
-    function hipblasZsyr_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="cublasZsyr_v2")
-#else
     function hipblasZsyr_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="hipblasZsyr")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -18843,11 +17108,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSsyr_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSsyr_64_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="cublasSsyr_v2_64")
-#else
     function hipblasSsyr_64_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="hipblasSsyr_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -18864,11 +17125,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDsyr_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDsyr_64_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="cublasDsyr_v2_64")
-#else
     function hipblasDsyr_64_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="hipblasDsyr_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -18885,11 +17142,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsyr_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCsyr_64_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="cublasCsyr_v2_64")
-#else
     function hipblasCsyr_64_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="hipblasCsyr_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -18906,11 +17159,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZsyr_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZsyr_64_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="cublasZsyr_v2_64")
-#else
     function hipblasZsyr_64_(handle,uplo,n,alpha,x,incx,AP,lda) bind(c, name="hipblasZsyr_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -18958,7 +17207,6 @@ module hipfort_hipblas
   !>               specifies the leading dimension of each A_i.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyrBatched
     function hipblasSsyrBatched_(handle,uplo,n,alpha,x,incx,AP,lda,batchCount) &
         bind(c, name="hipblasSsyrBatched")
@@ -18977,9 +17225,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyrBatched
     function hipblasDsyrBatched_(handle,uplo,n,alpha,x,incx,AP,lda,batchCount) &
         bind(c, name="hipblasDsyrBatched")
@@ -18998,9 +17244,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyrBatched
     function hipblasCsyrBatched_(handle,uplo,n,alpha,x,incx,AP,lda,batchCount) &
         bind(c, name="hipblasCsyrBatched")
@@ -19019,9 +17263,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyrBatched
     function hipblasZsyrBatched_(handle,uplo,n,alpha,x,incx,AP,lda,batchCount) &
         bind(c, name="hipblasZsyrBatched")
@@ -19040,9 +17282,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyrBatched_64
     function hipblasSsyrBatched_64_(handle,uplo,n,alpha,x,incx,AP,lda,batchCount) &
         bind(c, name="hipblasSsyrBatched_64")
@@ -19061,9 +17301,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyrBatched_64
     function hipblasDsyrBatched_64_(handle,uplo,n,alpha,x,incx,AP,lda,batchCount) &
         bind(c, name="hipblasDsyrBatched_64")
@@ -19082,9 +17320,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyrBatched_64
     function hipblasCsyrBatched_64_(handle,uplo,n,alpha,x,incx,AP,lda,batchCount) &
         bind(c, name="hipblasCsyrBatched_64")
@@ -19103,9 +17339,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyrBatched_64
     function hipblasZsyrBatched_64_(handle,uplo,n,alpha,x,incx,AP,lda,batchCount) &
         bind(c, name="hipblasZsyrBatched_64")
@@ -19124,7 +17358,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief   BLAS Level 2 API
   !>
@@ -19163,7 +17396,6 @@ module hipfort_hipblas
   !>               stride from the start of one matrix (A_i) to the next one (A_i+1).
   !>     @param[in] batchCount - [int]
   !>               number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyrStridedBatched
     function hipblasSsyrStridedBatched_(handle,uplo,n,alpha,x,incx,stridex,AP,lda,strideA, &
         batchCount) &
@@ -19196,9 +17428,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyrStridedBatched
     function hipblasDsyrStridedBatched_(handle,uplo,n,alpha,x,incx,stridex,AP,lda,strideA, &
         batchCount) &
@@ -19231,9 +17461,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyrStridedBatched
     function hipblasCsyrStridedBatched_(handle,uplo,n,alpha,x,incx,stridex,AP,lda,strideA, &
         batchCount) &
@@ -19266,9 +17494,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyrStridedBatched
     function hipblasZsyrStridedBatched_(handle,uplo,n,alpha,x,incx,stridex,AP,lda,strideA, &
         batchCount) &
@@ -19301,9 +17527,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyrStridedBatched_64
     function hipblasSsyrStridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,AP,lda,strideA, &
         batchCount) &
@@ -19325,9 +17549,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyrStridedBatched_64
     function hipblasDsyrStridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,AP,lda,strideA, &
         batchCount) &
@@ -19349,9 +17571,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyrStridedBatched_64
     function hipblasCsyrStridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,AP,lda,strideA, &
         batchCount) &
@@ -19373,9 +17593,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyrStridedBatched_64
     function hipblasZsyrStridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,AP,lda,strideA, &
         batchCount) &
@@ -19397,7 +17615,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -19434,11 +17651,7 @@ module hipfort_hipblas
   !>     @param[in] lda - [int]
   !>               specifies the leading dimension of A.
   interface hipblasSsyr2
-#ifdef USE_CUDA_NAMES
-    function hipblasSsyr2_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="cublasSsyr2_v2")
-#else
     function hipblasSsyr2_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasSsyr2")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -19468,11 +17681,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDsyr2
-#ifdef USE_CUDA_NAMES
-    function hipblasDsyr2_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="cublasDsyr2_v2")
-#else
     function hipblasDsyr2_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasDsyr2")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -19502,11 +17711,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsyr2
-#ifdef USE_CUDA_NAMES
-    function hipblasCsyr2_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="cublasCsyr2_v2")
-#else
     function hipblasCsyr2_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasCsyr2")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -19536,11 +17741,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZsyr2
-#ifdef USE_CUDA_NAMES
-    function hipblasZsyr2_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="cublasZsyr2_v2")
-#else
     function hipblasZsyr2_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) bind(c, name="hipblasZsyr2")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -19570,13 +17771,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSsyr2_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSsyr2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) &
-        bind(c, name="cublasSsyr2_v2_64")
-#else
     function hipblasSsyr2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) &
         bind(c, name="hipblasSsyr2_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -19595,13 +17791,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDsyr2_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDsyr2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) &
-        bind(c, name="cublasDsyr2_v2_64")
-#else
     function hipblasDsyr2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) &
         bind(c, name="hipblasDsyr2_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -19620,13 +17811,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsyr2_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCsyr2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) &
-        bind(c, name="cublasCsyr2_v2_64")
-#else
     function hipblasCsyr2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) &
         bind(c, name="hipblasCsyr2_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -19645,13 +17831,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZsyr2_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZsyr2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) &
-        bind(c, name="cublasZsyr2_v2_64")
-#else
     function hipblasZsyr2_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda) &
         bind(c, name="hipblasZsyr2_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -19704,7 +17885,6 @@ module hipfort_hipblas
   !>               specifies the leading dimension of each A_i.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyr2Batched
     function hipblasSsyr2Batched_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasSsyr2Batched")
@@ -19725,9 +17905,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyr2Batched
     function hipblasDsyr2Batched_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasDsyr2Batched")
@@ -19748,9 +17926,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyr2Batched
     function hipblasCsyr2Batched_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasCsyr2Batched")
@@ -19771,9 +17947,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyr2Batched
     function hipblasZsyr2Batched_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasZsyr2Batched")
@@ -19794,9 +17968,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyr2Batched_64
     function hipblasSsyr2Batched_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasSsyr2Batched_64")
@@ -19817,9 +17989,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyr2Batched_64
     function hipblasDsyr2Batched_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasDsyr2Batched_64")
@@ -19840,9 +18010,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyr2Batched_64
     function hipblasCsyr2Batched_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasCsyr2Batched_64")
@@ -19863,9 +18031,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyr2Batched_64
     function hipblasZsyr2Batched_64_(handle,uplo,n,alpha,x,incx,y,incy,AP,lda,batchCount) &
         bind(c, name="hipblasZsyr2Batched_64")
@@ -19886,7 +18052,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -19929,7 +18094,6 @@ module hipfort_hipblas
   !>               stride from the start of one matrix (A_i) to the next one (A_i+1).
   !>     @param[in] batchCount - [int]
   !>               number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyr2StridedBatched
     function hipblasSsyr2StridedBatched_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -19965,9 +18129,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyr2StridedBatched
     function hipblasDsyr2StridedBatched_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -20003,9 +18165,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyr2StridedBatched
     function hipblasCsyr2StridedBatched_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -20041,9 +18201,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyr2StridedBatched
     function hipblasZsyr2StridedBatched_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP,lda, &
         strideA,batchCount) &
@@ -20079,9 +18237,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyr2StridedBatched_64
     function hipblasSsyr2StridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP, &
         lda,strideA,batchCount) &
@@ -20106,9 +18262,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyr2StridedBatched_64
     function hipblasDsyr2StridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP, &
         lda,strideA,batchCount) &
@@ -20133,9 +18287,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyr2StridedBatched_64
     function hipblasCsyr2StridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP, &
         lda,strideA,batchCount) &
@@ -20160,9 +18312,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyr2StridedBatched_64
     function hipblasZsyr2StridedBatched_64_(handle,uplo,n,alpha,x,incx,stridex,y,incy,stridey,AP, &
         lda,strideA,batchCount) &
@@ -20187,7 +18337,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief BLAS Level 2 API
   !>
@@ -20256,11 +18405,7 @@ module hipfort_hipblas
   !>     @param[in] incx - [int]
   !>               specifies the increment for the elements of x.
   interface hipblasStbmv
-#ifdef USE_CUDA_NAMES
-    function hipblasStbmv_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) bind(c, name="cublasStbmv_v2")
-#else
     function hipblasStbmv_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) bind(c, name="hipblasStbmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -20290,11 +18435,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtbmv
-#ifdef USE_CUDA_NAMES
-    function hipblasDtbmv_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) bind(c, name="cublasDtbmv_v2")
-#else
     function hipblasDtbmv_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) bind(c, name="hipblasDtbmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -20324,11 +18465,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtbmv
-#ifdef USE_CUDA_NAMES
-    function hipblasCtbmv_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) bind(c, name="cublasCtbmv_v2")
-#else
     function hipblasCtbmv_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) bind(c, name="hipblasCtbmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -20358,11 +18495,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtbmv
-#ifdef USE_CUDA_NAMES
-    function hipblasZtbmv_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) bind(c, name="cublasZtbmv_v2")
-#else
     function hipblasZtbmv_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) bind(c, name="hipblasZtbmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -20392,13 +18525,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasStbmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasStbmv_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) &
-        bind(c, name="cublasStbmv_v2_64")
-#else
     function hipblasStbmv_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) &
         bind(c, name="hipblasStbmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -20417,13 +18545,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtbmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDtbmv_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) &
-        bind(c, name="cublasDtbmv_v2_64")
-#else
     function hipblasDtbmv_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) &
         bind(c, name="hipblasDtbmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -20442,13 +18565,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtbmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCtbmv_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) &
-        bind(c, name="cublasCtbmv_v2_64")
-#else
     function hipblasCtbmv_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) &
         bind(c, name="hipblasCtbmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -20467,13 +18585,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtbmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZtbmv_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) &
-        bind(c, name="cublasZtbmv_v2_64")
-#else
     function hipblasZtbmv_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) &
         bind(c, name="hipblasZtbmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -20560,7 +18673,6 @@ module hipfort_hipblas
   !>               specifies the increment for the elements of each x_i.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasStbmvBatched
     function hipblasStbmvBatched_(handle,uplo,transA,diag,n,k,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasStbmvBatched")
@@ -20581,9 +18693,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtbmvBatched
     function hipblasDtbmvBatched_(handle,uplo,transA,diag,n,k,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasDtbmvBatched")
@@ -20604,9 +18714,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtbmvBatched
     function hipblasCtbmvBatched_(handle,uplo,transA,diag,n,k,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasCtbmvBatched")
@@ -20627,9 +18735,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtbmvBatched
     function hipblasZtbmvBatched_(handle,uplo,transA,diag,n,k,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasZtbmvBatched")
@@ -20650,9 +18756,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasStbmvBatched_64
     function hipblasStbmvBatched_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasStbmvBatched_64")
@@ -20673,9 +18777,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtbmvBatched_64
     function hipblasDtbmvBatched_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasDtbmvBatched_64")
@@ -20696,9 +18798,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtbmvBatched_64
     function hipblasCtbmvBatched_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasCtbmvBatched_64")
@@ -20719,9 +18819,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtbmvBatched_64
     function hipblasZtbmvBatched_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasZtbmvBatched_64")
@@ -20742,7 +18840,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -20818,7 +18915,6 @@ module hipfort_hipblas
   !>               stride from the start of one x_i matrix to the next x_(i + 1).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasStbmvStridedBatched
     function hipblasStbmvStridedBatched_(handle,uplo,transA,diag,n,k,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -20853,9 +18949,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtbmvStridedBatched
     function hipblasDtbmvStridedBatched_(handle,uplo,transA,diag,n,k,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -20890,9 +18984,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtbmvStridedBatched
     function hipblasCtbmvStridedBatched_(handle,uplo,transA,diag,n,k,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -20927,9 +19019,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtbmvStridedBatched
     function hipblasZtbmvStridedBatched_(handle,uplo,transA,diag,n,k,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -20964,9 +19054,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasStbmvStridedBatched_64
     function hipblasStbmvStridedBatched_64_(handle,uplo,transA,diag,n,k,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -20990,9 +19078,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtbmvStridedBatched_64
     function hipblasDtbmvStridedBatched_64_(handle,uplo,transA,diag,n,k,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -21016,9 +19102,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtbmvStridedBatched_64
     function hipblasCtbmvStridedBatched_64_(handle,uplo,transA,diag,n,k,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -21042,9 +19126,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtbmvStridedBatched_64
     function hipblasZtbmvStridedBatched_64_(handle,uplo,transA,diag,n,k,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -21068,7 +19150,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -21121,11 +19202,7 @@ module hipfort_hipblas
   !>     @param[in] incx - [int]
   !>               specifies the increment for the elements of x.
   interface hipblasStbsv
-#ifdef USE_CUDA_NAMES
-    function hipblasStbsv_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) bind(c, name="cublasStbsv_v2")
-#else
     function hipblasStbsv_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) bind(c, name="hipblasStbsv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -21155,11 +19232,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtbsv
-#ifdef USE_CUDA_NAMES
-    function hipblasDtbsv_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) bind(c, name="cublasDtbsv_v2")
-#else
     function hipblasDtbsv_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) bind(c, name="hipblasDtbsv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -21189,11 +19262,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtbsv
-#ifdef USE_CUDA_NAMES
-    function hipblasCtbsv_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) bind(c, name="cublasCtbsv_v2")
-#else
     function hipblasCtbsv_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) bind(c, name="hipblasCtbsv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -21223,11 +19292,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtbsv
-#ifdef USE_CUDA_NAMES
-    function hipblasZtbsv_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) bind(c, name="cublasZtbsv_v2")
-#else
     function hipblasZtbsv_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) bind(c, name="hipblasZtbsv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -21257,13 +19322,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasStbsv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasStbsv_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) &
-        bind(c, name="cublasStbsv_v2_64")
-#else
     function hipblasStbsv_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) &
         bind(c, name="hipblasStbsv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -21282,13 +19342,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtbsv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDtbsv_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) &
-        bind(c, name="cublasDtbsv_v2_64")
-#else
     function hipblasDtbsv_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) &
         bind(c, name="hipblasDtbsv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -21307,13 +19362,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtbsv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCtbsv_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) &
-        bind(c, name="cublasCtbsv_v2_64")
-#else
     function hipblasCtbsv_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) &
         bind(c, name="hipblasCtbsv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -21332,13 +19382,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtbsv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZtbsv_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) &
-        bind(c, name="cublasZtbsv_v2_64")
-#else
     function hipblasZtbsv_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx) &
         bind(c, name="hipblasZtbsv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -21411,7 +19456,6 @@ module hipfort_hipblas
   !>               specifies the increment for the elements of each x_i.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasStbsvBatched
     function hipblasStbsvBatched_(handle,uplo,transA,diag,n,k,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasStbsvBatched")
@@ -21432,9 +19476,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtbsvBatched
     function hipblasDtbsvBatched_(handle,uplo,transA,diag,n,k,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasDtbsvBatched")
@@ -21455,9 +19497,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtbsvBatched
     function hipblasCtbsvBatched_(handle,uplo,transA,diag,n,k,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasCtbsvBatched")
@@ -21478,9 +19518,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtbsvBatched
     function hipblasZtbsvBatched_(handle,uplo,transA,diag,n,k,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasZtbsvBatched")
@@ -21501,9 +19539,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasStbsvBatched_64
     function hipblasStbsvBatched_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasStbsvBatched_64")
@@ -21524,9 +19560,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtbsvBatched_64
     function hipblasDtbsvBatched_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasDtbsvBatched_64")
@@ -21547,9 +19581,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtbsvBatched_64
     function hipblasCtbsvBatched_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasCtbsvBatched_64")
@@ -21570,9 +19602,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtbsvBatched_64
     function hipblasZtbsvBatched_64_(handle,uplo,transA,diag,n,k,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasZtbsvBatched_64")
@@ -21593,7 +19623,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -21655,7 +19684,6 @@ module hipfort_hipblas
   !>               (x_i+1).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasStbsvStridedBatched
     function hipblasStbsvStridedBatched_(handle,uplo,transA,diag,n,k,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -21690,9 +19718,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtbsvStridedBatched
     function hipblasDtbsvStridedBatched_(handle,uplo,transA,diag,n,k,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -21727,9 +19753,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtbsvStridedBatched
     function hipblasCtbsvStridedBatched_(handle,uplo,transA,diag,n,k,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -21764,9 +19788,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtbsvStridedBatched
     function hipblasZtbsvStridedBatched_(handle,uplo,transA,diag,n,k,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -21801,9 +19823,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasStbsvStridedBatched_64
     function hipblasStbsvStridedBatched_64_(handle,uplo,transA,diag,n,k,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -21827,9 +19847,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtbsvStridedBatched_64
     function hipblasDtbsvStridedBatched_64_(handle,uplo,transA,diag,n,k,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -21853,9 +19871,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtbsvStridedBatched_64
     function hipblasCtbsvStridedBatched_64_(handle,uplo,transA,diag,n,k,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -21879,9 +19895,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtbsvStridedBatched_64
     function hipblasZtbsvStridedBatched_64_(handle,uplo,transA,diag,n,k,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -21905,7 +19919,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -21956,11 +19969,7 @@ module hipfort_hipblas
   !>     @param[in] incx - [int]
   !>             specifies the increment for the elements of x. incx must not be zero.
   interface hipblasStpmv
-#ifdef USE_CUDA_NAMES
-    function hipblasStpmv_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="cublasStpmv_v2")
-#else
     function hipblasStpmv_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="hipblasStpmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -21987,11 +19996,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtpmv
-#ifdef USE_CUDA_NAMES
-    function hipblasDtpmv_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="cublasDtpmv_v2")
-#else
     function hipblasDtpmv_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="hipblasDtpmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -22018,11 +20023,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtpmv
-#ifdef USE_CUDA_NAMES
-    function hipblasCtpmv_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="cublasCtpmv_v2")
-#else
     function hipblasCtpmv_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="hipblasCtpmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -22049,11 +20050,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtpmv
-#ifdef USE_CUDA_NAMES
-    function hipblasZtpmv_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="cublasZtpmv_v2")
-#else
     function hipblasZtpmv_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="hipblasZtpmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -22080,11 +20077,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasStpmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasStpmv_64_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="cublasStpmv_v2_64")
-#else
     function hipblasStpmv_64_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="hipblasStpmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -22101,11 +20094,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtpmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDtpmv_64_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="cublasDtpmv_v2_64")
-#else
     function hipblasDtpmv_64_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="hipblasDtpmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -22122,11 +20111,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtpmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCtpmv_64_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="cublasCtpmv_v2_64")
-#else
     function hipblasCtpmv_64_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="hipblasCtpmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -22143,11 +20128,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtpmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZtpmv_64_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="cublasZtpmv_v2_64")
-#else
     function hipblasZtpmv_64_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="hipblasZtpmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -22204,7 +20185,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>               The number of batched matrices/vectors.
-#ifndef USE_CUDA_NAMES
   interface hipblasStpmvBatched
     function hipblasStpmvBatched_(handle,uplo,transA,diag,n,AP,x,incx,batchCount) &
         bind(c, name="hipblasStpmvBatched")
@@ -22223,9 +20203,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtpmvBatched
     function hipblasDtpmvBatched_(handle,uplo,transA,diag,n,AP,x,incx,batchCount) &
         bind(c, name="hipblasDtpmvBatched")
@@ -22244,9 +20222,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtpmvBatched
     function hipblasCtpmvBatched_(handle,uplo,transA,diag,n,AP,x,incx,batchCount) &
         bind(c, name="hipblasCtpmvBatched")
@@ -22265,9 +20241,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtpmvBatched
     function hipblasZtpmvBatched_(handle,uplo,transA,diag,n,AP,x,incx,batchCount) &
         bind(c, name="hipblasZtpmvBatched")
@@ -22286,9 +20260,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasStpmvBatched_64
     function hipblasStpmvBatched_64_(handle,uplo,transA,diag,n,AP,x,incx,batchCount) &
         bind(c, name="hipblasStpmvBatched_64")
@@ -22307,9 +20279,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtpmvBatched_64
     function hipblasDtpmvBatched_64_(handle,uplo,transA,diag,n,AP,x,incx,batchCount) &
         bind(c, name="hipblasDtpmvBatched_64")
@@ -22328,9 +20298,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtpmvBatched_64
     function hipblasCtpmvBatched_64_(handle,uplo,transA,diag,n,AP,x,incx,batchCount) &
         bind(c, name="hipblasCtpmvBatched_64")
@@ -22349,9 +20317,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtpmvBatched_64
     function hipblasZtpmvBatched_64_(handle,uplo,transA,diag,n,AP,x,incx,batchCount) &
         bind(c, name="hipblasZtpmvBatched_64")
@@ -22370,7 +20336,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief   BLAS Level 2 API
   !>
@@ -22421,7 +20386,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>               The number of batched matrices/vectors.
-#ifndef USE_CUDA_NAMES
   interface hipblasStpmvStridedBatched
     function hipblasStpmvStridedBatched_(handle,uplo,transA,diag,n,AP,strideA,x,incx,stridex, &
         batchCount) &
@@ -22453,9 +20417,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtpmvStridedBatched
     function hipblasDtpmvStridedBatched_(handle,uplo,transA,diag,n,AP,strideA,x,incx,stridex, &
         batchCount) &
@@ -22487,9 +20449,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtpmvStridedBatched
     function hipblasCtpmvStridedBatched_(handle,uplo,transA,diag,n,AP,strideA,x,incx,stridex, &
         batchCount) &
@@ -22521,9 +20481,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtpmvStridedBatched
     function hipblasZtpmvStridedBatched_(handle,uplo,transA,diag,n,AP,strideA,x,incx,stridex, &
         batchCount) &
@@ -22555,9 +20513,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasStpmvStridedBatched_64
     function hipblasStpmvStridedBatched_64_(handle,uplo,transA,diag,n,AP,strideA,x,incx,stridex, &
         batchCount) &
@@ -22579,9 +20535,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtpmvStridedBatched_64
     function hipblasDtpmvStridedBatched_64_(handle,uplo,transA,diag,n,AP,strideA,x,incx,stridex, &
         batchCount) &
@@ -22603,9 +20557,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtpmvStridedBatched_64
     function hipblasCtpmvStridedBatched_64_(handle,uplo,transA,diag,n,AP,strideA,x,incx,stridex, &
         batchCount) &
@@ -22627,9 +20579,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtpmvStridedBatched_64
     function hipblasZtpmvStridedBatched_64_(handle,uplo,transA,diag,n,AP,strideA,x,incx,stridex, &
         batchCount) &
@@ -22651,7 +20601,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -22697,11 +20646,7 @@ module hipfort_hipblas
   !>     @param[in] incx - [int]
   !>               specifies the increment for the elements of x.
   interface hipblasStpsv
-#ifdef USE_CUDA_NAMES
-    function hipblasStpsv_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="cublasStpsv_v2")
-#else
     function hipblasStpsv_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="hipblasStpsv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -22728,11 +20673,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtpsv
-#ifdef USE_CUDA_NAMES
-    function hipblasDtpsv_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="cublasDtpsv_v2")
-#else
     function hipblasDtpsv_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="hipblasDtpsv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -22759,11 +20700,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtpsv
-#ifdef USE_CUDA_NAMES
-    function hipblasCtpsv_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="cublasCtpsv_v2")
-#else
     function hipblasCtpsv_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="hipblasCtpsv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -22790,11 +20727,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtpsv
-#ifdef USE_CUDA_NAMES
-    function hipblasZtpsv_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="cublasZtpsv_v2")
-#else
     function hipblasZtpsv_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="hipblasZtpsv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -22821,11 +20754,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasStpsv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasStpsv_64_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="cublasStpsv_v2_64")
-#else
     function hipblasStpsv_64_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="hipblasStpsv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -22842,11 +20771,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtpsv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDtpsv_64_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="cublasDtpsv_v2_64")
-#else
     function hipblasDtpsv_64_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="hipblasDtpsv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -22863,11 +20788,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtpsv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCtpsv_64_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="cublasCtpsv_v2_64")
-#else
     function hipblasCtpsv_64_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="hipblasCtpsv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -22884,11 +20805,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtpsv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZtpsv_64_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="cublasZtpsv_v2_64")
-#else
     function hipblasZtpsv_64_(handle,uplo,transA,diag,n,AP,x,incx) bind(c, name="hipblasZtpsv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -22952,7 +20869,6 @@ module hipfort_hipblas
   !>               specifies the increment for the elements of each x_i.
   !>     @param[in] batchCount - [int]
   !>                 specifies the number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasStpsvBatched
     function hipblasStpsvBatched_(handle,uplo,transA,diag,n,AP,x,incx,batchCount) &
         bind(c, name="hipblasStpsvBatched")
@@ -22971,9 +20887,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtpsvBatched
     function hipblasDtpsvBatched_(handle,uplo,transA,diag,n,AP,x,incx,batchCount) &
         bind(c, name="hipblasDtpsvBatched")
@@ -22992,9 +20906,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtpsvBatched
     function hipblasCtpsvBatched_(handle,uplo,transA,diag,n,AP,x,incx,batchCount) &
         bind(c, name="hipblasCtpsvBatched")
@@ -23013,9 +20925,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtpsvBatched
     function hipblasZtpsvBatched_(handle,uplo,transA,diag,n,AP,x,incx,batchCount) &
         bind(c, name="hipblasZtpsvBatched")
@@ -23034,9 +20944,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasStpsvBatched_64
     function hipblasStpsvBatched_64_(handle,uplo,transA,diag,n,AP,x,incx,batchCount) &
         bind(c, name="hipblasStpsvBatched_64")
@@ -23055,9 +20963,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtpsvBatched_64
     function hipblasDtpsvBatched_64_(handle,uplo,transA,diag,n,AP,x,incx,batchCount) &
         bind(c, name="hipblasDtpsvBatched_64")
@@ -23076,9 +20982,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtpsvBatched_64
     function hipblasCtpsvBatched_64_(handle,uplo,transA,diag,n,AP,x,incx,batchCount) &
         bind(c, name="hipblasCtpsvBatched_64")
@@ -23097,9 +21001,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtpsvBatched_64
     function hipblasZtpsvBatched_64_(handle,uplo,transA,diag,n,AP,x,incx,batchCount) &
         bind(c, name="hipblasZtpsvBatched_64")
@@ -23118,7 +21020,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -23172,7 +21073,6 @@ module hipfort_hipblas
   !>               stride from the beginning of one vector (x_i) to the next (x_i+1).
   !>     @param[in] batchCount - [int]
   !>                 specifies the number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasStpsvStridedBatched
     function hipblasStpsvStridedBatched_(handle,uplo,transA,diag,n,AP,strideA,x,incx,stridex, &
         batchCount) &
@@ -23204,9 +21104,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtpsvStridedBatched
     function hipblasDtpsvStridedBatched_(handle,uplo,transA,diag,n,AP,strideA,x,incx,stridex, &
         batchCount) &
@@ -23238,9 +21136,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtpsvStridedBatched
     function hipblasCtpsvStridedBatched_(handle,uplo,transA,diag,n,AP,strideA,x,incx,stridex, &
         batchCount) &
@@ -23272,9 +21168,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtpsvStridedBatched
     function hipblasZtpsvStridedBatched_(handle,uplo,transA,diag,n,AP,strideA,x,incx,stridex, &
         batchCount) &
@@ -23306,9 +21200,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasStpsvStridedBatched_64
     function hipblasStpsvStridedBatched_64_(handle,uplo,transA,diag,n,AP,strideA,x,incx,stridex, &
         batchCount) &
@@ -23330,9 +21222,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtpsvStridedBatched_64
     function hipblasDtpsvStridedBatched_64_(handle,uplo,transA,diag,n,AP,strideA,x,incx,stridex, &
         batchCount) &
@@ -23354,9 +21244,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtpsvStridedBatched_64
     function hipblasCtpsvStridedBatched_64_(handle,uplo,transA,diag,n,AP,strideA,x,incx,stridex, &
         batchCount) &
@@ -23378,9 +21266,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtpsvStridedBatched_64
     function hipblasZtpsvStridedBatched_64_(handle,uplo,transA,diag,n,AP,strideA,x,incx,stridex, &
         batchCount) &
@@ -23402,7 +21288,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -23447,11 +21332,7 @@ module hipfort_hipblas
   !>     @param[in] incx - [int]
   !>               specifies the increment for the elements of x.
   interface hipblasStrmv
-#ifdef USE_CUDA_NAMES
-    function hipblasStrmv_(handle,uplo,transA,diag,n,AP,lda,x,incx) bind(c, name="cublasStrmv_v2")
-#else
     function hipblasStrmv_(handle,uplo,transA,diag,n,AP,lda,x,incx) bind(c, name="hipblasStrmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -23480,11 +21361,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtrmv
-#ifdef USE_CUDA_NAMES
-    function hipblasDtrmv_(handle,uplo,transA,diag,n,AP,lda,x,incx) bind(c, name="cublasDtrmv_v2")
-#else
     function hipblasDtrmv_(handle,uplo,transA,diag,n,AP,lda,x,incx) bind(c, name="hipblasDtrmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -23513,11 +21390,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtrmv
-#ifdef USE_CUDA_NAMES
-    function hipblasCtrmv_(handle,uplo,transA,diag,n,AP,lda,x,incx) bind(c, name="cublasCtrmv_v2")
-#else
     function hipblasCtrmv_(handle,uplo,transA,diag,n,AP,lda,x,incx) bind(c, name="hipblasCtrmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -23546,11 +21419,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtrmv
-#ifdef USE_CUDA_NAMES
-    function hipblasZtrmv_(handle,uplo,transA,diag,n,AP,lda,x,incx) bind(c, name="cublasZtrmv_v2")
-#else
     function hipblasZtrmv_(handle,uplo,transA,diag,n,AP,lda,x,incx) bind(c, name="hipblasZtrmv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -23579,13 +21448,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasStrmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasStrmv_64_(handle,uplo,transA,diag,n,AP,lda,x,incx) &
-        bind(c, name="cublasStrmv_v2_64")
-#else
     function hipblasStrmv_64_(handle,uplo,transA,diag,n,AP,lda,x,incx) &
         bind(c, name="hipblasStrmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -23603,13 +21467,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtrmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDtrmv_64_(handle,uplo,transA,diag,n,AP,lda,x,incx) &
-        bind(c, name="cublasDtrmv_v2_64")
-#else
     function hipblasDtrmv_64_(handle,uplo,transA,diag,n,AP,lda,x,incx) &
         bind(c, name="hipblasDtrmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -23627,13 +21486,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtrmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCtrmv_64_(handle,uplo,transA,diag,n,AP,lda,x,incx) &
-        bind(c, name="cublasCtrmv_v2_64")
-#else
     function hipblasCtrmv_64_(handle,uplo,transA,diag,n,AP,lda,x,incx) &
         bind(c, name="hipblasCtrmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -23651,13 +21505,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtrmv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZtrmv_64_(handle,uplo,transA,diag,n,AP,lda,x,incx) &
-        bind(c, name="cublasZtrmv_v2_64")
-#else
     function hipblasZtrmv_64_(handle,uplo,transA,diag,n,AP,lda,x,incx) &
         bind(c, name="hipblasZtrmv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -23719,7 +21568,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>               The number of batched matrices/vectors.
-#ifndef USE_CUDA_NAMES
   interface hipblasStrmvBatched
     function hipblasStrmvBatched_(handle,uplo,transA,diag,n,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasStrmvBatched")
@@ -23739,9 +21587,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrmvBatched
     function hipblasDtrmvBatched_(handle,uplo,transA,diag,n,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasDtrmvBatched")
@@ -23761,9 +21607,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrmvBatched
     function hipblasCtrmvBatched_(handle,uplo,transA,diag,n,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasCtrmvBatched")
@@ -23783,9 +21627,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrmvBatched
     function hipblasZtrmvBatched_(handle,uplo,transA,diag,n,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasZtrmvBatched")
@@ -23805,9 +21647,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasStrmvBatched_64
     function hipblasStrmvBatched_64_(handle,uplo,transA,diag,n,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasStrmvBatched_64")
@@ -23827,9 +21667,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrmvBatched_64
     function hipblasDtrmvBatched_64_(handle,uplo,transA,diag,n,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasDtrmvBatched_64")
@@ -23849,9 +21687,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrmvBatched_64
     function hipblasCtrmvBatched_64_(handle,uplo,transA,diag,n,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasCtrmvBatched_64")
@@ -23871,9 +21707,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrmvBatched_64
     function hipblasZtrmvBatched_64_(handle,uplo,transA,diag,n,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasZtrmvBatched_64")
@@ -23893,7 +21727,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief   BLAS Level 2 API
   !>
@@ -23948,7 +21781,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>               The number of batched matrices/vectors.
-#ifndef USE_CUDA_NAMES
   interface hipblasStrmvStridedBatched
     function hipblasStrmvStridedBatched_(handle,uplo,transA,diag,n,AP,lda,strideA,x,incx,stridex, &
         batchCount) &
@@ -23982,9 +21814,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrmvStridedBatched
     function hipblasDtrmvStridedBatched_(handle,uplo,transA,diag,n,AP,lda,strideA,x,incx,stridex, &
         batchCount) &
@@ -24018,9 +21848,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrmvStridedBatched
     function hipblasCtrmvStridedBatched_(handle,uplo,transA,diag,n,AP,lda,strideA,x,incx,stridex, &
         batchCount) &
@@ -24054,9 +21882,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrmvStridedBatched
     function hipblasZtrmvStridedBatched_(handle,uplo,transA,diag,n,AP,lda,strideA,x,incx,stridex, &
         batchCount) &
@@ -24090,9 +21916,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasStrmvStridedBatched_64
     function hipblasStrmvStridedBatched_64_(handle,uplo,transA,diag,n,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -24115,9 +21939,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrmvStridedBatched_64
     function hipblasDtrmvStridedBatched_64_(handle,uplo,transA,diag,n,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -24140,9 +21962,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrmvStridedBatched_64
     function hipblasCtrmvStridedBatched_64_(handle,uplo,transA,diag,n,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -24165,9 +21985,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrmvStridedBatched_64
     function hipblasZtrmvStridedBatched_64_(handle,uplo,transA,diag,n,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -24190,7 +22008,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -24234,11 +22051,7 @@ module hipfort_hipblas
   !>     @param[in] incx - [int]
   !>               specifies the increment for the elements of x.
   interface hipblasStrsv
-#ifdef USE_CUDA_NAMES
-    function hipblasStrsv_(handle,uplo,transA,diag,n,AP,lda,x,incx) bind(c, name="cublasStrsv_v2")
-#else
     function hipblasStrsv_(handle,uplo,transA,diag,n,AP,lda,x,incx) bind(c, name="hipblasStrsv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -24267,11 +22080,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtrsv
-#ifdef USE_CUDA_NAMES
-    function hipblasDtrsv_(handle,uplo,transA,diag,n,AP,lda,x,incx) bind(c, name="cublasDtrsv_v2")
-#else
     function hipblasDtrsv_(handle,uplo,transA,diag,n,AP,lda,x,incx) bind(c, name="hipblasDtrsv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -24300,11 +22109,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtrsv
-#ifdef USE_CUDA_NAMES
-    function hipblasCtrsv_(handle,uplo,transA,diag,n,AP,lda,x,incx) bind(c, name="cublasCtrsv_v2")
-#else
     function hipblasCtrsv_(handle,uplo,transA,diag,n,AP,lda,x,incx) bind(c, name="hipblasCtrsv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -24333,11 +22138,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtrsv
-#ifdef USE_CUDA_NAMES
-    function hipblasZtrsv_(handle,uplo,transA,diag,n,AP,lda,x,incx) bind(c, name="cublasZtrsv_v2")
-#else
     function hipblasZtrsv_(handle,uplo,transA,diag,n,AP,lda,x,incx) bind(c, name="hipblasZtrsv")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -24366,13 +22167,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasStrsv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasStrsv_64_(handle,uplo,transA,diag,n,AP,lda,x,incx) &
-        bind(c, name="cublasStrsv_v2_64")
-#else
     function hipblasStrsv_64_(handle,uplo,transA,diag,n,AP,lda,x,incx) &
         bind(c, name="hipblasStrsv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -24390,13 +22186,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtrsv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDtrsv_64_(handle,uplo,transA,diag,n,AP,lda,x,incx) &
-        bind(c, name="cublasDtrsv_v2_64")
-#else
     function hipblasDtrsv_64_(handle,uplo,transA,diag,n,AP,lda,x,incx) &
         bind(c, name="hipblasDtrsv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -24414,13 +22205,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtrsv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCtrsv_64_(handle,uplo,transA,diag,n,AP,lda,x,incx) &
-        bind(c, name="cublasCtrsv_v2_64")
-#else
     function hipblasCtrsv_64_(handle,uplo,transA,diag,n,AP,lda,x,incx) &
         bind(c, name="hipblasCtrsv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -24438,13 +22224,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtrsv_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZtrsv_64_(handle,uplo,transA,diag,n,AP,lda,x,incx) &
-        bind(c, name="cublasZtrsv_v2_64")
-#else
     function hipblasZtrsv_64_(handle,uplo,transA,diag,n,AP,lda,x,incx) &
         bind(c, name="hipblasZtrsv_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -24506,7 +22287,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch
-#ifndef USE_CUDA_NAMES
   interface hipblasStrsvBatched
     function hipblasStrsvBatched_(handle,uplo,transA,diag,n,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasStrsvBatched")
@@ -24526,9 +22306,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrsvBatched
     function hipblasDtrsvBatched_(handle,uplo,transA,diag,n,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasDtrsvBatched")
@@ -24548,9 +22326,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrsvBatched
     function hipblasCtrsvBatched_(handle,uplo,transA,diag,n,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasCtrsvBatched")
@@ -24570,9 +22346,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrsvBatched
     function hipblasZtrsvBatched_(handle,uplo,transA,diag,n,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasZtrsvBatched")
@@ -24592,9 +22366,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasStrsvBatched_64
     function hipblasStrsvBatched_64_(handle,uplo,transA,diag,n,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasStrsvBatched_64")
@@ -24614,9 +22386,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrsvBatched_64
     function hipblasDtrsvBatched_64_(handle,uplo,transA,diag,n,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasDtrsvBatched_64")
@@ -24636,9 +22406,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrsvBatched_64
     function hipblasCtrsvBatched_64_(handle,uplo,transA,diag,n,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasCtrsvBatched_64")
@@ -24658,9 +22426,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrsvBatched_64
     function hipblasZtrsvBatched_64_(handle,uplo,transA,diag,n,AP,lda,x,incx,batchCount) &
         bind(c, name="hipblasZtrsvBatched_64")
@@ -24680,7 +22446,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 2 API
   !>
@@ -24734,7 +22499,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasStrsvStridedBatched
     function hipblasStrsvStridedBatched_(handle,uplo,transA,diag,n,AP,lda,strideA,x,incx,stridex, &
         batchCount) &
@@ -24768,9 +22532,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrsvStridedBatched
     function hipblasDtrsvStridedBatched_(handle,uplo,transA,diag,n,AP,lda,strideA,x,incx,stridex, &
         batchCount) &
@@ -24804,9 +22566,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrsvStridedBatched
     function hipblasCtrsvStridedBatched_(handle,uplo,transA,diag,n,AP,lda,strideA,x,incx,stridex, &
         batchCount) &
@@ -24840,9 +22600,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrsvStridedBatched
     function hipblasZtrsvStridedBatched_(handle,uplo,transA,diag,n,AP,lda,strideA,x,incx,stridex, &
         batchCount) &
@@ -24876,9 +22634,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasStrsvStridedBatched_64
     function hipblasStrsvStridedBatched_64_(handle,uplo,transA,diag,n,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -24901,9 +22657,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrsvStridedBatched_64
     function hipblasDtrsvStridedBatched_64_(handle,uplo,transA,diag,n,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -24926,9 +22680,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrsvStridedBatched_64
     function hipblasCtrsvStridedBatched_64_(handle,uplo,transA,diag,n,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -24951,9 +22703,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrsvStridedBatched_64
     function hipblasZtrsvStridedBatched_64_(handle,uplo,transA,diag,n,AP,lda,strideA,x,incx, &
         stridex,batchCount) &
@@ -24976,7 +22726,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -25022,13 +22771,8 @@ module hipfort_hipblas
   !>     @param[in] ldc - [int]
   !>               specifies the leading dimension of C.
   interface hipblasHgemm
-#ifdef USE_CUDA_NAMES
-    function hipblasHgemm_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasHgemm")
-#else
     function hipblasHgemm_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasHgemm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25051,13 +22795,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSgemm
-#ifdef USE_CUDA_NAMES
-    function hipblasSgemm_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasSgemm_v2")
-#else
     function hipblasSgemm_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasSgemm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25091,13 +22830,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgemm
-#ifdef USE_CUDA_NAMES
-    function hipblasDgemm_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasDgemm_v2")
-#else
     function hipblasDgemm_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasDgemm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25131,13 +22865,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgemm
-#ifdef USE_CUDA_NAMES
-    function hipblasCgemm_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasCgemm_v2")
-#else
     function hipblasCgemm_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasCgemm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25171,13 +22900,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgemm
-#ifdef USE_CUDA_NAMES
-    function hipblasZgemm_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasZgemm_v2")
-#else
     function hipblasZgemm_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasZgemm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25211,13 +22935,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasHgemm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasHgemm_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasHgemm_64")
-#else
     function hipblasHgemm_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasHgemm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25240,13 +22959,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSgemm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSgemm_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasSgemm_v2_64")
-#else
     function hipblasSgemm_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasSgemm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25269,13 +22983,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgemm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDgemm_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasDgemm_v2_64")
-#else
     function hipblasDgemm_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasDgemm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25298,13 +23007,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgemm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCgemm_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasCgemm_v2_64")
-#else
     function hipblasCgemm_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasCgemm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25327,13 +23031,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgemm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZgemm_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasZgemm_v2_64")
-#else
     function hipblasZgemm_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasZgemm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25404,15 +23103,9 @@ module hipfort_hipblas
   !>               [int]
   !>               number of gemm operations in the batch.
   interface hipblasHgemmBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasHgemmBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
-        batchCount) &
-        bind(c, name="cublasHgemmBatched")
-#else
     function hipblasHgemmBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
         bind(c, name="hipblasHgemmBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25436,15 +23129,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSgemmBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasSgemmBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
-        batchCount) &
-        bind(c, name="cublasSgemmBatched")
-#else
     function hipblasSgemmBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
         bind(c, name="hipblasSgemmBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25468,15 +23155,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgemmBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasDgemmBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
-        batchCount) &
-        bind(c, name="cublasDgemmBatched")
-#else
     function hipblasDgemmBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
         bind(c, name="hipblasDgemmBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25500,15 +23181,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgemmBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasCgemmBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
-        batchCount) &
-        bind(c, name="cublasCgemmBatched")
-#else
     function hipblasCgemmBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
         bind(c, name="hipblasCgemmBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25532,15 +23207,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgemmBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasZgemmBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
-        batchCount) &
-        bind(c, name="cublasZgemmBatched")
-#else
     function hipblasZgemmBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
         bind(c, name="hipblasZgemmBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25564,15 +23233,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasHgemmBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasHgemmBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
-        batchCount) &
-        bind(c, name="cublasHgemmBatched_64")
-#else
     function hipblasHgemmBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
         bind(c, name="hipblasHgemmBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25596,15 +23259,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSgemmBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSgemmBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
-        batchCount) &
-        bind(c, name="cublasSgemmBatched_64")
-#else
     function hipblasSgemmBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
         bind(c, name="hipblasSgemmBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25628,15 +23285,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgemmBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDgemmBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
-        batchCount) &
-        bind(c, name="cublasDgemmBatched_64")
-#else
     function hipblasDgemmBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
         bind(c, name="hipblasDgemmBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25660,15 +23311,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgemmBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCgemmBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
-        batchCount) &
-        bind(c, name="cublasCgemmBatched_64")
-#else
     function hipblasCgemmBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
         bind(c, name="hipblasCgemmBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25692,15 +23337,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgemmBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZgemmBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
-        batchCount) &
-        bind(c, name="cublasZgemmBatched_64")
-#else
     function hipblasZgemmBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
         bind(c, name="hipblasZgemmBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25779,15 +23418,9 @@ module hipfort_hipblas
   !>               [int]
   !>               number of gemm operatons in the batch.
   interface hipblasHgemmStridedBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasHgemmStridedBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP,ldb, &
-        strideB,beta,CP,ldc,strideC,batchCount) &
-        bind(c, name="cublasHgemmStridedBatched")
-#else
     function hipblasHgemmStridedBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
         bind(c, name="hipblasHgemmStridedBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25814,15 +23447,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSgemmStridedBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasSgemmStridedBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP,ldb, &
-        strideB,beta,CP,ldc,strideC,batchCount) &
-        bind(c, name="cublasSgemmStridedBatched")
-#else
     function hipblasSgemmStridedBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
         bind(c, name="hipblasSgemmStridedBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25860,15 +23487,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgemmStridedBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasDgemmStridedBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP,ldb, &
-        strideB,beta,CP,ldc,strideC,batchCount) &
-        bind(c, name="cublasDgemmStridedBatched")
-#else
     function hipblasDgemmStridedBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
         bind(c, name="hipblasDgemmStridedBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25906,15 +23527,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgemmStridedBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasCgemmStridedBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP,ldb, &
-        strideB,beta,CP,ldc,strideC,batchCount) &
-        bind(c, name="cublasCgemmStridedBatched")
-#else
     function hipblasCgemmStridedBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
         bind(c, name="hipblasCgemmStridedBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25952,15 +23567,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgemmStridedBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasZgemmStridedBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP,ldb, &
-        strideB,beta,CP,ldc,strideC,batchCount) &
-        bind(c, name="cublasZgemmStridedBatched")
-#else
     function hipblasZgemmStridedBatched_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
         bind(c, name="hipblasZgemmStridedBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -25998,15 +23607,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasHgemmStridedBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasHgemmStridedBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP, &
-        ldb,strideB,beta,CP,ldc,strideC,batchCount) &
-        bind(c, name="cublasHgemmStridedBatched_64")
-#else
     function hipblasHgemmStridedBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP, &
         ldb,strideB,beta,CP,ldc,strideC,batchCount) &
         bind(c, name="hipblasHgemmStridedBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -26033,15 +23636,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSgemmStridedBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSgemmStridedBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP, &
-        ldb,strideB,beta,CP,ldc,strideC,batchCount) &
-        bind(c, name="cublasSgemmStridedBatched_64")
-#else
     function hipblasSgemmStridedBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP, &
         ldb,strideB,beta,CP,ldc,strideC,batchCount) &
         bind(c, name="hipblasSgemmStridedBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -26068,15 +23665,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgemmStridedBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDgemmStridedBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP, &
-        ldb,strideB,beta,CP,ldc,strideC,batchCount) &
-        bind(c, name="cublasDgemmStridedBatched_64")
-#else
     function hipblasDgemmStridedBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP, &
         ldb,strideB,beta,CP,ldc,strideC,batchCount) &
         bind(c, name="hipblasDgemmStridedBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -26103,15 +23694,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgemmStridedBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCgemmStridedBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP, &
-        ldb,strideB,beta,CP,ldc,strideC,batchCount) &
-        bind(c, name="cublasCgemmStridedBatched_64")
-#else
     function hipblasCgemmStridedBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP, &
         ldb,strideB,beta,CP,ldc,strideC,batchCount) &
         bind(c, name="hipblasCgemmStridedBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -26138,15 +23723,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgemmStridedBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZgemmStridedBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP, &
-        ldb,strideB,beta,CP,ldc,strideC,batchCount) &
-        bind(c, name="cublasZgemmStridedBatched_64")
-#else
     function hipblasZgemmStridedBatched_64_(handle,transA,transB,m,n,k,alpha,AP,lda,strideA,BP, &
         ldb,strideB,beta,CP,ldc,strideC,batchCount) &
         bind(c, name="hipblasZgemmStridedBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -26232,13 +23811,8 @@ module hipfort_hipblas
   !>     @param[in] ldc - [int]
   !>            ldc specifies the first dimension of C. ldc >= max( 1, n ).
   interface hipblasCherk
-#ifdef USE_CUDA_NAMES
-    function hipblasCherk_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
-        bind(c, name="cublasCherk_v2")
-#else
     function hipblasCherk_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
         bind(c, name="hipblasCherk")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -26269,13 +23843,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZherk
-#ifdef USE_CUDA_NAMES
-    function hipblasZherk_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
-        bind(c, name="cublasZherk_v2")
-#else
     function hipblasZherk_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
         bind(c, name="hipblasZherk")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -26306,13 +23875,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCherk_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCherk_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
-        bind(c, name="cublasCherk_v2_64")
-#else
     function hipblasCherk_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
         bind(c, name="hipblasCherk_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -26332,13 +23896,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZherk_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZherk_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
-        bind(c, name="cublasZherk_v2_64")
-#else
     function hipblasZherk_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
         bind(c, name="hipblasZherk_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -26418,7 +23977,6 @@ module hipfort_hipblas
   !>            ldc specifies the first dimension of C. ldc >= max( 1, n ).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasCherkBatched
     function hipblasCherkBatched_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasCherkBatched")
@@ -26440,9 +23998,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZherkBatched
     function hipblasZherkBatched_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasZherkBatched")
@@ -26464,9 +24020,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCherkBatched_64
     function hipblasCherkBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasCherkBatched_64")
@@ -26488,9 +24042,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZherkBatched_64
     function hipblasZherkBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasZherkBatched_64")
@@ -26512,7 +24064,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -26581,7 +24132,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasCherkStridedBatched
     function hipblasCherkStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,beta,CP,ldc, &
         strideC,batchCount) &
@@ -26617,9 +24167,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZherkStridedBatched
     function hipblasZherkStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,beta,CP,ldc, &
         strideC,batchCount) &
@@ -26655,9 +24203,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCherkStridedBatched_64
     function hipblasCherkStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,beta,CP, &
         ldc,strideC,batchCount) &
@@ -26682,9 +24228,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZherkStridedBatched_64
     function hipblasZherkStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,beta,CP, &
         ldc,strideC,batchCount) &
@@ -26709,7 +24253,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -26781,13 +24324,8 @@ module hipfort_hipblas
   !>     @param[in] ldc - [int]
   !>            ldc specifies the first dimension of C. ldc >= max( 1, n ).
   interface hipblasCherkx
-#ifdef USE_CUDA_NAMES
-    function hipblasCherkx_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasCherkx")
-#else
     function hipblasCherkx_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasCherkx")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -26820,13 +24358,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZherkx
-#ifdef USE_CUDA_NAMES
-    function hipblasZherkx_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasZherkx")
-#else
     function hipblasZherkx_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasZherkx")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -26859,13 +24392,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCherkx_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCherkx_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasCherkx_64")
-#else
     function hipblasCherkx_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasCherkx_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -26887,13 +24415,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZherkx_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZherkx_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasZherkx_64")
-#else
     function hipblasZherkx_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasZherkx_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -26989,7 +24512,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasCherkxBatched
     function hipblasCherkxBatched_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -27014,9 +24536,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZherkxBatched
     function hipblasZherkxBatched_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -27041,9 +24561,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCherkxBatched_64
     function hipblasCherkxBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -27068,9 +24586,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZherkxBatched_64
     function hipblasZherkxBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -27095,7 +24611,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief   BLAS Level 3 API
   !>
@@ -27179,7 +24694,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasCherkxStridedBatched
     function hipblasCherkxStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -27218,9 +24732,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZherkxStridedBatched
     function hipblasZherkxStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -27259,9 +24771,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCherkxStridedBatched_64
     function hipblasCherkxStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -27289,9 +24799,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZherkxStridedBatched_64
     function hipblasZherkxStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -27319,7 +24827,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -27389,13 +24896,8 @@ module hipfort_hipblas
   !>     @param[in] ldc - [int]
   !>            ldc specifies the first dimension of C. ldc >= max( 1, n ).
   interface hipblasCher2k
-#ifdef USE_CUDA_NAMES
-    function hipblasCher2k_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasCher2k_v2")
-#else
     function hipblasCher2k_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasCher2k")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -27428,13 +24930,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZher2k
-#ifdef USE_CUDA_NAMES
-    function hipblasZher2k_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasZher2k_v2")
-#else
     function hipblasZher2k_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasZher2k")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -27467,13 +24964,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCher2k_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCher2k_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasCher2k_v2_64")
-#else
     function hipblasCher2k_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasCher2k_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -27495,13 +24987,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZher2k_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZher2k_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasZher2k_v2_64")
-#else
     function hipblasZher2k_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasZher2k_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -27592,7 +25079,6 @@ module hipfort_hipblas
   !>            ldc specifies the first dimension of C. ldc >= max( 1, n ).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasCher2kBatched
     function hipblasCher2kBatched_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -27617,9 +25103,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZher2kBatched
     function hipblasZher2kBatched_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -27644,9 +25128,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCher2kBatched_64
     function hipblasCher2kBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -27671,9 +25153,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZher2kBatched_64
     function hipblasZher2kBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -27698,7 +25178,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -27780,7 +25259,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasCher2kStridedBatched
     function hipblasCher2kStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -27819,9 +25297,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZher2kStridedBatched
     function hipblasZher2kStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -27860,9 +25336,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCher2kStridedBatched_64
     function hipblasCher2kStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -27890,9 +25364,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZher2kStridedBatched_64
     function hipblasZher2kStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -27920,7 +25392,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -27984,13 +25455,8 @@ module hipfort_hipblas
   !>     @param[in] ldc - [int]
   !>            ldc specifies the first dimension of C. ldc >= max( 1, m ).
   interface hipblasSsymm
-#ifdef USE_CUDA_NAMES
-    function hipblasSsymm_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasSsymm_v2")
-#else
     function hipblasSsymm_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasSsymm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -28023,13 +25489,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDsymm
-#ifdef USE_CUDA_NAMES
-    function hipblasDsymm_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasDsymm_v2")
-#else
     function hipblasDsymm_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasDsymm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -28062,13 +25523,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsymm
-#ifdef USE_CUDA_NAMES
-    function hipblasCsymm_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasCsymm_v2")
-#else
     function hipblasCsymm_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasCsymm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -28101,13 +25557,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZsymm
-#ifdef USE_CUDA_NAMES
-    function hipblasZsymm_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasZsymm_v2")
-#else
     function hipblasZsymm_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasZsymm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -28140,13 +25591,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSsymm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSsymm_64_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasSsymm_v2_64")
-#else
     function hipblasSsymm_64_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasSsymm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -28168,13 +25614,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDsymm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDsymm_64_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasDsymm_v2_64")
-#else
     function hipblasDsymm_64_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasDsymm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -28196,13 +25637,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsymm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCsymm_64_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasCsymm_v2_64")
-#else
     function hipblasCsymm_64_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasCsymm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -28224,13 +25660,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZsymm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZsymm_64_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasZsymm_v2_64")
-#else
     function hipblasZsymm_64_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasZsymm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -28316,7 +25747,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsymmBatched
     function hipblasSsymmBatched_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasSsymmBatched")
@@ -28340,9 +25770,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsymmBatched
     function hipblasDsymmBatched_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasDsymmBatched")
@@ -28366,9 +25794,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsymmBatched
     function hipblasCsymmBatched_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasCsymmBatched")
@@ -28392,9 +25818,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsymmBatched
     function hipblasZsymmBatched_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasZsymmBatched")
@@ -28418,9 +25842,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsymmBatched_64
     function hipblasSsymmBatched_64_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -28445,9 +25867,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsymmBatched_64
     function hipblasDsymmBatched_64_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -28472,9 +25892,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsymmBatched_64
     function hipblasCsymmBatched_64_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -28499,9 +25917,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsymmBatched_64
     function hipblasZsymmBatched_64_(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -28526,7 +25942,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -28599,7 +26014,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsymmStridedBatched
     function hipblasSsymmStridedBatched_(handle,side,uplo,m,n,alpha,AP,lda,strideA,BP,ldb,strideB, &
         beta,CP,ldc,strideC,batchCount) &
@@ -28638,9 +26052,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsymmStridedBatched
     function hipblasDsymmStridedBatched_(handle,side,uplo,m,n,alpha,AP,lda,strideA,BP,ldb,strideB, &
         beta,CP,ldc,strideC,batchCount) &
@@ -28679,9 +26091,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsymmStridedBatched
     function hipblasCsymmStridedBatched_(handle,side,uplo,m,n,alpha,AP,lda,strideA,BP,ldb,strideB, &
         beta,CP,ldc,strideC,batchCount) &
@@ -28720,9 +26130,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsymmStridedBatched
     function hipblasZsymmStridedBatched_(handle,side,uplo,m,n,alpha,AP,lda,strideA,BP,ldb,strideB, &
         beta,CP,ldc,strideC,batchCount) &
@@ -28761,9 +26169,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsymmStridedBatched_64
     function hipblasSsymmStridedBatched_64_(handle,side,uplo,m,n,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -28791,9 +26197,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsymmStridedBatched_64
     function hipblasDsymmStridedBatched_64_(handle,side,uplo,m,n,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -28821,9 +26225,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsymmStridedBatched_64
     function hipblasCsymmStridedBatched_64_(handle,side,uplo,m,n,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -28851,9 +26253,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsymmStridedBatched_64
     function hipblasZsymmStridedBatched_64_(handle,side,uplo,m,n,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -28881,7 +26281,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -28944,13 +26343,8 @@ module hipfort_hipblas
   !>     @param[in] ldc - [int]
   !>            ldc specifies the first dimension of C. ldc >= max( 1, n ).
   interface hipblasSsyrk
-#ifdef USE_CUDA_NAMES
-    function hipblasSsyrk_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
-        bind(c, name="cublasSsyrk_v2")
-#else
     function hipblasSsyrk_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
         bind(c, name="hipblasSsyrk")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -28981,13 +26375,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDsyrk
-#ifdef USE_CUDA_NAMES
-    function hipblasDsyrk_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
-        bind(c, name="cublasDsyrk_v2")
-#else
     function hipblasDsyrk_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
         bind(c, name="hipblasDsyrk")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -29018,13 +26407,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsyrk
-#ifdef USE_CUDA_NAMES
-    function hipblasCsyrk_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
-        bind(c, name="cublasCsyrk_v2")
-#else
     function hipblasCsyrk_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
         bind(c, name="hipblasCsyrk")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -29055,13 +26439,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZsyrk
-#ifdef USE_CUDA_NAMES
-    function hipblasZsyrk_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
-        bind(c, name="cublasZsyrk_v2")
-#else
     function hipblasZsyrk_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
         bind(c, name="hipblasZsyrk")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -29092,13 +26471,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSsyrk_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSsyrk_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
-        bind(c, name="cublasSsyrk_v2_64")
-#else
     function hipblasSsyrk_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
         bind(c, name="hipblasSsyrk_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -29118,13 +26492,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDsyrk_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDsyrk_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
-        bind(c, name="cublasDsyrk_v2_64")
-#else
     function hipblasDsyrk_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
         bind(c, name="hipblasDsyrk_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -29144,13 +26513,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsyrk_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCsyrk_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
-        bind(c, name="cublasCsyrk_v2_64")
-#else
     function hipblasCsyrk_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
         bind(c, name="hipblasCsyrk_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -29170,13 +26534,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZsyrk_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZsyrk_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
-        bind(c, name="cublasZsyrk_v2_64")
-#else
     function hipblasZsyrk_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc) &
         bind(c, name="hipblasZsyrk_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -29257,7 +26616,6 @@ module hipfort_hipblas
   !>            ldc specifies the first dimension of C. ldc >= max( 1, n ).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyrkBatched
     function hipblasSsyrkBatched_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasSsyrkBatched")
@@ -29279,9 +26637,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyrkBatched
     function hipblasDsyrkBatched_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasDsyrkBatched")
@@ -29303,9 +26659,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyrkBatched
     function hipblasCsyrkBatched_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasCsyrkBatched")
@@ -29327,9 +26681,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyrkBatched
     function hipblasZsyrkBatched_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasZsyrkBatched")
@@ -29351,9 +26703,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyrkBatched_64
     function hipblasSsyrkBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasSsyrkBatched_64")
@@ -29375,9 +26725,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyrkBatched_64
     function hipblasDsyrkBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasDsyrkBatched_64")
@@ -29399,9 +26747,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyrkBatched_64
     function hipblasCsyrkBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasCsyrkBatched_64")
@@ -29423,9 +26769,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyrkBatched_64
     function hipblasZsyrkBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasZsyrkBatched_64")
@@ -29447,7 +26791,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -29517,7 +26860,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyrkStridedBatched
     function hipblasSsyrkStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,beta,CP,ldc, &
         strideC,batchCount) &
@@ -29553,9 +26895,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyrkStridedBatched
     function hipblasDsyrkStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,beta,CP,ldc, &
         strideC,batchCount) &
@@ -29591,9 +26931,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyrkStridedBatched
     function hipblasCsyrkStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,beta,CP,ldc, &
         strideC,batchCount) &
@@ -29629,9 +26967,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyrkStridedBatched
     function hipblasZsyrkStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,beta,CP,ldc, &
         strideC,batchCount) &
@@ -29667,9 +27003,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyrkStridedBatched_64
     function hipblasSsyrkStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,beta,CP, &
         ldc,strideC,batchCount) &
@@ -29694,9 +27028,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyrkStridedBatched_64
     function hipblasDsyrkStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,beta,CP, &
         ldc,strideC,batchCount) &
@@ -29721,9 +27053,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyrkStridedBatched_64
     function hipblasCsyrkStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,beta,CP, &
         ldc,strideC,batchCount) &
@@ -29748,9 +27078,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyrkStridedBatched_64
     function hipblasZsyrkStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,beta,CP, &
         ldc,strideC,batchCount) &
@@ -29775,7 +27103,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -29843,13 +27170,8 @@ module hipfort_hipblas
   !>     @param[in] ldc - [int]
   !>            ldc specifies the first dimension of C. ldc >= max( 1, n ).
   interface hipblasSsyr2k
-#ifdef USE_CUDA_NAMES
-    function hipblasSsyr2k_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasSsyr2k_v2")
-#else
     function hipblasSsyr2k_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasSsyr2k")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -29882,13 +27204,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDsyr2k
-#ifdef USE_CUDA_NAMES
-    function hipblasDsyr2k_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasDsyr2k_v2")
-#else
     function hipblasDsyr2k_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasDsyr2k")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -29921,13 +27238,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsyr2k
-#ifdef USE_CUDA_NAMES
-    function hipblasCsyr2k_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasCsyr2k_v2")
-#else
     function hipblasCsyr2k_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasCsyr2k")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -29960,13 +27272,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZsyr2k
-#ifdef USE_CUDA_NAMES
-    function hipblasZsyr2k_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasZsyr2k_v2")
-#else
     function hipblasZsyr2k_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasZsyr2k")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -29999,13 +27306,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSsyr2k_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSsyr2k_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasSsyr2k_v2_64")
-#else
     function hipblasSsyr2k_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasSsyr2k_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -30027,13 +27329,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDsyr2k_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDsyr2k_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasDsyr2k_v2_64")
-#else
     function hipblasDsyr2k_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasDsyr2k_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -30055,13 +27352,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsyr2k_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCsyr2k_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasCsyr2k_v2_64")
-#else
     function hipblasCsyr2k_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasCsyr2k_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -30083,13 +27375,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZsyr2k_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZsyr2k_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasZsyr2k_v2_64")
-#else
     function hipblasZsyr2k_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasZsyr2k_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -30177,7 +27464,6 @@ module hipfort_hipblas
   !>            ldc specifies the first dimension of C. ldc >= max( 1, n ).
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyr2kBatched
     function hipblasSsyr2kBatched_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -30202,9 +27488,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyr2kBatched
     function hipblasDsyr2kBatched_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -30229,9 +27513,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyr2kBatched
     function hipblasCsyr2kBatched_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -30256,9 +27538,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyr2kBatched
     function hipblasZsyr2kBatched_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -30283,9 +27563,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyr2kBatched_64
     function hipblasSsyr2kBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -30310,9 +27588,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyr2kBatched_64
     function hipblasDsyr2kBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -30337,9 +27613,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyr2kBatched_64
     function hipblasCsyr2kBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -30364,9 +27638,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyr2kBatched_64
     function hipblasZsyr2kBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -30391,7 +27663,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -30471,7 +27742,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyr2kStridedBatched
     function hipblasSsyr2kStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -30510,9 +27780,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyr2kStridedBatched
     function hipblasDsyr2kStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -30551,9 +27819,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyr2kStridedBatched
     function hipblasCsyr2kStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -30592,9 +27858,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyr2kStridedBatched
     function hipblasZsyr2kStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -30633,9 +27897,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyr2kStridedBatched_64
     function hipblasSsyr2kStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -30663,9 +27925,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyr2kStridedBatched_64
     function hipblasDsyr2kStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -30693,9 +27953,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyr2kStridedBatched_64
     function hipblasCsyr2kStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -30723,9 +27981,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyr2kStridedBatched_64
     function hipblasZsyr2kStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -30753,7 +28009,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -30825,13 +28080,8 @@ module hipfort_hipblas
   !>     @param[in] ldc - [int]
   !>            ldc specifies the first dimension of C. ldc >= max( 1, n ).
   interface hipblasSsyrkx
-#ifdef USE_CUDA_NAMES
-    function hipblasSsyrkx_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasSsyrkx")
-#else
     function hipblasSsyrkx_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasSsyrkx")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -30864,13 +28114,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDsyrkx
-#ifdef USE_CUDA_NAMES
-    function hipblasDsyrkx_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasDsyrkx")
-#else
     function hipblasDsyrkx_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasDsyrkx")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -30903,13 +28148,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsyrkx
-#ifdef USE_CUDA_NAMES
-    function hipblasCsyrkx_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasCsyrkx")
-#else
     function hipblasCsyrkx_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasCsyrkx")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -30942,13 +28182,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZsyrkx
-#ifdef USE_CUDA_NAMES
-    function hipblasZsyrkx_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasZsyrkx")
-#else
     function hipblasZsyrkx_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasZsyrkx")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -30981,13 +28216,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSsyrkx_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSsyrkx_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasSsyrkx_64")
-#else
     function hipblasSsyrkx_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasSsyrkx_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -31009,13 +28239,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDsyrkx_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDsyrkx_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasDsyrkx_64")
-#else
     function hipblasDsyrkx_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasDsyrkx_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -31037,13 +28262,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCsyrkx_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCsyrkx_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasCsyrkx_64")
-#else
     function hipblasCsyrkx_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasCsyrkx_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -31065,13 +28285,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZsyrkx_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZsyrkx_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasZsyrkx_64")
-#else
     function hipblasZsyrkx_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasZsyrkx_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -31165,7 +28380,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>             number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyrkxBatched
     function hipblasSsyrkxBatched_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -31190,9 +28404,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyrkxBatched
     function hipblasDsyrkxBatched_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -31217,9 +28429,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyrkxBatched
     function hipblasCsyrkxBatched_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -31244,9 +28454,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyrkxBatched
     function hipblasZsyrkxBatched_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -31271,9 +28479,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyrkxBatched_64
     function hipblasSsyrkxBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -31298,9 +28504,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyrkxBatched_64
     function hipblasDsyrkxBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -31325,9 +28529,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyrkxBatched_64
     function hipblasCsyrkxBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -31352,9 +28554,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyrkxBatched_64
     function hipblasZsyrkxBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -31379,7 +28579,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief   BLAS Level 3 API
   !>
@@ -31461,7 +28660,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyrkxStridedBatched
     function hipblasSsyrkxStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -31500,9 +28698,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyrkxStridedBatched
     function hipblasDsyrkxStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -31541,9 +28737,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyrkxStridedBatched
     function hipblasCsyrkxStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -31582,9 +28776,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyrkxStridedBatched
     function hipblasZsyrkxStridedBatched_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -31623,9 +28815,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSsyrkxStridedBatched_64
     function hipblasSsyrkxStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -31653,9 +28843,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDsyrkxStridedBatched_64
     function hipblasDsyrkxStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -31683,9 +28871,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCsyrkxStridedBatched_64
     function hipblasCsyrkxStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -31713,9 +28899,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZsyrkxStridedBatched_64
     function hipblasZsyrkxStridedBatched_64_(handle,uplo,transA,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -31743,7 +28927,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -31787,13 +28970,8 @@ module hipfort_hipblas
   !>     @param[in] ldc - [int]
   !>               specifies the leading dimension of C.
   interface hipblasSgeam
-#ifdef USE_CUDA_NAMES
-    function hipblasSgeam_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc) &
-        bind(c, name="cublasSgeam")
-#else
     function hipblasSgeam_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc) &
         bind(c, name="hipblasSgeam")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -31826,13 +29004,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgeam
-#ifdef USE_CUDA_NAMES
-    function hipblasDgeam_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc) &
-        bind(c, name="cublasDgeam")
-#else
     function hipblasDgeam_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc) &
         bind(c, name="hipblasDgeam")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -31865,13 +29038,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgeam
-#ifdef USE_CUDA_NAMES
-    function hipblasCgeam_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc) &
-        bind(c, name="cublasCgeam")
-#else
     function hipblasCgeam_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc) &
         bind(c, name="hipblasCgeam")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -31904,13 +29072,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgeam
-#ifdef USE_CUDA_NAMES
-    function hipblasZgeam_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc) &
-        bind(c, name="cublasZgeam")
-#else
     function hipblasZgeam_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc) &
         bind(c, name="hipblasZgeam")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -31943,13 +29106,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSgeam_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSgeam_64_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc) &
-        bind(c, name="cublasSgeam_64")
-#else
     function hipblasSgeam_64_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc) &
         bind(c, name="hipblasSgeam_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -31971,13 +29129,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgeam_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDgeam_64_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc) &
-        bind(c, name="cublasDgeam_64")
-#else
     function hipblasDgeam_64_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc) &
         bind(c, name="hipblasDgeam_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -31999,13 +29152,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgeam_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCgeam_64_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc) &
-        bind(c, name="cublasCgeam_64")
-#else
     function hipblasCgeam_64_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc) &
         bind(c, name="hipblasCgeam_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -32027,13 +29175,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgeam_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZgeam_64_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc) &
-        bind(c, name="cublasZgeam_64")
-#else
     function hipblasZgeam_64_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc) &
         bind(c, name="hipblasZgeam_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -32102,7 +29245,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances i in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSgeamBatched
     function hipblasSgeamBatched_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc, &
         batchCount) &
@@ -32127,9 +29269,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgeamBatched
     function hipblasDgeamBatched_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc, &
         batchCount) &
@@ -32154,9 +29294,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgeamBatched
     function hipblasCgeamBatched_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc, &
         batchCount) &
@@ -32181,9 +29319,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgeamBatched
     function hipblasZgeamBatched_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc, &
         batchCount) &
@@ -32208,9 +29344,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSgeamBatched_64
     function hipblasSgeamBatched_64_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc, &
         batchCount) &
@@ -32235,9 +29369,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgeamBatched_64
     function hipblasDgeamBatched_64_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc, &
         batchCount) &
@@ -32262,9 +29394,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgeamBatched_64
     function hipblasCgeamBatched_64_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc, &
         batchCount) &
@@ -32289,9 +29419,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgeamBatched_64
     function hipblasZgeamBatched_64_(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc, &
         batchCount) &
@@ -32316,7 +29444,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -32388,7 +29515,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances i in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSgeamStridedBatched
     function hipblasSgeamStridedBatched_(handle,transA,transB,m,n,alpha,AP,lda,strideA,beta,BP, &
         ldb,strideB,CP,ldc,strideC,batchCount) &
@@ -32427,9 +29553,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgeamStridedBatched
     function hipblasDgeamStridedBatched_(handle,transA,transB,m,n,alpha,AP,lda,strideA,beta,BP, &
         ldb,strideB,CP,ldc,strideC,batchCount) &
@@ -32468,9 +29592,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgeamStridedBatched
     function hipblasCgeamStridedBatched_(handle,transA,transB,m,n,alpha,AP,lda,strideA,beta,BP, &
         ldb,strideB,CP,ldc,strideC,batchCount) &
@@ -32509,9 +29631,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgeamStridedBatched
     function hipblasZgeamStridedBatched_(handle,transA,transB,m,n,alpha,AP,lda,strideA,beta,BP, &
         ldb,strideB,CP,ldc,strideC,batchCount) &
@@ -32550,9 +29670,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSgeamStridedBatched_64
     function hipblasSgeamStridedBatched_64_(handle,transA,transB,m,n,alpha,AP,lda,strideA,beta,BP, &
         ldb,strideB,CP,ldc,strideC,batchCount) &
@@ -32580,9 +29698,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgeamStridedBatched_64
     function hipblasDgeamStridedBatched_64_(handle,transA,transB,m,n,alpha,AP,lda,strideA,beta,BP, &
         ldb,strideB,CP,ldc,strideC,batchCount) &
@@ -32610,9 +29726,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgeamStridedBatched_64
     function hipblasCgeamStridedBatched_64_(handle,transA,transB,m,n,alpha,AP,lda,strideA,beta,BP, &
         ldb,strideB,CP,ldc,strideC,batchCount) &
@@ -32640,9 +29754,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgeamStridedBatched_64
     function hipblasZgeamStridedBatched_64_(handle,transA,transB,m,n,alpha,AP,lda,strideA,beta,BP, &
         ldb,strideB,CP,ldc,strideC,batchCount) &
@@ -32670,7 +29782,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -32735,13 +29846,8 @@ module hipfort_hipblas
   !>     @param[in] ldc - [int]
   !>            ldc specifies the first dimension of C. ldc >= max( 1, m ).
   interface hipblasChemm
-#ifdef USE_CUDA_NAMES
-    function hipblasChemm_(handle,side,uplo,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasChemm_v2")
-#else
     function hipblasChemm_(handle,side,uplo,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasChemm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -32774,13 +29880,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZhemm
-#ifdef USE_CUDA_NAMES
-    function hipblasZhemm_(handle,side,uplo,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasZhemm_v2")
-#else
     function hipblasZhemm_(handle,side,uplo,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasZhemm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -32813,13 +29914,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasChemm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasChemm_64_(handle,side,uplo,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasChemm_v2_64")
-#else
     function hipblasChemm_64_(handle,side,uplo,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasChemm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -32841,13 +29937,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZhemm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZhemm_64_(handle,side,uplo,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
-        bind(c, name="cublasZhemm_v2_64")
-#else
     function hipblasZhemm_64_(handle,side,uplo,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc) &
         bind(c, name="hipblasZhemm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -32934,7 +30025,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasChemmBatched
     function hipblasChemmBatched_(handle,side,uplo,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasChemmBatched")
@@ -32958,9 +30048,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhemmBatched
     function hipblasZhemmBatched_(handle,side,uplo,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc,batchCount) &
         bind(c, name="hipblasZhemmBatched")
@@ -32984,9 +30072,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasChemmBatched_64
     function hipblasChemmBatched_64_(handle,side,uplo,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -33011,9 +30097,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhemmBatched_64
     function hipblasZhemmBatched_64_(handle,side,uplo,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc, &
         batchCount) &
@@ -33038,7 +30122,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -33115,7 +30198,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasChemmStridedBatched
     function hipblasChemmStridedBatched_(handle,side,uplo,n,k,alpha,AP,lda,strideA,BP,ldb,strideB, &
         beta,CP,ldc,strideC,batchCount) &
@@ -33154,9 +30236,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhemmStridedBatched
     function hipblasZhemmStridedBatched_(handle,side,uplo,n,k,alpha,AP,lda,strideA,BP,ldb,strideB, &
         beta,CP,ldc,strideC,batchCount) &
@@ -33195,9 +30275,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasChemmStridedBatched_64
     function hipblasChemmStridedBatched_64_(handle,side,uplo,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -33225,9 +30303,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZhemmStridedBatched_64
     function hipblasZhemmStridedBatched_64_(handle,side,uplo,n,k,alpha,AP,lda,strideA,BP,ldb, &
         strideB,beta,CP,ldc,strideC,batchCount) &
@@ -33255,7 +30331,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -33343,13 +30418,8 @@ module hipfort_hipblas
   !>     @param[in] ldc - [int]
   !>            ldc specifies the first dimension of C. ldc >= max( 1, m ).
   interface hipblasStrmm
-#ifdef USE_CUDA_NAMES
-    function hipblasStrmm_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc) &
-        bind(c, name="cublasStrmm_v2")
-#else
     function hipblasStrmm_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc) &
         bind(c, name="hipblasStrmm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -33383,13 +30453,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtrmm
-#ifdef USE_CUDA_NAMES
-    function hipblasDtrmm_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc) &
-        bind(c, name="cublasDtrmm_v2")
-#else
     function hipblasDtrmm_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc) &
         bind(c, name="hipblasDtrmm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -33423,13 +30488,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtrmm
-#ifdef USE_CUDA_NAMES
-    function hipblasCtrmm_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc) &
-        bind(c, name="cublasCtrmm_v2")
-#else
     function hipblasCtrmm_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc) &
         bind(c, name="hipblasCtrmm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -33463,13 +30523,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtrmm
-#ifdef USE_CUDA_NAMES
-    function hipblasZtrmm_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc) &
-        bind(c, name="cublasZtrmm_v2")
-#else
     function hipblasZtrmm_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc) &
         bind(c, name="hipblasZtrmm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -33503,13 +30558,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasStrmm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasStrmm_64_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc) &
-        bind(c, name="cublasStrmm_v2_64")
-#else
     function hipblasStrmm_64_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc) &
         bind(c, name="hipblasStrmm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -33532,13 +30582,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtrmm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDtrmm_64_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc) &
-        bind(c, name="cublasDtrmm_v2_64")
-#else
     function hipblasDtrmm_64_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc) &
         bind(c, name="hipblasDtrmm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -33561,13 +30606,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtrmm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCtrmm_64_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc) &
-        bind(c, name="cublasCtrmm_v2_64")
-#else
     function hipblasCtrmm_64_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc) &
         bind(c, name="hipblasCtrmm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -33590,13 +30630,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtrmm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZtrmm_64_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc) &
-        bind(c, name="cublasZtrmm_v2_64")
-#else
     function hipblasZtrmm_64_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc) &
         bind(c, name="hipblasZtrmm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -33709,7 +30744,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances i in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasStrmmBatched
     function hipblasStrmmBatched_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc, &
         batchCount) &
@@ -33735,9 +30769,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrmmBatched
     function hipblasDtrmmBatched_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc, &
         batchCount) &
@@ -33763,9 +30795,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrmmBatched
     function hipblasCtrmmBatched_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc, &
         batchCount) &
@@ -33791,9 +30821,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrmmBatched
     function hipblasZtrmmBatched_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc, &
         batchCount) &
@@ -33819,9 +30847,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasStrmmBatched_64
     function hipblasStrmmBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc, &
         batchCount) &
@@ -33847,9 +30873,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrmmBatched_64
     function hipblasDtrmmBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc, &
         batchCount) &
@@ -33875,9 +30899,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrmmBatched_64
     function hipblasCtrmmBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc, &
         batchCount) &
@@ -33903,9 +30925,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrmmBatched_64
     function hipblasZtrmmBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc, &
         batchCount) &
@@ -33931,7 +30951,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -34034,7 +31053,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] batchCount - [int]
   !>                 number of instances i in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasStrmmStridedBatched
     function hipblasStrmmStridedBatched_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,strideA,B, &
         ldb,strideB,C,ldc,strideC,batchCount) &
@@ -34074,9 +31092,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrmmStridedBatched
     function hipblasDtrmmStridedBatched_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,strideA,B, &
         ldb,strideB,C,ldc,strideC,batchCount) &
@@ -34116,9 +31132,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrmmStridedBatched
     function hipblasCtrmmStridedBatched_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,strideA,B, &
         ldb,strideB,C,ldc,strideC,batchCount) &
@@ -34158,9 +31172,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrmmStridedBatched
     function hipblasZtrmmStridedBatched_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,strideA,B, &
         ldb,strideB,C,ldc,strideC,batchCount) &
@@ -34200,9 +31212,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasStrmmStridedBatched_64
     function hipblasStrmmStridedBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,strideA, &
         B,ldb,strideB,C,ldc,strideC,batchCount) &
@@ -34231,9 +31241,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrmmStridedBatched_64
     function hipblasDtrmmStridedBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,strideA, &
         B,ldb,strideB,C,ldc,strideC,batchCount) &
@@ -34262,9 +31270,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrmmStridedBatched_64
     function hipblasCtrmmStridedBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,strideA, &
         B,ldb,strideB,C,ldc,strideC,batchCount) &
@@ -34293,9 +31299,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrmmStridedBatched_64
     function hipblasZtrmmStridedBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,strideA, &
         B,ldb,strideB,C,ldc,strideC,batchCount) &
@@ -34324,7 +31328,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -34399,13 +31402,8 @@ module hipfort_hipblas
   !>     @param[in] ldb - [int]
   !>            ldb specifies the first dimension of B. ldb >= max( 1, m ).
   interface hipblasStrsm
-#ifdef USE_CUDA_NAMES
-    function hipblasStrsm_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb) &
-        bind(c, name="cublasStrsm_v2")
-#else
     function hipblasStrsm_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb) &
         bind(c, name="hipblasStrsm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -34437,13 +31435,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtrsm
-#ifdef USE_CUDA_NAMES
-    function hipblasDtrsm_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb) &
-        bind(c, name="cublasDtrsm_v2")
-#else
     function hipblasDtrsm_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb) &
         bind(c, name="hipblasDtrsm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -34475,13 +31468,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtrsm
-#ifdef USE_CUDA_NAMES
-    function hipblasCtrsm_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb) &
-        bind(c, name="cublasCtrsm_v2")
-#else
     function hipblasCtrsm_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb) &
         bind(c, name="hipblasCtrsm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -34513,13 +31501,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtrsm
-#ifdef USE_CUDA_NAMES
-    function hipblasZtrsm_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb) &
-        bind(c, name="cublasZtrsm_v2")
-#else
     function hipblasZtrsm_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb) &
         bind(c, name="hipblasZtrsm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -34551,13 +31534,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasStrsm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasStrsm_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb) &
-        bind(c, name="cublasStrsm_v2_64")
-#else
     function hipblasStrsm_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb) &
         bind(c, name="hipblasStrsm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -34578,13 +31556,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtrsm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDtrsm_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb) &
-        bind(c, name="cublasDtrsm_v2_64")
-#else
     function hipblasDtrsm_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb) &
         bind(c, name="hipblasDtrsm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -34605,13 +31578,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtrsm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCtrsm_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb) &
-        bind(c, name="cublasCtrsm_v2_64")
-#else
     function hipblasCtrsm_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb) &
         bind(c, name="hipblasCtrsm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -34632,13 +31600,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtrsm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZtrsm_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb) &
-        bind(c, name="cublasZtrsm_v2_64")
-#else
     function hipblasZtrsm_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb) &
         bind(c, name="hipblasZtrsm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -34720,13 +31683,8 @@ module hipfort_hipblas
   !>     @param[in] batchCount - [int]
   !>                 number of trsm operatons in the batch.
   interface hipblasStrsmBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasStrsmBatched_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb,batchCount) &
-        bind(c, name="cublasStrsmBatched")
-#else
     function hipblasStrsmBatched_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb,batchCount) &
         bind(c, name="hipblasStrsmBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -34748,13 +31706,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtrsmBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasDtrsmBatched_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb,batchCount) &
-        bind(c, name="cublasDtrsmBatched")
-#else
     function hipblasDtrsmBatched_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb,batchCount) &
         bind(c, name="hipblasDtrsmBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -34776,13 +31729,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtrsmBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasCtrsmBatched_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb,batchCount) &
-        bind(c, name="cublasCtrsmBatched")
-#else
     function hipblasCtrsmBatched_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb,batchCount) &
         bind(c, name="hipblasCtrsmBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -34804,13 +31752,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtrsmBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasZtrsmBatched_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb,batchCount) &
-        bind(c, name="cublasZtrsmBatched")
-#else
     function hipblasZtrsmBatched_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb,batchCount) &
         bind(c, name="hipblasZtrsmBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -34832,15 +31775,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasStrsmBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasStrsmBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb, &
-        batchCount) &
-        bind(c, name="cublasStrsmBatched_64")
-#else
     function hipblasStrsmBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb, &
         batchCount) &
         bind(c, name="hipblasStrsmBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -34862,15 +31799,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDtrsmBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDtrsmBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb, &
-        batchCount) &
-        bind(c, name="cublasDtrsmBatched_64")
-#else
     function hipblasDtrsmBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb, &
         batchCount) &
         bind(c, name="hipblasDtrsmBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -34892,15 +31823,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCtrsmBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCtrsmBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb, &
-        batchCount) &
-        bind(c, name="cublasCtrsmBatched_64")
-#else
     function hipblasCtrsmBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb, &
         batchCount) &
         bind(c, name="hipblasCtrsmBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -34922,15 +31847,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZtrsmBatched_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZtrsmBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb, &
-        batchCount) &
-        bind(c, name="cublasZtrsmBatched_64")
-#else
     function hipblasZtrsmBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb, &
         batchCount) &
         bind(c, name="hipblasZtrsmBatched_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -35017,7 +31936,6 @@ module hipfort_hipblas
   !>              stride from the start of one B_i matrix to the next B_(i + 1).
   !>     @param[in] batchCount - [int]
   !>                 number of trsm operatons in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasStrsmStridedBatched
     function hipblasStrsmStridedBatched_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,strideA,BP, &
         ldb,strideB,batchCount) &
@@ -35054,9 +31972,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrsmStridedBatched
     function hipblasDtrsmStridedBatched_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,strideA,BP, &
         ldb,strideB,batchCount) &
@@ -35093,9 +32009,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrsmStridedBatched
     function hipblasCtrsmStridedBatched_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,strideA,BP, &
         ldb,strideB,batchCount) &
@@ -35132,9 +32046,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrsmStridedBatched
     function hipblasZtrsmStridedBatched_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,strideA,BP, &
         ldb,strideB,batchCount) &
@@ -35171,9 +32083,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasStrsmStridedBatched_64
     function hipblasStrsmStridedBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,strideA, &
         BP,ldb,strideB,batchCount) &
@@ -35199,9 +32109,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrsmStridedBatched_64
     function hipblasDtrsmStridedBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,strideA, &
         BP,ldb,strideB,batchCount) &
@@ -35227,9 +32135,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrsmStridedBatched_64
     function hipblasCtrsmStridedBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,strideA, &
         BP,ldb,strideB,batchCount) &
@@ -35255,9 +32161,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrsmStridedBatched_64
     function hipblasZtrsmStridedBatched_64_(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,strideA, &
         BP,ldb,strideB,batchCount) &
@@ -35283,7 +32187,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -35315,7 +32218,6 @@ module hipfort_hipblas
   !>     @param[out] invA - device pointer storing matrix invA.
   !>     @param[in] ldinvA - [int]
   !>               specifies the leading dimension of invA.
-#ifndef USE_CUDA_NAMES
   interface hipblasStrtri
     function hipblasStrtri_(handle,uplo,diag,n,AP,lda,invA,ldinvA) bind(c, name="hipblasStrtri")
       use iso_c_binding
@@ -35343,9 +32245,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrtri
     function hipblasDtrtri_(handle,uplo,diag,n,AP,lda,invA,ldinvA) bind(c, name="hipblasDtrtri")
       use iso_c_binding
@@ -35373,9 +32273,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrtri
     function hipblasCtrtri_(handle,uplo,diag,n,AP,lda,invA,ldinvA) bind(c, name="hipblasCtrtri")
       use iso_c_binding
@@ -35403,9 +32301,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrtri
     function hipblasZtrtri_(handle,uplo,diag,n,AP,lda,invA,ldinvA) bind(c, name="hipblasZtrtri")
       use iso_c_binding
@@ -35433,7 +32329,6 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -35469,7 +32364,6 @@ module hipfort_hipblas
   !>               specifies the leading dimension of each invA_i.
   !>     @param[in] batchCount - [int]
   !>               numbers of matrices in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasStrtriBatched
     function hipblasStrtriBatched_(handle,uplo,diag,n,AP,lda,invA,ldinvA,batchCount) &
         bind(c, name="hipblasStrtriBatched")
@@ -35488,9 +32382,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrtriBatched
     function hipblasDtrtriBatched_(handle,uplo,diag,n,AP,lda,invA,ldinvA,batchCount) &
         bind(c, name="hipblasDtrtriBatched")
@@ -35509,9 +32401,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrtriBatched
     function hipblasCtrtriBatched_(handle,uplo,diag,n,AP,lda,invA,ldinvA,batchCount) &
         bind(c, name="hipblasCtrtriBatched")
@@ -35530,9 +32420,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrtriBatched
     function hipblasZtrtriBatched_(handle,uplo,diag,n,AP,lda,invA,ldinvA,batchCount) &
         bind(c, name="hipblasZtrtriBatched")
@@ -35551,7 +32439,6 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -35593,7 +32480,6 @@ module hipfort_hipblas
   !>                  invA_(i + 1).
   !>     @param[in] batchCount - [int]
   !>                  numbers of matrices in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasStrtriStridedBatched
     function hipblasStrtriStridedBatched_(handle,uplo,diag,n,AP,lda,strideA,invA,ldinvA, &
         stride_invA,batchCount) &
@@ -35626,9 +32512,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDtrtriStridedBatched
     function hipblasDtrtriStridedBatched_(handle,uplo,diag,n,AP,lda,strideA,invA,ldinvA, &
         stride_invA,batchCount) &
@@ -35661,9 +32545,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCtrtriStridedBatched
     function hipblasCtrtriStridedBatched_(handle,uplo,diag,n,AP,lda,strideA,invA,ldinvA, &
         stride_invA,batchCount) &
@@ -35696,9 +32578,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZtrtriStridedBatched
     function hipblasZtrtriStridedBatched_(handle,uplo,diag,n,AP,lda,strideA,invA,ldinvA, &
         stride_invA,batchCount) &
@@ -35731,7 +32611,6 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -35768,11 +32647,7 @@ module hipfort_hipblas
   !>     @param[in] ldc - [int]
   !>               specifies the leading dimension of C.
   interface hipblasSdgmm
-#ifdef USE_CUDA_NAMES
-    function hipblasSdgmm_(handle,side,m,n,AP,lda,x,incx,CP,ldc) bind(c, name="cublasSdgmm")
-#else
     function hipblasSdgmm_(handle,side,m,n,AP,lda,x,incx,CP,ldc) bind(c, name="hipblasSdgmm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -35802,11 +32677,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDdgmm
-#ifdef USE_CUDA_NAMES
-    function hipblasDdgmm_(handle,side,m,n,AP,lda,x,incx,CP,ldc) bind(c, name="cublasDdgmm")
-#else
     function hipblasDdgmm_(handle,side,m,n,AP,lda,x,incx,CP,ldc) bind(c, name="hipblasDdgmm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -35836,11 +32707,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCdgmm
-#ifdef USE_CUDA_NAMES
-    function hipblasCdgmm_(handle,side,m,n,AP,lda,x,incx,CP,ldc) bind(c, name="cublasCdgmm")
-#else
     function hipblasCdgmm_(handle,side,m,n,AP,lda,x,incx,CP,ldc) bind(c, name="hipblasCdgmm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -35870,11 +32737,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZdgmm
-#ifdef USE_CUDA_NAMES
-    function hipblasZdgmm_(handle,side,m,n,AP,lda,x,incx,CP,ldc) bind(c, name="cublasZdgmm")
-#else
     function hipblasZdgmm_(handle,side,m,n,AP,lda,x,incx,CP,ldc) bind(c, name="hipblasZdgmm")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -35904,11 +32767,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSdgmm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasSdgmm_64_(handle,side,m,n,AP,lda,x,incx,CP,ldc) bind(c, name="cublasSdgmm_64")
-#else
     function hipblasSdgmm_64_(handle,side,m,n,AP,lda,x,incx,CP,ldc) bind(c, name="hipblasSdgmm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -35927,11 +32786,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDdgmm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDdgmm_64_(handle,side,m,n,AP,lda,x,incx,CP,ldc) bind(c, name="cublasDdgmm_64")
-#else
     function hipblasDdgmm_64_(handle,side,m,n,AP,lda,x,incx,CP,ldc) bind(c, name="hipblasDdgmm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -35950,11 +32805,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCdgmm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasCdgmm_64_(handle,side,m,n,AP,lda,x,incx,CP,ldc) bind(c, name="cublasCdgmm_64")
-#else
     function hipblasCdgmm_64_(handle,side,m,n,AP,lda,x,incx,CP,ldc) bind(c, name="hipblasCdgmm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -35973,11 +32824,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZdgmm_64
-#ifdef USE_CUDA_NAMES
-    function hipblasZdgmm_64_(handle,side,m,n,AP,lda,x,incx,CP,ldc) bind(c, name="cublasZdgmm_64")
-#else
     function hipblasZdgmm_64_(handle,side,m,n,AP,lda,x,incx,CP,ldc) bind(c, name="hipblasZdgmm_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -36035,7 +32882,6 @@ module hipfort_hipblas
   !>               specifies the leading dimension of C_i.
   !>     @param[in] batchCount - [int]
   !>                 number of instances in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSdgmmBatched
     function hipblasSdgmmBatched_(handle,side,m,n,AP,lda,x,incx,CP,ldc,batchCount) &
         bind(c, name="hipblasSdgmmBatched")
@@ -36056,9 +32902,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDdgmmBatched
     function hipblasDdgmmBatched_(handle,side,m,n,AP,lda,x,incx,CP,ldc,batchCount) &
         bind(c, name="hipblasDdgmmBatched")
@@ -36079,9 +32923,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCdgmmBatched
     function hipblasCdgmmBatched_(handle,side,m,n,AP,lda,x,incx,CP,ldc,batchCount) &
         bind(c, name="hipblasCdgmmBatched")
@@ -36102,9 +32944,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdgmmBatched
     function hipblasZdgmmBatched_(handle,side,m,n,AP,lda,x,incx,CP,ldc,batchCount) &
         bind(c, name="hipblasZdgmmBatched")
@@ -36125,9 +32965,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSdgmmBatched_64
     function hipblasSdgmmBatched_64_(handle,side,m,n,AP,lda,x,incx,CP,ldc,batchCount) &
         bind(c, name="hipblasSdgmmBatched_64")
@@ -36148,9 +32986,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDdgmmBatched_64
     function hipblasDdgmmBatched_64_(handle,side,m,n,AP,lda,x,incx,CP,ldc,batchCount) &
         bind(c, name="hipblasDdgmmBatched_64")
@@ -36171,9 +33007,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCdgmmBatched_64
     function hipblasCdgmmBatched_64_(handle,side,m,n,AP,lda,x,incx,CP,ldc,batchCount) &
         bind(c, name="hipblasCdgmmBatched_64")
@@ -36194,9 +33028,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdgmmBatched_64
     function hipblasZdgmmBatched_64_(handle,side,m,n,AP,lda,x,incx,CP,ldc,batchCount) &
         bind(c, name="hipblasZdgmmBatched_64")
@@ -36217,7 +33049,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  BLAS Level 3 API
   !>
@@ -36265,7 +33096,6 @@ module hipfort_hipblas
   !>               stride from the start of one matrix (C_i) to the next one (C_i+1).
   !>     @param[in] batchCount - [int]
   !>                 number of instances i in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSdgmmStridedBatched
     function hipblasSdgmmStridedBatched_(handle,side,m,n,AP,lda,strideA,x,incx,stridex,CP,ldc, &
         strideC,batchCount) &
@@ -36301,9 +33131,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDdgmmStridedBatched
     function hipblasDdgmmStridedBatched_(handle,side,m,n,AP,lda,strideA,x,incx,stridex,CP,ldc, &
         strideC,batchCount) &
@@ -36339,9 +33167,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCdgmmStridedBatched
     function hipblasCdgmmStridedBatched_(handle,side,m,n,AP,lda,strideA,x,incx,stridex,CP,ldc, &
         strideC,batchCount) &
@@ -36377,9 +33203,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdgmmStridedBatched
     function hipblasZdgmmStridedBatched_(handle,side,m,n,AP,lda,strideA,x,incx,stridex,CP,ldc, &
         strideC,batchCount) &
@@ -36415,9 +33239,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasSdgmmStridedBatched_64
     function hipblasSdgmmStridedBatched_64_(handle,side,m,n,AP,lda,strideA,x,incx,stridex,CP,ldc, &
         strideC,batchCount) &
@@ -36442,9 +33264,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDdgmmStridedBatched_64
     function hipblasDdgmmStridedBatched_64_(handle,side,m,n,AP,lda,strideA,x,incx,stridex,CP,ldc, &
         strideC,batchCount) &
@@ -36469,9 +33289,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCdgmmStridedBatched_64
     function hipblasCdgmmStridedBatched_64_(handle,side,m,n,AP,lda,strideA,x,incx,stridex,CP,ldc, &
         strideC,batchCount) &
@@ -36496,9 +33314,7 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZdgmmStridedBatched_64
     function hipblasZdgmmStridedBatched_64_(handle,side,m,n,AP,lda,strideA,x,incx,stridex,CP,ldc, &
         strideC,batchCount) &
@@ -36523,7 +33339,6 @@ module hipfort_hipblas
       integer(c_int64_t),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  SOLVER API
   !>
@@ -36569,7 +33384,6 @@ module hipfort_hipblas
   !>     @param[out] myInfo - pointer to a int on the GPU.
   !>               - If info = 0, successful exit.
   !>               - If info = j > 0, U is singular. U[j,j] is the first zero pivot.
-#ifndef USE_CUDA_NAMES
   interface hipblasSgetrf
     function hipblasSgetrf_(handle,n,A,lda,ipiv,myInfo) bind(c, name="hipblasSgetrf")
       use iso_c_binding
@@ -36595,9 +33409,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgetrf
     function hipblasDgetrf_(handle,n,A,lda,ipiv,myInfo) bind(c, name="hipblasDgetrf")
       use iso_c_binding
@@ -36623,9 +33435,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgetrf
     function hipblasCgetrf_(handle,n,A,lda,ipiv,myInfo) bind(c, name="hipblasCgetrf")
       use iso_c_binding
@@ -36651,9 +33461,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgetrf
     function hipblasZgetrf_(handle,n,A,lda,ipiv,myInfo) bind(c, name="hipblasZgetrf")
       use iso_c_binding
@@ -36679,7 +33487,6 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
   !>     \brief  SOLVER API
   !>
@@ -36732,13 +33539,8 @@ module hipfort_hipblas
   !>     @param[in] batchCount - int. batchCount >= 0.
   !>                 Number of matrices in the batch.
   interface hipblasSgetrfBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasSgetrfBatched_(handle,n,A,lda,ipiv,myInfo,batchCount) &
-        bind(c, name="cublasSgetrfBatched")
-#else
     function hipblasSgetrfBatched_(handle,n,A,lda,ipiv,myInfo,batchCount) &
         bind(c, name="hipblasSgetrfBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -36754,13 +33556,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgetrfBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasDgetrfBatched_(handle,n,A,lda,ipiv,myInfo,batchCount) &
-        bind(c, name="cublasDgetrfBatched")
-#else
     function hipblasDgetrfBatched_(handle,n,A,lda,ipiv,myInfo,batchCount) &
         bind(c, name="hipblasDgetrfBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -36776,13 +33573,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgetrfBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasCgetrfBatched_(handle,n,A,lda,ipiv,myInfo,batchCount) &
-        bind(c, name="cublasCgetrfBatched")
-#else
     function hipblasCgetrfBatched_(handle,n,A,lda,ipiv,myInfo,batchCount) &
         bind(c, name="hipblasCgetrfBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -36798,13 +33590,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgetrfBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasZgetrfBatched_(handle,n,A,lda,ipiv,myInfo,batchCount) &
-        bind(c, name="cublasZgetrfBatched")
-#else
     function hipblasZgetrfBatched_(handle,n,A,lda,ipiv,myInfo,batchCount) &
         bind(c, name="hipblasZgetrfBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -36878,7 +33665,6 @@ module hipfort_hipblas
   !>               - If info[i] = j > 0, U_i is singular. U_i[j,j] is the first zero pivot.
   !>     @param[in] batchCount - int. batchCount >= 0.
   !>                 Number of matrices in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSgetrfStridedBatched
     function hipblasSgetrfStridedBatched_(handle,n,A,lda,strideA,ipiv,strideP,myInfo,batchCount) &
         bind(c, name="hipblasSgetrfStridedBatched")
@@ -36908,9 +33694,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgetrfStridedBatched
     function hipblasDgetrfStridedBatched_(handle,n,A,lda,strideA,ipiv,strideP,myInfo,batchCount) &
         bind(c, name="hipblasDgetrfStridedBatched")
@@ -36940,9 +33724,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgetrfStridedBatched
     function hipblasCgetrfStridedBatched_(handle,n,A,lda,strideA,ipiv,strideP,myInfo,batchCount) &
         bind(c, name="hipblasCgetrfStridedBatched")
@@ -36972,9 +33754,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgetrfStridedBatched
     function hipblasZgetrfStridedBatched_(handle,n,A,lda,strideA,ipiv,strideP,myInfo,batchCount) &
         bind(c, name="hipblasZgetrfStridedBatched")
@@ -37004,7 +33784,6 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
   !>     \brief  SOLVER API
   !>
@@ -37051,7 +33830,6 @@ module hipfort_hipblas
   !>     @param[out] myInfo - pointer to a int on the host.
   !>               - If info = 0, successful exit.
   !>               - If info = j < 0, the argument at position -j is invalid.
-#ifndef USE_CUDA_NAMES
   interface hipblasSgetrs
     function hipblasSgetrs_(handle,trans,n,nrhs,A,lda,ipiv,B,ldb,myInfo) &
         bind(c, name="hipblasSgetrs")
@@ -37082,9 +33860,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgetrs
     function hipblasDgetrs_(handle,trans,n,nrhs,A,lda,ipiv,B,ldb,myInfo) &
         bind(c, name="hipblasDgetrs")
@@ -37115,9 +33891,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgetrs
     function hipblasCgetrs_(handle,trans,n,nrhs,A,lda,ipiv,B,ldb,myInfo) &
         bind(c, name="hipblasCgetrs")
@@ -37148,9 +33922,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgetrs
     function hipblasZgetrs_(handle,trans,n,nrhs,A,lda,ipiv,B,ldb,myInfo) &
         bind(c, name="hipblasZgetrs")
@@ -37181,7 +33953,6 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
   !>     \brief  SOLVER API
   !>
@@ -37236,13 +34007,8 @@ module hipfort_hipblas
   !>     @param[in] batchCount - int. batchCount >= 0.
   !>                 Number of instances (systems) in the batch.
   interface hipblasSgetrsBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasSgetrsBatched_(handle,trans,n,nrhs,A,lda,ipiv,B,ldb,myInfo,batchCount) &
-        bind(c, name="cublasSgetrsBatched")
-#else
     function hipblasSgetrsBatched_(handle,trans,n,nrhs,A,lda,ipiv,B,ldb,myInfo,batchCount) &
         bind(c, name="hipblasSgetrsBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -37262,13 +34028,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgetrsBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasDgetrsBatched_(handle,trans,n,nrhs,A,lda,ipiv,B,ldb,myInfo,batchCount) &
-        bind(c, name="cublasDgetrsBatched")
-#else
     function hipblasDgetrsBatched_(handle,trans,n,nrhs,A,lda,ipiv,B,ldb,myInfo,batchCount) &
         bind(c, name="hipblasDgetrsBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -37288,13 +34049,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgetrsBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasCgetrsBatched_(handle,trans,n,nrhs,A,lda,ipiv,B,ldb,myInfo,batchCount) &
-        bind(c, name="cublasCgetrsBatched")
-#else
     function hipblasCgetrsBatched_(handle,trans,n,nrhs,A,lda,ipiv,B,ldb,myInfo,batchCount) &
         bind(c, name="hipblasCgetrsBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -37314,13 +34070,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgetrsBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasZgetrsBatched_(handle,trans,n,nrhs,A,lda,ipiv,B,ldb,myInfo,batchCount) &
-        bind(c, name="cublasZgetrsBatched")
-#else
     function hipblasZgetrsBatched_(handle,trans,n,nrhs,A,lda,ipiv,B,ldb,myInfo,batchCount) &
         bind(c, name="hipblasZgetrsBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -37404,7 +34155,6 @@ module hipfort_hipblas
   !>               - If info = j < 0, the argument at position -j is invalid.
   !>     @param[in] batchCount - int. batchCount >= 0.
   !>                 Number of instances (systems) in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSgetrsStridedBatched
     function hipblasSgetrsStridedBatched_(handle,trans,n,nrhs,A,lda,strideA,ipiv,strideP,B,ldb, &
         strideB,myInfo,batchCount) &
@@ -37440,9 +34190,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgetrsStridedBatched
     function hipblasDgetrsStridedBatched_(handle,trans,n,nrhs,A,lda,strideA,ipiv,strideP,B,ldb, &
         strideB,myInfo,batchCount) &
@@ -37478,9 +34226,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgetrsStridedBatched
     function hipblasCgetrsStridedBatched_(handle,trans,n,nrhs,A,lda,strideA,ipiv,strideP,B,ldb, &
         strideB,myInfo,batchCount) &
@@ -37516,9 +34262,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgetrsStridedBatched
     function hipblasZgetrsStridedBatched_(handle,trans,n,nrhs,A,lda,strideA,ipiv,strideP,B,ldb, &
         strideB,myInfo,batchCount) &
@@ -37554,7 +34298,6 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
   !>     \brief  SOLVER API
   !>
@@ -37599,13 +34342,8 @@ module hipfort_hipblas
   !>     @param[in] batchCount - int. batchCount >= 0.
   !>                 Number of matrices in the batch.
   interface hipblasSgetriBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasSgetriBatched_(handle,n,A,lda,ipiv,C,ldc,myInfo,batchCount) &
-        bind(c, name="cublasSgetriBatched")
-#else
     function hipblasSgetriBatched_(handle,n,A,lda,ipiv,C,ldc,myInfo,batchCount) &
         bind(c, name="hipblasSgetriBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -37623,13 +34361,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgetriBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasDgetriBatched_(handle,n,A,lda,ipiv,C,ldc,myInfo,batchCount) &
-        bind(c, name="cublasDgetriBatched")
-#else
     function hipblasDgetriBatched_(handle,n,A,lda,ipiv,C,ldc,myInfo,batchCount) &
         bind(c, name="hipblasDgetriBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -37647,13 +34380,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgetriBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasCgetriBatched_(handle,n,A,lda,ipiv,C,ldc,myInfo,batchCount) &
-        bind(c, name="cublasCgetriBatched")
-#else
     function hipblasCgetriBatched_(handle,n,A,lda,ipiv,C,ldc,myInfo,batchCount) &
         bind(c, name="hipblasCgetriBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -37671,13 +34399,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgetriBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasZgetriBatched_(handle,n,A,lda,ipiv,C,ldc,myInfo,batchCount) &
-        bind(c, name="cublasZgetriBatched")
-#else
     function hipblasZgetriBatched_(handle,n,A,lda,ipiv,C,ldc,myInfo,batchCount) &
         bind(c, name="hipblasZgetriBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -37758,7 +34481,6 @@ module hipfort_hipblas
   !>                 - If info = 0, successful exit.
   !>                 - If info = i > 0, the solution could not be computed because input matrix A is
   !>                 rank deficient; the i-th diagonal element of its triangular factor is zero.
-#ifndef USE_CUDA_NAMES
   interface hipblasSgels
     function hipblasSgels_(handle,trans,m,n,nrhs,A,lda,B,ldb,myInfo,deviceInfo) &
         bind(c, name="hipblasSgels")
@@ -37779,9 +34501,7 @@ module hipfort_hipblas
       type(c_ptr),value :: deviceInfo
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgels
     function hipblasDgels_(handle,trans,m,n,nrhs,A,lda,B,ldb,myInfo,deviceInfo) &
         bind(c, name="hipblasDgels")
@@ -37802,9 +34522,7 @@ module hipfort_hipblas
       type(c_ptr),value :: deviceInfo
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgels
     function hipblasCgels_(handle,trans,m,n,nrhs,A,lda,B,ldb,myInfo,deviceInfo) &
         bind(c, name="hipblasCgels")
@@ -37825,9 +34543,7 @@ module hipfort_hipblas
       type(c_ptr),value :: deviceInfo
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgels
     function hipblasZgels_(handle,trans,m,n,nrhs,A,lda,B,ldb,myInfo,deviceInfo) &
         bind(c, name="hipblasZgels")
@@ -37848,7 +34564,6 @@ module hipfort_hipblas
       type(c_ptr),value :: deviceInfo
     end function
   end interface
-#endif
 
   !>     \brief  SOLVER API
   !>
@@ -37925,13 +34640,8 @@ module hipfort_hipblas
   !>     @param[in] batchCount - int. batchCount >= 0.
   !>                 Number of matrices in the batch.
   interface hipblasSgelsBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasSgelsBatched_(handle,trans,m,n,nrhs,A,lda,B,ldb,myInfo,deviceInfo,batchCount) &
-        bind(c, name="cublasSgelsBatched")
-#else
     function hipblasSgelsBatched_(handle,trans,m,n,nrhs,A,lda,B,ldb,myInfo,deviceInfo,batchCount) &
         bind(c, name="hipblasSgelsBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -37952,13 +34662,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgelsBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasDgelsBatched_(handle,trans,m,n,nrhs,A,lda,B,ldb,myInfo,deviceInfo,batchCount) &
-        bind(c, name="cublasDgelsBatched")
-#else
     function hipblasDgelsBatched_(handle,trans,m,n,nrhs,A,lda,B,ldb,myInfo,deviceInfo,batchCount) &
         bind(c, name="hipblasDgelsBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -37979,13 +34684,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgelsBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasCgelsBatched_(handle,trans,m,n,nrhs,A,lda,B,ldb,myInfo,deviceInfo,batchCount) &
-        bind(c, name="cublasCgelsBatched")
-#else
     function hipblasCgelsBatched_(handle,trans,m,n,nrhs,A,lda,B,ldb,myInfo,deviceInfo,batchCount) &
         bind(c, name="hipblasCgelsBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -38006,13 +34706,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgelsBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasZgelsBatched_(handle,trans,m,n,nrhs,A,lda,B,ldb,myInfo,deviceInfo,batchCount) &
-        bind(c, name="cublasZgelsBatched")
-#else
     function hipblasZgelsBatched_(handle,trans,m,n,nrhs,A,lda,B,ldb,myInfo,deviceInfo,batchCount) &
         bind(c, name="hipblasZgelsBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -38112,7 +34807,6 @@ module hipfort_hipblas
   !>                 factor is zero.
   !>     @param[in] batchCount - int. batchCount >= 0.
   !>                 Number of matrices in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSgelsStridedBatched
     function hipblasSgelsStridedBatched_(handle,trans,m,n,nrhs,A,lda,strideA,B,ldb,strideB,myInfo, &
         deviceInfo,batchCount) &
@@ -38137,9 +34831,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgelsStridedBatched
     function hipblasDgelsStridedBatched_(handle,trans,m,n,nrhs,A,lda,strideA,B,ldb,strideB,myInfo, &
         deviceInfo,batchCount) &
@@ -38164,9 +34856,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgelsStridedBatched
     function hipblasCgelsStridedBatched_(handle,trans,m,n,nrhs,A,lda,strideA,B,ldb,strideB,myInfo, &
         deviceInfo,batchCount) &
@@ -38191,9 +34881,7 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgelsStridedBatched
     function hipblasZgelsStridedBatched_(handle,trans,m,n,nrhs,A,lda,strideA,B,ldb,strideB,myInfo, &
         deviceInfo,batchCount) &
@@ -38218,7 +34906,6 @@ module hipfort_hipblas
       integer(c_int),value :: batchCount
     end function
   end interface
-#endif
 
   !>     \brief  SOLVER API
   !>
@@ -38270,7 +34957,6 @@ module hipfort_hipblas
   !>     @param[out] myInfo - pointer to a int on the host.
   !>               - If info = 0, successful exit.
   !>               - If info = j < 0, the argument at position -j is invalid.
-#ifndef USE_CUDA_NAMES
   interface hipblasSgeqrf
     function hipblasSgeqrf_(handle,m,n,A,lda,ipiv,myInfo) bind(c, name="hipblasSgeqrf")
       use iso_c_binding
@@ -38297,9 +34983,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgeqrf
     function hipblasDgeqrf_(handle,m,n,A,lda,ipiv,myInfo) bind(c, name="hipblasDgeqrf")
       use iso_c_binding
@@ -38326,9 +35010,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgeqrf
     function hipblasCgeqrf_(handle,m,n,A,lda,ipiv,myInfo) bind(c, name="hipblasCgeqrf")
       use iso_c_binding
@@ -38355,9 +35037,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgeqrf
     function hipblasZgeqrf_(handle,m,n,A,lda,ipiv,myInfo) bind(c, name="hipblasZgeqrf")
       use iso_c_binding
@@ -38384,7 +35064,6 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
   !>     \brief  SOLVER API
   !>
@@ -38443,13 +35122,8 @@ module hipfort_hipblas
   !>     @param[in] batchCount - int. batchCount >= 0.
   !>                  Number of matrices in the batch.
   interface hipblasSgeqrfBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasSgeqrfBatched_(handle,m,n,A,lda,ipiv,myInfo,batchCount) &
-        bind(c, name="cublasSgeqrfBatched")
-#else
     function hipblasSgeqrfBatched_(handle,m,n,A,lda,ipiv,myInfo,batchCount) &
         bind(c, name="hipblasSgeqrfBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -38466,13 +35140,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDgeqrfBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasDgeqrfBatched_(handle,m,n,A,lda,ipiv,myInfo,batchCount) &
-        bind(c, name="cublasDgeqrfBatched")
-#else
     function hipblasDgeqrfBatched_(handle,m,n,A,lda,ipiv,myInfo,batchCount) &
         bind(c, name="hipblasDgeqrfBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -38489,13 +35158,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasCgeqrfBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasCgeqrfBatched_(handle,m,n,A,lda,ipiv,myInfo,batchCount) &
-        bind(c, name="cublasCgeqrfBatched")
-#else
     function hipblasCgeqrfBatched_(handle,m,n,A,lda,ipiv,myInfo,batchCount) &
         bind(c, name="hipblasCgeqrfBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -38512,13 +35176,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasZgeqrfBatched
-#ifdef USE_CUDA_NAMES
-    function hipblasZgeqrfBatched_(handle,m,n,A,lda,ipiv,myInfo,batchCount) &
-        bind(c, name="cublasZgeqrfBatched")
-#else
     function hipblasZgeqrfBatched_(handle,m,n,A,lda,ipiv,myInfo,batchCount) &
         bind(c, name="hipblasZgeqrfBatched")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -38598,7 +35257,6 @@ module hipfort_hipblas
   !>               - If info = j < 0, the argument at position -j is invalid.
   !>     @param[in] batchCount - int. batchCount >= 0.
   !>                  Number of matrices in the batch.
-#ifndef USE_CUDA_NAMES
   interface hipblasSgeqrfStridedBatched
     function hipblasSgeqrfStridedBatched_(handle,m,n,A,lda,strideA,ipiv,strideP,myInfo,batchCount) &
         bind(c, name="hipblasSgeqrfStridedBatched")
@@ -38629,9 +35287,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDgeqrfStridedBatched
     function hipblasDgeqrfStridedBatched_(handle,m,n,A,lda,strideA,ipiv,strideP,myInfo,batchCount) &
         bind(c, name="hipblasDgeqrfStridedBatched")
@@ -38662,9 +35318,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasCgeqrfStridedBatched
     function hipblasCgeqrfStridedBatched_(handle,m,n,A,lda,strideA,ipiv,strideP,myInfo,batchCount) &
         bind(c, name="hipblasCgeqrfStridedBatched")
@@ -38695,9 +35349,7 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasZgeqrfStridedBatched
     function hipblasZgeqrfStridedBatched_(handle,m,n,A,lda,strideA,ipiv,strideP,myInfo,batchCount) &
         bind(c, name="hipblasZgeqrfStridedBatched")
@@ -38728,7 +35380,6 @@ module hipfort_hipblas
 #endif
 #endif
   end interface
-#endif
 
   !>  \brief  BLAS EX API
   !>
@@ -38816,15 +35467,9 @@ module hipfort_hipblas
   !>     @param[in] algo - [hipblasGemmAlgo_t]
   !>               enumerant specifying the algorithm type.
   interface hipblasGemmEx
-#ifdef USE_CUDA_NAMES
-    function hipblasGemmEx_(handle,transA,transB,m,n,k,alpha,A,aType,lda,B,bType,ldb,beta,C,cType, &
-        ldc,computeType,algo) &
-        bind(c, name="cublasGemmEx")
-#else
     function hipblasGemmEx_(handle,transA,transB,m,n,k,alpha,A,aType,lda,B,bType,ldb,beta,C,cType, &
         ldc,computeType,algo) &
         bind(c, name="hipblasGemmEx")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -38852,7 +35497,6 @@ module hipfort_hipblas
     end function
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipblasGemmExWithFlags
     function hipblasGemmExWithFlags_(handle,transA,transB,m,n,k,alpha,A,aType,lda,B,bType,ldb, &
         beta,C,cType,ldc,computeType,algo,flags) &
@@ -38884,18 +35528,11 @@ module hipfort_hipblas
       integer(kind(HIPBLAS_GEMM_FLAGS_NONE)),value :: flags
     end function
   end interface
-#endif
 
   interface hipblasGemmEx_64
-#ifdef USE_CUDA_NAMES
-    function hipblasGemmEx_64_(handle,transA,transB,m,n,k,alpha,A,aType,lda,B,bType,ldb,beta,C, &
-        cType,ldc,computeType,algo) &
-        bind(c, name="cublasGemmEx_64")
-#else
     function hipblasGemmEx_64_(handle,transA,transB,m,n,k,alpha,A,aType,lda,B,bType,ldb,beta,C, &
         cType,ldc,computeType,algo) &
         bind(c, name="hipblasGemmEx_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -38923,7 +35560,6 @@ module hipfort_hipblas
     end function
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipblasGemmExWithFlags_64
     function hipblasGemmExWithFlags_64_(handle,transA,transB,m,n,k,alpha,A,aType,lda,B,bType,ldb, &
         beta,C,cType,ldc,computeType,algo,flags) &
@@ -38955,7 +35591,6 @@ module hipfort_hipblas
       integer(kind(HIPBLAS_GEMM_FLAGS_NONE)),value :: flags
     end function
   end interface
-#endif
 
   !>  \brief  BLAS EX API
   !>
@@ -39034,15 +35669,9 @@ module hipfort_hipblas
   !>     @param[in] algo - [hipblasGemmAlgo_t]
   !>               enumerant specifying the algorithm type.
   interface hipblasGemmBatchedEx
-#ifdef USE_CUDA_NAMES
-    function hipblasGemmBatchedEx_(handle,transA,transB,m,n,k,alpha,A,aType,lda,B,bType,ldb,beta, &
-        C,cType,ldc,batchCount,computeType,algo) &
-        bind(c, name="cublasGemmBatchedEx")
-#else
     function hipblasGemmBatchedEx_(handle,transA,transB,m,n,k,alpha,A,aType,lda,B,bType,ldb,beta, &
         C,cType,ldc,batchCount,computeType,algo) &
         bind(c, name="hipblasGemmBatchedEx")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -39071,7 +35700,6 @@ module hipfort_hipblas
     end function
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipblasGemmBatchedExWithFlags
     function hipblasGemmBatchedExWithFlags_(handle,transA,transB,m,n,k,alpha,A,aType,lda,B,bType, &
         ldb,beta,C,cType,ldc,batchCount,computeType,algo,flags) &
@@ -39104,18 +35732,11 @@ module hipfort_hipblas
       integer(kind(HIPBLAS_GEMM_FLAGS_NONE)),value :: flags
     end function
   end interface
-#endif
 
   interface hipblasGemmBatchedEx_64
-#ifdef USE_CUDA_NAMES
-    function hipblasGemmBatchedEx_64_(handle,transA,transB,m,n,k,alpha,A,aType,lda,B,bType,ldb, &
-        beta,C,cType,ldc,batchCount,computeType,algo) &
-        bind(c, name="cublasGemmBatchedEx_64")
-#else
     function hipblasGemmBatchedEx_64_(handle,transA,transB,m,n,k,alpha,A,aType,lda,B,bType,ldb, &
         beta,C,cType,ldc,batchCount,computeType,algo) &
         bind(c, name="hipblasGemmBatchedEx_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -39144,7 +35765,6 @@ module hipfort_hipblas
     end function
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipblasGemmBatchedExWithFlags_64
     function hipblasGemmBatchedExWithFlags_64_(handle,transA,transB,m,n,k,alpha,A,aType,lda,B, &
         bType,ldb,beta,C,cType,ldc,batchCount,computeType,algo,flags) &
@@ -39177,7 +35797,6 @@ module hipfort_hipblas
       integer(kind(HIPBLAS_GEMM_FLAGS_NONE)),value :: flags
     end function
   end interface
-#endif
 
   !>  \brief   BLAS EX API
   !>
@@ -39264,15 +35883,9 @@ module hipfort_hipblas
   !>     @param[in] algo - [hipblasGemmAlgo_t]
   !>               enumerant specifying the algorithm type.
   interface hipblasGemmStridedBatchedEx
-#ifdef USE_CUDA_NAMES
-    function hipblasGemmStridedBatchedEx_(handle,transA,transB,m,n,k,alpha,A,aType,lda,strideA,B, &
-        bType,ldb,strideB,beta,C,cType,ldc,strideC,batchCount,computeType,algo) &
-        bind(c, name="cublasGemmStridedBatchedEx")
-#else
     function hipblasGemmStridedBatchedEx_(handle,transA,transB,m,n,k,alpha,A,aType,lda,strideA,B, &
         bType,ldb,strideB,beta,C,cType,ldc,strideC,batchCount,computeType,algo) &
         bind(c, name="hipblasGemmStridedBatchedEx")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -39304,7 +35917,6 @@ module hipfort_hipblas
     end function
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipblasGemmStridedBatchedExWithFlags
     function hipblasGemmStridedBatchedExWithFlags_(handle,transA,transB,m,n,k,alpha,A,aType,lda, &
         strideA,B,bType,ldb,strideB,beta,C,cType,ldc,strideC,batchCount,computeType,algo,flags) &
@@ -39340,18 +35952,11 @@ module hipfort_hipblas
       integer(kind(HIPBLAS_GEMM_FLAGS_NONE)),value :: flags
     end function
   end interface
-#endif
 
   interface hipblasGemmStridedBatchedEx_64
-#ifdef USE_CUDA_NAMES
-    function hipblasGemmStridedBatchedEx_64_(handle,transA,transB,m,n,k,alpha,A,aType,lda,strideA, &
-        B,bType,ldb,strideB,beta,C,cType,ldc,strideC,batchCount,computeType,algo) &
-        bind(c, name="cublasGemmStridedBatchedEx_64")
-#else
     function hipblasGemmStridedBatchedEx_64_(handle,transA,transB,m,n,k,alpha,A,aType,lda,strideA, &
         B,bType,ldb,strideB,beta,C,cType,ldc,strideC,batchCount,computeType,algo) &
         bind(c, name="hipblasGemmStridedBatchedEx_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -39383,7 +35988,6 @@ module hipfort_hipblas
     end function
   end interface
 
-#ifndef USE_CUDA_NAMES
   interface hipblasGemmStridedBatchedExWithFlags_64
     function hipblasGemmStridedBatchedExWithFlags_64_(handle,transA,transB,m,n,k,alpha,A,aType, &
         lda,strideA,B,bType,ldb,strideB,beta,C,cType,ldc,strideC,batchCount,computeType,algo, &
@@ -39420,7 +36024,6 @@ module hipfort_hipblas
       integer(kind(HIPBLAS_GEMM_FLAGS_NONE)),value :: flags
     end function
   end interface
-#endif
 
   !>  \brief  BLAS EX API
   !>
@@ -39474,7 +36077,6 @@ module hipfort_hipblas
   !>     @param[in] computeType
   !>     [hipDataType]
   !>               specifies the datatype of the computation.
-#ifndef USE_CUDA_NAMES
   interface hipblasSyrkEx
     function hipblasSyrkEx_(handle,uplo,transA,n,k,alpha,A,aType,lda,beta,C,cType,ldc,computeType) &
         bind(c, name="hipblasSyrkEx")
@@ -39499,7 +36101,6 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: computeType
     end function
   end interface
-#endif
 
   !>  BLAS EX API
   !>
@@ -39611,7 +36212,6 @@ module hipfort_hipblas
   !>     @param[in] computeType
   !>     [hipDataType]
   !>             specifies the datatype of computation.
-#ifndef USE_CUDA_NAMES
   interface hipblasTrsmEx
     function hipblasTrsmEx_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,invA,invAsize, &
         computeType) &
@@ -39638,7 +36238,6 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: computeType
     end function
   end interface
-#endif
 
   !>  \brief  BLAS EX API
   !>
@@ -39692,7 +36291,6 @@ module hipfort_hipblas
   !>     @param[in] computeType
   !>     [hipDataType]
   !>               specifies the datatype of the computation.
-#ifndef USE_CUDA_NAMES
   interface hipblasHerkEx
     function hipblasHerkEx_(handle,uplo,transA,n,k,alpha,A,aType,lda,beta,C,cType,ldc,computeType) &
         bind(c, name="hipblasHerkEx")
@@ -39717,7 +36315,6 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: computeType
     end function
   end interface
-#endif
 
   !>  BLAS EX API
   !>
@@ -39835,7 +36432,6 @@ module hipfort_hipblas
   !>     @param[in] computeType
   !>     [hipDataType]
   !>             specifies the datatype of computation.
-#ifndef USE_CUDA_NAMES
   interface hipblasTrsmBatchedEx
     function hipblasTrsmBatchedEx_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,batchCount, &
         invA,invAsize,computeType) &
@@ -39863,7 +36459,6 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: computeType
     end function
   end interface
-#endif
 
   !>  \brief   BLAS EX API
   !>
@@ -39991,7 +36586,6 @@ module hipfort_hipblas
   !>     @param[in] computeType
   !>     [hipDataType]
   !>             specifies the datatype of computation.
-#ifndef USE_CUDA_NAMES
   interface hipblasTrsmStridedBatchedEx
     function hipblasTrsmStridedBatchedEx_(handle,side,uplo,transA,diag,m,n,alpha,A,lda,strideA,B, &
         ldb,strideB,batchCount,invA,invAsize,strideInvA,computeType) &
@@ -40022,7 +36616,6 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: computeType
     end function
   end interface
-#endif
 
   !>  \brief  BLAS EX API
   !>
@@ -40058,13 +36651,8 @@ module hipfort_hipblas
   !>     [hipDataType]
   !>               specifies the datatype of computation.
   interface hipblasAxpyEx
-#ifdef USE_CUDA_NAMES
-    function hipblasAxpyEx_(handle,n,alpha,alphaType,x,xType,incx,y,yType,incy,executionType) &
-        bind(c, name="cublasAxpyEx")
-#else
     function hipblasAxpyEx_(handle,n,alpha,alphaType,x,xType,incx,y,yType,incy,executionType) &
         bind(c, name="hipblasAxpyEx")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -40085,13 +36673,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasAxpyEx_64
-#ifdef USE_CUDA_NAMES
-    function hipblasAxpyEx_64_(handle,n,alpha,alphaType,x,xType,incx,y,yType,incy,executionType) &
-        bind(c, name="cublasAxpyEx_64")
-#else
     function hipblasAxpyEx_64_(handle,n,alpha,alphaType,x,xType,incx,y,yType,incy,executionType) &
         bind(c, name="hipblasAxpyEx_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -40147,7 +36730,6 @@ module hipfort_hipblas
   !>     @param[in] executionType
   !>     [hipDataType]
   !>               specifies the datatype of computation.
-#ifndef USE_CUDA_NAMES
   interface hipblasAxpyBatchedEx
     function hipblasAxpyBatchedEx_(handle,n,alpha,alphaType,x,xType,incx,y,yType,incy,batchCount, &
         executionType) &
@@ -40171,9 +36753,7 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasAxpyBatchedEx_64
     function hipblasAxpyBatchedEx_64_(handle,n,alpha,alphaType,x,xType,incx,y,yType,incy, &
         batchCount,executionType) &
@@ -40197,7 +36777,6 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
   !>  \brief  BLAS EX API
   !>
@@ -40245,7 +36824,6 @@ module hipfort_hipblas
   !>     @param[in] executionType
   !>     [hipDataType]
   !>               specifies the datatype of computation.
-#ifndef USE_CUDA_NAMES
   interface hipblasAxpyStridedBatchedEx
     function hipblasAxpyStridedBatchedEx_(handle,n,alpha,alphaType,x,xType,incx,stridex,y,yType, &
         incy,stridey,batchCount,executionType) &
@@ -40271,9 +36849,7 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasAxpyStridedBatchedEx_64
     function hipblasAxpyStridedBatchedEx_64_(handle,n,alpha,alphaType,x,xType,incx,stridex,y, &
         yType,incy,stridey,batchCount,executionType) &
@@ -40299,7 +36875,6 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
   !>     \brief  BLAS EX API
   !>
@@ -40341,13 +36916,8 @@ module hipfort_hipblas
   !>     [hipDataType]
   !>               specifies the datatype of computation.
   interface hipblasDotEx
-#ifdef USE_CUDA_NAMES
-    function hipblasDotEx_(handle,n,x,xType,incx,y,yType,incy,myResult,resultType,executionType) &
-        bind(c, name="cublasDotEx")
-#else
     function hipblasDotEx_(handle,n,x,xType,incx,y,yType,incy,myResult,resultType,executionType) &
         bind(c, name="hipblasDotEx")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -40368,13 +36938,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDotcEx
-#ifdef USE_CUDA_NAMES
-    function hipblasDotcEx_(handle,n,x,xType,incx,y,yType,incy,myResult,resultType,executionType) &
-        bind(c, name="cublasDotcEx")
-#else
     function hipblasDotcEx_(handle,n,x,xType,incx,y,yType,incy,myResult,resultType,executionType) &
         bind(c, name="hipblasDotcEx")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -40395,15 +36960,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDotEx_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDotEx_64_(handle,n,x,xType,incx,y,yType,incy,myResult,resultType, &
-        executionType) &
-        bind(c, name="cublasDotEx_64")
-#else
     function hipblasDotEx_64_(handle,n,x,xType,incx,y,yType,incy,myResult,resultType, &
         executionType) &
         bind(c, name="hipblasDotEx_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -40424,15 +36983,9 @@ module hipfort_hipblas
   end interface
 
   interface hipblasDotcEx_64
-#ifdef USE_CUDA_NAMES
-    function hipblasDotcEx_64_(handle,n,x,xType,incx,y,yType,incy,myResult,resultType, &
-        executionType) &
-        bind(c, name="cublasDotcEx_64")
-#else
     function hipblasDotcEx_64_(handle,n,x,xType,incx,y,yType,incy,myResult,resultType, &
         executionType) &
         bind(c, name="hipblasDotcEx_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -40497,7 +37050,6 @@ module hipfort_hipblas
   !>     @param[in] executionType
   !>     [hipDataType]
   !>               specifies the datatype of computation.
-#ifndef USE_CUDA_NAMES
   interface hipblasDotBatchedEx
     function hipblasDotBatchedEx_(handle,n,x,xType,incx,y,yType,incy,batchCount,myResult, &
         resultType,executionType) &
@@ -40521,9 +37073,7 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDotcBatchedEx
     function hipblasDotcBatchedEx_(handle,n,x,xType,incx,y,yType,incy,batchCount,myResult, &
         resultType,executionType) &
@@ -40547,9 +37097,7 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDotBatchedEx_64
     function hipblasDotBatchedEx_64_(handle,n,x,xType,incx,y,yType,incy,batchCount,myResult, &
         resultType,executionType) &
@@ -40573,9 +37121,7 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDotcBatchedEx_64
     function hipblasDotcBatchedEx_64_(handle,n,x,xType,incx,y,yType,incy,batchCount,myResult, &
         resultType,executionType) &
@@ -40599,7 +37145,6 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
   !>     \brief  BLAS EX API
   !>
@@ -40651,7 +37196,6 @@ module hipfort_hipblas
   !>     @param[in] executionType
   !>     [hipDataType]
   !>               specifies the datatype of computation.
-#ifndef USE_CUDA_NAMES
   interface hipblasDotStridedBatchedEx
     function hipblasDotStridedBatchedEx_(handle,n,x,xType,incx,stridex,y,yType,incy,stridey, &
         batchCount,myResult,resultType,executionType) &
@@ -40677,9 +37221,7 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDotcStridedBatchedEx
     function hipblasDotcStridedBatchedEx_(handle,n,x,xType,incx,stridex,y,yType,incy,stridey, &
         batchCount,myResult,resultType,executionType) &
@@ -40705,9 +37247,7 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDotStridedBatchedEx_64
     function hipblasDotStridedBatchedEx_64_(handle,n,x,xType,incx,stridex,y,yType,incy,stridey, &
         batchCount,myResult,resultType,executionType) &
@@ -40733,9 +37273,7 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasDotcStridedBatchedEx_64
     function hipblasDotcStridedBatchedEx_64_(handle,n,x,xType,incx,stridex,y,yType,incy,stridey, &
         batchCount,myResult,resultType,executionType) &
@@ -40761,7 +37299,6 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
   !>  \brief   BLAS EX API
   !>
@@ -40793,13 +37330,8 @@ module hipfort_hipblas
   !>     [hipDataType]
   !>               specifies the datatype of computation.
   interface hipblasNrm2Ex
-#ifdef USE_CUDA_NAMES
-    function hipblasNrm2Ex_(handle,n,x,xType,incx,myResult,resultType,executionType) &
-        bind(c, name="cublasNrm2Ex")
-#else
     function hipblasNrm2Ex_(handle,n,x,xType,incx,myResult,resultType,executionType) &
         bind(c, name="hipblasNrm2Ex")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -40817,13 +37349,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasNrm2Ex_64
-#ifdef USE_CUDA_NAMES
-    function hipblasNrm2Ex_64_(handle,n,x,xType,incx,myResult,resultType,executionType) &
-        bind(c, name="cublasNrm2Ex_64")
-#else
     function hipblasNrm2Ex_64_(handle,n,x,xType,incx,myResult,resultType,executionType) &
         bind(c, name="hipblasNrm2Ex_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -40872,7 +37399,6 @@ module hipfort_hipblas
   !>     @param[in] executionType
   !>     [hipDataType]
   !>               specifies the datatype of computation.
-#ifndef USE_CUDA_NAMES
   interface hipblasNrm2BatchedEx
     function hipblasNrm2BatchedEx_(handle,n,x,xType,incx,batchCount,myResult,resultType, &
         executionType) &
@@ -40893,9 +37419,7 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasNrm2BatchedEx_64
     function hipblasNrm2BatchedEx_64_(handle,n,x,xType,incx,batchCount,myResult,resultType, &
         executionType) &
@@ -40916,7 +37440,6 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
   !>  \brief   BLAS EX API
   !>
@@ -40956,7 +37479,6 @@ module hipfort_hipblas
   !>     @param[in] executionType
   !>     [hipDataType]
   !>               specifies the datatype of computation.
-#ifndef USE_CUDA_NAMES
   interface hipblasNrm2StridedBatchedEx
     function hipblasNrm2StridedBatchedEx_(handle,n,x,xType,incx,stridex,batchCount,myResult, &
         resultType,executionType) &
@@ -40978,9 +37500,7 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasNrm2StridedBatchedEx_64
     function hipblasNrm2StridedBatchedEx_64_(handle,n,x,xType,incx,stridex,batchCount,myResult, &
         resultType,executionType) &
@@ -41002,7 +37522,6 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
   !>  \brief  BLAS EX API
   !>
@@ -41051,13 +37570,8 @@ module hipfort_hipblas
   !>     [hipDataType]
   !>             specifies the datatype of computation.
   interface hipblasRotEx
-#ifdef USE_CUDA_NAMES
-    function hipblasRotEx_(handle,n,x,xType,incx,y,yType,incy,c,s,csType,executionType) &
-        bind(c, name="cublasRotEx")
-#else
     function hipblasRotEx_(handle,n,x,xType,incx,y,yType,incy,c,s,csType,executionType) &
         bind(c, name="hipblasRotEx")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -41079,13 +37593,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasRotEx_64
-#ifdef USE_CUDA_NAMES
-    function hipblasRotEx_64_(handle,n,x,xType,incx,y,yType,incy,c,s,csType,executionType) &
-        bind(c, name="cublasRotEx_64")
-#else
     function hipblasRotEx_64_(handle,n,x,xType,incx,y,yType,incy,c,s,csType,executionType) &
         bind(c, name="hipblasRotEx_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -41155,7 +37664,6 @@ module hipfort_hipblas
   !>     @param[in] executionType
   !>     [hipDataType]
   !>             specifies the datatype of computation.
-#ifndef USE_CUDA_NAMES
   interface hipblasRotBatchedEx
     function hipblasRotBatchedEx_(handle,n,x,xType,incx,y,yType,incy,c,s,csType,batchCount, &
         executionType) &
@@ -41180,9 +37688,7 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasRotBatchedEx_64
     function hipblasRotBatchedEx_64_(handle,n,x,xType,incx,y,yType,incy,c,s,csType,batchCount, &
         executionType) &
@@ -41207,7 +37713,6 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
   !>  \brief  BLAS EX API
   !>
@@ -41262,7 +37767,6 @@ module hipfort_hipblas
   !>     @param[in] executionType
   !>     [hipDataType]
   !>             specifies the datatype of computation.
-#ifndef USE_CUDA_NAMES
   interface hipblasRotStridedBatchedEx
     function hipblasRotStridedBatchedEx_(handle,n,x,xType,incx,stridex,y,yType,incy,stridey,c,s, &
         csType,batchCount,executionType) &
@@ -41289,9 +37793,7 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasRotStridedBatchedEx_64
     function hipblasRotStridedBatchedEx_64_(handle,n,x,xType,incx,stridex,y,yType,incy,stridey,c, &
         s,csType,batchCount,executionType) &
@@ -41318,7 +37820,6 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
   !>  \brief  BLAS EX API
   !>
@@ -41347,13 +37848,8 @@ module hipfort_hipblas
   !>     [hipDataType]
   !>                    specifies the datatype of computation.
   interface hipblasScalEx
-#ifdef USE_CUDA_NAMES
-    function hipblasScalEx_(handle,n,alpha,alphaType,x,xType,incx,executionType) &
-        bind(c, name="cublasScalEx")
-#else
     function hipblasScalEx_(handle,n,alpha,alphaType,x,xType,incx,executionType) &
         bind(c, name="hipblasScalEx")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -41371,13 +37867,8 @@ module hipfort_hipblas
   end interface
 
   interface hipblasScalEx_64
-#ifdef USE_CUDA_NAMES
-    function hipblasScalEx_64_(handle,n,alpha,alphaType,x,xType,incx,executionType) &
-        bind(c, name="cublasScalEx_64")
-#else
     function hipblasScalEx_64_(handle,n,alpha,alphaType,x,xType,incx,executionType) &
         bind(c, name="hipblasScalEx_64")
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       use hipfort_enums
@@ -41423,7 +37914,6 @@ module hipfort_hipblas
   !>     @param[in] executionType
   !>     [hipDataType]
   !>                    specifies the datatype of computation.
-#ifndef USE_CUDA_NAMES
   interface hipblasScalBatchedEx
     function hipblasScalBatchedEx_(handle,n,alpha,alphaType,x,xType,incx,batchCount,executionType) &
         bind(c, name="hipblasScalBatchedEx")
@@ -41443,9 +37933,7 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasScalBatchedEx_64
     function hipblasScalBatchedEx_64_(handle,n,alpha,alphaType,x,xType,incx,batchCount, &
         executionType) &
@@ -41466,7 +37954,6 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
   !>  \brief  BLAS EX API
   !>
@@ -41503,7 +37990,6 @@ module hipfort_hipblas
   !>     @param[in] executionType
   !>     [hipDataType]
   !>                    specifies the datatype of computation.
-#ifndef USE_CUDA_NAMES
   interface hipblasScalStridedBatchedEx
     function hipblasScalStridedBatchedEx_(handle,n,alpha,alphaType,x,xType,incx,stridex, &
         batchCount,executionType) &
@@ -41525,9 +38011,7 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
-#ifndef USE_CUDA_NAMES
   interface hipblasScalStridedBatchedEx_64
     function hipblasScalStridedBatchedEx_64_(handle,n,alpha,alphaType,x,xType,incx,stridex, &
         batchCount,executionType) &
@@ -41549,7 +38033,6 @@ module hipfort_hipblas
       integer(kind(HIP_R_32F)),value :: executionType
     end function
   end interface
-#endif
 
   !>  \brief  Auxiliary API
   !>
@@ -41558,7 +38041,6 @@ module hipfort_hipblas
   !>
   !>     @param[in] status - [hipblasStatus_t]
   !>             hipBLAS status to convert to string.
-#ifndef USE_CUDA_NAMES
   interface hipblasStatusToString
     function hipblasStatusToString_(status) bind(c, name="hipblasStatusToString")
       use iso_c_binding
@@ -41568,14 +38050,9 @@ module hipfort_hipblas
       integer(kind(HIPBLAS_STATUS_SUCCESS)),value :: status
     end function
   end interface
-#endif
 
   interface hipblasSetVector
-#ifdef USE_CUDA_NAMES
-    function hipblasSetVector_(n,elem_size,x,incx,y,incy) bind(c, name="cublasSetVector") result(ret)
-#else
     function hipblasSetVector_(n,elem_size,x,incx,y,incy) bind(c, name="hipblasSetVector") result(ret)
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -41606,11 +38083,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasGetVector
-#ifdef USE_CUDA_NAMES
-    function hipblasGetVector_(n,elem_size,x,incx,y,incy) bind(c, name="cublasGetVector") result(ret)
-#else
     function hipblasGetVector_(n,elem_size,x,incx,y,incy) bind(c, name="hipblasGetVector") result(ret)
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -41641,11 +38114,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSetMatrix
-#ifdef USE_CUDA_NAMES
-    function hipblasSetMatrix_(rows,cols,elem_size,A,lda,B,ldb) bind(c, name="cublasSetMatrix") result(ret)
-#else
     function hipblasSetMatrix_(rows,cols,elem_size,A,lda,B,ldb) bind(c, name="hipblasSetMatrix") result(ret)
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -41677,11 +38146,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasGetMatrix
-#ifdef USE_CUDA_NAMES
-    function hipblasGetMatrix_(rows,cols,elem_size,A,lda,B,ldb) bind(c, name="cublasGetMatrix") result(ret)
-#else
     function hipblasGetMatrix_(rows,cols,elem_size,A,lda,B,ldb) bind(c, name="hipblasGetMatrix") result(ret)
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -41713,11 +38178,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSetVectorAsync
-#ifdef USE_CUDA_NAMES
-    function hipblasSetVectorAsync_(n,elem_size,x,incx,y,incy,stream) bind(c, name="cublasSetVectorAsync") result(ret)
-#else
     function hipblasSetVectorAsync_(n,elem_size,x,incx,y,incy,stream) bind(c, name="hipblasSetVectorAsync") result(ret)
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -41749,11 +38210,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasGetVectorAsync
-#ifdef USE_CUDA_NAMES
-    function hipblasGetVectorAsync_(n,elem_size,x,incx,y,incy,stream) bind(c, name="cublasGetVectorAsync") result(ret)
-#else
     function hipblasGetVectorAsync_(n,elem_size,x,incx,y,incy,stream) bind(c, name="hipblasGetVectorAsync") result(ret)
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -41785,11 +38242,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasSetMatrixAsync
-#ifdef USE_CUDA_NAMES
-    function hipblasSetMatrixAsync_(rows,cols,elem_size,A,lda,B,ldb,stream) bind(c, name="cublasSetMatrixAsync") result(ret)
-#else
     function hipblasSetMatrixAsync_(rows,cols,elem_size,A,lda,B,ldb,stream) bind(c, name="hipblasSetMatrixAsync") result(ret)
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -41822,11 +38275,7 @@ module hipfort_hipblas
   end interface
 
   interface hipblasGetMatrixAsync
-#ifdef USE_CUDA_NAMES
-    function hipblasGetMatrixAsync_(rows,cols,elem_size,A,lda,B,ldb,stream) bind(c, name="cublasGetMatrixAsync") result(ret)
-#else
     function hipblasGetMatrixAsync_(rows,cols,elem_size,A,lda,B,ldb,stream) bind(c, name="hipblasGetMatrixAsync") result(ret)
-#endif
       use iso_c_binding
       use hipfort_hipblas_enums
       implicit none
@@ -42042,7 +38491,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasIsamaxStridedBatched_assumed_rank(handle,n,x,incx,stridex,batchCount,myResult)
       use iso_c_binding
@@ -42097,8 +38545,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasIdamaxStridedBatched_assumed_rank(handle,n,x,incx,stridex,batchCount,myResult)
       use iso_c_binding
@@ -42153,8 +38599,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasIcamaxStridedBatched_assumed_rank(handle,n,x,incx,stridex,batchCount,myResult)
       use iso_c_binding
@@ -42209,8 +38653,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasIzamaxStridedBatched_assumed_rank(handle,n,x,incx,stridex,batchCount,myResult)
       use iso_c_binding
@@ -42264,7 +38706,6 @@ module hipfort_hipblas
         stridex,batchCount,myResult)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasIsamin_assumed_rank(handle,n,x,incx,myResult)
@@ -42446,7 +38887,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasIsaminStridedBatched_assumed_rank(handle,n,x,incx,stridex,batchCount,myResult)
       use iso_c_binding
@@ -42501,8 +38941,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasIdaminStridedBatched_assumed_rank(handle,n,x,incx,stridex,batchCount,myResult)
       use iso_c_binding
@@ -42557,8 +38995,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasIcaminStridedBatched_assumed_rank(handle,n,x,incx,stridex,batchCount,myResult)
       use iso_c_binding
@@ -42613,8 +39049,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasIzaminStridedBatched_assumed_rank(handle,n,x,incx,stridex,batchCount,myResult)
       use iso_c_binding
@@ -42668,7 +39102,6 @@ module hipfort_hipblas
         stridex,batchCount,myResult)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSasum_assumed_rank(handle,n,x,incx,myResult)
@@ -42850,7 +39283,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSasumStridedBatched_assumed_rank(handle,n,x,incx,stridex,batchCount,myResult)
       use iso_c_binding
@@ -42905,8 +39337,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDasumStridedBatched_assumed_rank(handle,n,x,incx,stridex,batchCount,myResult)
       use iso_c_binding
@@ -42961,8 +39391,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasScasumStridedBatched_assumed_rank(handle,n,x,incx,stridex,batchCount,myResult)
       use iso_c_binding
@@ -43017,8 +39445,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDzasumStridedBatched_assumed_rank(handle,n,x,incx,stridex,batchCount,myResult)
       use iso_c_binding
@@ -43072,7 +39498,6 @@ module hipfort_hipblas
         stridex,batchCount,myResult)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSaxpy_assumed_rank(handle,n,alpha,x,incx,y,incy)
@@ -43278,7 +39703,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSaxpyStridedBatched_assumed_rank(handle,n,alpha,x,incx,stridex,y,incy,stridey, &
         batchCount)
@@ -43345,8 +39769,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDaxpyStridedBatched_assumed_rank(handle,n,alpha,x,incx,stridex,y,incy,stridey, &
         batchCount)
@@ -43413,8 +39835,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCaxpyStridedBatched_assumed_rank(handle,n,alpha,x,incx,stridex,y,incy,stridey, &
         batchCount)
@@ -43481,8 +39901,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZaxpyStridedBatched_assumed_rank(handle,n,alpha,x,incx,stridex,y,incy,stridey, &
         batchCount)
@@ -43548,7 +39966,6 @@ module hipfort_hipblas
         incx,stridex,c_loc(y),incy,stridey,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasScopy_assumed_rank(handle,n,x,incx,y,incy)
@@ -43742,7 +40159,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasScopyStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey, &
         batchCount)
@@ -43804,8 +40220,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDcopyStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey, &
         batchCount)
@@ -43867,8 +40281,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCcopyStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey, &
         batchCount)
@@ -43930,8 +40342,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZcopyStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey, &
         batchCount)
@@ -43992,7 +40402,6 @@ module hipfort_hipblas
         stridex,c_loc(y),incy,stridey,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSdot_assumed_rank(handle,n,x,incx,y,incy,myResult)
@@ -44300,7 +40709,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSdotStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey, &
         batchCount,myResult)
@@ -44367,8 +40775,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDdotStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey, &
         batchCount,myResult)
@@ -44435,8 +40841,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCdotcStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey, &
         batchCount,myResult)
@@ -44503,8 +40907,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCdotuStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey, &
         batchCount,myResult)
@@ -44571,8 +40973,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZdotcStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey, &
         batchCount,myResult)
@@ -44639,8 +41039,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZdotuStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey, &
         batchCount,myResult)
@@ -44706,7 +41104,6 @@ module hipfort_hipblas
         stridex,c_loc(y),incy,stridey,batchCount,myResult)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSnrm2_assumed_rank(handle,n,x,incx,myResult)
@@ -44888,7 +41285,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSnrm2StridedBatched_assumed_rank(handle,n,x,incx,stridex,batchCount,myResult)
       use iso_c_binding
@@ -44943,8 +41339,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDnrm2StridedBatched_assumed_rank(handle,n,x,incx,stridex,batchCount,myResult)
       use iso_c_binding
@@ -44999,8 +41393,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasScnrm2StridedBatched_assumed_rank(handle,n,x,incx,stridex,batchCount,myResult)
       use iso_c_binding
@@ -45055,8 +41447,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDznrm2StridedBatched_assumed_rank(handle,n,x,incx,stridex,batchCount,myResult)
       use iso_c_binding
@@ -45110,7 +41500,6 @@ module hipfort_hipblas
         stridex,batchCount,myResult)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSrot_assumed_rank(handle,n,x,incx,y,incy,c,s)
@@ -45436,7 +41825,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSrotStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey,c,s, &
         batchCount)
@@ -45504,8 +41892,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDrotStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey,c,s, &
         batchCount)
@@ -45573,8 +41959,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCrotStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey,c,s, &
         batchCount)
@@ -45642,8 +42026,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCsrotStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey,c,s, &
         batchCount)
@@ -45713,8 +42095,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZrotStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey,c,s, &
         batchCount)
@@ -45782,8 +42162,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZdrotStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey,c,s, &
         batchCount)
@@ -45852,7 +42230,6 @@ module hipfort_hipblas
         stridex,c_loc(y),incy,stridey,c,s,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSrotm_assumed_rank(handle,n,x,incx,y,incy,param)
@@ -45956,7 +42333,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSrotmStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey,param, &
         strideParam,batchCount)
@@ -46026,8 +42402,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDrotmStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey,param, &
         strideParam,batchCount)
@@ -46096,7 +42470,6 @@ module hipfort_hipblas
         stridex,c_loc(y),incy,stridey,param,strideParam,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSscal_assumed_rank(handle,n,alpha,x,incx)
@@ -46368,7 +42741,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSscalStridedBatched_assumed_rank(handle,n,alpha,x,incx,stridex,batchCount)
       use iso_c_binding
@@ -46423,8 +42795,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDscalStridedBatched_assumed_rank(handle,n,alpha,x,incx,stridex,batchCount)
       use iso_c_binding
@@ -46479,8 +42849,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCscalStridedBatched_assumed_rank(handle,n,alpha,x,incx,stridex,batchCount)
       use iso_c_binding
@@ -46535,8 +42903,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZscalStridedBatched_assumed_rank(handle,n,alpha,x,incx,stridex,batchCount)
       use iso_c_binding
@@ -46591,8 +42957,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCsscalStridedBatched_assumed_rank(handle,n,alpha,x,incx,stridex,batchCount)
       use iso_c_binding
@@ -46647,8 +43011,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZdscalStridedBatched_assumed_rank(handle,n,alpha,x,incx,stridex,batchCount)
       use iso_c_binding
@@ -46702,7 +43064,6 @@ module hipfort_hipblas
         incx,stridex,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSswap_assumed_rank(handle,n,x,incx,y,incy)
@@ -46896,7 +43257,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSswapStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey, &
         batchCount)
@@ -46958,8 +43318,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDswapStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey, &
         batchCount)
@@ -47021,8 +43379,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCswapStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey, &
         batchCount)
@@ -47084,8 +43440,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZswapStridedBatched_assumed_rank(handle,n,x,incx,stridex,y,incy,stridey, &
         batchCount)
@@ -47146,7 +43500,6 @@ module hipfort_hipblas
         stridex,c_loc(y),incy,stridey,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSgbmv_assumed_rank(handle,trans,m,n,kl,ku,alpha,AP,lda,x,incx,beta,y,incy)
@@ -47544,7 +43897,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSgbmvStridedBatched_assumed_rank(handle,trans,m,n,kl,ku,alpha,AP,lda,strideA, &
         x,incx,stridex,beta,y,incy,stridey,batchCount)
@@ -47664,8 +44016,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDgbmvStridedBatched_assumed_rank(handle,trans,m,n,kl,ku,alpha,AP,lda,strideA, &
         x,incx,stridex,beta,y,incy,stridey,batchCount)
@@ -47785,8 +44135,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCgbmvStridedBatched_assumed_rank(handle,trans,m,n,kl,ku,alpha,AP,lda,strideA, &
         x,incx,stridex,beta,y,incy,stridey,batchCount)
@@ -47906,8 +44254,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZgbmvStridedBatched_assumed_rank(handle,trans,m,n,kl,ku,alpha,AP,lda,strideA, &
         x,incx,stridex,beta,y,incy,stridey,batchCount)
@@ -48026,7 +44372,6 @@ module hipfort_hipblas
         alpha,c_loc(AP),lda,strideA,c_loc(x),incx,stridex,beta,c_loc(y),incy,stridey,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSgemv_assumed_rank(handle,trans,m,n,alpha,AP,lda,x,incx,beta,y,incy)
@@ -49330,7 +45675,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSgerStridedBatched_assumed_rank(handle,m,n,alpha,x,incx,stridex,y,incy, &
         stridey,AP,lda,strideA,batchCount)
@@ -49434,8 +45778,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDgerStridedBatched_assumed_rank(handle,m,n,alpha,x,incx,stridex,y,incy, &
         stridey,AP,lda,strideA,batchCount)
@@ -49539,8 +45881,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCgeruStridedBatched_assumed_rank(handle,m,n,alpha,x,incx,stridex,y,incy, &
         stridey,AP,lda,strideA,batchCount)
@@ -49644,8 +45984,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCgercStridedBatched_assumed_rank(handle,m,n,alpha,x,incx,stridex,y,incy, &
         stridey,AP,lda,strideA,batchCount)
@@ -49749,8 +46087,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZgeruStridedBatched_assumed_rank(handle,m,n,alpha,x,incx,stridex,y,incy, &
         stridey,AP,lda,strideA,batchCount)
@@ -49854,8 +46190,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZgercStridedBatched_assumed_rank(handle,m,n,alpha,x,incx,stridex,y,incy, &
         stridey,AP,lda,strideA,batchCount)
@@ -49958,7 +46292,6 @@ module hipfort_hipblas
         c_loc(x),incx,stridex,c_loc(y),incy,stridey,c_loc(AP),lda,strideA,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasChbmv_assumed_rank(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy)
@@ -50142,7 +46475,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasChbmvStridedBatched_assumed_rank(handle,uplo,n,k,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount)
@@ -50254,8 +46586,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZhbmvStridedBatched_assumed_rank(handle,uplo,n,k,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount)
@@ -50366,7 +46696,6 @@ module hipfort_hipblas
         c_loc(AP),lda,strideA,c_loc(x),incx,stridex,beta,c_loc(y),incy,stridey,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasChemv_assumed_rank(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy)
@@ -50542,7 +46871,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasChemvStridedBatched_assumed_rank(handle,uplo,n,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount)
@@ -50650,8 +46978,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZhemvStridedBatched_assumed_rank(handle,uplo,n,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount)
@@ -50758,7 +47084,6 @@ module hipfort_hipblas
         c_loc(AP),lda,strideA,c_loc(x),incx,stridex,beta,c_loc(y),incy,stridey,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCher_assumed_rank(handle,uplo,n,alpha,x,incx,AP,lda)
@@ -50902,7 +47227,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCherStridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,AP,lda, &
         strideA,batchCount)
@@ -50994,8 +47318,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZherStridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,AP,lda, &
         strideA,batchCount)
@@ -51086,7 +47408,6 @@ module hipfort_hipblas
         c_loc(x),incx,stridex,c_loc(AP),lda,strideA,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCher2_assumed_rank(handle,uplo,n,alpha,x,incx,y,incy,AP,lda)
@@ -51254,7 +47575,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCher2StridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,y,incy, &
         stridey,AP,lda,strideA,batchCount)
@@ -51358,8 +47678,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZher2StridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,y,incy, &
         stridey,AP,lda,strideA,batchCount)
@@ -51462,7 +47780,6 @@ module hipfort_hipblas
         c_loc(x),incx,stridex,c_loc(y),incy,stridey,c_loc(AP),lda,strideA,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasChpmv_assumed_rank(handle,uplo,n,alpha,AP,x,incx,beta,y,incy)
@@ -51590,7 +47907,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasChpmvStridedBatched_assumed_rank(handle,uplo,n,alpha,AP,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount)
@@ -51669,8 +47985,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZhpmvStridedBatched_assumed_rank(handle,uplo,n,alpha,AP,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount)
@@ -51748,7 +48062,6 @@ module hipfort_hipblas
         c_loc(AP),strideA,c_loc(x),incx,stridex,beta,c_loc(y),incy,stridey,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasChpr_assumed_rank(handle,uplo,n,alpha,x,incx,AP)
@@ -51852,7 +48165,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasChprStridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,AP,strideA, &
         batchCount)
@@ -51919,8 +48231,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZhprStridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,AP,strideA, &
         batchCount)
@@ -51986,7 +48296,6 @@ module hipfort_hipblas
         incx,stridex,c_loc(AP),strideA,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasChpr2_assumed_rank(handle,uplo,n,alpha,x,incx,y,incy,AP)
@@ -52104,7 +48413,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasChpr2StridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,y,incy, &
         stridey,AP,strideA,batchCount)
@@ -52180,8 +48488,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZhpr2StridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,y,incy, &
         stridey,AP,strideA,batchCount)
@@ -52256,7 +48562,6 @@ module hipfort_hipblas
         c_loc(x),incx,stridex,c_loc(y),incy,stridey,c_loc(AP),strideA,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsbmv_assumed_rank(handle,uplo,n,k,alpha,AP,lda,x,incx,beta,y,incy)
@@ -52440,7 +48745,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsbmvStridedBatched_assumed_rank(handle,uplo,n,k,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount)
@@ -52552,8 +48856,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDsbmvStridedBatched_assumed_rank(handle,uplo,n,k,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount)
@@ -52664,7 +48966,6 @@ module hipfort_hipblas
         c_loc(AP),lda,strideA,c_loc(x),incx,stridex,beta,c_loc(y),incy,stridey,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSspmv_assumed_rank(handle,uplo,n,alpha,AP,x,incx,beta,y,incy)
@@ -52792,7 +49093,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSspmvStridedBatched_assumed_rank(handle,uplo,n,alpha,AP,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount)
@@ -52871,8 +49171,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDspmvStridedBatched_assumed_rank(handle,uplo,n,alpha,AP,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount)
@@ -52950,7 +49248,6 @@ module hipfort_hipblas
         c_loc(AP),strideA,c_loc(x),incx,stridex,beta,c_loc(y),incy,stridey,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSspr_assumed_rank(handle,uplo,n,alpha,x,incx,AP)
@@ -53054,7 +49351,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCspr_assumed_rank(handle,uplo,n,alpha,x,incx,AP)
       use iso_c_binding
@@ -53106,8 +49402,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZspr_assumed_rank(handle,uplo,n,alpha,x,incx,AP)
       use iso_c_binding
@@ -53159,8 +49453,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsprStridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,AP,strideA, &
         batchCount)
@@ -53227,8 +49519,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDsprStridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,AP,strideA, &
         batchCount)
@@ -53295,8 +49585,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCsprStridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,AP,strideA, &
         batchCount)
@@ -53363,8 +49651,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZsprStridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,AP,strideA, &
         batchCount)
@@ -53430,7 +49716,6 @@ module hipfort_hipblas
         incx,stridex,c_loc(AP),strideA,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSspr2_assumed_rank(handle,uplo,n,alpha,x,incx,y,incy,AP)
@@ -53548,7 +49833,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSspr2StridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,y,incy, &
         stridey,AP,strideA,batchCount)
@@ -53624,8 +49908,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDspr2StridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,y,incy, &
         stridey,AP,strideA,batchCount)
@@ -53700,7 +49982,6 @@ module hipfort_hipblas
         c_loc(x),incx,stridex,c_loc(y),incy,stridey,c_loc(AP),strideA,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsymv_assumed_rank(handle,uplo,n,alpha,AP,lda,x,incx,beta,y,incy)
@@ -54050,7 +50331,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsymvStridedBatched_assumed_rank(handle,uplo,n,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount)
@@ -54158,8 +50438,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDsymvStridedBatched_assumed_rank(handle,uplo,n,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount)
@@ -54267,8 +50545,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCsymvStridedBatched_assumed_rank(handle,uplo,n,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount)
@@ -54376,8 +50652,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZsymvStridedBatched_assumed_rank(handle,uplo,n,alpha,AP,lda,strideA,x,incx, &
         stridex,beta,y,incy,stridey,batchCount)
@@ -54484,7 +50758,6 @@ module hipfort_hipblas
         c_loc(AP),lda,strideA,c_loc(x),incx,stridex,beta,c_loc(y),incy,stridey,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsyr_assumed_rank(handle,uplo,n,alpha,x,incx,AP,lda)
@@ -54770,7 +51043,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsyrStridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,AP,lda, &
         strideA,batchCount)
@@ -54862,8 +51134,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDsyrStridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,AP,lda, &
         strideA,batchCount)
@@ -54955,8 +51225,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCsyrStridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,AP,lda, &
         strideA,batchCount)
@@ -55048,8 +51316,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZsyrStridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,AP,lda, &
         strideA,batchCount)
@@ -55140,7 +51406,6 @@ module hipfort_hipblas
         c_loc(x),incx,stridex,c_loc(AP),lda,strideA,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsyr2_assumed_rank(handle,uplo,n,alpha,x,incx,y,incy,AP,lda)
@@ -55474,7 +51739,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsyr2StridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,y,incy, &
         stridey,AP,lda,strideA,batchCount)
@@ -55578,8 +51842,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDsyr2StridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,y,incy, &
         stridey,AP,lda,strideA,batchCount)
@@ -55683,8 +51945,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCsyr2StridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,y,incy, &
         stridey,AP,lda,strideA,batchCount)
@@ -55788,8 +52048,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZsyr2StridedBatched_assumed_rank(handle,uplo,n,alpha,x,incx,stridex,y,incy, &
         stridey,AP,lda,strideA,batchCount)
@@ -55892,7 +52150,6 @@ module hipfort_hipblas
         c_loc(x),incx,stridex,c_loc(y),incy,stridey,c_loc(AP),lda,strideA,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStbmv_assumed_rank(handle,uplo,transA,diag,n,k,AP,lda,x,incx)
@@ -56218,7 +52475,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStbmvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,k,AP,lda,strideA,x, &
         incx,stridex,batchCount)
@@ -56318,8 +52574,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDtbmvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,k,AP,lda,strideA,x, &
         incx,stridex,batchCount)
@@ -56419,8 +52673,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCtbmvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,k,AP,lda,strideA,x, &
         incx,stridex,batchCount)
@@ -56520,8 +52772,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZtbmvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,k,AP,lda,strideA,x, &
         incx,stridex,batchCount)
@@ -56620,7 +52870,6 @@ module hipfort_hipblas
         n,k,c_loc(AP),lda,strideA,c_loc(x),incx,stridex,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStbsv_assumed_rank(handle,uplo,transA,diag,n,k,AP,lda,x,incx)
@@ -56946,7 +53195,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStbsvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,k,AP,lda,strideA,x, &
         incx,stridex,batchCount)
@@ -57046,8 +53294,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDtbsvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,k,AP,lda,strideA,x, &
         incx,stridex,batchCount)
@@ -57147,8 +53393,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCtbsvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,k,AP,lda,strideA,x, &
         incx,stridex,batchCount)
@@ -57248,8 +53492,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZtbsvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,k,AP,lda,strideA,x, &
         incx,stridex,batchCount)
@@ -57348,7 +53590,6 @@ module hipfort_hipblas
         n,k,c_loc(AP),lda,strideA,c_loc(x),incx,stridex,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStpmv_assumed_rank(handle,uplo,transA,diag,n,AP,x,incx)
@@ -57566,7 +53807,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStpmvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,AP,strideA,x,incx, &
         stridex,batchCount)
@@ -57636,8 +53876,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDtpmvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,AP,strideA,x,incx, &
         stridex,batchCount)
@@ -57707,8 +53945,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCtpmvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,AP,strideA,x,incx, &
         stridex,batchCount)
@@ -57778,8 +54014,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZtpmvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,AP,strideA,x,incx, &
         stridex,batchCount)
@@ -57848,7 +54082,6 @@ module hipfort_hipblas
         c_loc(AP),strideA,c_loc(x),incx,stridex,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStpsv_assumed_rank(handle,uplo,transA,diag,n,AP,x,incx)
@@ -58066,7 +54299,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStpsvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,AP,strideA,x,incx, &
         stridex,batchCount)
@@ -58136,8 +54368,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDtpsvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,AP,strideA,x,incx, &
         stridex,batchCount)
@@ -58207,8 +54437,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCtpsvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,AP,strideA,x,incx, &
         stridex,batchCount)
@@ -58278,8 +54506,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZtpsvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,AP,strideA,x,incx, &
         stridex,batchCount)
@@ -58348,7 +54574,6 @@ module hipfort_hipblas
         c_loc(AP),strideA,c_loc(x),incx,stridex,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStrmv_assumed_rank(handle,uplo,transA,diag,n,AP,lda,x,incx)
@@ -58654,7 +54879,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStrmvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,AP,lda,strideA,x, &
         incx,stridex,batchCount)
@@ -58750,8 +54974,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDtrmvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,AP,lda,strideA,x, &
         incx,stridex,batchCount)
@@ -58847,8 +55069,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCtrmvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,AP,lda,strideA,x, &
         incx,stridex,batchCount)
@@ -58944,8 +55164,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZtrmvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,AP,lda,strideA,x, &
         incx,stridex,batchCount)
@@ -59040,7 +55258,6 @@ module hipfort_hipblas
         n,c_loc(AP),lda,strideA,c_loc(x),incx,stridex,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStrsv_assumed_rank(handle,uplo,transA,diag,n,AP,lda,x,incx)
@@ -59346,7 +55563,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStrsvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,AP,lda,strideA,x, &
         incx,stridex,batchCount)
@@ -59442,8 +55658,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDtrsvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,AP,lda,strideA,x, &
         incx,stridex,batchCount)
@@ -59539,8 +55753,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCtrsvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,AP,lda,strideA,x, &
         incx,stridex,batchCount)
@@ -59636,8 +55848,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZtrsvStridedBatched_assumed_rank(handle,uplo,transA,diag,n,AP,lda,strideA,x, &
         incx,stridex,batchCount)
@@ -59732,7 +55942,6 @@ module hipfort_hipblas
         n,c_loc(AP),lda,strideA,c_loc(x),incx,stridex,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSgemm_assumed_rank(handle,transA,transB,m,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc)
@@ -60784,7 +56993,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCherkStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         beta,CP,ldc,strideC,batchCount)
@@ -60888,8 +57096,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZherkStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         beta,CP,ldc,strideC,batchCount)
@@ -60992,7 +57198,6 @@ module hipfort_hipblas
         alpha,c_loc(AP),lda,strideA,beta,c_loc(CP),ldc,strideC,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCherkx_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc)
@@ -61184,7 +57389,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCherkxStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         BP,ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -61300,8 +57504,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZherkxStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         BP,ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -61416,7 +57618,6 @@ module hipfort_hipblas
         alpha,c_loc(AP),lda,strideA,c_loc(BP),ldb,strideB,beta,c_loc(CP),ldc,strideC,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCher2k_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc)
@@ -61608,7 +57809,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCher2kStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         BP,ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -61724,8 +57924,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZher2kStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         BP,ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -61840,7 +58038,6 @@ module hipfort_hipblas
         alpha,c_loc(AP),lda,strideA,c_loc(BP),ldb,strideB,beta,c_loc(CP),ldc,strideC,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsymm_assumed_rank(handle,side,uplo,m,n,alpha,AP,lda,BP,ldb,beta,CP,ldc)
@@ -62222,7 +58419,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsymmStridedBatched_assumed_rank(handle,side,uplo,m,n,alpha,AP,lda,strideA,BP, &
         ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -62338,8 +58534,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDsymmStridedBatched_assumed_rank(handle,side,uplo,m,n,alpha,AP,lda,strideA,BP, &
         ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -62455,8 +58649,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCsymmStridedBatched_assumed_rank(handle,side,uplo,m,n,alpha,AP,lda,strideA,BP, &
         ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -62572,8 +58764,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZsymmStridedBatched_assumed_rank(handle,side,uplo,m,n,alpha,AP,lda,strideA,BP, &
         ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -62688,7 +58878,6 @@ module hipfort_hipblas
         alpha,c_loc(AP),lda,strideA,c_loc(BP),ldb,strideB,beta,c_loc(CP),ldc,strideC,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsyrk_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,beta,CP,ldc)
@@ -63038,7 +59227,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsyrkStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         beta,CP,ldc,strideC,batchCount)
@@ -63142,8 +59330,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDsyrkStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         beta,CP,ldc,strideC,batchCount)
@@ -63247,8 +59433,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCsyrkStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         beta,CP,ldc,strideC,batchCount)
@@ -63352,8 +59536,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZsyrkStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         beta,CP,ldc,strideC,batchCount)
@@ -63456,7 +59638,6 @@ module hipfort_hipblas
         alpha,c_loc(AP),lda,strideA,beta,c_loc(CP),ldc,strideC,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsyr2k_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc)
@@ -63838,7 +60019,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsyr2kStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         BP,ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -63954,8 +60134,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDsyr2kStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         BP,ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -64071,8 +60249,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCsyr2kStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         BP,ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -64188,8 +60364,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZsyr2kStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         BP,ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -64304,7 +60478,6 @@ module hipfort_hipblas
         alpha,c_loc(AP),lda,strideA,c_loc(BP),ldb,strideB,beta,c_loc(CP),ldc,strideC,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsyrkx_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc)
@@ -64686,7 +60859,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSsyrkxStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         BP,ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -64802,8 +60974,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDsyrkxStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         BP,ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -64919,8 +61089,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCsyrkxStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         BP,ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -65036,8 +61204,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZsyrkxStridedBatched_assumed_rank(handle,uplo,transA,n,k,alpha,AP,lda,strideA, &
         BP,ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -65152,7 +61318,6 @@ module hipfort_hipblas
         alpha,c_loc(AP),lda,strideA,c_loc(BP),ldb,strideB,beta,c_loc(CP),ldc,strideC,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSgeam_assumed_rank(handle,transA,transB,m,n,alpha,AP,lda,beta,BP,ldb,CP,ldc)
@@ -65534,7 +61699,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSgeamStridedBatched_assumed_rank(handle,transA,transB,m,n,alpha,AP,lda, &
         strideA,beta,BP,ldb,strideB,CP,ldc,strideC,batchCount)
@@ -65650,8 +61814,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDgeamStridedBatched_assumed_rank(handle,transA,transB,m,n,alpha,AP,lda, &
         strideA,beta,BP,ldb,strideB,CP,ldc,strideC,batchCount)
@@ -65767,8 +61929,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCgeamStridedBatched_assumed_rank(handle,transA,transB,m,n,alpha,AP,lda, &
         strideA,beta,BP,ldb,strideB,CP,ldc,strideC,batchCount)
@@ -65884,8 +62044,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZgeamStridedBatched_assumed_rank(handle,transA,transB,m,n,alpha,AP,lda, &
         strideA,beta,BP,ldb,strideB,CP,ldc,strideC,batchCount)
@@ -66000,7 +62158,6 @@ module hipfort_hipblas
         alpha,c_loc(AP),lda,strideA,beta,c_loc(BP),ldb,strideB,c_loc(CP),ldc,strideC,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasChemm_assumed_rank(handle,side,uplo,n,k,alpha,AP,lda,BP,ldb,beta,CP,ldc)
@@ -66192,7 +62349,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasChemmStridedBatched_assumed_rank(handle,side,uplo,n,k,alpha,AP,lda,strideA,BP, &
         ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -66308,8 +62464,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZhemmStridedBatched_assumed_rank(handle,side,uplo,n,k,alpha,AP,lda,strideA,BP, &
         ldb,strideB,beta,CP,ldc,strideC,batchCount)
@@ -66424,7 +62578,6 @@ module hipfort_hipblas
         alpha,c_loc(AP),lda,strideA,c_loc(BP),ldb,strideB,beta,c_loc(CP),ldc,strideC,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStrmm_assumed_rank(handle,side,uplo,transA,diag,m,n,alpha,A,lda,B,ldb,C,ldc)
@@ -66822,7 +62975,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStrmmStridedBatched_assumed_rank(handle,side,uplo,transA,diag,m,n,alpha,A,lda, &
         strideA,B,ldb,strideB,C,ldc,strideC,batchCount)
@@ -66943,8 +63095,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDtrmmStridedBatched_assumed_rank(handle,side,uplo,transA,diag,m,n,alpha,A,lda, &
         strideA,B,ldb,strideB,C,ldc,strideC,batchCount)
@@ -67065,8 +63215,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCtrmmStridedBatched_assumed_rank(handle,side,uplo,transA,diag,m,n,alpha,A,lda, &
         strideA,B,ldb,strideB,C,ldc,strideC,batchCount)
@@ -67187,8 +63335,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZtrmmStridedBatched_assumed_rank(handle,side,uplo,transA,diag,m,n,alpha,A,lda, &
         strideA,B,ldb,strideB,C,ldc,strideC,batchCount)
@@ -67308,7 +63454,6 @@ module hipfort_hipblas
         diag,m,n,alpha,c_loc(A),lda,strideA,c_loc(B),ldb,strideB,c_loc(C),ldc,strideC,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStrsm_assumed_rank(handle,side,uplo,transA,diag,m,n,alpha,AP,lda,BP,ldb)
@@ -67674,7 +63819,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStrsmStridedBatched_assumed_rank(handle,side,uplo,transA,diag,m,n,alpha,AP, &
         lda,strideA,BP,ldb,strideB,batchCount)
@@ -67782,8 +63926,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDtrsmStridedBatched_assumed_rank(handle,side,uplo,transA,diag,m,n,alpha,AP, &
         lda,strideA,BP,ldb,strideB,batchCount)
@@ -67891,8 +64033,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCtrsmStridedBatched_assumed_rank(handle,side,uplo,transA,diag,m,n,alpha,AP, &
         lda,strideA,BP,ldb,strideB,batchCount)
@@ -68000,8 +64140,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZtrsmStridedBatched_assumed_rank(handle,side,uplo,transA,diag,m,n,alpha,AP, &
         lda,strideA,BP,ldb,strideB,batchCount)
@@ -68109,8 +64247,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStrtri_assumed_rank(handle,uplo,diag,n,AP,lda,invA,ldinvA)
       use iso_c_binding
@@ -68183,8 +64319,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDtrtri_assumed_rank(handle,uplo,diag,n,AP,lda,invA,ldinvA)
       use iso_c_binding
@@ -68257,8 +64391,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCtrtri_assumed_rank(handle,uplo,diag,n,AP,lda,invA,ldinvA)
       use iso_c_binding
@@ -68331,8 +64463,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZtrtri_assumed_rank(handle,uplo,diag,n,AP,lda,invA,ldinvA)
       use iso_c_binding
@@ -68405,8 +64535,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasStrtriStridedBatched_assumed_rank(handle,uplo,diag,n,AP,lda,strideA,invA, &
         ldinvA,stride_invA,batchCount)
@@ -68498,8 +64626,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDtrtriStridedBatched_assumed_rank(handle,uplo,diag,n,AP,lda,strideA,invA, &
         ldinvA,stride_invA,batchCount)
@@ -68591,8 +64717,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCtrtriStridedBatched_assumed_rank(handle,uplo,diag,n,AP,lda,strideA,invA, &
         ldinvA,stride_invA,batchCount)
@@ -68684,8 +64808,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZtrtriStridedBatched_assumed_rank(handle,uplo,diag,n,AP,lda,strideA,invA, &
         ldinvA,stride_invA,batchCount)
@@ -68776,7 +64898,6 @@ module hipfort_hipblas
         c_loc(AP),lda,strideA,c_loc(invA),ldinvA,stride_invA,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSdgmm_assumed_rank(handle,side,m,n,AP,lda,x,incx,CP,ldc)
@@ -69102,7 +65223,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSdgmmStridedBatched_assumed_rank(handle,side,m,n,AP,lda,strideA,x,incx, &
         stridex,CP,ldc,strideC,batchCount)
@@ -69206,8 +65326,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDdgmmStridedBatched_assumed_rank(handle,side,m,n,AP,lda,strideA,x,incx, &
         stridex,CP,ldc,strideC,batchCount)
@@ -69311,8 +65429,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCdgmmStridedBatched_assumed_rank(handle,side,m,n,AP,lda,strideA,x,incx, &
         stridex,CP,ldc,strideC,batchCount)
@@ -69416,8 +65532,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZdgmmStridedBatched_assumed_rank(handle,side,m,n,AP,lda,strideA,x,incx, &
         stridex,CP,ldc,strideC,batchCount)
@@ -69521,8 +65635,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSgetrf_assumed_rank(handle,n,A,lda,ipiv,myInfo)
       use iso_c_binding
@@ -69586,8 +65698,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDgetrf_assumed_rank(handle,n,A,lda,ipiv,myInfo)
       use iso_c_binding
@@ -69651,8 +65761,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCgetrf_assumed_rank(handle,n,A,lda,ipiv,myInfo)
       use iso_c_binding
@@ -69716,8 +65824,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZgetrf_assumed_rank(handle,n,A,lda,ipiv,myInfo)
       use iso_c_binding
@@ -69781,8 +65887,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSgetrfStridedBatched_assumed_rank(handle,n,A,lda,strideA,ipiv,strideP,myInfo, &
         batchCount)
@@ -69866,8 +65970,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDgetrfStridedBatched_assumed_rank(handle,n,A,lda,strideA,ipiv,strideP,myInfo, &
         batchCount)
@@ -69951,8 +66053,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCgetrfStridedBatched_assumed_rank(handle,n,A,lda,strideA,ipiv,strideP,myInfo, &
         batchCount)
@@ -70036,8 +66136,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZgetrfStridedBatched_assumed_rank(handle,n,A,lda,strideA,ipiv,strideP,myInfo, &
         batchCount)
@@ -70121,8 +66219,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSgetrs_assumed_rank(handle,trans,n,nrhs,A,lda,ipiv,B,ldb,myInfo)
       use iso_c_binding
@@ -70206,8 +66302,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDgetrs_assumed_rank(handle,trans,n,nrhs,A,lda,ipiv,B,ldb,myInfo)
       use iso_c_binding
@@ -70291,8 +66385,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCgetrs_assumed_rank(handle,trans,n,nrhs,A,lda,ipiv,B,ldb,myInfo)
       use iso_c_binding
@@ -70376,8 +66468,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZgetrs_assumed_rank(handle,trans,n,nrhs,A,lda,ipiv,B,ldb,myInfo)
       use iso_c_binding
@@ -70461,8 +66551,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSgetrsStridedBatched_assumed_rank(handle,trans,n,nrhs,A,lda,strideA,ipiv, &
         strideP,B,ldb,strideB,myInfo,batchCount)
@@ -70566,8 +66654,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDgetrsStridedBatched_assumed_rank(handle,trans,n,nrhs,A,lda,strideA,ipiv, &
         strideP,B,ldb,strideB,myInfo,batchCount)
@@ -70671,8 +66757,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCgetrsStridedBatched_assumed_rank(handle,trans,n,nrhs,A,lda,strideA,ipiv, &
         strideP,B,ldb,strideB,myInfo,batchCount)
@@ -70776,8 +66860,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZgetrsStridedBatched_assumed_rank(handle,trans,n,nrhs,A,lda,strideA,ipiv, &
         strideP,B,ldb,strideB,myInfo,batchCount)
@@ -70881,8 +66963,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSgeqrf_assumed_rank(handle,m,n,A,lda,ipiv,myInfo)
       use iso_c_binding
@@ -70950,8 +67030,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDgeqrf_assumed_rank(handle,m,n,A,lda,ipiv,myInfo)
       use iso_c_binding
@@ -71019,8 +67097,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCgeqrf_assumed_rank(handle,m,n,A,lda,ipiv,myInfo)
       use iso_c_binding
@@ -71088,8 +67164,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZgeqrf_assumed_rank(handle,m,n,A,lda,ipiv,myInfo)
       use iso_c_binding
@@ -71157,8 +67231,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSgeqrfStridedBatched_assumed_rank(handle,m,n,A,lda,strideA,ipiv,strideP, &
         myInfo,batchCount)
@@ -71246,8 +67318,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasDgeqrfStridedBatched_assumed_rank(handle,m,n,A,lda,strideA,ipiv,strideP, &
         myInfo,batchCount)
@@ -71335,8 +67405,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasCgeqrfStridedBatched_assumed_rank(handle,m,n,A,lda,strideA,ipiv,strideP, &
         myInfo,batchCount)
@@ -71424,8 +67492,6 @@ module hipfort_hipblas
     end function
 
 #endif
-#endif
-#ifndef USE_CUDA_NAMES
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasZgeqrfStridedBatched_assumed_rank(handle,m,n,A,lda,strideA,ipiv,strideP, &
         myInfo,batchCount)
@@ -71512,7 +67578,6 @@ module hipfort_hipblas
         lda,strideA,c_loc(ipiv),strideP,myInfo,batchCount)
     end function
 
-#endif
 #endif
 #ifdef USE_ASSUMED_RANK_INTERFACES
     function hipblasSetVector_l_assumed_rank(n,x,incx,y,incy) result(ret)

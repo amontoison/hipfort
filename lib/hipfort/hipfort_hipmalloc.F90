@@ -41,11 +41,7 @@ module hipfort_hipmalloc
   !>
   !>   @see hipMallocPitch, hipFree, hipMallocArray, hipFreeArray, hipMalloc3D, hipMalloc3DArray,
   !>  hipHostFree, hipHostMalloc
-#ifdef USE_CUDA_NAMES
-    function hipMalloc_(ptr, sizeBytes) bind(c, name="cudaMalloc")
-#else
     function hipMalloc_(ptr, sizeBytes) bind(c, name="hipMalloc")
-#endif
       use iso_c_binding
       implicit none
       integer(c_int) :: hipMalloc_
@@ -241,11 +237,7 @@ module hipfort_hipmalloc
   !>
   !>  @returns `hipSuccess`, `hipErrorMemoryAllocation`, `hipErrorNotSupported`,
   !>  `hipErrorInvalidValue`
-#ifdef USE_CUDA_NAMES
-    function hipMallocManaged_(ptr, sizeBytes, flags) bind(c, name="cudaMallocManaged")
-#else
     function hipMallocManaged_(ptr, sizeBytes, flags) bind(c, name="hipMallocManaged")
-#endif
       use iso_c_binding
       implicit none
       integer(c_int) :: hipMallocManaged_
@@ -443,11 +435,7 @@ module hipfort_hipmalloc
   !>
   !>
   !>   @see hipSetDeviceFlags, hiptHostFree
-#ifdef USE_CUDA_NAMES
-    function hipHostMalloc_(ptr, sizeBytes, flags) bind(c, name="cudaHostAlloc")
-#else
     function hipHostMalloc_(ptr, sizeBytes, flags) bind(c, name="hipHostMalloc")
-#endif
       use iso_c_binding
       implicit none
       integer(c_int) :: hipHostMalloc_
@@ -624,11 +612,7 @@ module hipfort_hipmalloc
   !>
   !>   @see hipMalloc, hipMallocPitch, hipMallocArray, hipFreeArray, hipHostFree, hipMalloc3D,
   !>  hipMalloc3DArray, hipHostMalloc
-#ifdef USE_CUDA_NAMES
-    function hipFree_(ptr) bind(c, name="cudaFree")
-#else
     function hipFree_(ptr) bind(c, name="hipFree")
-#endif
       use iso_c_binding
       implicit none
       integer(c_int) :: hipFree_
@@ -707,11 +691,7 @@ module hipfort_hipmalloc
   !>
   !>   @see hipMalloc, hipMallocPitch, hipFree, hipMallocArray, hipFreeArray, hipMalloc3D,
   !>  hipMalloc3DArray, hipHostMalloc
-#ifdef USE_CUDA_NAMES
-    function hipHostFree_(ptr) bind(c, name="cudaFreeHost")
-#else
     function hipHostFree_(ptr) bind(c, name="hipHostFree")
-#endif
       use iso_c_binding
       implicit none
       integer(c_int) :: hipHostFree_

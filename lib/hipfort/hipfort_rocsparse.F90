@@ -348,6 +348,16 @@ module hipfort_rocsparse
       implicit none
       integer(kind(rocsparse_status_success)) :: rocsparse_get_pointer_mode_
       type(c_ptr),value :: handle
+      integer(c_int) :: pointer_mode
+    end function
+
+    function rocsparse_get_pointer_mode_dptr(handle,pointer_mode) &
+        bind(c, name="rocsparse_get_pointer_mode")
+      use iso_c_binding
+      use hipfort_rocsparse_enums
+      implicit none
+      integer(kind(rocsparse_status_success)) :: rocsparse_get_pointer_mode_dptr
+      type(c_ptr),value :: handle
       type(c_ptr),value :: pointer_mode
     end function
   end interface

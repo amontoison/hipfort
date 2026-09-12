@@ -259,6 +259,19 @@ module hipfort_hipsparse
       implicit none
       integer(kind(HIPSPARSE_STATUS_SUCCESS)) :: hipsparseGetPointerMode_
       type(c_ptr),value :: handle
+      integer(c_int) :: mode
+    end function
+
+#ifdef USE_CUDA_NAMES
+    function hipsparseGetPointerMode_dptr(handle,mode) bind(c, name="cusparseGetPointerMode")
+#else
+    function hipsparseGetPointerMode_dptr(handle,mode) bind(c, name="hipsparseGetPointerMode")
+#endif
+      use iso_c_binding
+      use hipfort_hipsparse_enums
+      implicit none
+      integer(kind(HIPSPARSE_STATUS_SUCCESS)) :: hipsparseGetPointerMode_dptr
+      type(c_ptr),value :: handle
       type(c_ptr),value :: mode
     end function
   end interface
